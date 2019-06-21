@@ -1,0 +1,171 @@
+{% extends "layout.html" %}
+{% block content %}
+	
+<style>
+header, footer {
+   display: flex;
+   flex-direction: row;
+ }
+ header .profile-thumbnail {
+   width: 50px;
+   height: 50px;
+   border-radius: 4px;
+ }
+ header .profile-name {
+   display: flex;
+   flex-direction:column;
+   margin-left: 10px;
+ }
+header h3, header h4 {
+   display: flex;
+   margin: 0;
+ }
+ #inner p {
+   margin-bottom: 10px;
+   font-size: 20px;
+ }
+ #inner hr {
+   margin: 20px 0;
+   border-style: solid;
+   opacity: 0.1;
+   color:#F9E9C8;
+ }
+ .post{
+   border: 2px solid #F9E9C8;
+   padding: 10px;
+ }
+</style>	
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-3">
+				<!-- User info , photos -->
+		      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;" data-toggle="modal" data-target="#profile">
+		        <img src="{{ image_file }}" alt="harun profile" class="profile-thumbnail">
+		        <div class="profile-name">
+		          <h3>{{current_user.username}}</h3>
+		          <small>{{current_user.email}}</small>
+		        </div>
+		      </header>
+		      <br>
+		      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;" data-toggle="modal" data-target="#profile"><a class="text-decoration:none;" href="{{url_for('user_posts', username=current_user.username)}}">
+		        <div class="profile-name">
+		          <h3 style="color:#F9E9C8;">My Posts</h3>
+		          <small>click to view all your posts</small>
+		        </div>
+		        </a>
+		      </header>
+		      <br>
+
+		    <div class="card about" style="color:#000;text-align:left;">
+		    <div class="card-body">
+		      <h5 class="card-title">About <small>edit</small></h5>
+		      <p><i class="fas fa-graduation-cap"></i> Went to <span>Near East University</span></p>
+		      <p><i class="fas fa-fire-alt"></i> Is friends with <span>Obama</span></p>
+		      <p><i class="fas fa-money-check-alt"></i> Worked at <span>Airbnb</span></p>
+		      <p><i class="fas fa-home"></i> Lives in <span>Nicosia, Cyprus</span></p>
+		      <p><i class="fas fa-igloo"></i> From <span>Nairobi, Kenya</span></p>
+		    </div>
+		  </div>
+
+		  <br>
+
+		  <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+		    <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo" class="profile-thumbnail">
+		    <div class="profile-name">
+		      <h3 class="logo">BAMBI</h3>
+		      <small>&copy 2019</small>
+		    </div>
+		  </header>
+		</div>
+
+		<div class="col-6" style="text-align: center">
+			<div class="post">
+			<!--<header>
+			    <img src="{{ image_file }}" alt="{{current_user.username}} profile" class="profile-thumbnail">
+			    <div class="profile-name">
+			      <h3>{{current_user.username}}</h3>
+			      <small>{{current_user.email}}</small>
+			    </div>
+			  </header>-->
+			  {% with messages = get_flashed_messages(with_categories=true) %}
+		    	{% if messages %}
+		      		{% for category , message in messages %}
+		        		<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+	      					{{message}}
+	        			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	          				<span aria-hidden="true">&times;</span>
+	        			</button>
+	      				</div>
+		      		{% endfor %}
+		    	{% endif %}
+	  		  {% endwith %}
+			  <div id="inner">
+			   <div class="content-section">
+				  <form method="POST" action="" enctype="multipart/form-data">
+				    {{ form.hidden_tag() }}
+				    <fieldset class="form-group">
+				      <legend class="border-bottom mb-2 pb-2">Account Info</legend>
+				      <div class="form-group">
+				        {{ form.username.label(class="form-control-label") }}
+
+				        {% if form.username.errors %}
+				        {{ form.username(class="form-control form-control-lg is-invalid") }}
+				        <div class="invalid-feedback">
+				          {% for error in form.username.errors %}
+				          <span>{{ error }}</span>
+				          {% endfor %}
+				        </div>
+				        {% else %}
+				        {{ form.username(class="form-control form-control-lg") }}
+				        {% endif %}
+				      </div>
+				      <div class="form-group">
+				        {{ form.email.label(class="form-control-label") }}
+				        {% if form.email.errors %}
+				        {{ form.email(class="form-control form-control-lg is-invalid") }}
+				        <div class="invalid-feedback">
+				          {% for error in form.email.errors %}
+				          <span>{{ error }}</span>
+				          {% endfor %}
+				        </div>
+				        {% else %}
+				        {{ form.email(class="form-control form-control-lg") }}
+				        {% endif %}
+				      </div>
+				      <div class="form-group">
+				        {{ form.picture.label() }}
+				        {{ form.picture(class="form-control-file") }}
+				        {% if form.picture.errors %}
+				          {% for error in form.picture.errors %}
+				          	<span class="text-danger">{{ error }}</span><br>
+				          {% endfor %}
+				        {% endif %}
+				    </div>
+				    </fieldset>
+				    <div class="form-group">
+				      {{ form.submit(class="btn btn-outline-warning") }}
+				    </div>
+				  </form>
+
+			  </div>
+		</div>
+		<br>
+		</div>
+
+		<!--<div class="col-3">
+			 <div class="card" style="color:#000;">
+		      <img class="card-img-top" src="https://bit.ly/2Zner4a" alt="logo">
+		      <div class="card-body">
+		        <h5 class="card-title"><small class="text-muted">sponsored</small></h5>
+		        <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
+		      </div>
+		      <div class="card-footer">
+		        <small class="text-muted">Last updated 3 mins ago</small>
+		      </div>
+		    </div>
+		</div>
+  	</div>
+</div>-->
+
+
+{% endblock content %}

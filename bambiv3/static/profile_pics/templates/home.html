@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Font awesome kit -->
+    <script src="https://kit.fontawesome.com/17192b7610.js"></script>
+
+    <link rel="shortcut icon" type="image/png" href="2.png">
+    <title>Home</title>
+    <style>
+      body{
+        background:#000;
+        color: #F9E9C8;
+      }
+      nav{
+          background: #000;
+      }
+      .search{
+        margin-right:5px;
+        border: 1px solid #F9E9C8;
+        outline:none;
+        color:#000;
+        background:#fff;
+      }
+      .search:focus{
+        background:#000;
+        outline:none;
+        border:#000;
+        color:#F9E9C8;
+      }
+      .settings li{
+        padding-right:10px;
+      }
+      .logo{
+        color:#F9E9C8;
+        letter-spacing:2px;
+      }
+      .about span, small{
+        color:#1e90ff;
+      }
+      header, footer {
+   display: flex;
+   flex-direction: row;
+ }
+ header .profile-thumbnail {
+   width: 50px;
+   height: 50px;
+   border-radius: 4px;
+ }
+ header .profile-name {
+   display: flex;
+   flex-direction:column;
+   margin-left: 10px;
+ }
+ header .follow-btn {
+   display: flex;
+   margin: 0 0 0 auto;
+ }
+ header .follow-btn button {
+   border: 0;
+   border-radius: 3px;
+   padding: 5px;
+ }
+ header h3, header h4 {
+   display: flex;
+   margin: 0;
+ }
+ #inner p {
+   margin-bottom: 10px;
+   font-size: 20px;
+ }
+ #inner hr {
+   margin: 20px 0;
+   border-style: solid;
+   opacity: 0.1;
+   color:#F9E9C8;
+ }
+ footer .stats {
+   display: flex;
+   font-size: 15px;
+ }
+ footer .stats strong {
+   font-size: 18px;
+ }
+ footer .stats .likes {
+   margin-left: 10px;
+ }
+ footer .cta {
+   margin-left: auto;
+ }
+ footer .cta button {
+   border: 0;
+   background: transparent;
+ }
+ .post{
+   border: 2px solid #F9E9C8;
+   padding: 10px;
+ }
+  </style>
+  </head>
+  <body>
+
+<nav class="navbar navbar-expand-md navbar-dark ">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li>
+              <form class="form-inline">
+                <div class="input-group">
+                  <input type="text" class="form-control  search" placeholder="search" aria-label="Search" aria-describedby="basic-addon1"> <br>
+                  <button class="btn  my-2 my-sm-0" type="submit"><i class="fas fa-search" style="color:#F9E9C8;"></i></button>
+                </div>
+              </form>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+      <a class="navbar-brand mx-auto" href="#">
+        <img src="2.png" width="35" height="35" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8; padding:2px;border-radius:2px;">
+        <span class="logo">BAMBI</span>
+      </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 settings">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <i class="fas fa-fire"><a href="discover.html" style="color:#F9E9C8;"> Discover</a></i>
+            </li>
+            <li class="nav-item">
+                <i class="fas fa-envelope"> Inbox</i>
+            </li>
+            <li class="nav-item">
+                <i class="fas fa-cog"> Settings</i>
+            </li>
+            <li class="nav-item">
+                <i class="fas fa-sign-out-alt"><a href="login.html" style="color:#F9E9C8;"> Logout</a></i>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3">
+      <!-- User info , photos -->
+      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;" data-toggle="modal" data-target="#profile">
+        <img src="bitmoji.png" alt="harun profile" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3>Harun Mohamed</h3>
+          <small>@harunmohamed</small>
+        </div>
+      </header>
+      <br>
+
+      <!-- Modal -->
+      <div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          <div class="modal-body">
+            <div class="card" style="color:#000;text-align:center;">
+            <img class="card-img-top" src="bitmoji.png" alt="Card image cap" style="height:250px;">
+            <div class="card-body">
+              <h5 class="card-title">Harun Mohamed</h5>
+              <small>Software Engineering Student at Near East University</small>
+            </div>
+            <div class="card-footer">
+            <div>
+              <strong>12M</strong> Friends
+            </div>
+            <div>
+              <strong>3</strong> Enemies
+            </div>
+            </div>
+          </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-dismiss="modal">Edit</button>
+            <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card about" style="color:#000;text-align:left;">
+    <div class="card-body">
+      <h5 class="card-title">About <small>edit</small></h5>
+      <p><i class="fas fa-graduation-cap"></i> Went to <span>Near East University</span></p>
+      <p><i class="fas fa-fire-alt"></i> Is friends with <span>Obama</span></p>
+      <p><i class="fas fa-money-check-alt"></i> Worked at <span>Airbnb</span></p>
+      <p><i class="fas fa-home"></i> Lives in <span>Nicosia, Cyprus</span></p>
+      <p><i class="fas fa-igloo"></i> From <span>Nairobi, Kenya</span></p>
+    </div>
+  </div>
+
+  <br>
+
+  <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+    <img src="2.png" alt="harun profile" class="profile-thumbnail">
+    <div class="profile-name">
+      <h3 class="logo">BAMBI</h3>
+      <small>&copy 2019</small>
+    </div>
+  </header>
+
+
+
+
+    </div>
+
+
+
+    <div class="col-6">
+
+      <!-- content area -->
+      <h3 style='color:#ccc;font-size: 30px;'>No message yet..</h3>
+      <form action="" method="POST">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control message" placeholder="What's on your mind?" aria-label="post" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <input type="submit" class="btn" type="button" style="color:#F9E9C8;border-color: #F9E9C8;padding-top: 2px;">
+        </div>
+      </form>
+      <div class="message_holder"></div>
+
+
+      </div>
+
+
+
+    <div class="col-3">
+      <!-- notifications and relevant ads -->
+      <div class="alert alert-dark alert-dismissible fade show" role="alert">
+      You have <strong>15</strong> unread messages
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Ikra Abdullahi</strong> has a new post.Click to check.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>View your profile!</strong> Check yourself, you aren't looking too well.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="card" style="color:#000;">
+      <img class="card-img-top" src="2.png" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title"><small class="text-muted">sponsored</small></h5>
+        <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+
+
+
+
+    </div>
+
+
+ <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+    <script type="text/javascript">
+      var socket = io.connect('http://' + document.domain + ':' + location.port);
+      socket.on( 'connect', function() {
+        socket.emit( 'my event', {
+          data: 'User Connected'
+        } )
+        var form = $( 'form' ).on( 'submit', function( e ) {
+          e.preventDefault()
+          let user_name = $( 'input.username' ).val()
+          let user_input = $( 'input.message' ).val()
+          socket.emit( 'my event', {
+            user_name : user_name,
+            message : user_input
+          } )
+          $( 'input.message' ).val( '' ).focus()
+        } )
+      } )
+      socket.on( 'my response', function( msg ) {
+        console.log( msg )
+        if( typeof msg.user_name !== 'undefined' ) {
+          $( 'h3' ).remove()
+          // $( 'div.message_holder' ).append( '<div style="border:1px solid #fff; padding:10px;width:100%;"><u style="color: #1e90ff;">'+msg.user_name+'</u> '+'<b style="color:#F9E9C8;">' +msg.message+ '</b></div><br/>' )
+          $('div.message_holder').append('<div class="post"><header><img src="bitmoji.png" alt="harun profile" class="profile-thumbnail"><div class="profile-name"><h3>' + msg.user_name + '</h3><small>@' + msg.user_name + '</small></div><div class="follow-btn"><button style="height:40px;background:#000;color:#F9E9C8;border:1px solid #F9E9C8;">Follow</button></div></header><div id="inner"><p>' + msg.message + '</p><span class="date">1:32 PM - 10 June 2019</span><hr></div><br/>')
+        }
+      })
+    </script>
+
+
+
+    
+  </body>
+</html>

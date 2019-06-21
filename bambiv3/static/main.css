@@ -1,0 +1,30 @@
+body{
+  background:#000;
+  color: #F9E9C8;
+}
+nav{
+    background: #000;
+}
+.search{
+  margin-right:5px;
+  border: 1px solid #F9E9C8;
+  outline:none;
+  color:#000;
+  background:#fff;
+}
+.search:focus{
+  background:#000;
+  outline:none;
+  border:#000;
+  color:#F9E9C8;
+}
+.settings li{
+  padding-right:10px;
+}
+.logo{
+  color:#F9E9C8;
+  letter-spacing:2px;
+}
+.about span, small{
+  color:#1e90ff;
+}

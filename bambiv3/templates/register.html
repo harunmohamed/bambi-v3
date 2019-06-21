@@ -1,0 +1,112 @@
+<style>
+  body{
+    text-align:center;
+    background: #000;
+    color:#F9E9C8;
+    margin-top:100px;
+    font-family: 'Comfortaa', cursive;
+  }
+  img{
+    width:120px;
+    height:120px;
+    border:2px solid #F9E9C8;
+    padding: 3px;
+    border-radius: 5px;
+  }
+  input{
+    background:#162023;
+    border: none;
+    outline:none;
+    border-radius: 5px;
+    height: 30px;
+    margin-bottom: 10px;
+    padding: 10px;
+    color: #F9E9C8;
+  }
+  .button{
+    background: #000;
+    border: 1px solid #F9E9C8;
+    border-radius: 5px;
+    height: 40px;
+    width:100px;
+    margin: 30px;
+    margin-top:10px;
+  }
+  a{
+    color: #F9E9C8;
+  }
+  .button .a:hover{
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  span{
+    color:#d9534f;
+  }
+</style>
+
+	<head>
+	    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}">
+	    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+		 {% if title %}
+	      <title>Bambi - {{ title }}</title>
+	    {% else %}
+	      <title>Bambi</title>
+	    {% endif %}
+	</head>
+
+	<img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo"> <br>
+	<br>
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+
+			{% if form.username.errors %}
+				{{ form.username(placeholder="username", class="is-invalid") }} <br>
+				<div class="invalid-feedback">
+					{% for error in form.username.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.username(placeholder="username") }} <br>
+			{% endif %}
+
+			{% if form.email.errors %}
+				{{ form.email(placeholder="email", class="is-invalid") }} <br>
+				<div class="invalid-feedback">
+					{% for error in form.email.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.email(placeholder="email") }} <br>
+			{% endif %}
+
+
+			{% if form.password.errors %}
+				{{ form.password(placeholder="password", class="is-invalid") }} <br>
+				<div class="invalid-feedback">
+					{% for error in form.password.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.password(placeholder="password") }} <br>
+			{% endif %}
+
+			{% if form.confirm_password.errors %}
+				{{ form.confirm_password(placeholder="confirm password", class="is-invalid") }} <br>
+				<div class="invalid-feedback">
+					{% for error in form.confirm_password.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.confirm_password(placeholder="confrim password") }} <br>
+			{% endif %}
+
+			{{ form.submit(class="button", placeholder="Sign Up") }}
+	</form>
+
+
+	  <small class="text-muted">Already have an account? <a href="{{ url_for('login') }}">Login</a></small>

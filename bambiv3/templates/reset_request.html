@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+{% block content %}
+  
+<style>
+header, footer {
+   display: flex;
+   flex-direction: row;
+ }
+ header .profile-thumbnail {
+   width: 50px;
+   height: 50px;
+   border-radius: 4px;
+ }
+ header .profile-name {
+   display: flex;
+   flex-direction:column;
+   margin-left: 10px;
+ }
+header h3, header h4 {
+   display: flex;
+   margin: 0;
+ }
+ #inner p {
+   margin-bottom: 10px;
+   font-size: 20px;
+ }
+ #inner hr {
+   margin: 20px 0;
+   border-style: solid;
+   opacity: 0.1;
+   color:#F9E9C8;
+ }
+ .post{
+   border: 2px solid #F9E9C8;
+   padding: 10px;
+ }
+</style>  
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3">
+        <!-- User info , photos -->
+      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+        <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3 class="logo">BAMBI</h3>
+          <small>&copy 2019</small>
+        </div>
+      </header>
+    </div>
+
+    <div class="col-6" style="text-align: center">
+      <div class="post">
+      <!--<header>
+          <img src="{{ image_file }}" alt="{{current_user.email}} profile" class="profile-thumbnail">
+          <div class="profile-name">
+            <h3>{{current_user.email}}</h3>
+            <small>{{current_user.email}}</small>
+          </div>
+        </header>-->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+              {% for category , message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                  {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+              {% endfor %}
+          {% endif %}
+          {% endwith %}
+        <div id="inner">
+         <div class="content-section">
+          <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+              <legend class="border-bottom mb-2 pb-2">Reset Password</legend>
+              <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
+
+                {% if form.email.errors %}
+                {{ form.email(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.email.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.email(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+            </fieldset>
+            <div class="form-group">
+              {{ form.submit(class="btn btn-outline-warning") }}
+            </div>
+          </form>
+
+        </div>
+    </div>
+    <br>
+    </div>
+
+    <!--<div class="col-3">
+       <div class="card" style="color:#000;">
+          <img class="card-img-top" src="https://bit.ly/2Zner4a" alt="logo">
+          <div class="card-body">
+            <h5 class="card-title"><small class="text-muted">sponsored</small></h5>
+            <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </div>
+        </div>
+    </div>
+    </div>
+</div>-->
+
+
+{% endblock content %}
