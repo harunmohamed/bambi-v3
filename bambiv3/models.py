@@ -14,6 +14,12 @@ class User(db.Model, UserMixin):
 	email = db.Column(db.String(120), unique=True, nullable=False)
 	image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
 	password = db.Column(db.String(60), nullable=False)
+	#last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+	department = db.Column(db.String(20), nullable=False)
+	student_number = db.Column(db.Integer(), unique=True, nullable=False)
+	age = db.Column(db.Integer(), nullable=False)
+	country = db.Column(db.String(20), nullable=False)
+	hobby = db.Column(db.String(20), nullable=False)
 	posts = db.relationship('Post', backref='author', lazy=True)
 
 	def get_reset_token(self, expires_sec=1800):
@@ -43,4 +49,7 @@ class Post(db.Model):
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 	def __repr__(self):
-		return f"Post('{self.content}', '{self.date_posted}')"
+		if self.title != None:
+			return f"Post('{self.title}','{self.content}', '{self.date_posted}')"
+		else:
+			return f"Post({self.content}', '{self.date_posted}')"

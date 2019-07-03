@@ -61,12 +61,18 @@ header, footer {
    border: 2px solid #F9E9C8;
    padding: 10px;
  }
+ .liked {
+  color: red;
+}
+.love{
+  cursor: pointer;
+}
 </style>
 
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-3">
+    <div class="col-lg-3 d-none d-lg-block">
       <!-- User info , photos -->
       {% if current_user.is_authenticated %}
       <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;" data-toggle="modal" data-target="#profile">
@@ -113,12 +119,14 @@ header, footer {
 
     <div class="card about" style="color:#000;text-align:left;">
     <div class="card-body">
-      <h5 class="card-title">About <small>edit</small></h5>
-      <p><i class="fas fa-graduation-cap"></i> Went to <span>Near East University</span></p>
-      <p><i class="fas fa-fire-alt"></i> Is friends with <span>Obama</span></p>
-      <p><i class="fas fa-money-check-alt"></i> Worked at <span>Airbnb</span></p>
+      <h5 class="card-title">About <small><a href="{{ url_for('account') }}">edit</a></small></h5>
+      <p><i class="fas fa-graduation-cap"></i> Studies at <span>Near East University</span></p>
+      <p><i class="fas fa-fire-alt"></i> Majors in <span>{{current_user.department}}</span></p>
+      <p><i class="fas fa-home"></i> Student Number: <span>{{current_user.student_number}}</span></p>
+      <p><i class="fas fa-fire-alt"></i> Is <span>{{current_user.age}}</span> years old</p>
+      <p><i class="fas fa-money-check-alt"></i> From <span>{{current_user.country}}</span></p>
       <p><i class="fas fa-home"></i> Lives in <span>Nicosia, Cyprus</span></p>
-      <p><i class="fas fa-igloo"></i> From <span>Nairobi, Kenya</span></p>
+      <p><i class="fas fa-igloo"></i> Interested in <span>{{current_user.hobby}}</span></p>
     </div>
   </div>
 
@@ -155,7 +163,7 @@ header, footer {
 
 
 
-    <div class="col-6">
+    <div class="col-lg-6">
       <!-- content area -->
       <!--<div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="What's on your mind?" aria-label="post" aria-describedby="basic-addon2">
@@ -192,10 +200,10 @@ header, footer {
     	  <footer>
     			    <div class="stats">
     			      <div class="Retweets">
-    			        <!--<strong></strong>--> <i class="fas fa-heart" style="color:red;font-size: 18px;"></i>
+    			        <!--<strong></strong>--> <i class="fas fa-heart love" style="font-size: 28px;"></i>
     			      </div>
     			      <div class="likes">
-    			        <!--<strong></strong>--> <i class="far fa-comments" style="color:orange;font-size: 18px;"></i>
+    			        <!--<strong></strong>--> <!--<i class="far fa-comments" style="color:orange;font-size: 18px;"></i>-->
     			      </div>
     			    </div>
     			  </footer>
@@ -205,7 +213,7 @@ header, footer {
 
 
 
-    <div class="col-3">
+    <div class="col-lg-3 d-none d-lg-block">
       {% if current_user.is_authenticated %}
       <!-- notifications and relevant ads -->
 	    {% with messages = get_flashed_messages(with_categories=true) %}
@@ -282,6 +290,16 @@ header, footer {
       </div>
     </div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script>
+    $('.love').click(function(){
+  $(this).toggleClass('liked');
+});
+  </script>
 
 
 {% endblock content %}

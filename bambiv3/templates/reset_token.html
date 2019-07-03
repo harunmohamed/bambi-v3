@@ -37,7 +37,7 @@ header h3, header h4 {
 </style>  
 <div class="container-fluid">
   <div class="row">
-    <div class="col-3">
+    <div class="col-lg-3 d-none d-lg-block">
         <!-- User info , photos -->
       <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
         <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo" class="profile-thumbnail">
@@ -48,7 +48,7 @@ header h3, header h4 {
       </header>
     </div>
 
-    <div class="col-6" style="text-align: center">
+    <div class="col-lg-6" style="text-align: center">
       <div class="post">
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}

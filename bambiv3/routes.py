@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
@@ -8,6 +9,12 @@ from bambiv3.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
+
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
 
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
@@ -44,7 +51,9 @@ def register():
 	form = RegistrationForm()
 	if form.validate_on_submit():
 		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-		user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+		user = User(username=form.username.data, email=form.email.data, department=form.department.data,\
+			student_number=form.student_number.data, age=form.age.data, country=form.country.data, hobby=form.hobby.data,\
+			password=hashed_password)
 		db.session.add(user)
 		db.session.commit()
 		flash(f'Account Created for {form.username.data}! You can now log in', 'success')
@@ -101,14 +110,27 @@ def account():
 			current_user.image_file = picture_file
 		current_user.username = form.username.data
 		current_user.email = form.email.data
+		current_user.department = form.department.data
+		current_user.student_number = form.student_number.data
+		current_user.country = form.country.data
+		current_user.age = form.age.data
+		current_user.hobby = form.hobby.data
 		db.session.commit()
 		flash('Your Account has been updated', 'success')
 		return redirect(url_for('account'))
 	elif request.method == 'GET':
 		form.username.data = current_user.username
 		form.email.data = current_user.email
+		form.department.data = current_user.department
+		form.student_number.data = current_user.student_number
+		form.country.data = current_user.country
+		form.age.data = current_user.age
+		form.hobby.data = current_user.hobby
 	image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
 	return render_template('account.html', title='Account', image_file=image_file, form=form)
+
+
+
 
 
 @app.route('/post/new', methods=['GET', 'POST'])
@@ -122,7 +144,6 @@ def new_post():
 		flash('Your Post Has been Created!', 'success')
 		return redirect(url_for('home'))
 	return render_template('create_post.html', title='New Post', form=form, legend='New Post')
-
 
 @app.route('/post/<int:post_id>')
 def post(post_id):
@@ -167,7 +188,7 @@ def user_posts(username):
 	page = request.args.get('page', 1, type=int)
 	user = User.query.filter_by(username=username).first_or_404()
 	posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
-	return render_template('user_posts.html', posts=posts, user=user)
+	return render_template('user_posts.html', posts=posts, user=user, title=user.username)
 
 
 def send_reset_email(user):
@@ -210,3 +231,18 @@ def reset_token(token):
         flash('Your password has been updated! You are now able to log in', 'success')
         return redirect(url_for('login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
+
+
+#Error Handlers
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
+@app.errorhandler(403)
+def forbidden_route_error(error):
+    return render_template('403.html'), 403
+
+@app.errorhandler(500)
+def internal_error(error):
+    db.session.rollback()
+    return render_template('500.html'), 500

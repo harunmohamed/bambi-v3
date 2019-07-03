@@ -3,7 +3,7 @@
     text-align:center;
     background: #000;
     color:#F9E9C8;
-    margin-top:100px;
+    margin-top:30px;
     font-family: 'Comfortaa', cursive;
   }
   img{
@@ -11,6 +11,7 @@
     height:120px;
     border:2px solid #F9E9C8;
     padding: 3px;
+    margin-top: 30px;
     border-radius: 5px;
   }
   input{
@@ -29,7 +30,6 @@
     border-radius: 5px;
     height: 40px;
     width:100px;
-    margin: 30px;
     margin-top:10px;
   }
   a{
@@ -82,6 +82,62 @@
 				{{ form.email(placeholder="email") }} <br>
 			{% endif %}
 
+			{% if form.student_number.errors %}
+				{{ form.student_number(placeholder="student number", class="is-invalid") }} <br>
+				<div class="invalid-feedback">
+					{% for error in form.student_number.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.student_number(placeholder="student number") }} <br>
+			{% endif %}
+
+			{% if form.department.errors %}
+				{{ form.department(placeholder="department / major", class="is-invalid") }} <br>
+				<div class="invalid-feedback">
+					{% for error in form.department.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.department(placeholder="department / major") }} 
+			{% endif %}
+
+
+			{% if form.age.errors %}
+				{{ form.age(placeholder="age", class="is-invalid") }} <br>
+				<div class="invalid-feedback">
+					{% for error in form.age.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.age(placeholder="age") }} <br>
+			{% endif %}
+
+			{% if form.country.errors %}
+				{{ form.country(placeholder="country", class="is-invalid") }} <br>
+				<div class="invalid-feedback">
+					{% for error in form.country.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.country(placeholder="country") }} 
+			{% endif %}
+
+			{% if form.hobby.errors %}
+				{{ form.hobby(placeholder="hobbies / interests", class="is-invalid") }} <br>
+				<div class="invalid-feedback">
+					{% for error in form.hobby.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.hobby(placeholder="hobbies / interests") }} <br>
+			{% endif %}
+
 
 			{% if form.password.errors %}
 				{{ form.password(placeholder="password", class="is-invalid") }} <br>
@@ -91,7 +147,7 @@
 					{% endfor %}
 				</div>
 			{% else %}
-				{{ form.password(placeholder="password") }} <br>
+				{{ form.password(placeholder="password") }} 
 			{% endif %}
 
 			{% if form.confirm_password.errors %}
@@ -102,7 +158,7 @@
 					{% endfor %}
 				</div>
 			{% else %}
-				{{ form.confirm_password(placeholder="confrim password") }} <br>
+				{{ form.confirm_password(placeholder="confirm password") }} <br>
 			{% endif %}
 
 			{{ form.submit(class="button", placeholder="Sign Up") }}

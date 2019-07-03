@@ -1,1 +1,1 @@
-web: gunicorn app:bambiv3
+web: gunicorn app:run

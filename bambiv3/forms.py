@@ -8,6 +8,11 @@ from bambiv3.models import User
 class RegistrationForm(FlaskForm):
 	username = StringField('Username', validators = [DataRequired(), Length(min=2, max=20) ])
 	email = StringField('Email', validators = [DataRequired(), Email()])
+	department = StringField('Department', validators=[DataRequired()])
+	student_number = StringField('Student Number', validators=[DataRequired()])
+	country = StringField('Country', validators=[DataRequired()])
+	age = StringField('Age', validators=[DataRequired()])
+	hobby = StringField('Hobby', validators=[DataRequired()])
 	password = PasswordField('Password', validators = [DataRequired()])
 	confirm_password = PasswordField('Confirm Password', validators = [DataRequired(), EqualTo('password')])
 	submit = SubmitField('Sign Up')
@@ -22,6 +27,11 @@ class RegistrationForm(FlaskForm):
 		if user:
 			raise ValidationError('That email is taken. Please choose a different one')
 
+	def validate_student_number(self, student_number):
+		user = User.query.filter_by(student_number=student_number.data).first()
+		if user:
+			raise ValidationError('That Student Number is taken. Please choose a different one')
+
 
 class LoginForm(FlaskForm):
 	email = StringField('Email', validators = [DataRequired(), Email()])
@@ -34,6 +44,11 @@ class UpdateAccountForm(FlaskForm):
 	username = StringField('Username', validators = [DataRequired(), Length(min=2, max=20) ])
 	email = StringField('Email', validators = [DataRequired(), Email()])
 	picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
+	department = StringField('Department', validators=[DataRequired()])
+	student_number = StringField('Student Number', validators=[DataRequired()])
+	country = StringField('Country', validators=[DataRequired()])
+	age = StringField('Age', validators=[DataRequired()])
+	hobby = StringField('Hobby')
 	submit = SubmitField('Update')
 
 	def validate_username(self, username):
@@ -53,7 +68,6 @@ class PostForm(FlaskForm):
 	title = StringField('Title') #validators=[DataRequired()]
 	content = TextAreaField('Content', validators=[DataRequired()])
 	submit = SubmitField('Post')
-
 
 class RequestResetForm(FlaskForm):
 	email = StringField('Email', validators = [DataRequired(), Email()])
