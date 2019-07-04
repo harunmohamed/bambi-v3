@@ -44,6 +44,10 @@ def about():
 def discover():
 	return render_template('discover.html')
 
+@app.route('/explore')
+def explore():
+	return render_template('explore.html', title="Explore")
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
 	if current_user.is_authenticated:
