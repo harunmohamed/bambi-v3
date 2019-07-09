@@ -194,7 +194,7 @@ header, footer {
             {{ form.hidden_tag() }}
               <div class="input-group mb-3">
                 {% if form.content.errors %}
-                {{ form.content(class="form-control-label is-invalid", placeholder="What's on your mind?") }}
+                {{ form.content(class="form-control is-invalid", placeholder="What's on your mind?") }}
                 <div class="invalid-feedback">
                   {% for error in form.content.errors %}
                   <span>{{ error }}</span>
@@ -321,6 +321,28 @@ header, footer {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <div style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;border-radius: 5px;">
+        <h5 style="padding-left: 3px;">Friends - <small><a href="{{url_for('discover')}}" target="_blank">view all</a></small></h5>
+        {% for user in users if user != current_user %}
+        <header>
+        <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3>{{user.username}}</h3>
+          {% if user.country == current_user.country %}
+          <small>From {{user.country}}</small>
+          {% endif %}
+          {% if user.department == current_user.department %}
+          <small>Studies {{user.department}}</small>
+          {% endif %}
+        </div>
+        <div class="follow-btn">
+            <button style="height:40px;background:#000;color:#F9E9C8;"><a href="{{url_for('user_posts', username=user.username)}}"target="_blank"><i class="fas fa-user-plus" style="color: #F9E9C8;"></i></a></button>
+          </div>
+      </header>
+      <br>
+      {% endfor %}
+      </div>
+      <br>
       <div class="card" style="color:#000;">
       <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo">
       <div class="card-body">

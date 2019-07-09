@@ -28,9 +28,10 @@ def home():
 		return redirect(url_for('home'))
 	page = request.args.get('page', 1, type=int)
 	posts = Post.query.order_by(Post.date_posted.desc()).paginate(per_page=5, page=page)
+	users = User.query.all()
 	if current_user.is_authenticated:
 		image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-		return render_template('home.html', title="Home", form=form, posts=posts, image_file=image_file)
+		return render_template('home.html', title="Home", form=form, posts=posts, image_file=image_file, users=users)
 	else:
 		return redirect(url_for('login'))
 		#return render_template('home.html', title="Home", posts=posts)
@@ -42,7 +43,8 @@ def about():
 
 @app.route('/discover')
 def discover():
-	return render_template('discover.html')
+	users = User.query.all()
+	return render_template('discover.html', users=users)
 
 @app.route('/explore')
 def explore():

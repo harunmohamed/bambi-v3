@@ -163,17 +163,21 @@ body {
   p{
     font-size: 8px;
   }
-  small , h5{
+  .info{
     padding:10px;
     text-align:center;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #F9E9C8;
-    background: #000
+    background: #000;
   }
   h5{
     background: #F9E9C8;
     color:#000;
+    padding:10px;
+    text-align:center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
   }
   .logo{
         color:#F9E9C8;
@@ -194,14 +198,14 @@ body {
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">
             <li>
-              <span class="logo">DISCOVER FRIENDS</span>
+              <span class="logo" title="Here you can Discover New Friends who share things in common with you">DISCOVER FRIENDS</span>
             </li>
         </ul>
     </div>
     <div class="mx-auto order-0">
       <a class="navbar-brand mx-auto" href="#">
         <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35" height="35" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8; padding:2px;border-radius:2px;">
-        <span class="logo">BAMBI</span>
+        <span class="logo"><!--BAMBI--></span>
       </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span class="navbar-toggler-icon"></span>
@@ -210,7 +214,7 @@ body {
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 settings">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <i class="fas fa-home" style="color:#F9E9C8;"><a href="{{ url_for('home') }}" class="logo"> HOME</a></i>
+                <a href="{{ url_for('home') }}" style="color:#F9E9C8;"><i class="fas fa-home" style="color:#F9E9C8;"></i> HOME</a>
             </li>
         </ul>
     </div>
@@ -223,35 +227,22 @@ body {
   </div>
 
   <div class="tinder--cards">
+    {% for user in users if user != current_user %}
     <div class="tinder--card">
-      <img src="{{ url_for('static', filename='profile_pics/' + 'abdi.jpg') }}" style="width: 100%" height="70%">
-      <h5>Abdinoor Mohamed <i class="far fa-check-circle"></i></h5>
-      <small>Caramel Connoisseur</small>
+      <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" style="width: 100%" height="70%">
+      <h5>{{user.username}} <i class="far fa-check-circle"></i></h5>
+      <div class="info">
+      <small>I'm {{user.age}} from {{user.country}} and I study {{user.department}}</small> <br>
+      <small title="View {{user.username}}'s Profile and Posts"><a href="{{url_for('user_posts', username=user.username)}}" target="_blank">MORE</a></small>
+      </div>
     </div>
-    <div class="tinder--card">
-      <img src="{{ url_for('static', filename='profile_pics/' + 'ikra.jpg') }}" style="width: 100%" height="70%">
-      <h5>Ikra Abdullahi <i class="far fa-check-circle"></i></h5>
-      <small>Feminist</small>
-    </div>
-    <div class="tinder--card">
-      <img src="{{ url_for('static', filename='profile_pics/' + 'kevin.jpg') }}" style="width: 100%" height="70%">
-      <h5>Kevin Macharia <i class="far fa-check-circle"></i></h5>
-      <small>21 Century Picasso</small>
-    </div>
-    <div class="tinder--card">
-      <img src="{{ url_for('static', filename='profile_pics/' + 'esther.jpg') }}" style="width: 100%" height="70%">
-      <h5>Esther Holtz <i class="far fa-check-circle"></i></i></h5>
-      <small>Who doesn't love Cheese?</small>
-    </div>
-    <div class="tinder--card">
-      <img src="{{ url_for('static', filename='profile_pics/' + 'jere.jpg') }}" style="width: 100%" height="70%">
-      <h5>Jeremiah <i class="far fa-check-circle"></i></h5>
-      <small>Drummer</small>
-    </div>
+    {% endfor %}
     <div class="tinder--card">
       <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" style="width: 100%" height="70%">
       <h5><i class="fas fa-ad"></i></h5>
+      <div class="info">
       <small>Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</small>
+    </div>
     </div>
   </div>
 

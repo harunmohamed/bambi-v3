@@ -4,13 +4,13 @@
 <body onload="getArticles()">
 		<div id="search-container" class="container" style="color: #000">
 			<br>
-			<div style="text-align: center;">
+			<!--<div style="text-align: center;">
 			<button class="btn btn-dark" onclick="darkMode()"><i class="far fa-moon"></i></button>
 			<button class="btn btn-dark" onclick="lightMode()"><i class="fas fa-sun"></i></button>
 			</div>
-			<hr>
+			<hr>-->
 			<div id="search" class="card card-body bg-light mb-3">
-				<h4>Explore Random Stuff!</h4>
+				<h4>Hey {{current_user.username}}, Explore Random Stuff!</h4>
 				<form id="search-form">
 					<div class="form-group">
 						<input type="text" id="search-input" class="form-control mb-2" placeholder="Search Bambi for...">

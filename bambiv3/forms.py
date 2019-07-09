@@ -48,7 +48,7 @@ class UpdateAccountForm(FlaskForm):
 	student_number = StringField('Student Number', validators=[DataRequired()])
 	country = StringField('Country', validators=[DataRequired()])
 	age = StringField('Age', validators=[DataRequired()])
-	hobby = StringField('Hobby')
+	hobby = StringField('Hobby', validators=[DataRequired()])
 	submit = SubmitField('Update')
 
 	def validate_username(self, username):

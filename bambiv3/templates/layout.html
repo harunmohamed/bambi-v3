@@ -39,7 +39,7 @@
     <div class="mx-auto order-0">
       <a class="navbar-brand mx-auto" href="{{ url_for('home') }}">
         <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35" height="35" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8; padding:2px;border-radius:2px;">
-        <span class="logo">BAMBI</span>
+        <span class="logo"><!--BAMBI--></span>
       </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span class="navbar-toggler-icon"></span>
@@ -48,7 +48,26 @@
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 settings">
         <ul class="navbar-nav ml-auto">
           {% if current_user.is_authenticated %}
-             <li class="nav-item" title="Add posts with a Title">
+          <li>
+            <div class="dropdown">
+            <button class="btn  btn-sm btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="far fa-grin-hearts" title="Menu"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="{{ url_for('new_post') }}" title="Add Posts with a Title"><i class="fas fa-ice-cream"></i> Post</a>
+              <a class="dropdown-item" href="{{ url_for('discover') }}" title="Discover New Friends"><i class="fas fa-fire"></i> Discover Friends</a>
+              <a class="dropdown-item" href="{{ url_for('explore') }}" title="Explore Random Stuff!"><i class="fas fa-bomb"></i> Explore</a>
+              <a class="dropdown-item" href="#" title="Reply to your Messages"><i class="fas fa-envelope"></i> Inbox</a>
+              <a class="dropdown-item" href="{{ url_for('account') }}" title="Account Settings"><i class="fas fa-cookie"></i> Settings</a>
+              <a class="dropdown-item" href="{{ url_for('about') }}" title="Know Bambi More"><i class="fas fa-info-circle"></i> About Bambi</a>
+              <a class="dropdown-item" href="{{ url_for('logout') }}" title="Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+          </div>
+          </li>
+          <li>
+            <div id="google_translate_element"></div>
+          </li>
+             <!--<li class="nav-item" title="Add posts with a Title">
                 <i class="fas fa-blog"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;"> Post</a></i>
             </li>
             <li class="nav-item" title="Discover New Friends">
@@ -62,7 +81,7 @@
             </li>
             <li>
             <div id="google_translate_element"></div>
-          </li>
+          </li>-->
           {% else %}
             <li class="nav-item">
                 <i class="fas fa-user-plus"><a href="{{ url_for('register') }}" style="color:#F9E9C8;"> Register</a></i>
