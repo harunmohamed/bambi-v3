@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- CSS styles in static -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <!-- Font awesome kit -->
+    <script src="https://kit.fontawesome.com/17192b7610.js"></script>
+
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}">
+    {% if title %}
+      <title>Bambi - {{ title }}</title>
+    {% else %}
+      <title>Bambi</title>
+    {% endif %}
+    
+  </head>
+  <body>
+
+<nav class="navbar navbar-expand-md navbar-dark sticky-top">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li>
+              <form class="form-inline">
+                <div class="input-group">
+                  <input type="text" class="form-control  search" placeholder="search" aria-label="Search" aria-describedby="basic-addon1"> <br>
+                  <button class="btn  my-2 my-sm-0" type="submit"><i class="fas fa-search" style="color:#F9E9C8;"></i></button>
+                </div>
+              </form>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+      <a class="navbar-brand mx-auto" href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35" height="35" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8; padding:2px;border-radius:2px;">
+        <span class="logo"><!--BAMBI--></span>
+      </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 settings">
+        <ul class="navbar-nav ml-auto">
+          {% if current_user.is_authenticated %}
+          <li>
+            <div class="dropdown">
+            <button class="btn  btn-sm btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <span title="Menu">😎</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="{{ url_for('new_post') }}" title="Add Posts with a Title"> 🍧 Post</a>
+              <a class="dropdown-item" href="{{ url_for('discover') }}" title="Discover New Friends"> 🔥 Discover Friends</a>
+              <a class="dropdown-item" href="{{ url_for('explore') }}" title="Explore Random Stuff!"> 🔱 Explore</a>
+              <a class="dropdown-item" href="#" title="Reply to your Messages"> 💬 Inbox</a>
+              <a class="dropdown-item" href="{{ url_for('account') }}" title="Account Settings"> 🍪 Settings</a>
+              <a class="dropdown-item" href="{{ url_for('about') }}" title="Know Bambi More"> 🕯 About Bambi</a>
+              <a class="dropdown-item" href="{{ url_for('logout') }}" title="Logout"> 🛫 Logout</a>
+            </div>
+          </div>
+          </li>
+          <li>
+            <div id="google_translate_element"></div>
+          </li>
+             <!--<li class="nav-item" title="Add posts with a Title">
+                <i class="fas fa-blog"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;"> Post</a></i>
+            </li>
+            <li class="nav-item" title="Discover New Friends">
+                <i class="fas fa-fire"><a href="{{ url_for('discover') }}" style="color:#F9E9C8;"> Discover</a></i>
+            </li>
+            <li class="nav-item" title="Send Private Messages">
+                <i class="fas fa-envelope"> Inbox</i>
+            </li>
+            <li class="nav-item">
+                <i class="fas fa-sign-out-alt"><a href="{{ url_for('logout') }}" style="color:#F9E9C8;"> Logout</a></i>
+            </li>
+            <li>
+            <div id="google_translate_element"></div>
+          </li>-->
+          {% else %}
+            <li class="nav-item">
+                <i class="fas fa-user-plus"><a href="{{ url_for('register') }}" style="color:#F9E9C8;"> Register</a></i>
+            </li>
+            <li class="nav-item">
+                <i class="fas fa-sign-in-alt"><a href="{{ url_for('login') }}" style="color:#F9E9C8;"> Login</a></i>
+            </li>
+          {% endif %}
+        </ul>
+    </div>
+</nav>
+
+
+  
+
+  {% block content %} {% endblock %}
+
+  {% if current_user.is_authenticated %}
+      <div id="new_post">
+          <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;">✏</a></button>
+        </div>
+    {% endif %}
+    <style>
+          .post_btn{
+      background-color : #000;
+      color: #F9E9C8;
+      padding: 10px 20px;
+      outline:none;
+      border:1px solid #F9E9C8;
+      padding: 2px;
+      border-radius: 50%;
+      height:50px;
+      width:50px;
+    }
+    .post_btn:hover{
+      outline: none;
+    }
+    #new_post{
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+    }
+    </style>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'ar,en,es,jv,pa,ru,zh-CN,tr,sw', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+    }
+  </script>
+  </body>
+</html>

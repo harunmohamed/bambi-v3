@@ -1,0 +1,324 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<style>
+header, footer {
+   display: flex;
+   flex-direction: row;
+ }
+ header .profile-thumbnail {
+   width: 50px;
+   height: 50px;
+   border-radius: 4px;
+ }
+ header .profile-name {
+   display: flex;
+   flex-direction:column;
+   margin-left: 10px;
+ }
+ header .follow-btn {
+   display: flex;
+   margin: 0 0 0 auto;
+ }
+ header .follow-btn button {
+   border: 0;
+   border-radius: 3px;
+   padding: 5px;
+ }
+ header h3, header h4 {
+   display: flex;
+   margin: 0;
+ }
+ #inner p {
+   margin-bottom: 10px;
+   font-size: 20px;
+ }
+ #inner hr {
+   margin: 20px 0;
+   border-style: solid;
+   opacity: 0.1;
+   color:#F9E9C8;
+ }
+ footer .stats {
+   display: flex;
+   font-size: 15px;
+ }
+ footer .stats strong {
+   font-size: 18px;
+ }
+ footer .stats .likes {
+   margin-left: 10px;
+ }
+ footer .cta {
+   margin-left: auto;
+ }
+ footer .cta button {
+   border: 0;
+   background: transparent;
+ }
+ .post{
+   border: 2px solid #F9E9C8;
+   padding: 10px;
+ }
+ .post_btn{
+  background-color : #000;
+  color: #F9E9C8;
+  padding: 10px 20px;
+  border:none;
+  outline:none;
+  border:2px solid #F9E9C8;
+  padding: 2px;
+  border-radius: 50%;
+  height:70px;
+  width:70px;
+}
+
+#new_post{
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+}
+.liked {
+  color: red;
+}
+.love{
+  cursor: pointer;
+}
+</style>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3">
+      <!-- User info , photos -->
+      {% if current_user.is_authenticated %}
+      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;" data-toggle="modal" data-target="#profile">
+        <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3>{{user.username}}</h3>
+          <small>{{user.email}}</small>
+        </div>
+      </header>
+      <br>
+
+
+    <div class="card about" style="color:#000;text-align:left;">
+    <div class="card-body">
+      <h5 class="card-title">About <span style="color:#1e90ff;">
+        {% if current_user == user %}
+          Me <a href="{{ url_for('account') }}">(edit)</a></small>
+        {% else %}
+          {{ user.username }}
+        {% endif %}
+        </span></h5>
+      <!-- {% if current_user.last_seen %}<p><i class="fas fa-dot-circle" style="color: green"></i> Last seen on: {{ current_user.last_seen }}</p>{% endif %} -->
+      <p> 🎓 Studies at <span>Near East University</span></p>
+      <p> 📖 Majors in <span>{{user.department}}</span></p>
+      <p> 🔗 Student Number: <span>{{user.student_number}}</span></p>
+      <p> 🤓 Is <span>{{user.age}}</span> years old</p>
+      <p> 🚀 From <span>{{user.country}}</span></p>
+      <p> 🚦 Lives in <span>Nicosia, Cyprus</span></p>
+      <p> 💎 Interested in <span>{{user.hobby}}</span></p>
+    </div>
+  </div>
+
+  <br>
+
+  <header class="d-none d-lg-flex" style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+    <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo" class="profile-thumbnail">
+    <div class="profile-name">
+      <h3 class="logo">BAMBI</h3>
+      <small>&copy 2019</small>
+    </div>
+  </header>
+  {% else %}
+    <div class="card" style="color:#000;">
+      <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-ad"></i></h5>
+        <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted logo">BAMBI</small>
+      </div>
+    </div>
+    <br>
+    <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+    <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo" class="profile-thumbnail">
+    <div class="profile-name">
+      <h3 class="logo">BAMBI</h3>
+      <small>&copy 2019</small>
+    </div>
+  </header>
+  {% endif %}
+</div>
+
+
+
+    <div class="col-lg-6">
+      <!-- content area -->
+      <h1 class="mb-3">
+      {% if current_user == user %}
+          My Posts ({{ posts.total }})
+        {% else %}
+          Posts by {{ user.username }} ({{ posts.total }})
+        {% endif %}
+        </h1>
+      {% for post in posts.items %}
+	  <div class="post">
+			<header>
+			    <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail">
+			    <div class="profile-name">
+			      <h3>{{post.author.username}}</h3>
+			      <small>@{{post.author.email}}</small>
+			    </div>
+          {% if current_user != user %}
+			    <div class="follow-btn">
+			      <button style="height:40px;background:#000;color:#F9E9C8;border:1px solid #F9E9C8;"><i class="fas fa-user-plus" style="color: #F9E9C8;"></i> Follow</button>
+			    </div>
+          {% else %}
+            <div class="follow-btn">
+              <!--<strong></strong>--> <i class="fas fa-heart love" style="font-size: 28px;"></i>
+            </div>
+          {% endif %}
+			  </header>
+
+			  <div id="inner">
+          <p style="text-transform: uppercase;letter-spacing: 2px;text-align: center;margin-top: 4px;background:#F9E9C8;color:#000;"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#000;">{{post.title}}</a></p>
+			    <p>{{post.content}}</p>
+          {% if post.author == current_user %}
+            <div style="text-align: center;">
+              <a class="btn btn-warning btn-sm m-1" href="{{url_for('update_post', post_id=post.id)}}">Update</a>
+              <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+            </div>
+            <!-- Delete Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel" style="color:#000;">Delete Post?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                      <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+			    <small class="date">{{post.date_posted.strftime('%d-%m-%Y')}}</small>
+			    <hr>
+			  </div>
+
+			  <footer>
+			    <div class="stats">
+            {% if current_user != user %}
+			      <div class="Retweets">
+			        <!--<strong></strong>--> <i class="fas fa-heart love" style="font-size: 28px;"></i>
+			      </div>
+            {% endif %}
+			      <div class="likes">
+			        <!--<strong></strong>--> <!--<i class="far fa-comments" style="color:orange;font-size: 18px;"></i>-->
+			      </div>
+			    </div>
+			  </footer>
+		</div>
+		<br>
+	{% endfor %}
+
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+      {% if page_num %}
+        {% if posts.page == page_num %}
+          <a href="{{ url_for('user_posts', username=user.username, page=page_num) }}" class="btn btn-warning mb-4">{{page_num}}</a>
+        {% else %}
+          <a href="{{ url_for('user_posts', username=user.username, page=page_num) }}" class="btn btn-outline-warning mb-4">{{page_num}}</a>
+        {% endif %}
+      {% else %}
+        ...
+      {% endif %}
+    {% endfor %}
+</div>
+
+
+
+    <div class="col-lg-3 d-none d-lg-block">
+      {% if current_user.is_authenticated %}
+      <!-- notifications and relevant ads -->
+	    {% with messages = get_flashed_messages(with_categories=true) %}
+	    	{% if messages %}
+	      		{% for category , message in messages %}
+	        		<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+      					{{message}}
+        			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          				<span aria-hidden="true">&times;</span>
+        			</button>
+      				</div>
+	      		{% endfor %}
+	    	{% endif %}
+	  	{% endwith %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <a href="{{ url_for('new_post') }}"  style="color:#000;text-decoration: none">
+      <strong>Post Something!</strong> Tell your friends what you're up to.</a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <a href="{{ url_for('discover') }}"  style="color:#000;text-decoration: none">
+      <strong>Discover Friends!</strong> Swipe left and right on discover to make friends.</a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-dark alert-dismissible fade show" role="alert">
+      <strong>Check your Inbox! </strong>You have Unread Messages
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="card" style="color:#000;">
+      <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-ad"></i></h5>
+        <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted logo">BAMBI</small>
+      </div>
+    </div>
+    <div id="new_post">
+      <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;"><i class="fas fa-feather-alt" style="font-size:30px;"></i></a></button>
+    </div>
+    {% else %}
+    <div class="card" style="color:#000;">
+      <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-ad"></i></h5>
+        <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted logo">BAMBI</small>
+      </div>
+    </div>
+    {% endif %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script>
+    $('.love').click(function(){
+  $(this).toggleClass('liked');
+});
+  </script>
+
+
+
+{% endblock content %}
