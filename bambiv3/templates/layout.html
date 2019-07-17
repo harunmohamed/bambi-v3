@@ -55,9 +55,10 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="{{ url_for('new_post') }}" title="Add Posts with a Title"> 🍧 Post</a>
+              <a class="dropdown-item" href="#" title="Reply to your Messages"> 💬 Inbox</a>
               <a class="dropdown-item" href="{{ url_for('discover') }}" title="Discover New Friends"> 🔥 Discover Friends</a>
               <a class="dropdown-item" href="{{ url_for('explore') }}" title="Explore Random Stuff!"> 🔱 Explore</a>
-              <a class="dropdown-item" href="#" title="Reply to your Messages"> 💬 Inbox</a>
+              <a class="dropdown-item" href="{{ url_for('market') }}" title="Buy and Sell Stuff"> 👜 Market</a>
               <a class="dropdown-item" href="{{ url_for('account') }}" title="Account Settings"> 🍪 Settings</a>
               <a class="dropdown-item" href="{{ url_for('about') }}" title="Know Bambi More"> 🕯 About Bambi</a>
               <a class="dropdown-item" href="{{ url_for('logout') }}" title="Logout"> 🛫 Logout</a>
