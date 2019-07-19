@@ -73,7 +73,6 @@ header, footer {
   height:70px;
   width:70px;
 }
-
 #new_post{
   position: fixed;
   bottom: 20px;
@@ -142,13 +141,13 @@ header, footer {
     <div class="card about" style="color:#000;text-align:left;">
     <div class="card-body">
       <h5 class="card-title">About <small title="Edit Your Personal Info"><a href="{{ url_for('account') }}">edit</a></small></h5>
-      <p><i class="fas fa-graduation-cap"></i> Studies at <span>Near East University</span></p>
-      <p><i class="fas fa-fire-alt"></i> Majors in <span>{{current_user.department}}</span></p>
-      <p><i class="fas fa-home"></i> Student Number: <span>{{current_user.student_number}}</span></p>
-      <p><i class="fas fa-fire-alt"></i> Is <span>{{current_user.age}}</span> years old</p>
-      <p><i class="fas fa-igloo"></i> From <span>{{current_user.country}}</span></p>
-      <p><i class="fas fa-home"></i> Lives in <span>Nicosia, Cyprus</span></p>
-      <p><i class="fas fa-money-check-alt"></i> Interested in <span>{{current_user.hobby}}</span></p>
+      <p> 🎓 Studies at <span>Near East University</span></p>
+      <p> 📖 Majors in <span>{{current_user.department}}</span></p>
+      <p> 🔗 Student Number: <span>{{current_user.student_number}}</span></p>
+      <p> 🤓 Is <span>{{current_user.age}}</span> years old</p>
+      <p> 🚀 From <span>{{current_user.country}}</span></p>
+      <p> 🚦 Lives in <span>Nicosia, Cyprus</span></p>
+      <p> 💎 Interested in <span>{{current_user.hobby}}</span></p>
     </div>
   </div>
 
@@ -211,23 +210,23 @@ header, footer {
           {%  endif %}
 
    {% for post in posts.items %}
-	  <div class="post">
-			<header>
-			    <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" title="I am {{post.author.age}} from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}">
+    <div class="post">
+      <header>
+          <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" title="I am {{post.author.age}} from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}">
           <div class="profile-name">
-			      <h3 title="View {{post.author.username}}'s Info"><a href="{{url_for('user_posts', username=post.author.username)}}" style="color:#F9E9C8;">{{post.author.username}}</a></h3>
-			      <small>@{{post.author.email}}</small>
-			    </div>
+            <h3 title="View {{post.author.username}}'s Info"><a href="{{url_for('user_posts', username=post.author.username)}}" style="color:#F9E9C8;">{{post.author.username}}</a></h3>
+            <small>@{{post.author.email}}</small>
+          </div>
           {% if post.author != current_user %}
-			    <div class="follow-btn" title="Follow {{post.author.username}}">
-			      <button style="height:40px;background:#000;color:#F9E9C8;border:1px solid #F9E9C8;"><i class="fas fa-user-plus" style="color: #F9E9C8;"></i> Follow</button>
-			    </div>
-          {% endif %}
-			  </header>
+          <div class="follow-btn" title="Follow {{post.author.username}}">
+            <span title="Follow {{post.author.username}}" style="cursor:pointer;">💡</span>
+          </div>
+          {% endif %} 
+        </header>
 
-			  <div id="inner">
+        <div id="inner">
           <p style="text-transform: uppercase;letter-spacing: 2px;text-align: center;margin-top: 4px;background:#F9E9C8;color:#000;" title="Click to View this Post Only"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#000;">{{post.title}}</a></p>
-			    <p>{{post.content}}</p>
+          <p>{{post.content}}</p>
           {% if post.author == current_user %}
             <div style="text-align: center;">
               <a class="btn btn-warning btn-sm m-1" href="{{url_for('update_post', post_id=post.id)}}">Update</a>
@@ -253,23 +252,23 @@ header, footer {
               </div>
             </div>
           {% endif %}
-			    <small class="date">{{post.date_posted.strftime('%d-%m-%Y')}}</small>
-			    <hr>
-			  </div>
+          <small class="date">{{post.date_posted.strftime('%d-%m-%Y')}}</small>
+          <hr>
+        </div>
 
-			  <footer>
-			    <div class="stats">
-			      <div class="Retweets" title="Like">
-			        <!--<strong></strong>--> <i class="fas fa-heart love" style="font-size: 28px;"></i>
-			      </div>
-			      <div class="likes">
-			        <!--<strong></strong>--> <!--<i class="far fa-comments" style="color:orange;font-size: 18px;"></i>-->
-			      </div>
-			    </div>
-			  </footer>
-		</div>
-		<br>
-	{% endfor %}
+        <footer>
+          <div class="stats">
+            <div class="Retweets" title="Like">
+              <!--<strong></strong>--> <i class="fas fa-heart love" style="font-size: 28px;"></i>
+            </div>
+            <div class="likes">
+              <!--<strong></strong>--> <!--<i class="far fa-comments" style="color:orange;font-size: 18px;"></i>-->
+            </div>
+          </div>
+        </footer>
+    </div>
+    <br>
+  {% endfor %}
 
     {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
       {% if page_num %}
@@ -289,18 +288,18 @@ header, footer {
     <div class="col-lg-3 d-none d-lg-block">
       {% if current_user.is_authenticated %}
       <!-- notifications and relevant ads -->
-	    {% with messages = get_flashed_messages(with_categories=true) %}
-	    	{% if messages %}
-	      		{% for category , message in messages %}
-	        		<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-      					{{message}}
-        			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          				<span aria-hidden="true">&times;</span>
-        			</button>
-      				</div>
-	      		{% endfor %}
-	    	{% endif %}
-	  	{% endwith %}
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category , message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              </div>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <a href="{{ url_for('new_post') }}"  style="color:#000;text-decoration: none">
       <strong>Post Something!</strong> Tell your friends what you're up to.</a>
@@ -321,7 +320,7 @@ header, footer {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;border-radius: 5px;" title="Discover New Friends here with same interests as you!">
+      <div style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;border-radius: 5px;">
         <h5 style="padding-left: 3px;">Friends - <small><a href="{{url_for('discover')}}" target="_blank">view all</a></small></h5>
         {% for user in users if user != current_user %}
         <header>
@@ -336,7 +335,7 @@ header, footer {
           {% endif %}
         </div>
         <div class="follow-btn">
-            <button style="height:40px;background:#000;color:#F9E9C8;"><a href="{{url_for('user_posts', username=user.username)}}"target="_blank"><i class="fas fa-user-plus" style="color: #F9E9C8;"></i></a></button>
+            <button style="height:40px;background:#000;color:#F9E9C8;"><a href="{{url_for('user_posts', username=user.username)}}"target="_blank">❤</a></button>
           </div>
       </header>
       <br>

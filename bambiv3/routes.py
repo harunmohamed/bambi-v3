@@ -41,6 +41,10 @@ def home():
 def about():
 	return render_template('about.html', title="About")
 
+@app.route('/market')
+def market():
+	return render_template('market.html', title="Market")
+
 @app.route('/discover')
 def discover():
 	users = User.query.all()

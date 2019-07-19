@@ -51,16 +51,17 @@
           <li>
             <div class="dropdown">
             <button class="btn  btn-sm btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <i class="far fa-grin-hearts" title="Menu"></i>
+               <span title="Menu">😎</span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="{{ url_for('new_post') }}" title="Add Posts with a Title"><i class="fas fa-ice-cream"></i> Post</a>
-              <a class="dropdown-item" href="{{ url_for('discover') }}" target="_blank" title="Discover New Friends"><i class="fas fa-fire"></i> Discover Friends</a>
-              <a class="dropdown-item" href="{{ url_for('explore') }}" target="_blank" title="Explore Random Stuff!"><i class="fas fa-bomb"></i> Explore</a>
-              <a class="dropdown-item" href="#" title="Reply to your Messages"><i class="fas fa-envelope"></i> Inbox</a>
-              <a class="dropdown-item" href="{{ url_for('account') }}" title="Account Settings"><i class="fas fa-cookie"></i> Settings</a>
-              <a class="dropdown-item" href="{{ url_for('about') }}" target="_blank" title="Know Bambi More"><i class="fas fa-info-circle"></i> About Bambi</a>
-              <a class="dropdown-item" href="{{ url_for('logout') }}" title="Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+              <a class="dropdown-item" href="{{ url_for('new_post') }}" title="Add Posts with a Title"> 🍧 Post</a>
+              <a class="dropdown-item" href="#" title="Reply to your Messages"> 💬 Inbox</a>
+              <a class="dropdown-item" href="{{ url_for('discover') }}" title="Discover New Friends"> 🔥 Discover Friends</a>
+              <a class="dropdown-item" href="{{ url_for('explore') }}" title="Explore Random Stuff!"> 🔱 Explore</a>
+              <a class="dropdown-item" href="{{ url_for('market') }}" title="Buy and Sell Stuff"> 👜 Market</a>
+              <a class="dropdown-item" href="{{ url_for('account') }}" title="Account Settings"> 🍪 Settings</a>
+              <a class="dropdown-item" href="{{ url_for('about') }}" title="Know Bambi More"> 🕯 About Bambi</a>
+              <a class="dropdown-item" href="{{ url_for('logout') }}" title="Logout"> 🛫 Logout</a>
             </div>
           </div>
           </li>
@@ -101,7 +102,7 @@
 
   {% if current_user.is_authenticated %}
       <div id="new_post">
-          <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;"><i class="fas fa-feather-alt" style="font-size:30px;" title="Add posts with a Title"></i></a></button>
+          <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;">✏</a></button>
         </div>
     {% endif %}
     <style>
@@ -109,15 +110,16 @@
       background-color : #000;
       color: #F9E9C8;
       padding: 10px 20px;
-      border:none;
       outline:none;
-      border:2px solid #F9E9C8;
+      border:1px solid #F9E9C8;
       padding: 2px;
       border-radius: 50%;
-      height:70px;
-      width:70px;
+      height:50px;
+      width:50px;
     }
-
+    .post_btn:hover{
+      outline: none;
+    }
     #new_post{
       position: fixed;
       bottom: 20px;
