@@ -55,11 +55,11 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="{{ url_for('new_post') }}" title="Add Posts with a Title"><i class="fas fa-ice-cream"></i> Post</a>
-              <a class="dropdown-item" href="{{ url_for('discover') }}" title="Discover New Friends"><i class="fas fa-fire"></i> Discover Friends</a>
-              <a class="dropdown-item" href="{{ url_for('explore') }}" title="Explore Random Stuff!"><i class="fas fa-bomb"></i> Explore</a>
+              <a class="dropdown-item" href="{{ url_for('discover') }}" target="_blank" title="Discover New Friends"><i class="fas fa-fire"></i> Discover Friends</a>
+              <a class="dropdown-item" href="{{ url_for('explore') }}" target="_blank" title="Explore Random Stuff!"><i class="fas fa-bomb"></i> Explore</a>
               <a class="dropdown-item" href="#" title="Reply to your Messages"><i class="fas fa-envelope"></i> Inbox</a>
               <a class="dropdown-item" href="{{ url_for('account') }}" title="Account Settings"><i class="fas fa-cookie"></i> Settings</a>
-              <a class="dropdown-item" href="{{ url_for('about') }}" title="Know Bambi More"><i class="fas fa-info-circle"></i> About Bambi</a>
+              <a class="dropdown-item" href="{{ url_for('about') }}" target="_blank" title="Know Bambi More"><i class="fas fa-info-circle"></i> About Bambi</a>
               <a class="dropdown-item" href="{{ url_for('logout') }}" title="Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
           </div>

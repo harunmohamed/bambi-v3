@@ -321,7 +321,7 @@ header, footer {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;border-radius: 5px;">
+      <div style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;border-radius: 5px;" title="Discover New Friends here with same interests as you!">
         <h5 style="padding-left: 3px;">Friends - <small><a href="{{url_for('discover')}}" target="_blank">view all</a></small></h5>
         {% for user in users if user != current_user %}
         <header>
