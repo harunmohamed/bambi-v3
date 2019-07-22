@@ -45,6 +45,10 @@ def about():
 def market():
 	return render_template('market.html', title="Market")
 
+@app.route('/inbox')
+def inbox():
+	return render_template('inbox.html', title="Inbox")
+
 @app.route('/discover')
 def discover():
 	users = User.query.all()
