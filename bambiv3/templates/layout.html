@@ -68,21 +68,6 @@
           <li>
             <div id="google_translate_element"></div>
           </li>
-             <!--<li class="nav-item" title="Add posts with a Title">
-                <i class="fas fa-blog"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;"> Post</a></i>
-            </li>
-            <li class="nav-item" title="Discover New Friends">
-                <i class="fas fa-fire"><a href="{{ url_for('discover') }}" style="color:#F9E9C8;"> Discover</a></i>
-            </li>
-            <li class="nav-item" title="Send Private Messages">
-                <i class="fas fa-envelope"> Inbox</i>
-            </li>
-            <li class="nav-item">
-                <i class="fas fa-sign-out-alt"><a href="{{ url_for('logout') }}" style="color:#F9E9C8;"> Logout</a></i>
-            </li>
-            <li>
-            <div id="google_translate_element"></div>
-          </li>-->
           {% else %}
             <li class="nav-item">
                 <i class="fas fa-user-plus"><a href="{{ url_for('register') }}" style="color:#F9E9C8;"> Register</a></i>
@@ -102,7 +87,7 @@
 
   {% if current_user.is_authenticated %}
       <div id="new_post">
-          <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;">✏</a></button>
+          <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;" title="Add Longer Posts with Titles">✏</a></button>
         </div>
     {% endif %}
     <style>
