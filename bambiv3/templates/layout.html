@@ -29,8 +29,8 @@
             <li>
               <form class="form-inline">
                 <div class="input-group">
-                  <input type="text" class="form-control  search" placeholder="search" aria-label="Search" aria-describedby="basic-addon1"> <br>
-                  <button class="btn  my-2 my-sm-0" type="submit"><i class="fas fa-search" style="color:#F9E9C8;"></i></button>
+                  <input type="text" class="form-control  search" placeholder="search" aria-label="Search" aria-describedby="basic-addon1" style="background: #000"> <br>
+                  <button class="btn my-2 my-sm-0" type="submit">🔍</button>
                 </div>
               </form>
             </li>
@@ -51,23 +51,38 @@
           <li>
             <div class="dropdown">
             <button class="btn  btn-sm btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span title="Menu">😎</span>
+               <span title="🍌: Menu">😎</span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="{{ url_for('new_post') }}" title="Add Posts with a Title"> 🍧 Post</a>
-              <a class="dropdown-item" href="#" title="Reply to your Messages"> 💬 Inbox</a>
-              <a class="dropdown-item" href="{{ url_for('discover') }}" title="Discover New Friends"> 🔥 Discover Friends</a>
-              <a class="dropdown-item" href="{{ url_for('explore') }}" title="Explore Random Stuff!"> 🔱 Explore</a>
-              <a class="dropdown-item" href="{{ url_for('market') }}" title="Buy and Sell Stuff"> 👜 Market</a>
-              <a class="dropdown-item" href="{{ url_for('account') }}" title="Account Settings"> 🍪 Settings</a>
-              <a class="dropdown-item" href="{{ url_for('about') }}" title="Know Bambi More"> 🕯 About Bambi</a>
-              <a class="dropdown-item" href="{{ url_for('logout') }}" title="Logout"> 🛫 Logout</a>
+              <a class="dropdown-item" href="{{ url_for('new_post') }}" title="🍌: Add Posts with a Title"> 🍧 Post</a>
+              <a class="dropdown-item" href="{{ url_for('inbox') }}" title="🍌: Reply to your Messages"> 💬 Inbox</a>
+              <a class="dropdown-item" href="{{ url_for('discover') }}" title="🍌: Discover New Friends"> 🔥 Discover Friends</a>
+              <a class="dropdown-item" href="{{ url_for('explore') }}" title="🍌: Explore Random Stuff!"> 🔱 Explore</a>
+              <a class="dropdown-item" href="{{ url_for('market') }}" title="🍌: Buy and Sell Stuff"> 👜 Market</a>
+              <a class="dropdown-item" href="{{ url_for('account') }}" title="🍌: Account Settings"> 🍪 Settings</a>
+              <a class="dropdown-item" href="{{ url_for('about') }}" title="🍌: Know Bambi More"> 🕯 About Bambi</a>
+              <a class="dropdown-item" href="{{ url_for('logout') }}" title="🍌: Logout"> 🛫 Logout</a>
             </div>
           </div>
           </li>
           <li>
             <div id="google_translate_element"></div>
           </li>
+             <!--<li class="nav-item" title="Add posts with a Title">
+                <i class="fas fa-blog"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;"> Post</a></i>
+            </li>
+            <li class="nav-item" title="Discover New Friends">
+                <i class="fas fa-fire"><a href="{{ url_for('discover') }}" style="color:#F9E9C8;"> Discover</a></i>
+            </li>
+            <li class="nav-item" title="Send Private Messages">
+                <i class="fas fa-envelope"> Inbox</i>
+            </li>
+            <li class="nav-item">
+                <i class="fas fa-sign-out-alt"><a href="{{ url_for('logout') }}" style="color:#F9E9C8;"> Logout</a></i>
+            </li>
+            <li>
+            <div id="google_translate_element"></div>
+          </li>-->
           {% else %}
             <li class="nav-item">
                 <i class="fas fa-user-plus"><a href="{{ url_for('register') }}" style="color:#F9E9C8;"> Register</a></i>
@@ -87,7 +102,7 @@
 
   {% if current_user.is_authenticated %}
       <div id="new_post">
-          <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;" title="Add Longer Posts with Titles">✏</a></button>
+          <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;" title="🍌: Add Longer Posts with Titles">✏</a></button>
         </div>
     {% endif %}
     <style>

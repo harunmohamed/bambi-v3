@@ -107,7 +107,7 @@ header, footer {
     <div class="card-body">
       <h5 class="card-title">About <span style="color:#1e90ff;">
         {% if current_user == user %}
-          Me <a href="{{ url_for('account') }}">(edit)</a></small>
+          Me <small data-toggle="modal" data-target="#info" style="cursor: pointer;">edit</small></small>
         {% else %}
           {{ user.username }}
         {% endif %}
@@ -187,6 +187,11 @@ header, footer {
 			  <div id="inner">
           <p style="text-transform: uppercase;letter-spacing: 2px;text-align: center;margin-top: 4px;background:#F9E9C8;color:#000;"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#000;">{{post.title}}</a></p>
 			    <p>{{post.content}}</p>
+				  <div class="comments">
+            <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width: 40px;height: 40px;border-radius:5px;">
+            <input type="text" name="comment" placeholder="Join the Conversation" style="background:#000;border:none;border-radius:5px;outline:none;width:85%;height: 35px;padding:10px;color:#F9E9C8;margin-top:5px;">
+          </div>
+          <br>
           {% if post.author == current_user %}
             <div style="text-align: center;">
               <a class="btn btn-warning btn-sm m-1" href="{{url_for('update_post', post_id=post.id)}}">Update</a>
@@ -318,6 +323,139 @@ header, footer {
   $(this).toggleClass('liked');
 });
   </script>
+
+
+
+  <!-- User Info Modal -->
+      <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="card" style="color:#000;text-align:center;">
+            <img class="card-img-top" src="{{ image_file }}" alt="Card image cap" style="height:250px;">
+            <div class="card-body">
+               <div class="content-section">
+          <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+              <legend class="border-bottom mb-2 pb-2">Account Info</legend>
+              <div class="form-group">
+                {{ form.username.label(class="form-control-label") }}
+
+                {% if form.username.errors %}
+                {{ form.username(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.username.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.username(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
+                {% if form.email.errors %}
+                {{ form.email(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.email.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.email(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.department.label(class="form-control-label") }}
+                {% if form.department.errors %}
+                {{ form.department(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.department.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.department(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.student_number.label(class="form-control-label") }}
+                {% if form.student_number.errors %}
+                {{ form.student_number(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.student_number.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.student_number(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.country.label(class="form-control-label") }}
+                {% if form.country.errors %}
+                {{ form.country(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.country.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.country(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+               <div class="form-group">
+                {{ form.age.label(class="form-control-label") }}
+                {% if form.age.errors %}
+                {{ form.age(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.age.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.age(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.hobby.label(class="form-control-label") }}
+                {% if form.hobby.errors %}
+                {{ form.hobby(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.hobby.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.hobby(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.picture.label() }}
+                {{ form.picture(class="form-control-file") }}
+                {% if form.picture.errors %}
+                  {% for error in form.picture.errors %}
+                    <span class="text-danger">{{ error }}</span><br>
+                  {% endfor %}
+                {% endif %}
+            </div>
+            </fieldset>
+            <div class="form-group">
+              {{ form.submit(class="btn btn-outline-warning") }}
+            </div>
+          </form>
+
+        </div>
+    </div>
+    <br>
+    </div>
+
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
 
 
 

@@ -45,6 +45,10 @@ def about():
 def market():
 	return render_template('market.html', title="Market")
 
+@app.route('/inbox')
+def inbox():
+	return render_template('inbox.html', title="Inbox")
+
 @app.route('/discover')
 def discover():
 	users = User.query.all()
@@ -193,12 +197,35 @@ def delete_post(post_id):
     return redirect(url_for('home'))
 
 
-@app.route("/user/<string:username>")
+@app.route("/user/<string:username>", methods=['GET', 'POST'])
 def user_posts(username):
+	form = UpdateAccountForm()
+	if form.validate_on_submit():
+		if form.picture.data:
+			picture_file = save_picture(form.picture.data)
+			current_user.image_file = picture_file
+		current_user.username = form.username.data
+		current_user.email = form.email.data
+		current_user.department = form.department.data
+		current_user.student_number = form.student_number.data
+		current_user.country = form.country.data
+		current_user.age = form.age.data
+		current_user.hobby = form.hobby.data
+		db.session.commit()
+		flash('Your Account has been updated', 'success')
+	elif request.method == 'GET':
+		form.username.data = current_user.username
+		form.email.data = current_user.email
+		form.department.data = current_user.department
+		form.student_number.data = current_user.student_number
+		form.country.data = current_user.country
+		form.age.data = current_user.age
+		form.hobby.data = current_user.hobby
+	image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
 	page = request.args.get('page', 1, type=int)
 	user = User.query.filter_by(username=username).first_or_404()
 	posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
-	return render_template('user_posts.html', posts=posts, user=user, title=user.username)
+	return render_template('user_posts.html', posts=posts, user=user, title=user.username,image_file=image_file,form=form)
 
 
 def send_reset_email(user):
