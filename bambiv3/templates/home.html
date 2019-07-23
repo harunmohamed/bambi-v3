@@ -73,6 +73,7 @@ header, footer {
   height:70px;
   width:70px;
 }
+
 #new_post{
   position: fixed;
   bottom: 20px;
@@ -114,20 +115,14 @@ header, footer {
             <img class="card-img-top" src="{{ image_file }}" alt="Card image cap" style="height:250px;">
             <div class="card-body">
               <h5 class="card-title">{{current_user.username}}</h5>
-              <small>
                 My name is {{current_user.username}} and I study {{current_user.department}} at Near East University.
-                I am from {{current_user.country}} and I am {{current_user.age}} years old. My hobbies include {{current_user.hobby}}.My Student number is {{current_user.student_number}} and my email is {{current_user.email}}
-              </small>
-              <!--<small>Software Engineering Student at Near East University</small>
+                I am from {{current_user.country}} and I am {{current_user.age}} years old. 
             </div>
             <div class="card-footer">
+              My hobbies include {{current_user.hobby}}.My Student number is {{current_user.student_number}} and my email is {{current_user.email}}
             <div>
-              <strong>12M</strong> Friends
             </div>
-            <div>
-              <strong>3</strong> Enemies
-            </div>-->
-            </div>
+          </div>
           </div>
           </div>
           <div class="modal-footer">
@@ -200,7 +195,7 @@ header, footer {
                   {% endfor %}
                 </div>
                 {% else %}
-                {{ form.content(class="form-control", placeholder="What's on your mind?" ) }}
+                {{ form.content(class="form-control", placeholder="What's on your mind?") }}
                 {% endif %}
             <div class="input-group-append" style="color:#F9E9C8;border-color: #F9E9C8;">
               {{ form.submit(class="btn btn-outline-warning", style="color:#F9E9C8;border-color: #F9E9C8;") }}
@@ -210,24 +205,24 @@ header, footer {
           {%  endif %}
 
    {% for post in posts.items %}
-    <div class="post">
-      <header>
-          <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" title="🍌: I am {{post.author.age}} from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}">
+	  <div class="post">
+			<header>
+			    <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" title="🍌: I am {{post.author.age}} from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}">
           <div class="profile-name">
-            <h3 title="🍌: View {{post.author.username}}'s Info"><a href="{{url_for('user_posts', username=post.author.username)}}" style="color:#F9E9C8;">{{post.author.username}}</a></h3>
-            <small>@{{post.author.email}}</small>
-          </div>
+			      <h3 title="🍌: View {{post.author.username}}'s Info"><a href="{{url_for('user_posts', username=post.author.username)}}" style="color:#F9E9C8;">{{post.author.username}}</a></h3>
+			      <small>@{{post.author.email}}</small>
+			    </div>
           {% if post.author != current_user %}
-          <div class="follow-btn" title="Follow {{post.author.username}}">
-            <span title="🍌: Follow {{post.author.username}}" style="cursor:pointer;">💡</span>
-          </div>
+			    <div class="follow-btn" title="Follow {{post.author.username}}">
+			      <span title="🍌: Follow {{post.author.username}}" style="cursor:pointer;">💡</span>
+			    </div>
           {% endif %} 
-        </header>
+			  </header>
 
-        <div id="inner">
+			  <div id="inner">
           <p style="text-transform: uppercase;letter-spacing: 2px;text-align: center;margin-top: 4px;background:#F9E9C8;color:#000;" title="🍌: Click to View this Post Only"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#000;">{{post.title}}</a></p>
-          <p>{{post.content}}</p>
-        <div class="comments">
+			    <p>{{post.content}}</p>
+          <div class="comments">
             <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width: 40px;height: 40px;border-radius:5px;">
             <input type="text" name="comment" placeholder="Join the Conversation" style="background:#000;border:none;border-radius:5px;outline:none;width:85%;height: 35px;padding:10px;color:#F9E9C8;margin-top:5px;">
           </div>
@@ -257,23 +252,22 @@ header, footer {
               </div>
             </div>
           {% endif %}
-          <small class="date">{{post.date_posted.strftime('%d-%m-%Y')}}</small>
-          <hr>
-        </div>
+			    <small class="date">{{post.date_posted.strftime('%d-%m-%Y')}}</small>
+			    <hr>
+			  </div>
 
-        <footer>
-          <div class="stats">
-            <div class="Retweets" title="🍌: Like">
-              <!--<strong></strong>--> <i class="fas fa-heart love" style="font-size: 28px;"></i>
-            </div>
-            <div class="likes">
-              <!--<strong></strong>--> <!--<i class="far fa-comments" style="color:orange;font-size: 18px;"></i>-->
-            </div>
-          </div>
-        </footer>
-    </div>
-    <br>
-  {% endfor %}
+			  <footer>
+			    <div class="stats">
+			      <div class="Retweets" title="🍌: Like">
+			         <i class="fas fa-heart love" style="font-size: 28px;"></i>
+			      </div>
+			      <div class="likes">
+			      </div>
+			    </div>
+			  </footer>
+		</div>
+		<br>
+	{% endfor %}
 
     {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
       {% if page_num %}
@@ -293,18 +287,18 @@ header, footer {
     <div class="col-lg-3 d-none d-lg-block">
       {% if current_user.is_authenticated %}
       <!-- notifications and relevant ads -->
-      {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category , message in messages %}
-              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                {{message}}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-              </div>
-            {% endfor %}
-        {% endif %}
-      {% endwith %}
+	    {% with messages = get_flashed_messages(with_categories=true) %}
+	    	{% if messages %}
+	      		{% for category , message in messages %}
+	        		<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+      					{{message}}
+        			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          				<span aria-hidden="true">&times;</span>
+        			</button>
+      				</div>
+	      		{% endfor %}
+	    	{% endif %}
+	  	{% endwith %}
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <a href="{{ url_for('new_post') }}"  style="color:#000;text-decoration: none">
       <strong>Post Something!</strong> Tell your friends what you're up to.</a>
@@ -384,6 +378,5 @@ header, footer {
 });
   </script>
 
-
-
 {% endblock content %}
+
