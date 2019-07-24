@@ -12,3 +12,5 @@ This version of Bambi introduces the backend infrastructure to Bambi V2. On this
 The front end of the web application is in CSS, Bootstrap, JS and some jQuery. The backend is in Flask Python. This version is fully optimized for desktops, laptops, tablets and smartphones.
 
 This version provides language support in Arabic, Chinese, Punjabi, Russian, Spanish, Swahili and Turkish
+
+For more documentation and screenshots, visit https://bit.ly/2JOAGv0
