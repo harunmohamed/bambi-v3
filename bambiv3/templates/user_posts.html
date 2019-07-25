@@ -105,24 +105,17 @@ header, footer {
 
     <div class="card about" style="color:#000;text-align:left;">
     <div class="card-body">
-      <h5 class="card-title">About <span style="color:#1e90ff;">
-        {% if current_user == user %}
-          Me <small data-toggle="modal" data-target="#info" style="cursor: pointer;">edit</small></small>
-        {% else %}
-          {{ user.username }}
-        {% endif %}
-        </span></h5>
-      <!-- {% if current_user.last_seen %}<p><i class="fas fa-dot-circle" style="color: green"></i> Last seen on: {{ current_user.last_seen }}</p>{% endif %} -->
       <p> 🎓 Studies at <span>Near East University</span></p>
       <p> 🏅 Majors in <span>{{user.department}}</span></p>
       <p> ☂ Student Number: <span>{{user.student_number}}</span></p>
       <p> 🙊 Is <span>{{user.age}}</span> years old</p>
-      <p> ✈ From <span>{{user.country}}</span></p>
+      <p> 🌍 From <span>{{user.country}}</span></p>
       <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
       <p> 💎 Interested in <span>{{user.hobby}}</span></p>
       {% if user != current_user %}
       <a class="btn btn-sm btn-primary" href="#">✌ Follow {{user.username}}</a>
-      <!--<a class="btn btn-sm btn-success" href="#">👋 say hi!</a>-->
+      {% else %}
+      <a class="btn btn-sm btn-primary" href="{{ url_for('account') }}">🍁 edit</a>
       {% endif %}
     </div>
   </div>
