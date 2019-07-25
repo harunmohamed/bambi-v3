@@ -50,14 +50,14 @@ header h3, header h4 {
 
 		    <div class="card about" style="color:#000;text-align:left;">
 		    <div class="card-body">
-		      <h5 class="card-title">About <small><a href="{{ url_for('account') }}">edit</a></small></h5>
 		      <p> 🎓 Studies at <span>Near East University</span></p>
 			  <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
 			  <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
 			  <p> 🙊 Is <span>{{current_user.age}}</span> years old</p>
-			  <p> ✈ From <span>{{current_user.country}}</span></p>
+			  <p> 🌍 From <span>{{current_user.country}}</span></p>
 			  <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
 			  <p> 💎 Interested in <span>{{current_user.hobby}}</span></p>
+			  <a class="btn btn-sm btn-primary" href="{{ url_for('account') }}">🍁 edit</a>
 		    </div>
 		  </div>
 
