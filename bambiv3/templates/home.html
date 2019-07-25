@@ -137,11 +137,11 @@ header, footer {
     <div class="card-body">
       <h5 class="card-title">About <small title="🍌: Edit Your Personal Info"><a href="{{ url_for('account') }}">edit</a></small></h5>
       <p> 🎓 Studies at <span>Near East University</span></p>
-      <p> 📖 Majors in <span>{{current_user.department}}</span></p>
-      <p> 🔗 Student Number: <span>{{current_user.student_number}}</span></p>
-      <p> 🤓 Is <span>{{current_user.age}}</span> years old</p>
-      <p> 🚀 From <span>{{current_user.country}}</span></p>
-      <p> 🚦 Lives in <span>Nicosia, Cyprus</span></p>
+      <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
+      <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
+      <p> 🙊 Is <span>{{current_user.age}}</span> years old</p>
+      <p> ✈ From <span>{{current_user.country}}</span></p>
+      <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
       <p> 💎 Interested in <span>{{current_user.hobby}}</span></p>
     </div>
   </div>
@@ -204,6 +204,7 @@ header, footer {
           </form>
           {%  endif %}
 
+
    {% for post in posts.items %}
 	  <div class="post">
 			<header>
@@ -214,7 +215,7 @@ header, footer {
 			    </div>
           {% if post.author != current_user %}
 			    <div class="follow-btn" title="Follow {{post.author.username}}">
-			      <span title="🍌: Follow {{post.author.username}}" style="cursor:pointer;">💡</span>
+			      <span title="🍌: Follow {{post.author.username}}" style="cursor:pointer;">👋</span>
 			    </div>
           {% endif %} 
 			  </header>
@@ -230,7 +231,7 @@ header, footer {
           {% if post.author == current_user %}
             <div style="text-align: center;">
               <a class="btn btn-warning btn-sm m-1" href="{{url_for('update_post', post_id=post.id)}}">Update</a>
-              <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+              <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal"> Delete</button>
             </div>
             <!-- Delete Modal -->
             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
