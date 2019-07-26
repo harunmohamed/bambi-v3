@@ -98,7 +98,7 @@ header, footer {
         <div class="profile-name">
           <h3>{{user.username}} </h3>
           {% if current_user != user %}
-            <a class="badge badge-sm badge-primary" href="#">✌ Follow {{user.username}}</a>
+            <a class="badge badge-sm badge-primary" href="#">✌ Follow</a>
           {% endif %}
           {% if user == current_user %}
           <small>{{user.email}}</small>
