@@ -96,12 +96,16 @@ header, footer {
       <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;" data-toggle="modal" data-target="#profile">
         <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
-          <h3>{{user.username}}</h3>
+          <h3>{{user.username}} </h3>
+          {% if current_user != user %}
+            <a class="badge badge-sm badge-primary" href="#">✌ Follow {{user.username}}</a>
+          {% endif %}
+          {% if user == current_user %}
           <small>{{user.email}}</small>
+          {% endif %}
         </div>
       </header>
       <br>
-
 
     <div class="card about" style="color:#000;text-align:left;">
     <div class="card-body">
@@ -113,7 +117,9 @@ header, footer {
       <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
       <p> 💎 Interested in <span>{{user.hobby}}</span></p>
       {% if user != current_user %}
-      <a class="btn btn-sm btn-primary" href="#">✌ Follow {{user.username}}</a>
+      <a class="btn btn-sm btn-info" href="#">{{ posts.total }} posts</a> 
+      <a class="btn btn-sm btn-dark" href="#">10 followers</a>
+      <a class="btn btn-sm btn-success" href="#">3 following</a>
       {% else %}
       <a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#info" style="color:#fff;">🍁 edit</a>
       {% endif %}
