@@ -29,15 +29,15 @@
             <li>
               <form class="form-inline">
                 <div class="input-group">
-                  <input type="text" class="form-control  search" placeholder="search" aria-label="Search" aria-describedby="basic-addon1" style="background: #000"> <br>
-                  <button class="btn my-2 my-sm-0" type="submit">🔍</button>
+                  <input type="text" class="form-control  search" placeholder="search" aria-label="Search" aria-describedby="basic-addon1"> <br>
+                  <button class="btn  my-2 my-sm-0" type="submit"><i class="fas fa-search" style="color:#F9E9C8;"></i></button>
                 </div>
               </form>
             </li>
         </ul>
     </div>
     <div class="mx-auto order-0">
-      <a class="navbar-brand mx-auto" href="{{ url_for('home') }}">
+      <a class="navbar-brand mx-auto" href="{{ url_for('main.home') }}">
         <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35" height="35" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8; padding:2px;border-radius:2px;">
         <span class="logo"><!--BAMBI--></span>
       </a>
@@ -51,44 +51,44 @@
           <li>
             <div class="dropdown">
             <button class="btn  btn-sm btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span title="🍌: Menu">😎</span>
+               <span>😎</span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="{{ url_for('new_post') }}" title="🍌: Add Posts with a Title"> 🍧 Post</a>
-              <a class="dropdown-item" href="{{ url_for('inbox') }}" title="🍌: Reply to your Messages"> 💬 Inbox</a>
-              <a class="dropdown-item" href="{{ url_for('discover') }}" title="🍌: Discover New Friends"> 🔥 Discover Friends</a>
-              <a class="dropdown-item" href="{{ url_for('explore') }}" title="🍌: Explore Random Stuff!"> 🔱 Explore</a>
-              <a class="dropdown-item" href="{{ url_for('market') }}" title="🍌: Buy and Sell Stuff"> 👜 Market</a>
-              <a class="dropdown-item" href="{{ url_for('account') }}" title="🍌: Account Settings"> 🍪 Settings</a>
-              <a class="dropdown-item" href="{{ url_for('about') }}" title="🍌: Know Bambi More"> 🕯 About Bambi</a>
-              <a class="dropdown-item" href="{{ url_for('logout') }}" title="🍌: Logout"> 🛫 Logout</a>
+              <a class="dropdown-item" href="{{ url_for('posts.new_post') }}" data-toggle="popover" data-content="🍌: Add Posts with a Title"> 🍧 Post</a>
+              <a class="dropdown-item" href="{{ url_for('main.inbox') }}" data-toggle="popover" data-content="🍌: Reply to your Messages"> 💬 Inbox</a>
+              <a class="dropdown-item" href="{{ url_for('main.discover') }}" data-toggle="popover" data-content="🍌: Discover New Friends"> 🔥 Discover Friends</a>
+              <a class="dropdown-item" href="{{ url_for('main.explore') }}" data-toggle="popover" data-content="🍌: Explore Random Stuff!"> 🔱 Explore</a>
+              <a class="dropdown-item" href="{{ url_for('main.market') }}" data-toggle="popover" data-content="🍌: Buy and Sell Stuff"> 👜 Market</a>
+              <a class="dropdown-item" href="{{ url_for('users.account') }}" data-toggle="popover" data-content="🍌: Account Settings"> 🍪 Settings</a>
+              <a class="dropdown-item" href="{{ url_for('main.about') }}" data-toggle="popover" data-content="🍌: Know Bambi More"> 🕯 About Bambi</a>
+              <a class="dropdown-item" href="{{ url_for('users.logout') }}" data-toggle="popover" data-content="🍌: Logout"> 🛫 Logout</a>
             </div>
           </div>
           </li>
           <li>
             <div id="google_translate_element"></div>
           </li>
-             <!--<li class="nav-item" title="Add posts with a Title">
-                <i class="fas fa-blog"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;"> Post</a></i>
+             <!--<li class="nav-item" data-toggle="popover" data-content="Add posts with a Title">
+                <i class="fas fa-blog"><a href="{{ url_for('posts.new_post') }}" style="color:#F9E9C8;"> Post</a></i>
             </li>
-            <li class="nav-item" title="Discover New Friends">
-                <i class="fas fa-fire"><a href="{{ url_for('discover') }}" style="color:#F9E9C8;"> Discover</a></i>
+            <li class="nav-item" data-toggle="popover" data-content="Discover New Friends">
+                <i class="fas fa-fire"><a href="{{ url_for('main.discover') }}" style="color:#F9E9C8;"> Discover</a></i>
             </li>
-            <li class="nav-item" title="Send Private Messages">
+            <li class="nav-item" data-toggle="popover" data-content="Send Private Messages">
                 <i class="fas fa-envelope"> Inbox</i>
             </li>
             <li class="nav-item">
-                <i class="fas fa-sign-out-alt"><a href="{{ url_for('logout') }}" style="color:#F9E9C8;"> Logout</a></i>
+                <i class="fas fa-sign-out-alt"><a href="{{ url_for('users.logout') }}" style="color:#F9E9C8;"> Logout</a></i>
             </li>
             <li>
             <div id="google_translate_element"></div>
           </li>-->
           {% else %}
             <li class="nav-item">
-                <i class="fas fa-user-plus"><a href="{{ url_for('register') }}" style="color:#F9E9C8;"> Register</a></i>
+                <i class="fas fa-user-plus"><a href="{{ url_for('users.register') }}" style="color:#F9E9C8;"> Register</a></i>
             </li>
             <li class="nav-item">
-                <i class="fas fa-sign-in-alt"><a href="{{ url_for('login') }}" style="color:#F9E9C8;"> Login</a></i>
+                <i class="fas fa-sign-in-alt"><a href="{{ url_for('users.login') }}" style="color:#F9E9C8;"> Login</a></i>
             </li>
           {% endif %}
         </ul>
@@ -102,7 +102,7 @@
 
   {% if current_user.is_authenticated %}
       <div id="new_post">
-          <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;" title="🍌: Add Longer Posts with Titles">✏</a></button>
+          <button class="post_btn"><a href="{{ url_for('posts.new_post') }}" style="color:#F9E9C8;" data-toggle="popover" data-content="🍌: Add Longer Posts with Titles">✏</a></button>
         </div>
     {% endif %}
     <style>
@@ -146,5 +146,12 @@
       new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'ar,en,es,jv,pa,ru,zh-CN,tr,sw', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
     }
   </script>
+  <script>
+  $(document).ready(function(){
+    $('[data-toggle="popover"]').popover({
+      trigger: 'hover'
+    }); 
+  });
+</script>
   </body>
 </html>
