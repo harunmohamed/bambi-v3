@@ -114,20 +114,14 @@ header, footer {
             <img class="card-img-top" src="{{ image_file }}" alt="Card image cap" style="height:250px;">
             <div class="card-body">
               <h5 class="card-title">{{current_user.username}}</h5>
-              <small>
                 My name is {{current_user.username}} and I study {{current_user.department}} at Near East University.
-                I am from {{current_user.country}} and I am {{current_user.age}} years old. My hobbies include {{current_user.hobby}}.My Student number is {{current_user.student_number}} and my email is {{current_user.email}}
-              </small>
-              <!--<small>Software Engineering Student at Near East University</small>
+                I am from {{current_user.country}} and I am {{current_user.age}} years old. 
             </div>
             <div class="card-footer">
+              My hobbies include {{current_user.hobby}}.My Student number is {{current_user.student_number}} and my email is {{current_user.email}}
             <div>
-              <strong>12M</strong> Friends
             </div>
-            <div>
-              <strong>3</strong> Enemies
-            </div>-->
-            </div>
+          </div>
           </div>
           </div>
           <div class="modal-footer">
@@ -200,7 +194,7 @@ header, footer {
                   {% endfor %}
                 </div>
                 {% else %}
-                {{ form.content(class="form-control", placeholder="What's on your mind?" ) }}
+                {{ form.content(class="form-control", placeholder="What's on your mind?") }}
                 {% endif %}
             <div class="input-group-append" style="color:#F9E9C8;border-color: #F9E9C8;">
               {{ form.submit(class="btn btn-outline-warning", style="color:#F9E9C8;border-color: #F9E9C8;") }}
@@ -226,8 +220,8 @@ header, footer {
 
         <div id="inner">
           <p style="text-transform: uppercase;letter-spacing: 2px;text-align: center;margin-top: 4px;background:#F9E9C8;color:#000;" title="🍌: Click to View this Post Only"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#000;">{{post.title}}</a></p>
-          <p>{{post.content}}</p>
-        <div class="comments">
+          <p>{{post.content|urlize(40, target='_blank')}}</p>
+          <div class="comments">
             <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width: 40px;height: 40px;border-radius:5px;">
             <input type="text" name="comment" placeholder="Join the Conversation" style="background:#000;border:none;border-radius:5px;outline:none;width:85%;height: 35px;padding:10px;color:#F9E9C8;margin-top:5px;">
           </div>
@@ -264,10 +258,9 @@ header, footer {
         <footer>
           <div class="stats">
             <div class="Retweets" title="🍌: Like">
-              <!--<strong></strong>--> <i class="fas fa-heart love" style="font-size: 28px;"></i>
+               <i class="fas fa-heart love" style="font-size: 28px;"></i>
             </div>
             <div class="likes">
-              <!--<strong></strong>--> <!--<i class="far fa-comments" style="color:orange;font-size: 18px;"></i>-->
             </div>
           </div>
         </footer>
@@ -383,7 +376,5 @@ header, footer {
   $(this).toggleClass('liked');
 });
   </script>
-
-
 
 {% endblock content %}
