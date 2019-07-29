@@ -98,7 +98,7 @@ header, footer {
         <div class="profile-name">
           <h3>{{user.username}} </h3>
           {% if current_user != user %}
-            <a class="badge badge-sm badge-primary" href="#">✌ Follow</a>
+            <a id="follow" class="badge badge-sm badge-primary" href="#">✌ Follow</a>
           {% endif %}
           {% if user == current_user %}
           <small>{{user.email}}</small>
@@ -117,8 +117,9 @@ header, footer {
       <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
       <p> 💎 Interested in <span>{{user.hobby}}</span></p>
       {% if user != current_user %}
+      <p class="f"></p> 
       <a class="btn btn-sm btn-info" href="#">{{ posts.total }} posts</a> 
-      <a class="btn btn-sm btn-dark" href="#">10 followers</a>
+      <a class="btn btn-sm btn-dark followers" href="#">10 followers</a>
       <a class="btn btn-sm btn-success" href="#">3 following</a>
       {% else %}
       <a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#info" style="color:#fff;">🍁 edit</a>
@@ -188,7 +189,7 @@ header, footer {
         </header>
 
         <div id="inner">
-          <p style="text-transform: uppercase;letter-spacing: 2px;text-align: center;margin-top: 4px;background:#F9E9C8;color:#000;"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#000;">{{post.title}}</a></p>
+          <p style="text-transform: uppercase;letter-spacing: 2px;text-align: center;margin-top: 4px;background:#F9E9C8;color:#000;"><a href=" {{ url_for('posts.post', post_id=post.id) }} " style="color:#000;">{{post.title}}</a></p>
           <p>{{post.content|urlize(40, target='_blank')}}</p>
           <div class="comments">
             <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width: 40px;height: 40px;border-radius:5px;">
@@ -197,7 +198,7 @@ header, footer {
           <br>
           {% if post.author == current_user %}
             <div style="text-align: center;">
-              <a class="btn btn-warning btn-sm m-1" href="{{url_for('update_post', post_id=post.id)}}">Update</a>
+              <a class="btn btn-warning btn-sm m-1" href="{{url_for('posts.update_post', post_id=post.id)}}">Update</a>
               <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
             </div>
             <!-- Delete Modal -->
@@ -212,7 +213,7 @@ header, footer {
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                    <form action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="POST">
                       <input class="btn btn-danger" type="submit" value="Delete">
                     </form>
                   </div>
@@ -243,9 +244,9 @@ header, footer {
     {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
       {% if page_num %}
         {% if posts.page == page_num %}
-          <a href="{{ url_for('user_posts', username=user.username, page=page_num) }}" class="btn btn-warning mb-4">{{page_num}}</a>
+          <a href="{{ url_for('users.user_posts', username=user.username, page=page_num) }}" class="btn btn-warning mb-4">{{page_num}}</a>
         {% else %}
-          <a href="{{ url_for('user_posts', username=user.username, page=page_num) }}" class="btn btn-outline-warning mb-4">{{page_num}}</a>
+          <a href="{{ url_for('users.user_posts', username=user.username, page=page_num) }}" class="btn btn-outline-warning mb-4">{{page_num}}</a>
         {% endif %}
       {% else %}
         ...
@@ -271,14 +272,14 @@ header, footer {
         {% endif %}
       {% endwith %}
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <a href="{{ url_for('new_post') }}"  style="color:#000;text-decoration: none">
+        <a href="{{ url_for('posts.new_post') }}"  style="color:#000;text-decoration: none">
       <strong>Post Something!</strong> Tell your friends what you're up to.</a>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <a href="{{ url_for('discover') }}"  style="color:#000;text-decoration: none">
+        <a href="{{ url_for('main.discover') }}"  style="color:#000;text-decoration: none">
       <strong>Discover Friends!</strong> Swipe left and right on discover to make friends.</a>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -301,7 +302,7 @@ header, footer {
       </div>
     </div>
     <div id="new_post">
-      <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;"><i class="fas fa-feather-alt" style="font-size:30px;"></i></a></button>
+      <button class="post_btn"><a href="{{ url_for('posts.new_post') }}" style="color:#F9E9C8;"><i class="fas fa-feather-alt" style="font-size:30px;"></i></a></button>
     </div>
     {% else %}
     <div class="card" style="color:#000;">
@@ -325,6 +326,13 @@ header, footer {
     $('.love').click(function(){
   $(this).toggleClass('liked');
 });
+    $('#follow').click(function(){
+      $(this).text($(this).text() == '✌ Follow' ? '😬 Unfollow' : '✌ Follow');
+      $('.followers').text($('.followers').text() == '10 followers' ? '11 followers' : '10 followers');
+      $("#follow").toggleClass("badge-primary");
+      $("#follow").toggleClass("badge-danger");
+      $('.f').text($('.f').text() == '' ? '💛 You follow {{user.username}}' : '');
+    })
   </script>
 
 
