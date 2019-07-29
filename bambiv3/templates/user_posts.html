@@ -97,7 +97,7 @@ header, footer {
         <div class="profile-name">
           <h3>{{user.username}} </h3>
           {% if current_user != user %}
-            <a class="badge badge-sm badge-primary" href="#">✌ Follow</a>
+            <a id="follow" class="badge badge-sm badge-primary" href="#">✌ Follow</a>
           {% endif %}
           {% if user == current_user %}
           <small>{{user.email}}</small>
@@ -116,8 +116,9 @@ header, footer {
       <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
       <p> 💎 Interested in <span>{{user.hobby}}</span></p>
       {% if user != current_user %}
+      <p class="f"></p> 
       <a class="btn btn-sm btn-info" href="#">{{ posts.total }} posts</a> 
-      <a class="btn btn-sm btn-dark" href="#">10 followers</a>
+      <a class="btn btn-sm btn-dark followers" href="#">10 followers</a>
       <a class="btn btn-sm btn-success" href="#">3 following</a>
       {% else %}
       <a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#info" style="color:#fff;">🍁 edit</a>
@@ -271,20 +272,20 @@ header, footer {
       {% endwith %}
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <a href="{{ url_for('new_post') }}"  style="color:#000;text-decoration: none">
-      <strong>Post Something!</strong> Tell your friends what you're up to.</a>
+      <strong>🍧 Post Something!</strong> Tell your friends what you're up to.</a>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         <a href="{{ url_for('discover') }}"  style="color:#000;text-decoration: none">
-      <strong>Discover Friends!</strong> Swipe left and right on discover to make friends.</a>
+      <strong>🔥 Discover Friends!</strong> Swipe left and right on discover to make friends.</a>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="alert alert-dark alert-dismissible fade show" role="alert">
-      <strong>Check your Inbox! </strong>You have Unread Messages
+      <strong>💬 Check your Inbox! </strong>You have Unread Messages
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -324,6 +325,13 @@ header, footer {
     $('.love').click(function(){
   $(this).toggleClass('liked');
 });
+    $('#follow').click(function(){
+      $(this).text($(this).text() == '✌ Follow' ? '😬 Unfollow' : '✌ Follow');
+      $('.followers').text($('.followers').text() == '10 followers' ? '11 followers' : '10 followers');
+      $("#follow").toggleClass("badge-primary");
+      $("#follow").toggleClass("badge-danger");
+      $('.f').text($('.f').text() == '' ? '💛 You follow {{user.username}}' : '');
+    })
   </script>
 
 
