@@ -213,6 +213,7 @@ def user_posts(username):
 		current_user.hobby = form.hobby.data
 		db.session.commit()
 		flash('Your Account has been updated', 'success')
+		return redirect(url_for('user_posts', username=current_user.username))
 	elif request.method == 'GET':
 		form.username.data = current_user.username
 		form.email.data = current_user.email
