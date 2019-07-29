@@ -92,8 +92,7 @@ header, footer {
     <div class="col-lg-3 d-none d-lg-block">
       <!-- User info , photos -->
       {% if current_user.is_authenticated %}
-      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;" data-toggle="modal" data-target="#profile"
-      title="🍌: Click to Preview Your Profile Info">
+      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;" data-toggle="modal" data-target="#profile" title="🍌: Click to Preview Your Profile Info">
         <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
           <h3>{{current_user.username}}</h3>
@@ -134,20 +133,20 @@ header, footer {
 
     <div class="card about" style="color:#000;text-align:left;">
     <div class="card-body">
-      <h5 class="card-title">About <small title="🍌: Edit Your Personal Info"><a href="{{ url_for('account') }}">edit</a></small></h5>
       <p> 🎓 Studies at <span>Near East University</span></p>
-      <p> 📖 Majors in <span>{{current_user.department}}</span></p>
-      <p> 🔗 Student Number: <span>{{current_user.student_number}}</span></p>
-      <p> 🤓 Is <span>{{current_user.age}}</span> years old</p>
-      <p> 🚀 From <span>{{current_user.country}}</span></p>
-      <p> 🚦 Lives in <span>Nicosia, Cyprus</span></p>
+      <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
+      <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
+      <p> 🙊 Is <span>{{current_user.age}}</span> years old</p>
+      <p> 🌍 From <span>{{current_user.country}}</span></p>
+      <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
       <p> 💎 Interested in <span>{{current_user.hobby}}</span></p>
+      <a class="btn btn-sm btn-primary" href="{{ url_for('account') }}">🍁 edit</a>
     </div>
   </div>
 
   <br>
 
-  <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;" title="🍌: Click to know more about Bambi">
+  <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;" data-toggle="popover" data-content="🍌: Click to know more about Bambi">
     <a href="{{url_for('about')}}" target="_blank" style="color: #F9E9C8;text-decoration: none;">
     <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
@@ -183,7 +182,7 @@ header, footer {
     <div class="col-lg-6">
       <!-- content area -->
       {% if current_user.is_authenticated %}
-          <form method="POST" action="" enctype="multipart/form-data" title="🍌: Here you can add short posts without Titles">
+          <form method="POST" action="" enctype="multipart/form-data" data-toggle="popover" data-content="🍌: Here you can add short posts without Titles">
             {{ form.hidden_tag() }}
               <div class="input-group mb-3">
                 {% if form.content.errors %}
@@ -203,23 +202,24 @@ header, footer {
           </form>
           {%  endif %}
 
+
    {% for post in posts.items %}
     <div class="post">
       <header>
-          <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" title="🍌: I am {{post.author.age}} from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}">
+          <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" data-toggle="popover" data-content="😎 : I am {{post.author.age}} from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}">
           <div class="profile-name">
-            <h3 title="🍌: View {{post.author.username}}'s Info"><a href="{{url_for('user_posts', username=post.author.username)}}" style="color:#F9E9C8;">{{post.author.username}}</a></h3>
+            <h3 data-toggle="popover" data-content="🍌: View {{post.author.username}}'s Info"><a href="{{url_for('user_posts', username=post.author.username)}}" style="color:#F9E9C8;">{{post.author.username}}</a></h3>
             <small>@{{post.author.email}}</small>
           </div>
           {% if post.author != current_user %}
-          <div class="follow-btn" title="Follow {{post.author.username}}">
-            <span title="🍌: Follow {{post.author.username}}" style="cursor:pointer;">💡</span>
+          <div class="follow-btn" data-toggle="popover" data-content="Follow {{post.author.username}}">
+            <span data-toggle="popover" data-content="🍌: Follow {{post.author.username}}" style="cursor:pointer;">👋</span>
           </div>
           {% endif %} 
         </header>
 
         <div id="inner">
-          <p style="text-transform: uppercase;letter-spacing: 2px;text-align: center;margin-top: 4px;background:#F9E9C8;color:#000;" title="🍌: Click to View this Post Only"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#000;">{{post.title}}</a></p>
+          <p style="text-transform: uppercase;letter-spacing: 2px;text-align: center;margin-top: 4px;background:#F9E9C8;color:#000;" data-toggle="popover" data-content="🍌: Click to View this Post Only"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#000;">{{post.title}}</a></p>
           <p>{{post.content|urlize(40, target='_blank')}}</p>
           <div class="comments">
             <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width: 40px;height: 40px;border-radius:5px;">
@@ -229,7 +229,7 @@ header, footer {
           {% if post.author == current_user %}
             <div style="text-align: center;">
               <a class="btn btn-warning btn-sm m-1" href="{{url_for('update_post', post_id=post.id)}}">Update</a>
-              <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+              <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal"> Delete</button>
             </div>
             <!-- Delete Modal -->
             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -257,7 +257,7 @@ header, footer {
 
         <footer>
           <div class="stats">
-            <div class="Retweets" title="🍌: Like">
+            <div class="Retweets" data-toggle="popover" data-content="🍌: Like">
                <i class="fas fa-heart love" style="font-size: 28px;"></i>
             </div>
             <div class="likes">
@@ -376,5 +376,13 @@ header, footer {
   $(this).toggleClass('liked');
 });
   </script>
+
+  <script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover({
+    trigger: 'hover'
+  }); 
+});
+</script>
 
 {% endblock content %}
