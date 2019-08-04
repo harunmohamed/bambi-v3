@@ -229,8 +229,8 @@ header, footer {
           <br>
           {% if post.author == current_user %}
             <div style="text-align: center;">
-              <a class="badge badge-warning btn-sm m-1" href="{{url_for('update_post', post_id=post.id)}}">Update</a>
-              <button type="button" class="badge badge-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal"> Delete</button>
+              <a class="btn btn-warning btn-sm m-1" href="{{url_for('update_post', post_id=post.id)}}">Update</a>
+              <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal"> Delete</button>
             </div>
             <!-- Delete Modal -->
             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
