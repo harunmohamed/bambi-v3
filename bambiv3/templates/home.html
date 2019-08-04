@@ -213,7 +213,8 @@ header, footer {
           </div>
           {% if post.author != current_user %}
           <div class="follow-btn" data-toggle="popover" data-content="Follow {{post.author.username}}">
-            <span data-toggle="popover" data-content="🍌: Follow {{post.author.username}}" style="cursor:pointer;">👋</span>
+            <!--<span data-toggle="popover" data-content="🍌: Follow {{post.author.username}}" style="cursor:pointer;">👋</span>-->
+            <i class="fas fa-heart love" style="font-size: 28px;"></i>
           </div>
           {% endif %} 
         </header>
@@ -228,8 +229,8 @@ header, footer {
           <br>
           {% if post.author == current_user %}
             <div style="text-align: center;">
-              <a class="btn btn-warning btn-sm m-1" href="{{url_for('update_post', post_id=post.id)}}">Update</a>
-              <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal"> Delete</button>
+              <a class="badge badge-warning btn-sm m-1" href="{{url_for('update_post', post_id=post.id)}}">Update</a>
+              <button type="button" class="badge badge-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal"> Delete</button>
             </div>
             <!-- Delete Modal -->
             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -257,8 +258,8 @@ header, footer {
 
         <footer>
           <div class="stats">
-            <div class="Retweets" data-toggle="popover" data-content="🍌: Like">
-               <i class="fas fa-heart love" style="font-size: 28px;"></i>
+            <div class="Retweets">
+               <a  class="badge badge-dark" href="{{url_for('post', post_id=post.id)}}">🍒comments</a>
             </div>
             <div class="likes">
             </div>
@@ -384,5 +385,7 @@ $(document).ready(function(){
   }); 
 });
 </script>
+
+<script id="dsq-count-scr" src="//baambi.disqus.com/count.js" async></script>
 
 {% endblock content %}
