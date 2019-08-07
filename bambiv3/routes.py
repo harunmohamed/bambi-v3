@@ -160,6 +160,7 @@ def new_post():
 	return render_template('create_post.html', title='New Post', form=form, legend='New Post')
 
 @app.route('/post/<int:post_id>')
+@login_required
 def post(post_id):
 	post = Post.query.get_or_404(post_id)
 	return render_template('post.html',title=post.title, post=post)
@@ -198,6 +199,7 @@ def delete_post(post_id):
 
 
 @app.route("/user/<string:username>", methods=['GET', 'POST'])
+@login_required
 def user_posts(username):
 	form = UpdateAccountForm()
 	if form.validate_on_submit():
