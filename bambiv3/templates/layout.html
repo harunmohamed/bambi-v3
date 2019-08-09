@@ -41,19 +41,22 @@
         <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35" height="35" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8; padding:2px;border-radius:2px;">
         <span class="logo"></span>
         <span class="logo"><!--BAMBI--></span>
+        <!--<div class="progress-container d-none d-lg-block">
+      <div class="progress-bar" id="myBar"></div>
+    </div>-->
       </a>
-      <div class="progress-container">
-    <div class="progress-bar" id="myBar"></div>
   </div> 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="progress-container d-block d-sm-none">
+      <div class="progress-bar" id="myBar"></div>
     </div>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 settings">
         <ul class="navbar-nav ml-auto">
           {% if current_user.is_authenticated %}
           <li>
-            <div class="dropdown">
+            <div class="dropdown dropleft">
             <button class="btn  btn-sm btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                <span>😎</span>
             </button>
@@ -69,9 +72,9 @@
             </div>
           </div>
           </li>
-          <li>
+          <!--<li>
             <div id="google_translate_element"></div>
-          </li>
+          </li>-->
           {% else %}
             <li class="nav-item">
                 <i class="fas fa-user-plus"><a href="{{ url_for('register') }}" style="color:#F9E9C8;"> Register</a></i>
