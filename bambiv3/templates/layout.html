@@ -37,7 +37,7 @@
         </ul>
     </div>
     <div class="mx-auto order-0">
-      <a class="navbar-brand mx-auto" href="{{ url_for('home') }}">
+      <a class="navbar-brand mx-auto d-none d-lg-block" href="{{ url_for('home') }}">
         <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35" height="35" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8; padding:2px;border-radius:2px;">
         <span class="logo"></span>
         <span class="logo"><!--BAMBI--></span>
@@ -46,7 +46,7 @@
     </div>-->
       </a>
   </div> 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+    <button class="navbar-toggler d-none" type="button" data-toggle="collapse" data-target=".dual-collapse2">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="progress-container d-block d-sm-none">
@@ -94,10 +94,33 @@
   {% block content %} {% endblock %}
 
   {% if current_user.is_authenticated %}
-      <div id="new_post">
+      <div id="new_post" class=" d-none d-lg-block">
           <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;" data-toggle="popover" data-content="🍌: Add Longer Posts with Titles">✏</a></button>
         </div>
     {% endif %}
+
+    <div class="bottom d-block d-sm-none">
+
+      <a href="{{url_for('user_posts', username=current_user.username)}}" class="active"><img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="40px" height="40px;" style="padding-bottom: 10px;"></a>
+
+      <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35px" height="35px;" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8;padding:2px;border-radius:2px;"></a>
+
+      <a style="font-size:30px;cursor:pointer;" onclick="openNav()">🍪</a>
+
+    </div>
+
+    <div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a class="dropdown-item" href="{{ url_for('new_post') }}"> 🍧 Post</a>
+   <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
+  <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
+  <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
+  <a class="dropdown-item" href="{{ url_for('market') }}"> 👜 Market</a>
+  <a class="dropdown-item" href="{{ url_for('account') }}"> 🍪 Settings</a>
+  <a class="dropdown-item" href="{{ url_for('about') }}"> 🕯 About Bambi</a>
+  <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
+</div>
+
     <style>
           .post_btn{
       background-color : #000;
@@ -148,6 +171,69 @@
       background: #4caf50;
       width: 0%;
     }
+    .bottom {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .bottom a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    width:33.3%;
+    height: 45px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+  }
+
+  .bottom a:hover {
+    background: #000;
+    color: #F9E9C8;
+  }
+
+  .bottom a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+  .sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #000;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
     </style>
 
 
@@ -175,6 +261,15 @@
       trigger: 'hover'
     }); 
   });
+</script>
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
 </script>
 <script>
 // Custom progress bar beneath logo

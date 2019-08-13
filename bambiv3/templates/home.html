@@ -182,7 +182,7 @@ header, footer {
     <div class="col-lg-6">
       <!-- content area -->
       {% if current_user.is_authenticated %}
-          <form method="POST" action="" enctype="multipart/form-data" data-toggle="popover" data-content="🍌: Here you can add short posts without Titles">
+          <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
               <div class="input-group mb-3">
                 {% if form.content.errors %}
