@@ -110,16 +110,17 @@
     </div>
 
     <div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a class="dropdown-item" href="{{ url_for('new_post') }}"> 🍧 Post</a>
-   <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
-  <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
-  <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
-  <a class="dropdown-item" href="{{ url_for('market') }}"> 👜 Market</a>
-  <a class="dropdown-item" href="{{ url_for('account') }}"> 🍪 Settings</a>
-  <a class="dropdown-item" href="{{ url_for('about') }}"> 🕯 About Bambi</a>
-  <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
-</div>
+      <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="80px" height="80px;" style="margin-left: 45px;margin-bottom: 20px;">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a class="dropdown-item" href="{{ url_for('new_post') }}"> 🍧 Post</a>
+       <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
+      <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
+      <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
+      <a class="dropdown-item" href="{{ url_for('market') }}"> 👜 Market</a>
+      <a class="dropdown-item" href="{{ url_for('account') }}"> 🍪 Settings</a>
+      <a class="dropdown-item" href="{{ url_for('about') }}"> 🕯 About Bambi</a>
+      <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
+    </div>
 
     <style>
           .post_btn{
