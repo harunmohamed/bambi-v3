@@ -178,7 +178,7 @@ header, footer {
           {% endif %}
           <p style="text-transform: uppercase;letter-spacing: 2px;text-align: center;margin-top: 4px;background:#F9E9C8;color:#000;">{{post.title}}</p>
           <p>{{post.content|urlize(40, target='_blank')}}</p>
-          <small class="date">{{post.date_posted.strftime('%d-%m-%Y')}}</small>
+          <small class="date">{{post.date_posted.strftime('%d-%B-%Y')}}</small>
           <div id="disqus_thread"></div>
           <script>
           (function() { // DON'T EDIT BELOW THIS LINE
