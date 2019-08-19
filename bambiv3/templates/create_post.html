@@ -43,7 +43,7 @@ header h3, header h4 {
 		        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="harun profile" class="profile-thumbnail">
 		        <div class="profile-name">
 		          <h3>{{current_user.username}}</h3>
-		          <small>{{current_user.email}}</small>
+		          <small>@{{current_user.email.split("@")[0] | lower}}</small>
 		        </div>
 		      </header>
 		      <br>

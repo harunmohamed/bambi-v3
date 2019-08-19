@@ -99,7 +99,7 @@ header, footer {
           {% if current_user != user %}
           <a id="follow" class="badge badge-sm badge-primary" href="#">✌ Follow</a>
           {% else %}
-            <small>{{user.email}}</small>
+            <small>@{{user.email.split("@")[0] | lower}}</small>
           {% endif %}
            <div style="padding-top:3px;margin-left: -60px">
            <a class="badge badge-sm badge-info" href="#">{{ posts.total }} posts</a> | 
@@ -174,7 +174,7 @@ header, footer {
           <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail">
           <div class="profile-name">
             <h3>{{post.author.username}}</h3>
-            <small>@{{post.author.email}}</small>
+            <small>@{{post.author.email.split("@")[0] | lower}}</small>
           </div>
           {% if current_user != user %}
           <div class="follow-btn">
