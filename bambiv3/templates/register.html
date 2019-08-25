@@ -1,168 +1,237 @@
+{% extends "layout.html" %}
+{% block content %}
+  
 <style>
-  body{
-    text-align:center;
-    background: #000;
-    color:#F9E9C8;
-    margin-top:30px;
-    font-family: 'Comfortaa', cursive;
-  }
-  img{
-    width:120px;
-    height:120px;
-    border:2px solid #F9E9C8;
-    padding: 3px;
-    margin-top: 30px;
-    border-radius: 5px;
-  }
-  input{
-    background:#162023;
-    border: none;
-    outline:none;
-    border-radius: 5px;
-    height: 30px;
-    margin-bottom: 10px;
-    padding: 10px;
-    color: #F9E9C8;
-  }
-  .button{
-    background: #000;
-    border: 1px solid #F9E9C8;
-    border-radius: 5px;
-    height: 40px;
-    width:100px;
-    margin-top:10px;
-  }
-  a{
-    color: #F9E9C8;
-  }
-  .button .a:hover{
-    color: #000;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-  span{
-    color:#d9534f;
-  }
-</style>
+header, footer {
+   display: flex;
+   flex-direction: row;
+ }
+ header .profile-thumbnail {
+   width: 50px;
+   height: 50px;
+   border-radius: 4px;
+ }
+ header .profile-name {
+   display: flex;
+   flex-direction:column;
+   margin-left: 10px;
+ }
+header h3, header h4 {
+   display: flex;
+   margin: 0;
+ }
+ #inner p {
+   margin-bottom: 10px;
+   font-size: 20px;
+ }
+ #inner hr {
+   margin: 20px 0;
+   border-style: solid;
+   opacity: 0.1;
+   color:#F9E9C8;
+ }
+ .post{
+   border: 2px solid #F9E9C8;
+   padding: 10px;
+ }
+</style>  
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3 d-none d-lg-block">
+        <!-- User info , photos -->
+      <!--<header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+        <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3 class="logo">BAMBI</h3>
+          <small>&copy 2019</small>
+        </div>
+      </header>-->
+    </div>
 
-	<head>
-	    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}">
-	    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
-		 {% if title %}
-	      <title>Bambi - {{ title }}</title>
-	    {% else %}
-	      <title>Bambi</title>
-	    {% endif %}
-	</head>
+    <div class="col-lg-6" style="text-align: center">
+      <div class="post">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+              {% for category , message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                  {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+              {% endfor %}
+          {% endif %}
+          {% endwith %}
+        <div id="inner">
+         <div class="content-section">
+          <form method="POST" action="">
+      {{ form.hidden_tag() }}
+      <fieldset class="form-group">
+      <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" class="mb-3" style="width:120px;height:120px;border-radius: 5px;">
 
-	<img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo"> <br>
-	<br>
-	<form method="POST" action="">
-		{{ form.hidden_tag() }}
+      <div class="row">
+      <div class="col">
+        <div class="form-group">
+        {% if form.username.errors %}
+        {{ form.username(placeholder="username", class="form-control form-control is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.username.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+        {{ form.username(placeholder="username", class="form-control form-control") }}
+        {% endif %}
+      </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+        {% if form.email.errors %}
+        {{ form.email(placeholder="email", class="form-control form-control is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.email.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+        {{ form.email(placeholder="email", class="form-control form-control") }}
+        {% endif %}
+      </div>
+      </div>
+    </div>
 
-			{% if form.username.errors %}
-				{{ form.username(placeholder="username", class="is-invalid") }} <br>
-				<div class="invalid-feedback">
-					{% for error in form.username.errors %}
-						<span>{{ error }}</span>
-					{% endfor %}
-				</div>
-			{% else %}
-				{{ form.username(placeholder="username") }} <br>
-			{% endif %}
+    <div class="row">
+    <div class="col">
+      <div class="form-group">
+        {% if form.student_number.errors %}
+        {{ form.student_number(placeholder="student number", class="form-control form-control is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.student_number.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+        {{ form.student_number(placeholder="student number", class="form-control form-control") }}
+        {% endif %}
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        {% if form.department.errors %}
+        {{ form.department(placeholder="department", class="form-control form-control is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.department.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+        {{ form.department(placeholder="department", class="form-control form-control") }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+      
 
-			{% if form.email.errors %}
-				{{ form.email(placeholder="email", class="is-invalid") }} <br>
-				<div class="invalid-feedback">
-					{% for error in form.email.errors %}
-						<span>{{ error }}</span>
-					{% endfor %}
-				</div>
-			{% else %}
-				{{ form.email(placeholder="email") }} <br>
-			{% endif %}
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        {% if form.age.errors %}
+        {{ form.age(placeholder="age", class="form-control form-control is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.age.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+        {{ form.age(placeholder="age", class="form-control form-control") }}
+        {% endif %}
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        {% if form.country.errors %}
+        {{ form.country(placeholder="country", class="form-control form-control is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.country.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+        {{ form.country(placeholder="country", class="form-control form-control") }}
+        {% endif %}
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        {% if form.hobby.errors %}
+        {{ form.hobby(placeholder="hobbies / interests", class="form-control form-control is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.hobby.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+        {{ form.hobby(placeholder="hobbies / interests", class="form-control form-control") }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
 
-			{% if form.student_number.errors %}
-				{{ form.student_number(placeholder="student number", class="is-invalid") }} <br>
-				<div class="invalid-feedback">
-					{% for error in form.student_number.errors %}
-						<span>{{ error }}</span>
-					{% endfor %}
-				</div>
-			{% else %}
-				{{ form.student_number(placeholder="student number") }} <br>
-			{% endif %}
+      
 
-			{% if form.department.errors %}
-				{{ form.department(placeholder="department / major", class="is-invalid") }} <br>
-				<div class="invalid-feedback">
-					{% for error in form.department.errors %}
-						<span>{{ error }}</span>
-					{% endfor %}
-				</div>
-			{% else %}
-				{{ form.department(placeholder="department / major") }} 
-			{% endif %}
+      
 
+      
 
-			{% if form.age.errors %}
-				{{ form.age(placeholder="age", class="is-invalid") }} <br>
-				<div class="invalid-feedback">
-					{% for error in form.age.errors %}
-						<span>{{ error }}</span>
-					{% endfor %}
-				</div>
-			{% else %}
-				{{ form.age(placeholder="age") }} <br>
-			{% endif %}
+      <div class="form-group">
+        {% if form.password.errors %}
+        {{ form.password(placeholder="password", class="form-control form-control is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.password.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+        {{ form.password(placeholder="password", class="form-control form-control") }}
+        {% endif %}
+      </div>
 
-			{% if form.country.errors %}
-				{{ form.country(placeholder="country", class="is-invalid") }} <br>
-				<div class="invalid-feedback">
-					{% for error in form.country.errors %}
-						<span>{{ error }}</span>
-					{% endfor %}
-				</div>
-			{% else %}
-				{{ form.country(placeholder="country") }} 
-			{% endif %}
+      <div class="form-group">
+        {% if form.confirm_password.errors %}
+        {{ form.confirm_password(placeholder="confirm password", class="form-control form-control is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.confirm_password.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+        {{ form.confirm_password(placeholder="confirm password", class="form-control form-control") }}
+        {% endif %}
+      </div>
 
-			{% if form.hobby.errors %}
-				{{ form.hobby(placeholder="hobbies / interests", class="is-invalid") }} <br>
-				<div class="invalid-feedback">
-					{% for error in form.hobby.errors %}
-						<span>{{ error }}</span>
-					{% endfor %}
-				</div>
-			{% else %}
-				{{ form.hobby(placeholder="hobbies / interests") }} <br>
-			{% endif %}
+        </div>
+            </fieldset>
+            <div class="form-group">
 
+        {{ form.submit(class="btn btn-outline-warning", placeholder="Login") }}
 
-			{% if form.password.errors %}
-				{{ form.password(placeholder="password", class="is-invalid") }} <br>
-				<div class="invalid-feedback">
-					{% for error in form.password.errors %}
-						<span>{{ error }}</span>
-					{% endfor %}
-				</div>
-			{% else %}
-				{{ form.password(placeholder="password") }} 
-			{% endif %}
+      </div>
 
-			{% if form.confirm_password.errors %}
-				{{ form.confirm_password(placeholder="confirm password", class="is-invalid") }} <br>
-				<div class="invalid-feedback">
-					{% for error in form.confirm_password.errors %}
-						<span>{{ error }}</span>
-					{% endfor %}
-				</div>
-			{% else %}
-				{{ form.confirm_password(placeholder="confirm password") }} <br>
-			{% endif %}
+  </form>
 
-			{{ form.submit(class="button", placeholder="Sign Up") }}
-	</form>
+      <small class="text-muted">Already have an account? <a href="{{ url_for('login') }}">Login</a></small>
+
+        </div>
+    </div>
+    <br>
+     <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+        <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3 class="logo">BAMBI</h3>
+          <small>&copy 2019</small>
+        </div>
+      </header>
+    </div>
 
 
-	  <small class="text-muted">Already have an account? <a href="{{ url_for('login') }}">Login</a></small>
+{% endblock content %}

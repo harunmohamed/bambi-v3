@@ -77,10 +77,7 @@
           </li>-->
           {% else %}
             <li class="nav-item">
-                <i class="fas fa-user-plus"><a href="{{ url_for('register') }}" style="color:#F9E9C8;"> Register</a></i>
-            </li>
-            <li class="nav-item">
-                <i class="fas fa-sign-in-alt"><a href="{{ url_for('login') }}" style="color:#F9E9C8;"> Login</a></i>
+              <a href="{{ url_for('about') }}" style="color:#F9E9C8;text-decoration: none;"> 🕯 About Bambi</a>
             </li>
           {% endif %}
         </ul>
@@ -94,7 +91,7 @@
   {% block content %} {% endblock %}
 
   {% if current_user.is_authenticated %}
-      <div id="new_post" class=" d-none d-lg-block">
+      <div id="new_post" class="d-none d-lg-block">
           <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;" data-toggle="popover" data-content="🍌: Add Longer Posts with Titles">✏</a></button>
         </div>
 

@@ -1,108 +1,128 @@
+{% extends "layout.html" %}
+{% block content %}
+  
 <style>
-  body{
-    text-align:center;
-    background: #000;
-    color:#F9E9C8;
-    margin-top:100px;
-    font-family: 'Comfortaa', cursive;
-  }
-  img{
-    width:120px;
-    height:120px;
-    border:2px solid #F9E9C8;
-    padding: 3px;
-    border-radius: 5px;
-  }
-  input{
-    background:#162023;
-    border: none;
-    outline:none;
-    border-radius: 5px;
-    height: 30px;
-    margin-bottom: 10px;
-    padding: 10px;
-    color: #F9E9C8;
-  }
-  .button{
-    background: #000;
-    border: 1px solid #F9E9C8;
-    border-radius: 5px;
-    height: 40px;
-    width:100px;
-    margin-top:10px;
-  }
-  a{
-    color: #F9E9C8;
-  }
-  .button .a:hover{
-    color: #000;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-  span{
-    color:#d9534f;
-    padding:4px;
-  }
-</style>
+header, footer {
+   display: flex;
+   flex-direction: row;
+ }
+ header .profile-thumbnail {
+   width: 50px;
+   height: 50px;
+   border-radius: 4px;
+ }
+ header .profile-name {
+   display: flex;
+   flex-direction:column;
+   margin-left: 10px;
+ }
+header h3, header h4 {
+   display: flex;
+   margin: 0;
+ }
+ #inner p {
+   margin-bottom: 10px;
+   font-size: 20px;
+ }
+ #inner hr {
+   margin: 20px 0;
+   border-style: solid;
+   opacity: 0.1;
+   color:#F9E9C8;
+ }
+ .post{
+   border: 2px solid #F9E9C8;
+   padding: 10px;
+ }
+</style>  
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3 d-none d-lg-block">
+        <!-- User info , photos -->
+      <!--<header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+        <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3 class="logo">BAMBI</h3>
+          <small>&copy 2019</small>
+        </div>
+      </header>-->
+    </div>
 
-  <head>
-    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}">
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
-     {% if title %}
-      <title>Bambi - {{ title }}</title>
-      {% else %}
-        <title>Bambi</title>
-      {% endif %}
-  </head>
-
-	<img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo"> <br>
-	<br>
-  {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category , message in messages %}
-              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                 <span>{{message}}</span>
-              </div>
-            {% endfor %}
-        {% endif %}
-      {% endwith %}
-      <br>
-	<form method="POST" action="">
-		{{ form.hidden_tag() }}
-
-			{% if form.email.errors %}
-        {{ form.email(placeholder="email", class="is-invalid") }} <br>
+    <div class="col-lg-6" style="text-align: center">
+      <div class="post">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+              {% for category , message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                  {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+              {% endfor %}
+          {% endif %}
+          {% endwith %}
+        <div id="inner">
+         <div class="content-section">
+          <form method="POST" action="">
+      {{ form.hidden_tag() }}
+      <fieldset class="form-group">
+      <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" class="mb-3" style="width:120px;height:120px;border-radius: 5px;">
+     <div class="form-group">
+        {% if form.email.errors %}
+        {{ form.email(placeholder="email", class="form-control form-control is-invalid") }}
         <div class="invalid-feedback">
           {% for error in form.email.errors %}
-            <span>{{ error }}</span>
+          <span>{{ error }}</span>
           {% endfor %}
         </div>
-      {% else %}
-        {{ form.email(placeholder="email") }} <br>
-      {% endif %}
-
-
-      {% if form.password.errors %}
-        {{ form.password(placeholder="password", class="is-invalid") }} <br>
-        <div class="invalid-feedback">
-          {% for error in form.password.errors %}
-            <span>{{ error }}</span>
-          {% endfor %}
-        </div>
-      {% else %}
-        {{ form.password(placeholder="password") }} <br>
-      {% endif %}
-
-      <div class="form-check">
-        {{ form.remember(class="form-check-input") }}
-        {{ form.remember.label(class="form-check-label") }}
+        {% else %}
+        {{ form.email(placeholder="email", class="form-control form-control") }}
+        {% endif %}
       </div>
 
+      <div class="form-group">
+        {% if form.password.errors %}
+        {{ form.password(placeholder="password", class="form-control form-control is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.password.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+        {{ form.password(placeholder="password", class="form-control form-control") }}
+        {% endif %}
+      </div>
 
-			{{ form.submit(class="button", placeholder="Login") }}
+        <div class="form-check">
+          {{ form.remember(class="form-check-input") }}
+          {{ form.remember.label(class="form-check-label") }}
+        </div>
 
-	</form>
+        </div>
+            </fieldset>
+            <div class="form-group">
+
+        {{ form.submit(class="btn btn-outline-warning", placeholder="Login") }}
+
+      </div>
+
+  </form>
 
       <small class="text-muted"><a href="{{ url_for('reset_request') }}">Forgot Password?</a></small> <span>  </span>
       <small class="text-muted">Don't have an account? <a href="{{ url_for('register') }}">Sign Up</a></small>
 
+        </div>
+    </div>
+    <br>
+     <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+        <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3 class="logo">BAMBI</h3>
+          <small>&copy 2019</small>
+        </div>
+      </header>
+    </div>
+
+
+{% endblock content %}
