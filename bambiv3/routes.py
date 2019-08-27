@@ -103,7 +103,7 @@ def save_picture(form_picture):
 	picture_fn = random_hex + f_ext
 	picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
 
-	output_size = (125,125)
+	output_size = (400,400)
 	i = Image.open(form_picture)
 	i.thumbnail(output_size)
 	i.save(picture_path)
@@ -152,6 +152,9 @@ def account():
 def new_post():
 	form = PostForm()
 	if form.validate_on_submit():
+		if form.image.data:
+			picture = save_picture(form.image.data)
+			post = Post(title=form.title.data, content=form.content.data, image=picture, author=current_user)
 		post = Post(title=form.title.data, content=form.content.data, author=current_user)
 		db.session.add(post)
 		db.session.commit()
