@@ -187,7 +187,7 @@ header, footer {
           <p style="text-transform: uppercase;letter-spacing: 2px;text-align: center;margin-top: 4px;background:#F9E9C8;color:#000;"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#000;">{{post.title}}</a></p>
           <p>{{post.content|urlize(40, target='_blank')}}</p>
           {% if post.image %}
-          <img src="{{ url_for('static', filename='profile_pics/' + post.image) }}" style="width:100%;height:300px;border-radius:5px">
+          <img src="{{ url_for('static', filename='profile_pics/' + post.image) }}" style="width:100%;height:500px;border-radius:5px">
           {% endif %}
           <div class="comments">
             <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width: 40px;height: 40px;border-radius:5px;">

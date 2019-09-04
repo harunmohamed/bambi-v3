@@ -67,6 +67,17 @@ header, footer {
 .love{
   cursor: pointer;
 }
+.menu a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+.menu a:hover {
+  color: #000;
+}
 </style>
 
 
@@ -108,18 +119,16 @@ header, footer {
       </div>
     </div>
 
-    <div class="card about" style="color:#fff;background:#000;text-align:left;border:1px solid #F9E9C8;">
-    <div class="card-body">
-      <p> 🎓 Studies at <span>Near East University</span></p>
-      <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
-      <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
-      <p> 🙊 Is <span>{{current_user.age}}</span> years old</p>
-      <p> 🌍 From <span>{{current_user.country}}</span></p>
-      <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
-      <p> 💎 Interested in <span>{{current_user.hobby}}</span></p>
-      <a class="btn btn-sm btn-primary" href="{{ url_for('account') }}">🍁 edit</a>
+    <div class="menu" style="border:1px solid #F9E9C8;border-radius: 5px;">
+      <a class="dropdown-item" href="{{ url_for('new_post') }}"> 🍧 Post</a>
+       <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
+      <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
+      <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
+      <a class="dropdown-item" href="{{ url_for('market') }}"> 👜 Market</a>
+      <a class="dropdown-item" href="{{ url_for('account') }}"> 🍪 Settings</a>
+      <a class="dropdown-item" href="{{ url_for('about') }}"> 🕯 About Bambi</a>
+      <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
     </div>
-  </div>
 
   <br>
 
@@ -179,7 +188,7 @@ header, footer {
           <p style="text-transform: uppercase;letter-spacing: 2px;text-align: center;margin-top: 4px;background:#F9E9C8;color:#000;">{{post.title}}</p>
           <p>{{post.content|urlize(40, target='_blank')}}</p>
           {% if post.image %}
-          <img src="{{ url_for('static', filename='profile_pics/' + post.image) }}" style="width:100%;height:300px;border-radius:5px">
+          <img src="{{ url_for('static', filename='profile_pics/' + post.image) }}" style="width:100%;height:500px;border-radius:5px">
           {% endif %}
           <small class="date">{{post.date_posted.strftime('%d-%B-%Y')}}</small>
           <div id="disqus_thread"></div>
