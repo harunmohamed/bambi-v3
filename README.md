@@ -9,8 +9,9 @@ This version of Bambi introduces the backend infrastructure to Bambi V2. On this
 5. Explore random posts on the Explore Section
 6. Recover your account password by email.
 
+
 The front end of the web application is in CSS, Bootstrap, JS and some jQuery. The backend is in Flask Python. This version is fully optimized for desktops, laptops, tablets and smartphones.
 
-This version provides language support in Arabic, Chinese, Punjabi, Russian, Spanish, Swahili and Turkish
+This version had also been updated to include stories preview of users posts and  provides language support in Arabic, Chinese, Punjabi, Russian, Spanish, Swahili and Turkish
 
 For more documentation and screenshots, visit https://bit.ly/2JOAGv0
