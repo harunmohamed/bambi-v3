@@ -264,13 +264,13 @@ header, footer {
           <section class="cardi scroll">
             <div class="me">
             <div class="card--content">
-              <a href="{{url_for('user_posts', username=current_user.username)}}" target="_blank"><img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}"></a>
+              <a href="{{url_for('user_posts', username=current_user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}"></a>
             </div>
               <small style="font-size:15px;color:#F9E9C8;padding-left:15px">{{current_user.username}}</small>
             </div>
             {% for user in users if user != current_user %}
             <div class="others">
-            <div class="card--content"><a href="{{url_for('user_posts', username=user.username)}}"target="_blank"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt=""></a>
+            <div class="card--content"><a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt=""></a>
             </div>
             <small style="font-size:15px;padding-left:15px">{{user.username}}</small>
             </div>
