@@ -94,7 +94,6 @@ header, footer {
     margin: 0 auto;
     padding: 0 2rem;
 }
-
 section .btn {
     color: inherit;
     padding: 5px;
@@ -103,15 +102,12 @@ section .btn {
     outline:none;
     font-size: 15px;
 }
-
 /* Profile Section */
-
 .profile::after {
     content: "";
     display: block;
     clear: both;
 }
-
 .profile-image {
     float: left;
     width: calc(33.333% - 1rem);
@@ -120,29 +116,24 @@ section .btn {
     align-items: center;
     margin-right: 3rem;
 }
-
 .profile-image img {
     border-radius: 50%;
     margin-top:-10px;
 }
-
 .profile-user-settings,
 .profile-stats,
 .profile-bio {
     float: left;
     width: calc(66.666% - 2rem);
 }
-
 .profile-user-settings {
     margin-top: 1.1rem;
 }
-
 .profile-user-name {
     display: inline-block;
     font-size: 3.2rem;
     font-weight: 300;
 }
-
 .profile-edit-btn {
     font-size: 1.4rem;
     line-height: 1.8;
@@ -152,12 +143,9 @@ section .btn {
     margin-left: 1rem;
     margin-top:-15px;
 }
-
-
 .profile-stats {
     margin-top: 2.3rem;
 }
-
 .profile-stats li {
     display: inline-block;
     font-size: 1.6rem;
@@ -165,37 +153,30 @@ section .btn {
     margin-right: 4rem;
     cursor: pointer;
 }
-
 .profile-stats li:last-of-type {
     margin-right: 0;
 }
-
 .profile-bio {
     font-size: 1.6rem;
     font-weight: 400;
     line-height: 1.5;
     margin-top: 2.3rem;
 }
-
 .profile-real-name,
 .profile-stat-count,
 .profile-edit-btn {
     font-weight: 600;
 }
-
 /* Media Query */
-
 @media screen and (max-width: 40rem) {
     .profile {
         display: flex;
         flex-wrap: wrap;
         padding: 4rem 0;
     }
-
     .profile::after {
         display: none;
     }
-
     .profile-image,
     .profile-user-settings,
     .profile-bio,
@@ -203,49 +184,40 @@ section .btn {
         float: none;
         width: auto;
     }
-
     .profile-image img {
         width: 7.7rem;
     }
-
     .profile-user-settings {
         flex-basis: calc(100% - 10.7rem);
         display: flex;
         flex-wrap: wrap;
         margin-top: 1rem;
     }
-
     .profile-user-name {
         font-size: 2.2rem;
     }
-
     .profile-edit-btn {
         order: 1;
         padding: 0;
         text-align: center;
         margin-top: 1rem;
     }
-
     .profile-edit-btn {
         margin-left: 0;
     }
-
     .profile-bio {
         font-size: 1.4rem;
         margin-top: 1.5rem;
     }
-
     .profile-edit-btn,
     .profile-bio,
     .profile-stats {
         flex-basis: 100%;
     }
-
     .profile-stats {
         order: 1;
         margin-top: 1.5rem;
     }
-
     .profile-stats ul {
         display: flex;
         text-align: center;
@@ -253,19 +225,15 @@ section .btn {
         border-top: 0.1rem solid #dadada;
         border-bottom: 0.1rem solid #dadada;
     }
-
     .profile-stats li {
         font-size: 1.4rem;
         flex: 1;
         margin: 0;
     }
-
     .profile-stat-count {
         display: block;
     }
 }
-
-
 @supports (display: grid) {
     .profile {
         display: grid;
@@ -274,17 +242,14 @@ section .btn {
         grid-column-gap: 3rem;
         align-items: center;
     }
-
     .profile-image {
         grid-row: 1 / -1;
     }
-
     .gallery {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
         grid-gap: 2rem;
     }
-
     .profile-image,
     .profile-user-settings,
     .profile-stats,
@@ -294,29 +259,24 @@ section .btn {
         width: auto;
         margin: 0;
     }
-
     @media (max-width: 40rem) {
         .profile {
             grid-template-columns: auto 1fr;
             grid-row-gap: 1.5rem;
         }
-
         .profile-image {
             grid-row: 1 / 2;
         }
-
         .profile-user-settings {
             display: grid;
             grid-template-columns: auto 1fr;
             grid-gap: 1rem;
         }
-
         .profile-edit-btn,
         .profile-stats,
         .profile-bio {
             grid-column: 1 / -1;
         }
-
         .profile-user-settings,
         .profile-edit-btn,
         .profile-settings-btn,
@@ -326,7 +286,6 @@ section .btn {
         }
     }
 }
-
 </style>
 
 
@@ -345,7 +304,7 @@ section .btn {
 
       <div class="profile-user-settings">
 
-        <h1 class="profile-user-name">{{user.username}}<img src="https://img.icons8.com/bubbles/50/000000/verified-account.png"></h1>
+        <h2 class="profile-user-name">{{user.username}}<img src="https://img.icons8.com/bubbles/50/000000/verified-account.png" style="width:40px;height:40px;"></h2>
 
         {% if current_user == user%}
         <button class="btn profile-edit-btn btn-primary" data-toggle="modal" data-target="#info">Edit Profile</button>
@@ -358,16 +317,16 @@ section .btn {
       <div class="profile-stats">
 
         <ul>
-          <li style="font-size: 20px;"><span class="profile-stat-count">{{ posts.total }}</span> <small>posts</small></li>
-          <li style="font-size: 20px;"><span class="profile-stat-count">188</span> <small>followers</small></li>
-          <li style="font-size: 20px;"><span class="profile-stat-count">206</span> <small>following</small></li>
+          <li style="font-size: 22px;"><span class="profile-stat-count">{{ posts.total }}</span> <small>posts</small></li>
+          <li style="font-size: 22px;"><span class="profile-stat-count">188</span> <small>followers</small></li>
+          <li style="font-size: 22px;"><span class="profile-stat-count">206</span> <small>following</small></li>
         </ul>
 
       </div>
 
       <div class="profile-bio">
 
-        <p style="font-size:15px;"><small class="profile-real-name" style="font-size: 15px;">{{user.email.split("@")[0] | lower}}</small> - I study {{user.department}} at Near East University. I am {{current_user.age}} from {{user.country}}. I'm interested in {{user.hobby}}</p>
+        <p style="font-size:18px;"><small class="profile-real-name" style="font-size: 18px;">{{user.email.split("@")[0] | lower}}</small> - I study {{user.department}} at Near East University. I am {{current_user.age}} from {{user.country}}. I'm interested in {{user.hobby}}</p>
 
       </div>
 
@@ -378,8 +337,6 @@ section .btn {
   <!-- End of container -->
 
 </section>
-
-<br>
 
   <div class="row">
     <div class="col-lg-3">
