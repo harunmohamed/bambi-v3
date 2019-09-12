@@ -684,9 +684,10 @@ section .btn {
                 {% endif %}
             </div>
             </fieldset>
-            <div class="form-group">
-              {{ form.submit(class="btn btn-outline-warning") }}
-            </div>
+            <div class="modal-footer form-group">
+            {{ form.submit(class="btn btn-warning") }}
+            <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+          </div>
           </form>
 
         </div>
