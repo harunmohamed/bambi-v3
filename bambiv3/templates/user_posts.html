@@ -101,6 +101,7 @@ section .btn {
     cursor: pointer;
     border:none;
     outline:none;
+    font-size: 15px;
 }
 
 /* Profile Section */
@@ -330,7 +331,7 @@ section .btn {
 
 
 <div class="container-fluid">
-  <section style="border: 1px solid #F9E9C8;border-radius:4px;padding-top: 5px;">
+  <section style="padding-top: 5px;">
 
   <div class="container">
 
@@ -344,7 +345,7 @@ section .btn {
 
       <div class="profile-user-settings">
 
-        <h1 class="profile-user-name">{{user.username}}</h1>
+        <h1 class="profile-user-name">{{user.username}}<img src="https://img.icons8.com/bubbles/50/000000/verified-account.png"></h1>
 
         {% if current_user == user%}
         <button class="btn profile-edit-btn btn-primary" data-toggle="modal" data-target="#info">Edit Profile</button>
@@ -357,16 +358,16 @@ section .btn {
       <div class="profile-stats">
 
         <ul>
-          <li><span class="profile-stat-count">{{ posts.total }}</span> <small>posts</small></li>
-          <li><span class="profile-stat-count">188</span> <small>followers</small></li>
-          <li><span class="profile-stat-count">206</span> <small>following</small></li>
+          <li style="font-size: 20px;"><span class="profile-stat-count">{{ posts.total }}</span> <small>posts</small></li>
+          <li style="font-size: 20px;"><span class="profile-stat-count">188</span> <small>followers</small></li>
+          <li style="font-size: 20px;"><span class="profile-stat-count">206</span> <small>following</small></li>
         </ul>
 
       </div>
 
       <div class="profile-bio">
 
-        <p style="font-size:20px;"><small class="profile-real-name">{{user.email.split("@")[0] | lower}}</small> - I study {{user.department}} at Near East University.I am {{current_user.age}} from {{user.country}}. I'm interested in {{user.hobby}}</p>
+        <p style="font-size:15px;"><small class="profile-real-name" style="font-size: 15px;">{{user.email.split("@")[0] | lower}}</small> - I study {{user.department}} at Near East University. I am {{current_user.age}} from {{user.country}}. I'm interested in {{user.hobby}}</p>
 
       </div>
 
