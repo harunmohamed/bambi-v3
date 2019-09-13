@@ -333,7 +333,7 @@ header, footer {
           <p>
             {{post.content| truncate(240) | safe | urlize(40, target='_blank')}}
             {% set words = post.content.split() %}
-            {% if words|count > 240 %}<a class="badge badge-danger" href="{{url_for('post', post_id=post.id)}}">👀</a>{% endif %}
+            {% if words|count > 40 %}<a class="badge badge-danger" href="{{url_for('post', post_id=post.id)}}">👀read more</a>{% endif %}
           </p>
           {% if post.image %}
           <img class="mb-2" src="{{ url_for('static', filename='profile_pics/' + post.image) }}" style="width:100%;height:500px;border-radius:5px">
