@@ -88,38 +88,15 @@ header, footer {
     <div class="col-lg-3 d-none d-lg-block">
       <!-- User info , photos -->
       {% if current_user.is_authenticated %}
-      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;" data-toggle="modal" data-target="#profile">
+      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;">
         <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
           <h3>{{current_user.username}}</h3>
-          <small>{{current_user.email}}</small>
+          <small>@{{current_user.email.split("@")[0] | lower}}</small>
         </div>
       </header>
       <br>
 
-      <!-- Modal -->
-      <div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          <div class="modal-body">
-            <div class="card" style="color:#000;text-align:center;">
-            <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="Card image cap" style="height:250px;">
-            <div class="card-body">
-              <h5 class="card-title">{{current_user.username}}</h5>
-              <small>@{{current_user.email}}</small>
-            </div>
-          </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-warning"><a href="{{ url_for('account') }}" style="color:#F9E9C8;">Edit</a></button>
-            <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="menu" style="border:1px solid #F9E9C8;border-radius: 5px;">
       <a class="dropdown-item" href="{{ url_for('new_post') }}"> 🍧 Post</a>
