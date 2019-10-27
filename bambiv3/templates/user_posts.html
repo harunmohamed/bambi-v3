@@ -584,7 +584,7 @@ section .btn {
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
               <!--<legend class="border-bottom mb-2 pb-2">Account Info</legend>-->
-              <div class="form-group" style="margin-left:100px;">
+              <div class="form-group">
                 {{ form.picture.label() }}
                 {{ form.picture(class="form-control-file") }}
                 {% if form.picture.errors %}
