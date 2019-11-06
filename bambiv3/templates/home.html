@@ -217,24 +217,22 @@ header, footer {
     </div>
   </header>
   {% else %}
-    <div class="card" style="color:#000;">
-      <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo">
-      <div class="card-body">
-        <h5 class="card-title"><i class="fas fa-ad"></i></h5>
-        <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted logo">BAMBI</small>
-      </div>
-    </div>
-    <br>
-    <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+  <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
     <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
-      <h3 class="logo">BAMBI</h3>
-      <small>&copy 2019</small>
+      <h3 class="logo">Hello Friend!</h3>
+      <small>how about signing in?</small>
     </div>
   </header>
+  <br>
+     <div class="menu" style="border:1px solid #F9E9C8;border-radius: 5px;">
+      <a class="dropdown-item" href="{{ url_for('login') }}"> 🛫 Log In</a>
+      <a class="dropdown-item" href="{{ url_for('new_post') }}"> 🍧 Post</a>
+       <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
+      <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
+      <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
+      <a class="dropdown-item" href="{{ url_for('about') }}"> 🕯 About Bambi</a>
+    </div>
   {% endif %}
 </div>
 
@@ -263,6 +261,7 @@ header, footer {
           </form>
           {%  endif %}
 
+          {% if current_user.is_authenticated %}
           <section class="cardi scroll">
             <div class="me">
             <div class="card--content">
@@ -281,8 +280,9 @@ header, footer {
             <div class="card--content"><img src="" alt=""></div>
             <div class="card--content"><img src="" alt=""></div>
           </section>
-
           <br>
+          {% endif %}
+
 
 
 
@@ -342,10 +342,12 @@ header, footer {
           {% if post.image %}
           <img class="mb-2" src="{{ url_for('static', filename='profile_pics/' + post.image) }}" style="width:100%;height:500px;border-radius:5px">
           {% endif %}
+          {% if current_user.is_authenticated %}
           <div class="comments">
             <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" class="mb-2"style="width: 40px;height: 40px;border-radius:5px;">
             <input type="text" name="comment" placeholder="Join the Conversation" style="background:#000;border:none;border-radius:5px;outline:none;width:85%;height: 35px;padding:10px;color:#F9E9C8;margin-top:5px;">
           </div>
+          {% endif %}
           <br>
         </div>
 
@@ -447,6 +449,33 @@ header, footer {
       <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;"><i class="fas fa-feather-alt" style="font-size:30px;"></i></a></button>
     </div>
     {% else %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <a href="{{ url_for('new_post') }}"  style="color:#000;text-decoration: none">
+      <strong>🍌 Perks that come with having a Bambi Account!</strong></a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <a href="{{ url_for('new_post') }}"  style="color:#000;text-decoration: none">
+      <strong>🍧 Post Something and View Stories!</strong> Tell and see what your friends are up to.</a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <a href="{{ url_for('discover') }}"  style="color:#000;text-decoration: none">
+      <strong>🔥 Discover Friends!</strong> Swipe left and right on discover to make friends.</a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+      <strong>💬 Check your Inbox! </strong>You could be having Unread Messages
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     <div class="card" style="color:#000;">
       <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo">
       <div class="card-body">

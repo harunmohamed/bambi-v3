@@ -33,8 +33,8 @@ def home():
 		image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
 		return render_template('home.html', title="Home", form=form, posts=posts, image_file=image_file, users=users)
 	else:
-		return redirect(url_for('login'))
-		#return render_template('home.html', title="Home", posts=posts)
+		#return redirect(url_for('login'))
+		return render_template('home.html', title="Home", posts=posts)
 
 
 @app.route('/about')
