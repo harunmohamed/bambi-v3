@@ -119,6 +119,16 @@
       <a class="dropdown-item" href="{{ url_for('about') }}"> 🕯 About Bambi</a>
       <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
     </div>
+    {% else %}
+    <div class="bottom d-block d-sm-none">
+
+      <a href="{{ url_for('explore') }}" style="font-size:30px;cursor:pointer;" data-toggle="popover" data-content="🍌: Explore">🔱</a>
+
+      <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35px" height="35px;" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8;padding:2px;border-radius:2px;"></a>
+
+      <a href="{{ url_for('discover') }}" style="font-size:30px;cursor:pointer;" data-toggle="popover" data-content="🍌: Discover Friends">🔥</a>
+
+    </div>
     {% endif %}
     <style>
           .post_btn{
