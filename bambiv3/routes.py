@@ -37,6 +37,10 @@ def home():
 		return render_template('home.html', title="Home", posts=posts)
 
 
+@app.route('/blog')
+def blog():
+	return redirect("https://medium.com/@bambii", code=302)
+
 @app.route('/about')
 def about():
 	return render_template('about.html', title="About")
