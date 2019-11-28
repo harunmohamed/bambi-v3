@@ -53,6 +53,10 @@ def market():
 def inbox():
 	return render_template('inbox.html', title="Inbox")
 
+@app.route('/inbox/demo')
+def chat():
+	return render_template('inbox_preview.html', title="Chat")
+
 @app.route('/discover')
 def discover():
 	users = User.query.all()
