@@ -119,16 +119,16 @@ header, footer {
 .scroll img{
   width:100%;
   height:100%;
-  border-radius:50%;
+  border-radius:10px;
 }
 .card--content {
   background: linear-gradient(#ffcccc,#ccffff);
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   margin: 5px;
   border-radius:10px;
   border:1px solid #fff;
-  border-radius:50%;
+  border-radius:10px;
   padding:1px;
   flex: 0 0 auto;
 }
@@ -268,13 +268,13 @@ header, footer {
             <div class="card--content">
               <a href="{{url_for('user_posts', username=current_user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}"></a>
             </div>
-              <small style="font-size:15px;color:#F9E9C8;padding-left:15px">{{current_user.username}}</small>
+              <small style="font-size:15px;padding-left:15px">{{current_user.username.title()}}</small>
             </div>
             {% for user in users if user != current_user %}
             <div class="others">
             <div class="card--content"><a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt=""></a>
             </div>
-            <small style="font-size:15px;padding-left:15px">{{user.username}}</small>
+            <small style="font-size:15px;color:#f8f8f2;padding-left:15px">{{user.username.title()}}</small>
             </div>
             {% endfor %}
             <div class="card--content"><img src="" alt=""></div>
@@ -363,7 +363,6 @@ header, footer {
     </div>
     <br>
   {% endfor %}
-
     {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
       {% if page_num %}
         {% if posts.page == page_num %}
@@ -375,6 +374,7 @@ header, footer {
         ...
       {% endif %}
     {% endfor %}
+    <div style="margin-bottom: 40px;"></div>
 </div>
 
 
