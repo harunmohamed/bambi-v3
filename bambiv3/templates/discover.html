@@ -1,370 +1,381 @@
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Bambi - Discover</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+{% extends "layout.html" %}
+{% block content %}
 
-  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-
-  <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
-  <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 
 <style>
-  *, *:before, *:after {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-body {
-  background: #000;
-  overflow: hidden;
-}
-
-.tinder {
-  width: 100vw;
-  height: 90vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  opacity: 0;
-  transition: opacity 0.1s ease-in-out;
-}
-
-.loaded.tinder {
-  opacity: 1;
-}
-
-.tinder--status {
-  position: absolute;
-  top: 50%;
-  margin-top: -30px;
-  z-index: 2;
-  width: 100%;
-  text-align: center;
-  pointer-events: none;
-}
-
-.tinder--status i {
-  font-size: 100px;
-  opacity: 0;
-  -webkit-transform: scale(0.3);
-          transform: scale(0.3);
-  transition: all 0.2s ease-in-out;
-  position: absolute;
-  width: 100px;
-  margin-left: -50px;
-}
-
-.tinder_love .fa-heart {
-  opacity: 0.7;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-
-.tinder_nope .fa-remove {
-  opacity: 0.7;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-
-.tinder--cards {
-  flex-grow: 1;
-  padding-top: 40px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  z-index: 1;
-}
-
-.tinder--card {
-  display: inline-block;
-  width: 90vw;
-  max-width: 400px;
-  height: 70vh;
-  background: #FFFFFF;
-  padding-bottom: 40px;
-  border-radius: 8px;
-  overflow: hidden;
-  position: absolute;
-  will-change: transform;
-  transition: all 0.3s ease-in-out;
-  cursor: -webkit-grab;
-  cursor: grab;
-}
-
-.moving.tinder--card {
-  transition: none;
-  cursor: -webkit-grabbing;
-  cursor: grabbing;
-}
-
-.tinder--card img {
-  max-width: 100%;
-  pointer-events: none;
-}
-
-.tinder--card h3 {
-  margin-top: 32px;
-  font-size: 32px;
-  padding: 0 16px;
-  pointer-events: none;
-}
-
-.tinder--card p {
-  margin-top: 24px;
-  font-size: 20px;
-  padding: 0 16px;
-  pointer-events: none;
-}
-
-.tinder--buttons {
-  flex: 0 0 100px;
-  text-align: center;
-  padding-top: 20px;
-}
-
-.tinder--buttons button {
+header, footer {
+   display: flex;
+   flex-direction: row;
+ }
+ header .profile-thumbnail {
+   width: 50px;
+   height: 50px;
+   border-radius: 4px;
+ }
+ header .profile-name {
+   display: flex;
+   flex-direction:column;
+   margin-left: 10px;
+ }
+ header .follow-btn {
+   display: flex;
+   margin: 0 0 0 auto;
+ }
+ header .follow-btn button {
+   border: 0;
+   border-radius: 3px;
+   padding: 5px;
+ }
+ header h3, header h4 {
+   display: flex;
+   margin: 0;
+ }
+ #inner p {
+   margin-bottom: 10px;
+   font-size: 16px;
+   color:#f8f8f2;
+ }
+ #inner hr {
+   margin: 20px 0;
+   border-style: solid;
+   opacity: 0.1;
+   color:#F9E9C8;
+ }
+ footer .stats {
+   display: flex;
+   font-size: 15px;
+ }
+ footer .stats strong {
+   font-size: 18px;
+ }
+ footer .stats .likes {
+   margin-left: 10px;
+ }
+ footer .cta {
+   margin-left: auto;
+ }
+ footer .cta button {
+   border: 0;
+   background: transparent;
+ }
+ .post{
+   border: 1px solid #a0998a;
+   padding: 10px;
+   border-radius: 7px;
+ }
+ .post_btn{
+  background-color : #000;
+  color: #F9E9C8;
+  padding: 10px 20px;
+  border:none;
+  outline:none;
+  border:2px solid #F9E9C8;
+  padding: 2px;
   border-radius: 50%;
-  line-height: 60px;
-  width: 60px;
-  border: 0;
-  background: #FFFFFF;
-  display: inline-block;
-  margin: 0 8px;
+  height:70px;
+  width:70px;
 }
-
-.tinder--buttons button:focus {
-  outline: 0;
+#new_post{
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
 }
-
-.tinder--buttons i {
-  font-size: 32px;
-  vertical-align: middle;
-}
-
-.fa-heart {
+.liked {
   color: red;
 }
-
-.fa-remove {
+.love{
+  cursor: pointer;
+}
+.subtle{
+  background-color: #000;
+  border: 1px solid #F9E9C8;
+}
+.subtle:focus{
+  background-color: #000;
+  outline: none;
+  border: 1px solid #F9E9C8;
+  color: #fff;
+}
+.menu a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+.menu a:hover {
   color: #000;
 }
-
-  *{
-    font-family: 'Comfortaa', cursive;
-  }
-  p{
-    font-size: 8px;
-  }
-  .info{
-    padding:10px;
-    text-align:center;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #F9E9C8;
-    background: #000;
-  }
-  h5{
+.cardi{
+  background: #000;
+  overflow-x: auto;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.cardi::-webkit-scrollbar {
+  display: none;
+}
+.scroll img{
+  width:100%;
+  height:100%;
+  border-radius:10px;
+}
+.card--content {
+  background: linear-gradient(#ffcccc,#ccffff);
+  width: 300px;
+  height: 70%;
+  margin: 5px;
+  border-radius:10px;
+  border:1px solid #fff;
+  border-radius:10px;
+  padding:1px;
+  flex: 0 0 auto;
+}
+.card--content h5{
     background: #F9E9C8;
     color:#000;
-    padding:10px;
+    padding:5px;
     text-align:center;
     text-transform: uppercase;
     letter-spacing: 2px;
-  }
-  .logo{
-        color:#F9E9C8;
-        letter-spacing:2px;
-  }
-  a:hover{
-    color:#F9E9C8;
+    border-radius: 10px;
+    margin: 5px;
   }
 
 </style>
 
 
-</head>
-
-<body>
 <div class="container-fluid">
-  <nav class="navbar navbar-expand-md navbar-dark ">
-    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-        <ul class="navbar-nav mr-auto">
-            <li>
-              <span class="logo" title="Here you can Discover New Friends who share things in common with you">DISCOVER FRIENDS</span>
-            </li>
-        </ul>
-    </div>
-    <div class="mx-auto order-0">
-      <a class="navbar-brand mx-auto" href="#">
-        <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35" height="35" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8; padding:2px;border-radius:2px;">
-        <span class="logo"><!--BAMBI--></span>
-      </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 settings">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a href="{{ url_for('home') }}" style="color:#F9E9C8;"><i class="fas fa-home" style="color:#F9E9C8;"></i> HOME</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+  <div class="row">
+    <div class="col-lg-3 d-none d-lg-block">
+      <!-- User info , photos -->
+      {% if current_user.is_authenticated %}
+      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;" data-toggle="modal" data-target="#profile" title="🍌: Click to Preview Your Profile Info">
+        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3>{{current_user.username}}</h3>
+          <small>@{{current_user.email.split("@")[0] | lower}}</small>
+        </div>
+      </header>
+      <br>
 
-<div class="tinder">
-  <div class="tinder--status">
-    <i class="fa fa-remove"></i>
-    <i class="fa fa-heart"></i>
-  </div>
-
-  <div class="tinder--cards">
-    {% for user in users if user != current_user %}
-    <div class="tinder--card">
-      <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" style="width: 100%" height="70%">
-      <h5>{{user.username}} <i class="far fa-check-circle"></i></h5>
-      <div class="info">
-      <small>I'm {{user.age}} from {{user.country}} and I study {{user.department}}</small> <br>
-      <small title="View {{user.username}}'s Profile and Posts"><a href="{{url_for('user_posts', username=user.username)}}" target="_blank">MORE</a></small>
+      <!-- Profile Modal -->
+      <div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>-->
+          <div class="modal-body">
+            <div class="card" style="color:#000;text-align:center;">
+            <img class="card-img-top" src="{{ image_file }}" alt="Card image cap" style="height:250px;">
+            <div class="card-body">
+              <h5 class="card-title">{{current_user.username}}</h5>
+                My name is {{current_user.username}} and I study {{current_user.department}} at Near East University.
+                I am from {{current_user.country}} and I am {{current_user.age}} years old. 
+            </div>
+            <div class="card-footer">
+              My hobbies include {{current_user.hobby}}.My Student number is {{current_user.student_number}} and my email is {{current_user.email}}
+            <div>
+            </div>
+          </div>
+          </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary"><a href="{{ url_for('account') }}" style="color:#F9E9C8;">Edit</a></button>
+            <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
     </div>
-    {% endfor %}
-    <div class="tinder--card">
-      <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" style="width: 100%" height="70%">
-      <h5><i class="fas fa-ad"></i></h5>
-      <div class="info">
-      <small>Thats enough friends for today {{current_user.username}}. Why don't you tell your friends to sign up for Bambi instead!.</small>
-    </div>
+
+    <div class="card about" style="color:#fff;background:#000;text-align:left;border:1px solid #F9E9C8;">
+    <div class="card-body">
+      <p> 🎓 Studies at <span>Near East University</span></p>
+      <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
+      <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
+      <p> 🙊 Is <span>{{current_user.age}}</span> years old</p>
+      <p> 🌍 From <span>{{current_user.country}}</span></p>
+      <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
+      <p> 💎 Interested in <span>{{current_user.hobby}}</span></p>
+      <a class="btn btn-sm btn-primary" href="{{ url_for('account') }}">🍁 edit</a>
     </div>
   </div>
 
+  <br>
 
-  <div class="tinder--buttons">
-    <button id="nope"><i class="fa fa-remove"></i></button>
-    <button id="love"><i class="fa fa-heart"></i></button>
-  </div>
-</div>
-  <script src='https://hammerjs.github.io/dist/hammer.min.js'></script>
-
-
-
-    <script>
-              'use strict';
-
-        var tinderContainer = document.querySelector('.tinder');
-        var allCards = document.querySelectorAll('.tinder--card');
-        var nope = document.getElementById('nope');
-        var love = document.getElementById('love');
-
-        function initCards(card, index) {
-          var newCards = document.querySelectorAll('.tinder--card:not(.removed)');
-
-          newCards.forEach(function (card, index) {
-            card.style.zIndex = allCards.length - index;
-            card.style.transform = 'scale(' + (20 - index) / 20 + ') translateY(-' + 30 * index + 'px)';
-            card.style.opacity = (10 - index) / 10;
-          });
-          
-          tinderContainer.classList.add('loaded');
-        }
-
-        initCards();
-
-        allCards.forEach(function (el) {
-          var hammertime = new Hammer(el);
-
-          hammertime.on('pan', function (event) {
-            el.classList.add('moving');
-          });
-
-          hammertime.on('pan', function (event) {
-            if (event.deltaX === 0) return;
-            if (event.center.x === 0 && event.center.y === 0) return;
-
-            tinderContainer.classList.toggle('tinder_love', event.deltaX > 0);
-            tinderContainer.classList.toggle('tinder_nope', event.deltaX < 0);
-
-            var xMulti = event.deltaX * 0.03;
-            var yMulti = event.deltaY / 80;
-            var rotate = xMulti * yMulti;
-
-            event.target.style.transform = 'translate(' + event.deltaX + 'px, ' + event.deltaY + 'px) rotate(' + rotate + 'deg)';
-          });
-
-          hammertime.on('panend', function (event) {
-            el.classList.remove('moving');
-            tinderContainer.classList.remove('tinder_love');
-            tinderContainer.classList.remove('tinder_nope');
-
-            var moveOutWidth = document.body.clientWidth;
-            var keep = Math.abs(event.deltaX) < 80 || Math.abs(event.velocityX) < 0.5;
-
-            event.target.classList.toggle('removed', !keep);
-
-            if (keep) {
-              event.target.style.transform = '';
-            } else {
-              var endX = Math.max(Math.abs(event.velocityX) * moveOutWidth, moveOutWidth);
-              var toX = event.deltaX > 0 ? endX : -endX;
-              var endY = Math.abs(event.velocityY) * moveOutWidth;
-              var toY = event.deltaY > 0 ? endY : -endY;
-              var xMulti = event.deltaX * 0.03;
-              var yMulti = event.deltaY / 80;
-              var rotate = xMulti * yMulti;
-
-              event.target.style.transform = 'translate(' + toX + 'px, ' + (toY + event.deltaY) + 'px) rotate(' + rotate + 'deg)';
-              initCards();
-            }
-          });
-        });
-
-        function createButtonListener(love) {
-          return function (event) {
-            var cards = document.querySelectorAll('.tinder--card:not(.removed)');
-            var moveOutWidth = document.body.clientWidth * 1.5;
-
-            if (!cards.length) return false;
-
-            var card = cards[0];
-
-            card.classList.add('removed');
-
-            if (love) {
-              card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
-            } else {
-              card.style.transform = 'translate(-' + moveOutWidth + 'px, -100px) rotate(30deg)';
-            }
-
-            initCards();
-
-            event.preventDefault();
-          };
-        }
-
-        var nopeListener = createButtonListener(false);
-        var loveListener = createButtonListener(true);
-
-        nope.addEventListener('click', nopeListener);
-        love.addEventListener('click', loveListener);
-    </script>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-
-
+  <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;" data-toggle="popover" data-content="🍌: Click to know more about Bambi">
+    <a href="{{url_for('about')}}" target="_blank" style="color: #F9E9C8;text-decoration: none;">
+    <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo" class="profile-thumbnail">
+    <div class="profile-name">
+      <h3 class="logo">BAMBI</h3>
+      <small>&copy 2019</small>
+    </a>
+    </div>
+  </header>
+  {% else %}
+  <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+    <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo" class="profile-thumbnail">
+    <div class="profile-name">
+      <h3 class="logo">Hello Friend!</h3>
+      <small>how about signing in?</small>
+    </div>
+  </header>
+  <br>
+     <div class="menu" style="border:1px solid #F9E9C8;border-radius: 5px;">
+      <a class="dropdown-item" href="{{ url_for('new_post') }}"> 🍧 Post</a>
+       <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
+      <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
+      <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
+      <a class="dropdown-item" href="{{ url_for('blog') }}"> 🎬 Blog</a> 
+      <a class="dropdown-item" href="{{ url_for('about') }}"> 👋 About Bambi</a>
+    </div>
+  {% endif %}
 </div>
 
-</body>
 
-</html>
 
+    <div class="col-lg-6">
+      <!-- content area -->
+          <h2>Discover New Friends</h2>
+          {% if current_user.is_authenticated %}
+          <section class="cardi scroll">
+            {% for user in users if user != current_user %}
+            <div class="others">
+            <div class="card--content"><a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt=""></a>
+              <h5 style="font-size:15px;">{{user.username.title()}}<i class="far fa-check-circle"></i>: I'm {{user.age}} from {{user.country}} and I study {{user.department}}. <a href="{{url_for('user_posts', username=user.username)}}" target="_blank">MORE</a></h5>
+            </div>
+            </div>
+            {% endfor %}
+            <div class="other">
+            <div class="card--content"><a href="{{url_for('swipe')}}"><img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo"></a>
+              <h5 style="font-size:15px;">BAMBI<i class="far fa-check-circle"></i>: Wanna see more friend matches for you? <a href="{{url_for('swipe')}}" target="_blank">Start Swiping!</a></h5>
+            </div>
+            </div>
+          </section>
+          <br>
+          {% endif %}
+          <div style="margin-bottom: 30px;"></div>
+    </div>
+
+
+
+    <div class="col-lg-3 d-none d-lg-block">
+      {% if current_user.is_authenticated %}
+      <!-- notifications and relevant ads -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category , message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              </div>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <a href="{{ url_for('new_post') }}"  style="color:#000;text-decoration: none">
+      <strong>🍧 Post Something!</strong> Tell your friends what you're up to.</a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <a href="{{ url_for('discover') }}"  style="color:#000;text-decoration: none">
+      <strong>🔥 Discover Friends!</strong> Swipe left and right on discover to make friends.</a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-dark alert-dismissible fade show" role="alert">
+      <strong>💬 Check your Inbox! </strong>You have Unread Messages
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
+        <h5 style="padding-left: 3px;">Friends - <small><a href="{{url_for('discover')}}" target="_blank">view all</a></small></h5>
+        {% for user in users if user != current_user %}
+        <header>
+        <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3>{{user.username}}</h3>
+          {% if user.country == current_user.country %}
+          <small>From {{user.country}}</small>
+          {% endif %}
+          {% if user.department == current_user.department %}
+          <small>Studies {{user.department}}</small>
+          {% endif %}
+        </div>
+        <div class="follow-btn">
+            <button style="height:40px;background:#000;color:#F9E9C8;"><a href="{{url_for('user_posts', username=user.username)}}"target="_blank">❤</a></button>
+          </div>
+      </header>
+      <br>
+      {% endfor %}
+      </div>
+      <br>
+      <div class="card" style="color:#000;">
+      <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-ad"></i></h5>
+        <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted logo">BAMBI</small>
+      </div>
+    </div>
+    <div id="new_post">
+      <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;"><i class="fas fa-feather-alt" style="font-size:30px;"></i></a></button>
+    </div>
+    {% else %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <a href="{{ url_for('new_post') }}"  style="color:#000;text-decoration: none">
+      <strong>🍌 Perks of having a Bambi Account!</strong></a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <a href="{{ url_for('new_post') }}"  style="color:#000;text-decoration: none">
+      <strong>🍧 Post and View Stories!</strong> See what your friends are up to.</a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <a href="{{ url_for('discover') }}"  style="color:#000;text-decoration: none">
+      <strong>🔥 Discover Friends!</strong> Swipe left and right on discover to make friends.</a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+      <strong>💬 Check your Inbox! </strong>You could be having Unread Messages
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <div class="card" style="color:#000;">
+      <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" alt="logo">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-ad"></i></h5>
+        <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted logo">BAMBI</small>
+      </div>
+    </div>
+    {% endif %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+
+
+{% endblock content %}

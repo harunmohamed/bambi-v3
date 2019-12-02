@@ -62,6 +62,11 @@ def discover():
 	users = User.query.all()
 	return render_template('discover.html', users=users)
 
+@app.route('/swipe')
+def swipe():
+	users = User.query.all()
+	return render_template('swipe.html', users=users)
+
 @app.route('/explore')
 def explore():
 	return render_template('explore.html', title="Explore")
