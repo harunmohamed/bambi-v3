@@ -268,13 +268,19 @@ header, footer {
             <div class="card--content">
               <a href="{{url_for('user_posts', username=current_user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}"></a>
             </div>
-              <small style="font-size:15px;padding-left:15px">{{current_user.username.title()}}</small>
+              <small style="font-size:15px;padding-left:15px">
+              {{current_user.username.lower()}}
+              {% if current_user.username in ["harun" , "bambi"] %}<img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:15px;height:15px;">{% endif %}
+            </small>
             </div>
             {% for user in users if user != current_user %}
             <div class="others">
             <div class="card--content"><a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt=""></a>
             </div>
-            <small style="font-size:15px;color:#f8f8f2;padding-left:15px">{{user.username.title()}}</small>
+            <small style="font-size:15px;color:#f8f8f2;padding-left:15px">
+            {{user.username.lower()}}
+            {% if user.username in ["harun" , "bambi"] %}<img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:15px;height:15px;">{% endif %}
+          </small>
             </div>
             {% endfor %}
             <div class="card--content"><img src="" alt=""></div>
@@ -294,7 +300,7 @@ header, footer {
           <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" data-toggle="popover" data-content="😎 : I am {{post.author.age}} from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}">
           <div class="profile-name">
             <h3 data-toggle="popover"><a href="{{url_for('user_posts', username=post.author.username)}}" style="color:#F9E9C8;">{{post.author.username}}
-             {% if post.author.username == "harun"%}<img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:20px;height:20px;margin-left: -5px;">{% endif %}
+             {% if post.author.username in ["harun" , "bambi"] %}<img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:20px;height:20px;margin-left: -5px;">{% endif %}
            </a></h3>
             <small>@{{post.author.email.split("@")[0] | lower}}</small>
           </div>
@@ -335,17 +341,18 @@ header, footer {
 
         <div id="inner">
           <p style="text-transform: uppercase;letter-spacing: 2px;text-align: center;margin-top: 4px;background:#F9E9C8;color:#000;" data-toggle="popover" data-content="🍌: Click to View this Post Only"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#000;">{{post.title}}</a></p>
+          {% if post.image %}
+          <img class="mb-2" src="{{ url_for('static', filename='profile_pics/' + post.image) }}" style="width:100%;height:100%;border-radius:5px;">
+          {% endif %}
           <p>
+            {%if post.image%}<small>{{post.author.email.split("@")[0] | lower}}</small>{%endif%}
             {{post.content| truncate(240) | safe | urlize(40, target='_blank')}}
             {% set words = post.content.split() %}
             {% if words|count > 40 %}<a class="badge badge-danger" href="{{url_for('post', post_id=post.id)}}">👀read more</a>{% endif %}
           </p>
-          {% if post.image %}
-          <img class="mb-2" src="{{ url_for('static', filename='profile_pics/' + post.image) }}" style="width:100%;height:500px;border-radius:5px">
-          {% endif %}
           {% if current_user.is_authenticated %}
           <div class="comments">
-            <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" class="mb-2"style="width: 40px;height: 40px;border-radius:5px;">
+            <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" class="mb-2"style="width: 40px;height: 40px;border-radius:50%;">
             <input type="text" name="comment" placeholder="Join the Conversation" style="background:#000;border:none;border-radius:5px;outline:none;width:85%;height: 35px;padding:10px;color:#F9E9C8;margin-top:5px;">
           </div>
           {% endif %}
