@@ -298,9 +298,9 @@ section .btn {
 
     <div class="profile">
 
-      <div class="profile-image img-fluid">
+      <div class="profile-image">
 
-        <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="" class="profile-thumbnail" style="width:130px;height:130px;">
+        <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="" class="profile-thumbnail" style="width:150px;height:150px;">
 
       </div>
 
@@ -311,6 +311,8 @@ section .btn {
           {% if user.username in ["harun" , "bambi"] %}
           <img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:20px;height:20px;margin-left: -5px;">
           {% endif %}
+
+        </h2>
 
         {% if current_user == user%}
         <button class="btn profile-edit-btn btn-primary" data-toggle="modal" data-target="#info">Edit Profile</button>
