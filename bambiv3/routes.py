@@ -27,7 +27,7 @@ def home():
 		flash('Your Post Has been Created!', 'success')
 		return redirect(url_for('home'))
 	page = request.args.get('page', 1, type=int)
-	posts = Post.query.order_by(Post.date_posted.desc()).paginate(per_page=10, page=page)
+	posts = Post.query.order_by(Post.date_posted.desc()).paginate(per_page=50, page=page)
 	users = User.query.all()
 	if current_user.is_authenticated:
 		image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
