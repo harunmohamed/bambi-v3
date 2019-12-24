@@ -267,7 +267,7 @@ section .btn {
             grid-row-gap: 1.5rem;
         }
         .profile-image {
-            grid-row: 1 / 3;
+            grid-row: 1 / 2;
         }
         .profile-user-settings {
             display: grid;
@@ -298,9 +298,9 @@ section .btn {
 
     <div class="profile">
 
-      <div class="profile-image">
+      <div class="profile-image img-fluid">
 
-        <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="" class="profile-thumbnail" style="width:150px;height:150px;">
+        <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="" class="profile-thumbnail" style="width:130px;height:130px;">
 
       </div>
 
