@@ -73,6 +73,10 @@ def swipe():
 def explore():
 	return render_template('explore.html', title="Explore")
 
+@app.route('/dating')
+def dating():
+	return render_template('36.html', title="Dating")
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
 	if current_user.is_authenticated:

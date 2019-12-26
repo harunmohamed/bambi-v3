@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en" class="slideshow">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      	<title>Bambi - Dating</title>
+		<link rel="shortcut icon" type="image/png" href="/static/profile_pics/logo.png">
+		<meta http-equiv="Content-Language" content="en-au">
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+
+		<meta name="description" content="Try out the 36 questions that can make anyone fall in love.">
+		<link rel="canonical" href="http://bambi.chat/">
+		<meta property="og:title" content="36 Questions - How to fall in love">
+		<meta property="og:description" content="Try out the 36 questions that can make anyone fall in love.">
+		<meta property="og:url" content="http://bambi.chat/">
+		<meta property="og:site_name" content="bambi">
+		<meta property="og:image" content="http://bambi.chat/static/profile_pics/logo.png">
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:description" content="Try out the 36 questions that can make anyone fall in love.">
+		<meta name="twitter:title" content="36 Questions - How to fall in love">
+		<meta name="twitter:domain" content="bambi">
+		<meta name="twitter:creator" content="@harunnmohamed">
+		<meta name="twitter:image:src" content="http://bambi.chat/static/profile_pics/logo.png">
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+
+<style>
+	/* GENERAL ========================================= */
+
+/* Zero default margin & padding around common elements */
+article, blockquote, body, dd, dl, dt, fieldset, figure, form, h1, h2, h3, h4, h5, h6, header, li, menu, nav, ol, p, section, ul {
+	margin: 0;
+	border: 0 none #FFFFFF;
+	padding: 0;
+}
+
+html.slideshow {
+	height: 100%;
+}
+
+body {
+	width: 100%;
+	background-color: #060606;
+	color: #ffca7a;
+	line-height: 1.8;
+	font-family: 'Playfair Display', serif;
+	font-size: 130%;
+	text-align: left;
+}
+
+@media (max-width: 700px) {
+	body {
+		font-size: 100%;
+		line-height: 1.6;
+	}
+}
+
+@media (max-height: 400px) {
+	body {
+		font-size: 80%;
+		line-height: 1.6;
+	}
+}
+
+.slideshow body {
+	height: 100%;
+	overflow: hidden;
+}
+
+a {
+	color: #fa5d4e;
+	text-decoration: underline;
+}
+
+a:visited {
+	color: #fa5d4e;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+img {
+	border: 0 none transparent;
+}
+
+button, input, select, table, textarea, a.button {
+	font-size: 100%;
+	font-family: 'Josefin Sans', sans-serif;
+	outline: none;
+}
+
+
+
+
+/* CONTENT ========================================= */
+
+.slideshow .container,
+.slideshow ol li {
+	display: table;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	transition: opacity 0.5s linear;
+}
+
+.slideshow .container.on,
+.slideshow ol li.on {
+	z-index: 100;
+}
+
+.slideshow .container > .inner,
+.slideshow ol li > .inner {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.container > .inner > .inner,
+ol li > .inner > .inner {
+	position: relative;
+	width: 100%;
+	max-width: 30em;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0 auto;
+	padding: 0 3em;
+}
+
+#intro {
+	opacity: 0;
+}
+
+#intro.on {
+	opacity: 1;
+}
+
+#title {
+	margin-bottom: 0.4em;
+	font-size: 240%;
+	text-align: center;
+	white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+	#title {
+		font-size: 7vw;
+	}
+}
+
+h1 {
+	margin-left: -0.1em;
+	color: #ffffff;
+	font-size: 119%;
+	font-family: 'Playfair Display SC', serif;
+	font-weight: normal;
+	line-height: 0.1;
+}
+
+h1 span {
+	position: relative;
+	top: 0.28em;
+	font-size: 300%;
+}
+
+h2 {
+	margin-left: 4.6em;
+	margin-top: 0.45em;
+	color: #fa5d4e;
+	font-size: 81%;
+	font-style: italic;
+	font-weight: normal;
+}
+
+#intro p {
+	text-align: justify;
+}
+
+#intro p a {
+	color: #fa5d4e;
+}
+
+#intro p a:visited {
+	color: #fa5d4e;
+}
+
+#intro p button,
+#instructions button {
+	display: block;
+	width: 16em;
+	margin: 1.5em auto 0 auto;
+	border: 3px solid #fa5d4e;
+	border-radius: 5px;
+    outline: none;
+	padding: 0.8em 0 0.5em 0;
+	background-color: transparent;
+	color: #fa5d4e;
+	font-size: 90%;
+	text-transform: uppercase;
+	font-weight: bold;
+	cursor: pointer;
+	transition: all 0.15s linear;
+}
+
+@media (max-width: 700px) {
+	#intro p button,
+	#instructions button {
+		width: 100%;
+	}
+}
+
+#intro p button:hover,
+#instructions button:hover {
+	background-color: #fa5d4e;
+	color: #000;
+}
+
+.adsbygoogle {
+	margin-top: 1.8em;
+}
+
+#instructions {
+	text-align: justify;
+	opacity: 0;
+}
+
+#instructions.on {
+	opacity: 1;
+}
+
+#instructions > .inner > .inner:before {
+	content: url(../images/face1.svg);
+	position: absolute;
+	left: -15%;
+	top: 50%;
+	width: 15%;
+	margin-top: -20%;
+}
+
+#instructions > .inner > .inner:after {
+	content: url(../images/face2.svg);
+	position: absolute;
+	right: -15%;
+	top: 50%;
+	width: 15%;
+	margin-top: -20%;
+}
+
+#instructions button {
+	width: 8em;
+}
+
+ol {
+	margin-top: 1.5em;
+	margin-bottom: 5em;
+	transition: opacity 0.5s linear;
+}
+
+ol.off {
+	opacity: 0;
+}
+
+.slideshow ol li {
+	font-size: 200%;
+	font-style: italic;
+	text-align: center;
+	vertical-align: center;
+}
+
+@media (max-width: 700px) {
+	.slideshow ol li {
+		font-size: 135%;
+	}
+}
+
+ol li > .inner > .inner {
+	max-width: 28em;
+	padding: 0 4em;
+}
+
+@media (max-width: 700px) {
+	ol li > .inner > .inner {
+		padding: 0 2.5em;
+	}
+}
+
+.slideshow ol li span {
+	display: inline-block;
+	position: relative;
+	opacity: 0;
+	-webkit-transform: translate(200px, 0);
+	-moz-transform: translate(200px), 0;
+	-ms-transform: translate(200px, 0);
+	transform: translate(200px, 0);
+	transition: -webkit-transform 0.5s ease, opacity 0.3s linear;
+	transition: transform 0.5s ease, opacity 0.3s linear;
+}
+
+@media (max-width: 700px) {
+	.slideshow ol li span {
+		-webkit-transform: none;
+		-moz-transform: none;
+		-ms-transform: none;
+		transform: none;
+	}
+}
+
+ol li span.on {
+	opacity: 1;
+	-webkit-transform: none;
+	-moz-transform: none;
+	-ms-transform: none;
+	transform: none;
+}
+
+ol li span.off {
+	opacity: 0;
+	-webkit-transform: translateX(-200px);
+	-moz-transform: translateX(-200px);
+	-ms-transform: translateX(-200px);
+	transform: translateX(-200px);
+}
+
+@media (max-width: 700px) {
+	.slideshow ol li span.off {
+		-webkit-transform: none;
+		-moz-transform: none;
+		-ms-transform: none;
+		transform: none;
+	}
+}
+
+ol li strong {
+	font-weight: normal;
+	white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+	ol li strong {
+		white-space: normal;
+	}
+}
+
+#stare {
+	opacity: 0;
+}
+
+#stare.on {
+	opacity: 1;
+}
+
+#stare p:first-child {
+	margin-bottom: 1.5em;
+	color: #ffffff;
+}
+
+#numbering {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	z-index: 1;
+	width: 4em;
+	margin-left: -2em;
+	margin-top: -0.415em;
+	color: #ffffff;
+	font-size: 1600%;
+	font-family: 'Josefin Sans', sans-serif;
+	text-align: center;
+	line-height: 1;
+	opacity: 0;
+	transition: opacity 1s linear;
+}
+
+#numbering.on {
+	opacity: 0.15;
+}
+
+.progress {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	z-index: 1;
+	width: 0;
+	height: 8px;
+	background-color: #ffffff;
+	opacity: 0;
+	transition: opacity 1s linear, width 2s ease;
+}
+
+.progress.on {
+	opacity: 1;
+}
+
+.prevNext {
+	position: fixed;
+	top: 50%;
+	z-index: 200;
+	width: 4em;
+	height: 4em;
+	box-sizing: border-box;
+	margin-top: -2em;
+	border-radius: 50%;
+	border: 0 none transparent;
+	background-color: rgba(255,255,255,0.2);
+	color: #ffffff;
+	font-size: 130%;
+	font-family: 'Josefin Sans', sans-serif;
+	text-decoration: none;
+	text-align: right;
+	opacity: 0;
+	transition: all 0.15s linear, opacity 1s linear;
+}
+
+.prevNext.on {
+	opacity: 1;
+	cursor: pointer;
+}
+
+.prevNext:hover {
+	background-color: #ffffff;
+	color: #ffb4a2;
+}
+
+.prevNext:active {
+	color: #865a56;
+	transition: none;
+}
+
+#prev {
+	left: -2em;
+	padding-right: 0.6em;
+}
+
+#next {
+	right: -2em;
+	padding-left: 0.6em;
+	font-size: 250%;
+	text-align: left;
+}
+
+@media (max-width: 700px) {
+	#next {
+		font-size: 130%;
+	}
+}
+
+
+</style>
+
+	<body style="">
+		<section id="intro" class="container on" style="height: auto !important;">
+			<div class="inner" style="height: auto !important;">
+				<div class="inner" style="height: auto !important;">
+					<section id="title">
+						<br>
+						<h1><span>36</span> Questions</h1>
+						<h2 style="padding-left: 15px;">How to fall in love</h2>
+					</section> <!-- /#title -->
+					<p>The <a href="http://www.nytimes.com/2015/01/11/fashion/modern-love-to-fall-in-love-with-anyone-do-this.html" rel="nofollow" target="_blank">New York Times</a> lists <em>36 questions</em> you can ask someone if you want to fall in love. (Or make your love even stronger.) Bambi Dating provides the ideal experience for exploring these questions, so grab some wine, sit down with someone you want to love &amp; let’s get started. <button>Click here to start</button></p>					
+				</div> <!-- /.inner -->
+			</div> <!-- /.inner -->
+		</section> <!-- /#intro -->
+		<section id="instructions" class="container">
+			<div class="inner">
+				<div class="inner">
+					<p><strong>Quick instructions:</strong> read one question aloud to your partner, then both of you answer. Swap roles for the next question. <em>Answering all 36 questions should take around one hour, but time isn't important…</em> <button>Okay</button></p>
+				</div> <!-- /.inner -->
+			</div> <!-- /.inner -->
+		</section> <!-- /#instructions -->
+		<ol>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						If</span> <span>you</span> <span>could</span> <span>invite</span> <span>anyone</span> <span>in</span> <span>the</span> <span>world</span> <span>to</span> <span>dinner,</span> <span>who</span> <strong><span>would</span> <span>it</span> <span>be?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						Would</span> <span>you</span> <span>like</span> <span>to</span> <span>be</span> <span>famous?</span> <strong><span>In</span> <span>what</span> <span>way?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						Before</span> <span>making</span> <span>a</span> <span>telephone</span> <span>call,</span> <span>do</span> <span>you</span> <span>ever</span> <span>rehearse</span> <span>what</span> <span>you</span> <span>are</span> <span>going</span> <strong><span>to</span> <span>say?</span> <span>Why?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						What</span> <span>would</span> <span>constitute</span> <span>a</span> <span>“perfect”</span> <strong><span>day</span> <span>for</span> <span>you?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						When</span> <span>did</span> <span>you</span> <span>last</span> <span>sing</span> <span>to</span> <span>yourself?</span> <strong><span>To</span> <span>someone</span> <span>else?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						If</span> <span>you</span> <span>were</span> <span>able</span> <span>to</span> <span>live</span> <span>to</span> <span>the</span> <span>age</span> <span>of</span> <span>90</span> <span>and</span> <span>retain</span> <span>either</span> <span>the</span> <span>mind</span> <span>or</span> <span>body</span> <span>of</span> <span>a</span> <span>30</span> <span>year</span> <span>old</span> <span>for</span> <span>the</span> <span>last</span> <span>60</span> <span>years</span> <span>of</span> <span>your</span> <span>life,</span> <span>which</span> <strong><span>would</span> <span>you</span> <span>want?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						Do</span> <span>you</span> <span>have</span> <span>a</span> <span>secret</span> <span>hunch</span> <span>about</span> <span>how</span> <strong><span>you</span> <span>will</span> <span>die?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						Name</span> <span>three</span> <span>things</span> <span>you</span> <span>and</span> <span>your</span> <span>partner</span> <span>appear</span> <span>to</span> <strong><span>have</span> <span>in</span> <span>common.
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						For</span> <span>what</span> <span>in</span> <span>your</span> <span>life</span> <span>do</span> <span>you</span> <strong><span>feel</span> <span>most</span> <span>grateful?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						If</span> <span>you</span> <span>could</span> <span>change</span> <span>anything</span> <span>about</span> <span>the</span> <span>way</span> <span>you</span> <span>were</span> <span>raised,</span> <span>what</span> <strong><span>would</span> <span>it</span> <span>be?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						Take</span> <span>four</span> <span>minutes</span> <span>and</span> <span>tell</span> <span>your</span> <span>partner</span> <span>your</span> <span>life</span> <span>story</span> <span>in</span> <span>as</span> <span>much</span> <strong><span>detail</span> <span>as</span> <span>possible.
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						If</span> <span>you</span> <span>could</span> <span>wake</span> <span>up</span> <span>tomorrow</span> <span>having</span> <span>gained</span> <span>any</span> <span>one</span> <span>quality</span> <span>or</span> <span>ability,</span> <span>what</span> <strong><span>would</span> <span>it</span> <span>be?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						If</span> <span>a</span> <span>crystal</span> <span>ball</span> <span>could</span> <span>tell</span> <span>you</span> <span>the</span> <span>truth</span> <span>about</span> <span>yourself,</span> <span>your</span> <span>life,</span> <span>the</span> <span>future</span> <span>or</span> <span>anything</span> <span>else,</span> <span>what</span> <span>would</span> <span>you</span> <strong><span>want</span> <span>to</span> <span>know?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						Is</span> <span>there</span> <span>something</span> <span>that</span> <span>you’ve</span> <span>dreamed</span> <span>of</span> <span>doing</span> <span>for</span> <span>a</span> <span>long</span> <span>time?</span> <span>Why</span> <span>haven’t</span> <strong><span>you</span> <span>done</span> <span>it?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						What</span> <span>is</span> <span>the</span> <span>greatest</span> <span>accomplishment</span> <strong><span>of</span> <span>your</span> <span>life?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						What</span> <span>do</span> <span>you</span> <span>value</span> <span>most</span> <strong><span>in</span> <span>a</span> <span>friendship?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						What</span> <span>is</span> <span>your</span> <strong><span>most</span> <span>treasured</span> <span>memory?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						What</span> <span>is</span> <span>your</span> <strong><span>most</span> <span>terrible</span> <span>memory?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						If</span> <span>you</span> <span>knew</span> <span>that</span> <span>in</span> <span>one</span> <span>year</span> <span>you</span> <span>would</span> <span>die</span> <span>suddenly,</span> <span>would</span> <span>you</span> <span>change</span> <span>anything</span> <span>about</span> <span>the</span> <span>way</span> <span>you</span> <span>are</span> <strong><span>now</span> <span>living?</span> <span>Why?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						What</span> <span>does</span> <span>friendship</span> <strong><span>mean</span> <span>to</span> <span>you?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						What</span> <span>roles</span> <span>do</span> <span>love</span> <span>and</span> <span>affection</span> <span>play</span> <strong><span>in</span> <span>your</span> <span>life?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						Alternate</span> <span>sharing</span> <span>something</span> <span>you</span> <span>consider</span> <span>a</span> <span>positive</span> <span>characteristic</span> <span>of</span> <span>your</span> <span>partner.</span> <span>Share</span> <span>a</span> <span>total</span> <strong><span>of</span> <span>five</span> <span>items.
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						How</span> <span>close</span> <span>and</span> <span>warm</span> <span>is</span> <span>your</span> <span>family?</span> <span>Do</span> <span>you</span> <span>feel</span> <span>your</span> <span>childhood</span> <span>was</span> <span>happier</span> <span>than</span> <strong><span>most</span> <span>other</span> <span>people’s?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						How</span> <span>do</span> <span>you</span> <span>feel</span> <span>about</span> <span>your</span> <span>relationship</span> <strong><span>with</span> <span>your</span> <span>mother?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						Make</span> <span>three</span> <span>true</span> <span>“we”</span> <span>statements</span> <span>each.</span> <span>For</span> <span>instance,</span> <span>“We</span> <span>are</span> <span>both</span> <span>in</span> <span>this</span> <span>room</span> <strong><span>feeling</span> <span>...</span> <span>”
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						Complete</span> <span>this</span> <span>sentence:</span> <span>“I</span> <span>wish</span> <span>I</span> <span>had</span> <span>someone</span> <span>with</span> <span>whom</span> <span>I</span> <span>could</span> <strong><span>share</span> <span>...</span> <span>”
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						If</span> <span>you</span> <span>were</span> <span>going</span> <span>to</span> <span>become</span> <span>a</span> <span>close</span> <span>friend</span> <span>with</span> <span>your</span> <span>partner,</span> <span>please</span> <span>share</span> <span>what</span> <span>would</span> <span>be</span> <span>important</span> <span>for</span> <span>him</span> <span>or</span> <strong><span>her</span> <span>to</span> <span>know.
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						Tell</span> <span>your</span> <span>partner</span> <span>what</span> <span>you</span> <span>like</span> <span>about</span> <span>them;</span> <span>be</span> <span>very</span> <span>honest</span> <span>this</span> <span>time,</span> <span>saying</span> <span>things</span> <span>that</span> <span>you</span> <span>might</span> <span>not</span> <span>say</span> <span>to</span> <span>someone</span> <strong><span>you’ve</span> <span>just</span> <span>met.
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						Share</span> <span>with</span> <span>your</span> <span>partner</span> <span>an</span> <span>embarrassing</span> <span>moment</span> <strong><span>in</span> <span>your</span> <span>life.
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						When</span> <span>did</span> <span>you</span> <span>last</span> <span>cry</span> <span>in</span> <span>front</span> <span>of</span> <span>another</span> <strong><span>person?</span> <span>By</span> <span>yourself?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						Tell</span> <span>your</span> <span>partner</span> <span>something</span> <span>that</span> <span>you</span> <span>like</span> <strong><span>about</span> <span>them</span> <span>already.
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						What,</span> <span>if</span> <span>anything,</span> <span>is</span> <span>too</span> <span>serious</span> <span>to</span> <strong><span>be</span> <span>joked</span> <span>about?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						If</span> <span>you</span> <span>were</span> <span>to</span> <span>die</span> <span>this</span> <span>evening</span> <span>with</span> <span>no</span> <span>opportunity</span> <span>to</span> <span>communicate</span> <span>with</span> <span>anyone,</span> <span>what</span> <span>would</span> <span>you</span> <span>most</span> <span>regret</span> <span>not</span> <span>having</span> <span>told</span> <span>someone?</span> <span>Why</span> <span>haven’t</span> <span>you</span> <strong><span>told</span> <span>them</span> <span>yet?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						Your</span> <span>house,</span> <span>containing</span> <span>everything</span> <span>you</span> <span>own,</span> <span>catches</span> <span>fire.</span> <span>After</span> <span>saving</span> <span>your</span> <span>loved</span> <span>ones</span> <span>and</span> <span>pets,</span> <span>you</span> <span>have</span> <span>time</span> <span>to</span> <span>safely</span> <span>make</span> <span>a</span> <span>final</span> <span>dash</span> <span>to</span> <span>save</span> <span>any</span> <span>one</span> <span>item.</span> <span>What</span> <span>would</span> <strong><span>it</span> <span>be?</span> <span>Why?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						Of</span> <span>all</span> <span>the</span> <span>people</span> <span>in</span> <span>your</span> <span>family,</span> <span>whose</span> <span>death</span> <span>would</span> <span>you</span> <span>find</span> <strong><span>most</span> <span>disturbing?</span> <span>Why?
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+			<li>
+				<div class="inner">
+					<div class="inner"><span>
+						Share</span> <span>a</span> <span>personal</span> <span>problem</span> <span>and</span> <span>ask</span> <span>your</span> <span>partner’s</span> <span>advice</span> <span>on</span> <span>how</span> <span>he</span> <span>or</span> <span>she</span> <span>might</span> <span>handle</span> <span>it.</span> <span>Also,</span> <span>ask</span> <span>your</span> <span>partner</span> <span>to</span> <span>reflect</span> <span>back</span> <span>to</span> <span>you</span> <span>how</span> <span>you</span> <span>seem</span> <span>to</span> <span>be</span> <span>feeling</span> <span>about</span> <span>the</span> <span>problem</span> <strong><span>you</span> <span>have</span> <span>chosen.
+					</span></strong></div> <!-- /.inner -->
+				</div> <!-- /.inner -->
+			</li>
+		</ol>
+		<section id="stare" class="container">
+			<div class="inner">
+				<div class="inner">
+					<p>Congratulations, you've answered all the questions! Now for the hard part.</p>
+					<p>In order to solidify your love, you have to look into your partner's eyes for four minutes. <em>In silence.</em> It's hard, and you'll squirm, but you'll learn an incredible amount. Good luck…</p>
+					<p>Regards, Harun.</p>
+				</div> <!-- /.inner -->
+			</div> <!-- /.inner -->
+		</section>
+		<div id="numbering"></div>
+		<div class="progress"></div>
+		<button id="prev" class="prevNext">←</button>
+		<button id="next" class="prevNext">→</button>
+	
+	<script>
+		
+$('html').addClass('slideshow');
+
+$(init);
+
+function init() {
+	$('ol li > .inner > .inner').each(function() {
+		var $this = $(this);
+		var text = $this.text();
+		var split = text.split(' ');
+		$this.html('<span>' + split.join('</span> <span>') + '</span>');
+		var withNbsps = $this.html();
+		withNbsps = withNbsps.replace(/([^ ]+ [^ ]+ [^ ]+)$/, '<strong>$1</strong>');
+		$this.html(withNbsps);
+	});
+
+	$('body')
+		.on('click', function(event) {
+			if (!$(event.target).is('button') && $(event.target).parents('#intro').length > 0) {
+				if ($(event.target).is('a')) {
+					return true;
+				}
+				return false;
+			}
+			var intro = $('#intro');
+			if (intro.hasClass('on')) {
+				$('#intro').removeClass('on');
+				$('#instructions').addClass('on');
+			}
+			else {
+				$('#instructions').removeClass('on');
+				var currentSlide = $('ol li.on');
+				if (currentSlide.length <= 0) {
+					moveToSlide($('ol li').eq(0));
+				}
+				else if (currentSlide.next().length > 0) {
+					moveToSlide(currentSlide.next());
+				}
+				else {
+					$('ol').addClass('off');
+					$('#stare').addClass('on');
+					$('.prevNext').removeClass('on');
+					$('.progress').css('width', '100%');
+				}
+			}
+		})
+
+	$('#prev')
+		.on('click', function() {
+			var currentSlide = $('ol li.on');
+			if (currentSlide.index() >= 1) {
+				moveToSlide(currentSlide.prev());
+			}
+			return false;
+		})
+}
+
+function moveToSlide(slide) {
+	var WORD_ANIMATION_SPREAD_TIME = 600;
+	var INCOMING_ANIMATION_DELAY = 300;
+
+	var currSlide = $('ol li.on');
+	var currIndex = currSlide.index();
+	var newIndex = slide.index();
+
+	if (currSlide.length > 0) {
+		var minOffset = null;
+		var maxOffset = null;
+		$('span', currSlide).each(function() {
+			var offsetLeft = $(this).offset().left;
+			if (minOffset == null || offsetLeft < minOffset) {
+				minOffset = offsetLeft;
+			}
+			if (maxOffset == null || offsetLeft > maxOffset) {
+				maxOffset = offsetLeft;
+			}
+		});
+		$('span', currSlide).each(function() {
+			var $this = $(this);
+			var offsetLeft = $this.offset().left;
+			if (currIndex < newIndex) {
+				var delay = (offsetLeft - minOffset) / (maxOffset - minOffset) * WORD_ANIMATION_SPREAD_TIME;
+			}
+			else {
+				var delay = (maxOffset - offsetLeft) / (maxOffset - minOffset) * WORD_ANIMATION_SPREAD_TIME;
+			}
+			setTimeout(function() {
+				$this.removeClass('on');
+				if (currIndex < newIndex) {
+					$this.addClass('off');
+				}
+			}, delay)
+		});
+	}
+
+	$('ol li').removeClass('on');
+	slide.addClass('on');
+	var slideOffset = $('.inner > .inner', slide).offset().left;
+	var minOffset = null;
+	var maxOffset = null;
+	$('span', slide).each(function() {
+		var offsetLeft = $(this).offset().left;
+		if (minOffset == null || offsetLeft < minOffset) {
+			minOffset = offsetLeft;
+		}
+		if (maxOffset == null || offsetLeft > maxOffset) {
+			maxOffset = offsetLeft;
+		}
+	});
+	$('span', slide).each(function() {
+		var $this = $(this);
+		var offsetLeft = $this.offset().left;
+		if (currIndex < newIndex) {
+			var delay = (offsetLeft - minOffset) / (maxOffset - minOffset) * WORD_ANIMATION_SPREAD_TIME + INCOMING_ANIMATION_DELAY;
+		}
+		else {
+			var delay = (maxOffset - offsetLeft) / (maxOffset - minOffset) * WORD_ANIMATION_SPREAD_TIME + INCOMING_ANIMATION_DELAY;
+		}
+		setTimeout(function() {
+			$this
+				.removeClass('off')
+				.addClass('on')
+		}, delay)
+	});
+
+
+	var numbering = $('#numbering');
+	if (numbering.text() == '') {
+		numbering.addClass('on');
+	}
+	setTimeout(function(numberText) {
+		return function() {
+			numbering.text(numberText);
+		}
+	}(newIndex+1), WORD_ANIMATION_SPREAD_TIME);
+
+	var progress = $('.progress');
+	progress.addClass('on');
+	progress.css('width', newIndex / $('ol li').length * 100 + '%');
+
+	var next = $('#next');
+	next.addClass('on');
+
+	var prev = $('#prev');
+	if (newIndex > 0) {
+		prev.addClass('on');
+	}
+	else {
+		prev.removeClass('on');
+	}
+}
+
+	</script>

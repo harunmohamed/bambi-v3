@@ -43,7 +43,7 @@ class LoginForm(FlaskForm):
 class UpdateAccountForm(FlaskForm):
 	username = StringField('Username', validators = [DataRequired(), Length(min=2, max=20), Regexp(r'^[\w.-_.]+$')])
 	email = StringField('Email', validators = [DataRequired(), Email()])
-	picture = FileField('', validators=[FileAllowed(['jpg', 'png'])])
+	picture = FileField('', validators=[FileAllowed(['jpg', 'jpeg' , 'png'])])
 	department = StringField('Department', validators=[DataRequired()])
 	student_number = StringField('Student Number', validators=[DataRequired()])
 	country = StringField('Country', validators=[DataRequired()])
@@ -67,7 +67,7 @@ class UpdateAccountForm(FlaskForm):
 class PostForm(FlaskForm):
 	title = StringField('Title') #validators=[DataRequired()]
 	content = TextAreaField('Content', validators=[DataRequired()])
-	image = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png', 'gif'])])
+	image = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'jpeg' , 'png', 'gif'])])
 	submit = SubmitField('Post')
 
 class RequestResetForm(FlaskForm):
