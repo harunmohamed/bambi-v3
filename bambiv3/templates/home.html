@@ -346,9 +346,9 @@ header, footer {
           {% endif %}
           <p>
             {%if post.image%}<small>{{post.author.email.split("@")[0] | lower}}</small>{%endif%}
-            {{post.content| truncate(240) | safe | urlize(40, target='_blank')}}
+            {{post.content| truncate(420) | safe | urlize(40, target='_blank')}}
             {% set words = post.content.split() %}
-            {% if words|count > 40 %}<a class="badge badge-danger" href="{{url_for('post', post_id=post.id)}}">👀read more</a>{% endif %}
+            {% if words|count > 60 %}<a class="badge badge-danger" href="{{url_for('post', post_id=post.id)}}">👀read more</a>{% endif %}
           </p>
           {% if current_user.is_authenticated %}
           <div class="comments">
