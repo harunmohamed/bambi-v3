@@ -80,6 +80,31 @@ header, footer {
 .menu a:hover {
   color: #000;
 }
+.heart {
+  cursor: pointer;
+  height: 100px;
+  width: 100px;
+  background-image:url( 'https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
+  background-position: left;
+  background-repeat:no-repeat;
+  background-size:2900%;
+  margin-top: -35px;
+  margin-right:-35px;
+  margin-bottom: -10px;
+}
+
+.heart:hover {
+  background-position:right;
+}
+
+.is_animating {
+  animation: heart-burst .8s steps(28) 1;
+}
+
+@keyframes heart-burst {
+  from {background-position:left;}
+  to { background-position:right;}
+}
 </style>
 
 
@@ -155,7 +180,7 @@ header, footer {
           </div>
           <div class="follow-btn">
             {% if post.author != current_user %}
-              <i class="fas fa-heart love" style="font-size: 28px;"></i>
+              <div class="heart"></div>
             {% endif %}
           </div>
         </header>
@@ -287,9 +312,17 @@ header, footer {
   crossorigin="anonymous"></script>
 
   <script>
-    $('.love').click(function(){
-  $(this).toggleClass('liked');
-});
+    /* when a user clicks, toggle the 'is-animating' class */
+    $(".heart").on('click touchstart', function(){
+      $(this).toggleClass('is_animating');
+      $(this).toggleClass('liked');
+    });
+
+    /*when the animation is over, remove the class*/
+    $(".heart").on('animationend', function(){
+      $(this).toggleClass('is_animating');
+      $(this).toggleClass('liked');
+    });
   </script>
 
 
