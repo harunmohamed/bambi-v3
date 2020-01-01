@@ -29,12 +29,14 @@
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">
             <li>
-              <form class="form-inline">
-                <div class="input-group">
-                  <input type="text" class="form-control search" placeholder="search" aria-label="Search" aria-describedby="basic-addon1" style="color:#fff;background:#000"> <br>
-                  <button class="btn  my-2 my-sm-0" type="submit"><i class="fas fa-search" style="color:#F9E9C8;"></i></button>
-                </div>
-              </form>
+               <div class="d">
+                <input type="text" placeholder="🔍 Search Friends" id="search" onkeyup="filterFunction()" onclick="search()" class="dropbtn">
+              <div id="res" class="dropdown-content" style="overflow:auto;max-height:318px;">
+                {% for user in users%}
+                <a href="{{url_for('user_posts', username=user.username)}}" target="_blank"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="" style="width:30px;height:30px;border-radius:50%;"> {{user.username.lower()}}</a>
+                {% endfor %}
+              </div>
+            </div>
             </li>
         </ul>
     </div>
@@ -291,6 +293,30 @@ function myFunction() {
   var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
   var scrolled = (winScroll / height) * 100;
   document.getElementById("myBar").style.width = scrolled + "%";
+}
+</script>
+<script>
+  // Search Code
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function search() {
+  document.getElementById("res").classList.toggle("show");
+}
+
+function filterFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("res");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
 }
 </script>
   </body>

@@ -16,6 +16,11 @@ def before_request():
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
 
+@app.route('/layout')
+def layout():
+	users = User.query.all()
+	return render_template('layout.html', users=users)
+
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
 def home():
