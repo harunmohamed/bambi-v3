@@ -33,7 +33,7 @@
                 <input type="text" placeholder="🔍 Search Friends" id="search" onkeyup="filterFunction()" onclick="search()" class="dropbtn">
               <div id="res" class="dropdown-content" style="overflow:auto;max-height:318px;">
                 {% for user in users%}
-                <a href="{{url_for('user_posts', username=user.username)}}" target="_blank"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="" style="width:30px;height:30px;border-radius:50%;"> {{user.username.lower()}}</a>
+                <a href="{{url_for('user_posts', username=user.username)}}" target="_blank"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="" style="width:30px;height:30px;border-radius:50%;"> {{user.username.lower()}} {% if user.username in ["harun" , "bambi"] %}🔥{% endif %}</a>
                 {% endfor %}
               </div>
             </div>
