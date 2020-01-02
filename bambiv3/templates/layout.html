@@ -30,7 +30,7 @@
         <ul class="navbar-nav mr-auto">
             <li>
                <div class="d">
-                <input type="text" placeholder="🔍 Search Friends" id="search" onkeyup="filterFunction()" onclick="search()" class="dropbtn">
+                <input type="text" placeholder="🔍 Search Friends" id="search" onkeyup="filterFunction()" onfocusin="search()" onfocusout="searchout()" class="dropbtn">
               <div id="res" class="dropdown-content" style="overflow:auto;max-height:318px;">
                 {% for user in users%}
                 <a href="{{url_for('user_posts', username=user.username)}}" target="_blank"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="" style="width:30px;height:30px;border-radius:50%;"> {{user.username.lower()}} {% if user.username in ["harun" , "bambi"] %}🔥{% endif %}</a>
@@ -300,7 +300,11 @@ function myFunction() {
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function search() {
-  document.getElementById("res").classList.toggle("show");
+  document.getElementById("res").classList.add("show");
+}
+
+function searchout()  {
+  document.getElementById("res").classList.remove("show");
 }
 
 function filterFunction() {
