@@ -88,12 +88,15 @@ header, footer {
 }
 .subtle{
   background-color: #000;
-  border: 1px solid #F9E9C8;
+  border: none;
+  padding-top: 5px;
+  margin-top: 2px;
 }
 .subtle:focus{
   background-color: #000;
-  outline: none;
-  border: 1px solid #F9E9C8;
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
   color: #fff;
 }
 .menu a {
@@ -240,26 +243,68 @@ header, footer {
 
     <div class="col-lg-6">
       <!-- content area -->
-      {% if current_user.is_authenticated %}
+      <div class="row">
+        <div class="col-1">
+          {% if current_user.is_authenticated %}
+          <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="logo" class="profile-thumbnail" style="width:45px;height:45px;border-radius:50%;">
+        </div>
+        <div class="col-11">
           <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
               <div class="input-group mb-3">
                 {% if form.content.errors %}
-                {{ form.content(class="form-control is-invalid subtle", placeholder="What's on your mind?") }}
+                {{ form.content(class="form-control is-invalid subtle", placeholder="What's on your mind") }}
                 <div class="invalid-feedback">
                   {% for error in form.content.errors %}
                   <span>{{ error }}</span>
                   {% endfor %}
                 </div>
                 {% else %}
-                {{ form.content(class="form-control subtle", placeholder="What's on your mind?") }}
+                {{ form.content(class="form-control subtle", placeholder="What's on your mind?" , style="height:50px;") }}
                 {% endif %}
-            <div class="input-group-append" style="color:#F9E9C8;border-color: #F9E9C8;">
-              {{ form.submit(class="btn btn-outline-warning", style="color:#F9E9C8;border-color: #F9E9C8;") }}
+            <div class="input-group-prepend" style="color:#F9E9C8;">
+              <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              </button>
+              <div class="dropdown-menu p-2">
+                
+                <div class="form-group">
+                {{ form.title.label(placeholder="the title is optional", class="form-control-label") }}
+                {% if form.title.errors %}
+                {{ form.title(placeholder="the title is optional", class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.title.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.title(placeholder="the title is optional", class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+
+              <div class="form-group">
+                {{ form.image.label(class="form-control-label") }}
+                {% if form.image.errors %}
+                {{ form.image(class="form-control-file is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.image.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.image(class="form-control-file") }}
+                {% endif %}
+              </div>
+
+              </div>
+              {{ form.submit(class="btn btn-outline-dark input-group-append",style="color:#F9E9C8;border:1px solid #868e96;") }}
             </div>
           </div>
           </form>
           {%  endif %}
+        </div>
+      </div>
+      
+
 
           {% if current_user.is_authenticated %}
           <section class="cardi scroll">
