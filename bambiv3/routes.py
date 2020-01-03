@@ -26,9 +26,7 @@ def layout():
 def home():
 	form = PostForm()
 	if form.validate_on_submit():
-		if form.image.data:
-			picture = save_picture(form.image.data)
-		post = Post(title=form.title.data, content=form.content.data, image=picture, author=current_user)
+		post = Post(title=form.title.data, content=form.content.data, author=current_user)
 		db.session.add(post)
 		db.session.commit()
 		flash('Your Post Has been Created!', 'success')
