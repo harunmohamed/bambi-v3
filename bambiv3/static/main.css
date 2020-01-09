@@ -70,3 +70,12 @@ nav{
 .d a:hover {background-color: #ddd;}
 
 .show {display: block;}
+
+::selection {
+  color: #000;
+  background: #F9E9C8;
+}
+::-moz-selection { /* Code for Firefox */
+  color: #000;
+  background: #F9E9C8;
+}
