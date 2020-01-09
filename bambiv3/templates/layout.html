@@ -10,10 +10,22 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+
     <!-- CSS styles in static -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
     <!-- Font awesome kit -->
     <script src="https://kit.fontawesome.com/17192b7610.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155855958-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-155855958-1');
+    </script>
+
 
     <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}">
     {% if title %}
