@@ -116,7 +116,7 @@
 
     <div class="bottom d-block d-sm-none">
 
-      <a href="{{url_for('user_posts', username=current_user.username)}}" class="active"><img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="40px" height="40px;" style="padding-bottom: 10px;"></a>
+      <a href="{{url_for('user_posts', username=current_user.username)}}" class="active"><img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="35px" height="35px;" style="border-radius:50%;"></a>
 
       <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35px" height="35px;" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8;padding:2px;border-radius:2px;"></a>
 
@@ -144,7 +144,7 @@
 
       <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35px" height="35px;" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8;padding:2px;border-radius:2px;"></a>
 
-      <a href="{{ url_for('login') }}" style="font-size:30px;cursor:pointer;" data-toggle="popover" data-content="🍌: Log in">🤓</a>
+      <a href="{{ url_for('login') }}" style="font-size:30px;cursor:pointer;" data-toggle="popover" data-content="🍌: Log In">🤓</a>
 
     </div>
     {% endif %}
