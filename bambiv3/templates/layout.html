@@ -125,7 +125,7 @@
     </div>
 
     <div id="mySidenav" class="sidenav">
-      <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="80px" height="80px;" style="margin-left: 45px;margin-bottom: 20px;">
+      <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="90px" height="90px;" style="margin-left:45px;margin-bottom:20px;border-radius:50%">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <a class="dropdown-item" href="{{ url_for('new_post') }}"> 🍧 Post</a>
        <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
