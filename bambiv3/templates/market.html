@@ -67,7 +67,7 @@ body {
 
 <body>
   <nav class="navbar navbar-expand-md navbar-dark ">
-    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2 d-none d-lg-block">
         <ul class="navbar-nav mr-auto">
             <li>
               <span class="logo" title="Buy and sell stuff here">MARKET</span>
@@ -75,18 +75,18 @@ body {
         </ul>
     </div>
     <div class="mx-auto order-0">
-      <a class="navbar-brand mx-auto" href="#">
-        <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35" height="35" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8; padding:2px;border-radius:2px;">
+      <a class="navbar-brand mx-auto" href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35" height="35" class="d-inline-block align-top" alt="">
         <span class="logo"><!--BAMBI--></span>
       </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon d-none d-lg-block"></span>
         </button>
     </div>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 settings">
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 settings d-none d-lg-block">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a href="{{ url_for('home') }}" style="color:#F9E9C8;"><i class="fas fa-home" style="color:#F9E9C8;"></i> HOME</a>
+                <span class="logo" title="Buy and sell stuff here">MARKET</span>
             </li>
         </ul>
     </div>

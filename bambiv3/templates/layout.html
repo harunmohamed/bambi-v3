@@ -4,8 +4,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Bambi is a campus social network intended for students at The Near East University. It is a place to discover people and places, make friends, post and share stuff, buy and sell items and chat. Join today!" />
-    <meta property="og:description" content="Bambi is a campus social network intended for students at The Near East University. It is a place to discover people and places, make friends, post and share stuff, buy and sell items and chat. Join today!" />
+    <meta name="description" content="Bambi is a fun place for Near East University students to manage their lives and make friends while at it. Join Today!" />
+    <meta property="og:description" content="Bambi is a fun place for Near East University students to manage their lives and make friends while at it. Join today!" />
     <meta property="og:image" href="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -54,7 +54,7 @@
     </div>
     <div class="mx-auto order-0">
       <a class="navbar-brand mx-auto d-none d-lg-block" href="{{ url_for('home') }}">
-        <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35" height="35" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8; padding:2px;border-radius:2px;">
+        <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35" height="35" class="d-inline-block align-top" alt="">
         <span class="logo"></span>
         <span class="logo"><!--BAMBI--></span>
         <!--<div class="progress-container d-none d-lg-block">
@@ -118,7 +118,7 @@
 
       <a href="{{url_for('user_posts', username=current_user.username)}}" class="active"><img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="35px" height="35px;" style="border-radius:50%;"></a>
 
-      <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35px" height="35px;" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8;padding:2px;border-radius:2px;"></a>
+      <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35px" height="35px;" class="d-inline-block align-top" alt=""></a>
 
       <a style="font-size:30px;cursor:pointer;" onclick="openNav()">🍪</a>
 
@@ -142,7 +142,7 @@
 
       <a href="{{ url_for('explore') }}" style="font-size:30px;cursor:pointer;" data-toggle="popover" data-content="🍌: Explore">🔱</a>
 
-      <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35px" height="35px;" class="d-inline-block align-top" alt="" style="border:2px solid #F9E9C8;padding:2px;border-radius:2px;"></a>
+      <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35px" height="35px;" class="d-inline-block align-top" alt=""></a>
 
       <a href="{{ url_for('login') }}" style="font-size:30px;cursor:pointer;" data-toggle="popover" data-content="🍌: Log In">🤓</a>
 
