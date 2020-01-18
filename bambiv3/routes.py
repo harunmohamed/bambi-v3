@@ -89,7 +89,7 @@ def register():
 	form = RegistrationForm()
 	if form.validate_on_submit():
 		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-		user = User(username=form.username.data, email=form.email.data, department=form.department.data,\
+		user = User(username=form.username.data.lower(), email=form.email.data, department=form.department.data,\
 			student_number=form.student_number.data, age=form.age.data, country=form.country.data, hobby=form.hobby.data,\
 			password=hashed_password)
 		db.session.add(user)
@@ -146,7 +146,7 @@ def account():
 		if form.picture.data:
 			picture_file = save_picture(form.picture.data)
 			current_user.image_file = picture_file
-		current_user.username = form.username.data
+		current_user.username = form.username.data.lower()
 		current_user.email = form.email.data
 		current_user.department = form.department.data
 		current_user.student_number = form.student_number.data
@@ -233,12 +233,13 @@ def delete_post(post_id):
 @app.route("/user/<string:username>", methods=['GET', 'POST'])
 @login_required
 def user_posts(username):
+	username = username.lower()
 	form = UpdateAccountForm()
 	if form.validate_on_submit():
 		if form.picture.data:
 			picture_file = save_picture(form.picture.data)
 			current_user.image_file = picture_file
-		current_user.username = form.username.data
+		current_user.username = form.username.data.lower()
 		current_user.email = form.email.data
 		current_user.department = form.department.data
 		current_user.student_number = form.student_number.data

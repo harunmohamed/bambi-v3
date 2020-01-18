@@ -304,7 +304,7 @@ section .btn {
 
       <div class="profile-user-settings">
 
-        <h2 class="profile-user-name">{{user.username}}
+        <h2 class="profile-user-name">{{user.username.title()}}
           {% if user.username in ["harun" , "bambi"] %}
           <img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:20px;height:20px;margin-left: -5px;">
           {% endif %}
