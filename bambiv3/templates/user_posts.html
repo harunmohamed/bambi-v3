@@ -323,8 +323,8 @@ section .btn {
 
         <ul>
           <li style="font-size: 22px;"><span class="profile-stat-count">{{ posts.total }}</span> <small>posts</small></li>
-          <li style="font-size: 22px;"><span class="profile-stat-count">188</span> <small>followers</small></li>
-          <li style="font-size: 22px;"><span class="profile-stat-count">206</span> <small>following</small></li>
+          <li style="font-size: 22px;"><span class="profile-stat-count">{{posts.total * 2}}</span> <small>followers</small></li>
+          <li style="font-size: 22px;"><span class="profile-stat-count">{{posts.total // 2}}</span> <small>following</small></li>
         </ul>
 
       </div>
