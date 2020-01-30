@@ -329,8 +329,8 @@ section .btn {
 
         <ul>
           <li style="font-size: 22px;"><span class="profile-stat-count">{{ posts.total }}</span> <small>posts</small></li>
-          <li style="font-size: 22px;"><span class="profile-stat-count">{{ user.followers.count() }}</span> <small>followers</small></li>
-          <li style="font-size: 22px;"><span class="profile-stat-count">{{ user.followed.count() }}</span> <small>following</small></li>
+          <li style="font-size: 22px;"><span class="profile-stat-count" data-toggle="modal" data-target="#followers">{{ user.followers.count() }}</span> <small>followers</small></li>
+          <li style="font-size: 22px;"><span class="profile-stat-count" data-toggle="modal" data-target="#following">{{ user.followed.count() }}</span> <small>following</small></li>
         </ul>
 
       </div>
@@ -589,6 +589,62 @@ section .btn {
       $(this).toggleClass('liked');
     });
   </script>
+
+
+  <!-- Followers Modal -->
+<div class="modal fade" id="followers" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content" style="color:#000;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{ user.followers.count() }} Followers</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% for user in user.followers %}
+          <header>
+          <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
+          <div class="profile-name">
+            <p>{{user.username}}</p>
+          </div>
+          <div class="follow-btn">
+              <a href="{{ url_for('user_posts', username=user.username) }}"target="_blank" style="text-decoration:none;color:#fff;">❤</a>
+            </div>
+      </header>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Following Modal -->
+<div class="modal fade" id="following" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content" style="color:#000;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{ user.followed.count() }} Following</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% for user in user.followed %}
+           <header>
+          <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
+          <div class="profile-name">
+            <p>{{user.username}}</p>
+          </div>
+          <div class="follow-btn">
+              <a href="{{ url_for('follow', username=user.username) }}"target="_blank" style="text-decoration:none;color:#fff;">❤</a>
+            </div>
+      </header>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

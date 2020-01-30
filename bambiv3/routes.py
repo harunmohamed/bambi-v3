@@ -287,6 +287,11 @@ def user_posts(username):
 	return render_template('user_posts.html', posts=posts, user=user, title=user.username.title(),image_file=image_file,form=form)
 
 
+@app.route("/<string:username>", methods=['GET', 'POST'])
+@login_required
+def user(username):
+	return redirect(url_for('user_posts', username=username))
+
 @app.route('/follow/<username>')
 @login_required
 def follow(username):
