@@ -4,8 +4,8 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from bambiv3 import app, db, bcrypt, mail
-from bambiv3.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, RequestResetForm, ResetPasswordForm
-from bambiv3.models import User, Post
+from bambiv3.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, ProductForm, RequestResetForm, ResetPasswordForm
+from bambiv3.models import User, Post, Product
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
@@ -41,6 +41,12 @@ def home():
 		#return redirect(url_for('login'))
 		return render_template('home.html', title="Home", posts=posts)
 
+@app.route('/friends/posts')
+def f_posts():
+	page = request.args.get('page', 1, type=int)
+	posts = current_user.followed_posts().paginate(per_page=50, page=page)
+	return render_template('friends_posts.html', title="Friend Posts", posts=posts)
+
 
 @app.route('/blog')
 def blog():
@@ -50,9 +56,10 @@ def blog():
 def about():
 	return render_template('about.html', title="About")
 
-@app.route('/market')
+@app.route('/market', methods=['GET', 'POST'])
 def market():
-	return render_template('market.html', title="Market")
+	products = Product.query.order_by(Product.date_posted.desc())
+	return render_template('market.html', title="Market", products=products)
 
 @app.route('/inbox')
 def inbox():
@@ -230,6 +237,20 @@ def delete_post(post_id):
     return redirect(url_for('home'))
 
 
+@app.route('/product/new', methods=['GET', 'POST'])
+@login_required
+def new_product():
+	form = ProductForm()
+	if form.validate_on_submit():
+			picture1 = save_picture(form.image1.data)
+			product = Product(title=form.title.data, description=form.description.data, location=form.location.data, price=form.price.data, contact=form.contact.data, image1=picture1, author=current_user)
+			db.session.add(product)
+			db.session.commit()
+			flash('Your Product Has been Posted!', 'success')
+			return redirect(url_for('market'))
+	return render_template('create_product.html', title='New Product', form=form, legend='New Product')
+
+
 @app.route("/user/<string:username>", methods=['GET', 'POST'])
 @login_required
 def user_posts(username):
@@ -246,6 +267,7 @@ def user_posts(username):
 		current_user.country = form.country.data
 		current_user.age = form.age.data
 		current_user.hobby = form.hobby.data
+		current_user.bio = form.bio.data
 		db.session.commit()
 		flash('Your Account has been updated', 'success')
 		return redirect(url_for('user_posts', username=current_user.username))
@@ -257,11 +279,44 @@ def user_posts(username):
 		form.country.data = current_user.country
 		form.age.data = current_user.age
 		form.hobby.data = current_user.hobby
+		form.bio.data = current_user.bio
 	image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
 	page = request.args.get('page', 1, type=int)
 	user = User.query.filter_by(username=username).first_or_404()
 	posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
 	return render_template('user_posts.html', posts=posts, user=user, title=user.username.title(),image_file=image_file,form=form)
+
+
+@app.route('/follow/<username>')
+@login_required
+def follow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        flash('User {} not found.'.format(username))
+        return redirect(url_for('index'))
+    if user == current_user:
+        flash('You cannot follow yourself!', 'danger')
+        return redirect(url_for('user_posts', username=username))
+    current_user.follow(user)
+    db.session.commit()
+    flash('💛 You are following {}!'.format(username.title()), 'success')
+    return redirect(url_for('user_posts', username=username))
+
+
+@app.route('/unfollow/<username>')
+@login_required
+def unfollow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        flash('User {} not found.'.format(username))
+        return redirect(url_for('index'))
+    if user == current_user:
+        flash('You cannot unfollow yourself!', 'danger')
+        return redirect(url_for('user_posts', username=username))
+    current_user.unfollow(user)
+    db.session.commit()
+    flash('💔 You are not following {}.'.format(username.title()), 'info')
+    return redirect(url_for('user_posts', username=username))
 
 
 def send_reset_email(user):

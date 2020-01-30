@@ -185,7 +185,6 @@ header, footer {
 
 
     <div class="menu" style="border:1px solid #F9E9C8;border-radius: 5px;">
-      <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
        <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
       <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
       <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
@@ -196,20 +195,6 @@ header, footer {
       <a class="dropdown-item" href="{{ url_for('about') }}"> 👋 About Bambi</a>
       <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
     </div>
-
-    <!--<div class="card about" style="color:#fff;background:#000;text-align:left;border:1px solid #F9E9C8;">
-    <div class="card-body">
-      <p> 🎓 Studies at <span>Near East University</span></p>
-      <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
-      <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
-      <p> 🙊 Is <span>{{current_user.age}}</span> years old</p>
-      <p> 🌍 From <span>{{current_user.country}}</span></p>
-      <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
-      <p> 💎 Interested in <span>{{current_user.hobby}}</span></p>
-      <a class="btn btn-sm btn-primary" href="{{ url_for('account') }}">🍁 edit</a>
-    </div>
-  </div>-->
-
   <br>
 
   <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;" data-toggle="popover" data-content="🍌: Click to know more about Bambi">
@@ -245,57 +230,6 @@ header, footer {
 
     <div class="col-lg-6">
       <!-- content area -->
-      <div class="row">
-        <div class="col-1">
-          {% if current_user.is_authenticated %}
-          <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="logo" class="profile-thumbnail" style="width:45px;height:45px;border-radius:50%;padding-right:3px;">
-        </div>
-        <div class="col-11">
-          <form method="POST" action="" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
-              <div class="input-group mb-3">
-                {% if form.content.errors %}
-                {{ form.content(class="form-control is-invalid subtle", placeholder="What's on your mind") }}
-                <div class="invalid-feedback">
-                  {% for error in form.content.errors %}
-                  <span>{{ error }}</span>
-                  {% endfor %}
-                </div>
-                {% else %}
-                {{ form.content(class="form-control subtle", placeholder="What's on your mind?" , style="height:50px;") }}
-                {% endif %}
-            <div class="input-group-prepend" style="color:#F9E9C8;">
-              <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              </button>
-              <div class="dropdown-menu p-2">
-                
-                <div class="form-group">
-                {{ form.title.label(placeholder="the title is optional", class="form-control-label") }}
-                {% if form.title.errors %}
-                {{ form.title(placeholder="the title is optional", class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.title.errors %}
-                  <span>{{ error }}</span>
-                  {% endfor %}
-                </div>
-                {% else %}
-                {{ form.title(placeholder="the title is optional", class="form-control form-control-lg") }}
-                {% endif %}
-              </div>
-
-                <div class="form-group">
-                  {{ form.submit(class="btn btn-outline-dark",style="border:1px solid #868e96;") }}
-                </div>
-
-              </div>
-  
-            </div>
-          </div>
-          </form>
-          {%  endif %}
-        </div>
-      </div>
-      
 
 
           {% if current_user.is_authenticated %}

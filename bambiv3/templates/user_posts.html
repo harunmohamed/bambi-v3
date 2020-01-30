@@ -314,17 +314,23 @@ section .btn {
         {% if current_user == user%}
         <button class="btn profile-edit-btn btn-primary" data-toggle="modal" data-target="#info">Edit Profile</button>
         {% else %}
-        <button id="follow" class="btn profile-edit-btn btn-primary">✌ Follow</button>
+          {% if not current_user.is_following(user) %}
+            <button class="btn btn-primary mb-2"><a href="{{ url_for('follow', username=user.username) }}" style="color:#fff;text-decoration:none;">✌ Follow</a></button>
+          {% else %}
+            <button class="btn btn-danger mb-2"><a href="{{ url_for('unfollow', username=user.username) }}" style="color:#fff;text-decoration:none;">😬 Unfollow</a></button>
+          {% endif %}
         {% endif %}
+
 
       </div>
 
       <div class="profile-stats">
 
+
         <ul>
           <li style="font-size: 22px;"><span class="profile-stat-count">{{ posts.total }}</span> <small>posts</small></li>
-          <li style="font-size: 22px;"><span class="profile-stat-count">{{posts.total * 2}}</span> <small>followers</small></li>
-          <li style="font-size: 22px;"><span class="profile-stat-count">{{posts.total // 2}}</span> <small>following</small></li>
+          <li style="font-size: 22px;"><span class="profile-stat-count">{{ user.followers.count() }}</span> <small>followers</small></li>
+          <li style="font-size: 22px;"><span class="profile-stat-count">{{ user.followed.count() }}</span> <small>following</small></li>
         </ul>
 
       </div>
@@ -339,7 +345,11 @@ section .btn {
           {{user.email.split("@")[0] | lower}}☁</small> - I am a Software Engineering Student at The Near East University and the <a class="badge badge-warning" style="color:#000;">💦Founder of Bambi</a> too. I enjoy playing football and I have developed a recent liking for billiards.</p>
 
           {%else%}
-          {{user.email.split("@")[0] | lower}}</small> - I study {{user.department}} at Near East University. I am {{user.age}} from {{user.country}}. I'm interested in {{user.hobby}}</p>
+            {% if user.bio %}
+            <p>{{user.email.split("@")[0] | lower}}</small> - {{user.bio}}</p></p>
+            {% else %}
+            {{user.email.split("@")[0] | lower}}</small> - I study {{user.department}} at Near East University. I am {{user.age}} from {{user.country}}. I'm interested in {{user.hobby}}</p> 
+            {%endif%}
           {%endif%}
 
       </div>
@@ -378,8 +388,8 @@ section .btn {
       <p> 🌍 From <span>{{user.country}}</span></p>
       <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
       <p> 💎 Interested in <span>{{user.hobby}}</span></p>
-      {% if user != current_user %}
-      <p class="f"></p> 
+      {% if user != current_user and current_user.is_following(user) %}
+      <p class="f">💛 You follow {{user.username}}</p> 
       {% else %}
       <!--<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#info" style="color:#fff;">🍁 edit</a>-->
       {% endif %}
@@ -524,7 +534,7 @@ section .btn {
         {% endif %}
       {% endwith %}
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <a href="{{ url_for('new_post') }}"  style="color:#000;text-decoration: none">
+        <a href="{{ url_for('f_posts') }}"  style="color:#000;text-decoration: none">
       <strong>🍧 Post Something!</strong> Tell your friends what you're up to.</a>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -554,7 +564,7 @@ section .btn {
       </div>
     </div>
     <div id="new_post">
-      <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;"><i class="fas fa-feather-alt" style="font-size:30px;"></i></a></button>
+      <button class="post_btn"><a href="{{ url_for('f_posts') }}" style="color:#F9E9C8;"><i class="fas fa-feather-alt" style="font-size:30px;"></i></a></button>
     </div>
     {% else %}
     <div class="card" style="color:#000;">
@@ -578,14 +588,6 @@ section .btn {
     $('.love').click(function(){
       $(this).toggleClass('liked');
     });
-
-    $('#follow').click(function(){
-      $(this).text($(this).text() == '✌ Follow' ? '😬 Unfollow' : '✌ Follow');
-      $('.followers').text($('.followers').text() == '10 followers' ? '11 followers' : '10 followers');
-      $("#follow").toggleClass("badge-primary");
-      $("#follow").toggleClass("badge-danger");
-      $('.f').text($('.f').text() == '' ? '💛 You follow {{user.username}}' : '');
-    })
   </script>
 
 
@@ -610,6 +612,19 @@ section .btn {
                   {% for error in form.picture.errors %}
                     <span class="text-danger">{{ error }}</span><br>
                   {% endfor %}
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.bio.label(class="form-control-label") }}
+                {% if form.bio.errors %}
+                {{ form.bio(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.bio.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.bio(class="form-control form-control-lg") }}
                 {% endif %}
               </div>
               <div class="form-group">

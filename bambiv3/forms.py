@@ -49,6 +49,7 @@ class UpdateAccountForm(FlaskForm):
 	country = StringField('Country', validators=[DataRequired()])
 	age = StringField('Age', validators=[DataRequired()])
 	hobby = StringField('Hobby', validators=[DataRequired()])
+	bio = TextAreaField('Bio')
 	submit = SubmitField('Update')
 
 	def validate_username(self, username):
@@ -68,6 +69,17 @@ class PostForm(FlaskForm):
 	title = StringField('Title') #validators=[DataRequired()]
 	content = TextAreaField('Content', validators=[DataRequired()])
 	image = FileField('Upload Image', validators=[FileAllowed(['jpg', 'jpeg' , 'png', 'gif'])])
+	submit = SubmitField('🛫 Post')
+
+class ProductForm(FlaskForm):
+	title = StringField(validators=[DataRequired()])
+	description = TextAreaField(validators=[DataRequired()])
+	location = StringField(validators=[DataRequired()])
+	price = StringField(validators=[DataRequired()])
+	contact = StringField(validators=[DataRequired()])
+	image1 = FileField(validators=[FileAllowed(['jpg', 'jpeg' , 'png', 'gif']), DataRequired()])
+	#image2 = FileField(validators=[FileAllowed(['jpg', 'jpeg' , 'png', 'gif'])])
+	#image3 = FileField(validators=[FileAllowed(['jpg', 'jpeg' , 'png', 'gif'])])
 	submit = SubmitField('🛫 Post')
 
 class RequestResetForm(FlaskForm):

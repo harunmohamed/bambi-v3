@@ -56,7 +56,7 @@
       <a class="navbar-brand mx-auto d-none d-lg-block" href="{{ url_for('home') }}">
         <img src="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}" width="35" height="35" class="d-inline-block align-top" alt="">
         <span class="logo"></span>
-        <span class="logo"><!--BAMBI--></span>
+        <span class="logo"></span>
         <!--<div class="progress-container d-none d-lg-block">
       <div class="progress-bar" id="myBar"></div>
     </div>-->
@@ -77,12 +77,13 @@
                <span>😎</span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="{{ url_for('new_post') }}" data-toggle="popover" data-content="🍌: Add Posts with a Title"> 🍧 Post</a>
+              <a class="dropdown-item" href="{{ url_for('f_posts') }}" data-toggle="popover" data-content="🍌: Add Posts with a Title"> 🍧 Friend</a>
               <a class="dropdown-item" href="{{ url_for('inbox') }}" data-toggle="popover" data-content="🍌: Reply to your Messages"> 💬 Inbox</a>
               <a class="dropdown-item" href="{{ url_for('discover') }}" data-toggle="popover" data-content="🍌: Discover New Friends"> 🔥 Discover Friends</a>
               <a class="dropdown-item" href="{{ url_for('explore') }}" data-toggle="popover" data-content="🍌: Explore Random Stuff!"> 🔱 Explore</a> 
-              <a class="dropdown-item" href="{{ url_for('dating') }}" data-toggle="popover" data-content="🍌: Love Hard Today!"> 💋 Dating</a>
+              <a class="dropdown-item" href="{{ url_for('dating') }}" data-toggle="popover" data-content="🍌: Love Hard Today!"> 💋 Dating</a> 
               <a class="dropdown-item" href="{{ url_for('market') }}" data-toggle="popover" data-content="🍌: Buy and Sell Stuff"> 👜 Market</a>
+              <a class="dropdown-item" href="{{ url_for('new_product') }}" data-toggle="popover" data-content="🍌: Buy and Sell Stuff"> 🛠 Sell</a>
               <a class="dropdown-item" href="{{ url_for('account') }}" data-toggle="popover" data-content="🍌: Account Settings"> 🍪 Settings</a>
               <a class="dropdown-item" href="{{ url_for('blog') }}" data-toggle="popover" data-content="🍌: Bambi Blog"> 🎬 Blog</a>
               <a class="dropdown-item" href="{{ url_for('about') }}" data-toggle="popover" data-content="🍌: Know Bambi More"> 👋 About Bambi</a>
@@ -127,11 +128,12 @@
     <div id="mySidenav" class="sidenav">
       <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="90px" height="90px;" style="margin-left:45px;margin-bottom:20px;border-radius:50%">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a class="dropdown-item" href="{{ url_for('new_post') }}"> 🍧 Post</a>
+      <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
        <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
       <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
       <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
       <a class="dropdown-item" href="{{ url_for('market') }}"> 👜 Market</a>
+      <a class="dropdown-item" href="{{ url_for('new_product') }}"> 🛠 Sell</a>
       <a class="dropdown-item" href="{{ url_for('account') }}"> 🍪 Settings</a>
       <a class="dropdown-item" href="{{ url_for('blog') }}"> 🎬 Blog</a> 
       <a class="dropdown-item" href="{{ url_for('about') }}"> 👋 About Bambi</a>

@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
+from flask_migrate import Migrate
 
 
 app = Flask(__name__)
@@ -11,6 +12,7 @@ app.config['SECRET_KEY'] = '0a383bdacfada9ed7b9603837f78bb71'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
@@ -24,4 +26,4 @@ mail = Mail(app)
 
 
 
-from bambiv3 import routes
+from bambiv3 import routes, models
