@@ -243,7 +243,7 @@ header, footer {
               {% if current_user.username in ["harun" , "bambi"] %}<img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:15px;height:15px;">{% endif %}
             </small>
             </div>
-            {% for user in users if user != current_user %}
+            {% for user in current_user.followed %}
             <div class="others">
             <div class="card--content"><a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt=""></a>
             </div>
@@ -393,7 +393,7 @@ header, footer {
       </div>
       <div style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
         <h5 style="padding-left: 3px;">Friends - <small><a href="{{url_for('discover')}}" target="_blank">view all</a></small></h5>
-        {% for user in users if user != current_user %}
+        {% for user in users %}
         <header>
         <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
