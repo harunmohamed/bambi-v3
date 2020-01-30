@@ -315,9 +315,9 @@ section .btn {
         <button class="btn profile-edit-btn btn-primary" data-toggle="modal" data-target="#info">Edit Profile</button>
         {% else %}
           {% if not current_user.is_following(user) %}
-            <button class="btn btn-primary mb-2"><a href="{{ url_for('follow', username=user.username) }}" style="color:#fff;text-decoration:none;">✌ Follow</a></button>
+            <button class="btn btn-primary mb-2"><a href="{{ url_for('follow', username=user.username) }}" style="color:#fff;text-decoration:none;">Follow</a></button>
           {% else %}
-            <button class="btn btn-danger mb-2"><a href="{{ url_for('unfollow', username=user.username) }}" style="color:#fff;text-decoration:none;">😬 Unfollow</a></button>
+            <button class="btn btn-danger mb-2"><a href="{{ url_for('unfollow', username=user.username) }}" style="color:#fff;text-decoration:none;">Unfollow</a></button>
           {% endif %}
         {% endif %}
 
