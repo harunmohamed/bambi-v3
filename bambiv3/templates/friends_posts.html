@@ -333,7 +333,7 @@ header, footer {
           <div class="stats">
             <div class="Retweets">
               {% set words = post.content.split() %}
-               <a  class="badge badge-dark" href="{{url_for('post', post_id=post.id)}}">🍒comments</a> | <small class="date">{{post.date_posted.strftime('%d-%B-%Y')}}</small> <!--| <small>{{words | count}} words</small>-->
+               <a  class="badge badge-dark" href="{{url_for('post', post_id=post.id)}}">🍒comments</a> | <small class="date">{{ moment(post.date_posted).fromNow() }}</small> <!--| <small>{{words | count}} words</small>-->
             </div>
           </div>
         </footer>

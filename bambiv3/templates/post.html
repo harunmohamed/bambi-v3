@@ -178,7 +178,7 @@ header, footer {
             {%if post.image%}<small>{{post.author.email.split("@")[0] | lower}}</small>{%endif%}
             {{post.content| urlize(40, target='_blank')}}
           </p>
-          <small class="date">{{post.date_posted.strftime('%d-%B-%Y')}}</small>
+          <small class="date">{{ moment(post.date_posted).fromNow() }}</small>
           <div id="disqus_thread"></div>
           <script>
           (function() { // DON'T EDIT BELOW THIS LINE
