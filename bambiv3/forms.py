@@ -50,6 +50,7 @@ class UpdateAccountForm(FlaskForm):
 	age = StringField('Age', validators=[DataRequired()])
 	hobby = StringField('Hobby', validators=[DataRequired()])
 	bio = TextAreaField('Bio')
+	private = BooleanField('Private?')
 	submit = SubmitField('Update')
 
 	def validate_username(self, username):
@@ -70,6 +71,10 @@ class PostForm(FlaskForm):
 	content = TextAreaField('Content', validators=[DataRequired()])
 	image = FileField('Upload Image', validators=[FileAllowed(['jpg', 'jpeg' , 'png', 'gif'])])
 	submit = SubmitField('🛫 Post')
+
+class MessageForm(FlaskForm):
+    message = TextAreaField(('Message'), validators=[DataRequired(), Length(min=0, max=140)])
+    submit = SubmitField('send')
 
 class ProductForm(FlaskForm):
 	title = StringField(validators=[DataRequired()])

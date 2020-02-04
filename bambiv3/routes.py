@@ -4,17 +4,17 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from bambiv3 import app, db, bcrypt, mail
-from bambiv3.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, ProductForm, RequestResetForm, ResetPasswordForm
-from bambiv3.models import User, Post, Product
+from bambiv3.forms import RegistrationForm, LoginForm, UpdateAccountForm, MessageForm, PostForm, ProductForm, RequestResetForm, ResetPasswordForm
+from bambiv3.models import User, Post, Product, Message
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
 
 @app.before_request
 def before_request():
-    if current_user.is_authenticated:
-        current_user.last_seen = datetime.utcnow()
-        db.session.commit()
+	if current_user.is_authenticated:
+		current_user.last_seen = datetime.utcnow()
+		db.session.commit()
 
 @app.route('/layout')
 def layout():
@@ -42,6 +42,7 @@ def home():
 		return render_template('home.html', title="Home", posts=posts)
 
 @app.route('/friends/posts')
+@login_required
 def f_posts():
 	page = request.args.get('page', 1, type=int)
 	posts = current_user.followed_posts().paginate(per_page=50, page=page)
@@ -64,6 +65,27 @@ def market():
 @app.route('/inbox')
 def inbox():
 	return render_template('inbox.html', title="Inbox")
+
+@app.route('/send_message/<recipient>', methods=['GET', 'POST'])
+@login_required
+def send_message(recipient):
+    user = User.query.filter_by(username=recipient).first_or_404()
+    form = MessageForm()
+    if form.validate_on_submit():
+        msg = Message(body=form.message.data, author=current_user, recipient=user)
+        db.session.add(msg)
+        db.session.commit()
+        flash('Your message has been sent.', 'success')
+        return redirect(url_for('user_posts', username=recipient))
+    return render_template('send_message.html', recipient=recipient, title="Send Message", form=form)
+
+@app.route('/messages')
+@login_required
+def messages():
+    current_user.last_message_read_time = datetime.utcnow()
+    db.session.commit()
+    messages = current_user.messages_received.all()#order_by(Message.timestamp.desc())
+    return render_template('messages.html', messages=messages)#messages=messages.items)
 
 @app.route('/inbox/demo')
 def chat():
@@ -124,7 +146,7 @@ def login():
 @app.route('/logout')
 def logout():
 	logout_user()
-	return redirect(url_for('home'))
+	return redirect(url_for('login'))
 
 
 
@@ -198,43 +220,55 @@ def new_post():
 			return redirect(url_for('home'))
 	return render_template('create_post.html', title='New Post', form=form, legend='New Post')
 
-@app.route('/post/<int:post_id>')
+@app.route('/post/<int:post_id>', methods=["GET", "POST"])
 @login_required
 def post(post_id):
 	post = Post.query.get_or_404(post_id)
 	return render_template('post.html',title=post.title, post=post)
 
+@app.route('/like/<int:post_id>/<action>')
+@login_required
+def like_action(post_id, action):
+	post = Post.query.filter_by(id=post_id).first_or_404()
+	if action == 'like':
+		current_user.like_post(post)
+		db.session.commit()
+	if action == 'unlike':
+		current_user.unlike_post(post)
+		db.session.commit()
+	return redirect(request.referrer)
+
 
 @app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
 def update_post(post_id):
-    post = Post.query.get_or_404(post_id)
-    if post.author != current_user:
-        abort(403)
-    form = PostForm()
-    if form.validate_on_submit():
-        post.title = form.title.data
-        post.content = form.content.data
-        db.session.commit()
-        flash('Your post has been updated!', 'success')
-        return redirect(url_for('post', post_id=post.id))
-    elif request.method == 'GET':
-        form.title.data = post.title
-        form.content.data = post.content
-    return render_template('create_post.html', title='Update Post',
-                           form=form, legend='Update Post')
+	post = Post.query.get_or_404(post_id)
+	if post.author != current_user:
+		abort(403)
+	form = PostForm()
+	if form.validate_on_submit():
+		post.title = form.title.data
+		post.content = form.content.data
+		db.session.commit()
+		flash('Your post has been updated!', 'success')
+		return redirect(url_for('post', post_id=post.id))
+	elif request.method == 'GET':
+		form.title.data = post.title
+		form.content.data = post.content
+	return render_template('create_post.html', title='Update Post',
+						   form=form, legend='Update Post')
 
 
 @app.route("/post/<int:post_id>/delete", methods=['POST'])
 @login_required
 def delete_post(post_id):
-    post = Post.query.get_or_404(post_id)
-    if post.author != current_user:
-        abort(403)
-    db.session.delete(post)
-    db.session.commit()
-    flash('Your post has been deleted!', 'success')
-    return redirect(url_for('home'))
+	post = Post.query.get_or_404(post_id)
+	if post.author != current_user:
+		abort(403)
+	db.session.delete(post)
+	db.session.commit()
+	flash('Your post has been deleted!', 'success')
+	return redirect(url_for('home'))
 
 
 @app.route('/product/new', methods=['GET', 'POST'])
@@ -268,6 +302,7 @@ def user_posts(username):
 		current_user.age = form.age.data
 		current_user.hobby = form.hobby.data
 		current_user.bio = form.bio.data
+		current_user.private = form.private.data
 		db.session.commit()
 		flash('Your Account has been updated', 'success')
 		return redirect(url_for('user_posts', username=current_user.username))
@@ -280,6 +315,7 @@ def user_posts(username):
 		form.age.data = current_user.age
 		form.hobby.data = current_user.hobby
 		form.bio.data = current_user.bio
+		form.private.data = current_user.private
 	image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
 	page = request.args.get('page', 1, type=int)
 	user = User.query.filter_by(username=username).first_or_404()
@@ -295,33 +331,33 @@ def user(username):
 @app.route('/follow/<username>')
 @login_required
 def follow(username):
-    user = User.query.filter_by(username=username).first()
-    if user is None:
-        flash('User {} not found.'.format(username))
-        return redirect(url_for('index'))
-    if user == current_user:
-        flash('You cannot follow yourself!', 'danger')
-        return redirect(url_for('user_posts', username=username))
-    current_user.follow(user)
-    db.session.commit()
-    flash('💛 You are following {}!'.format(username.title()), 'success')
-    return redirect(url_for('user_posts', username=username))
+	user = User.query.filter_by(username=username).first()
+	if user is None:
+		flash('User {} not found.'.format(username))
+		return redirect(url_for('index'))
+	if user == current_user:
+		flash('You cannot follow yourself!', 'danger')
+		return redirect(url_for('user_posts', username=username))
+	current_user.follow(user)
+	db.session.commit()
+	flash('💛 You are following {}!'.format(username.title()), 'success')
+	return redirect(url_for('user_posts', username=username))
 
 
 @app.route('/unfollow/<username>')
 @login_required
 def unfollow(username):
-    user = User.query.filter_by(username=username).first()
-    if user is None:
-        flash('User {} not found.'.format(username))
-        return redirect(url_for('index'))
-    if user == current_user:
-        flash('You cannot unfollow yourself!', 'danger')
-        return redirect(url_for('user_posts', username=username))
-    current_user.unfollow(user)
-    db.session.commit()
-    flash('💔 You are not following {}.'.format(username.title()), 'info')
-    return redirect(url_for('user_posts', username=username))
+	user = User.query.filter_by(username=username).first()
+	if user is None:
+		flash('User {} not found.'.format(username))
+		return redirect(url_for('index'))
+	if user == current_user:
+		flash('You cannot unfollow yourself!', 'danger')
+		return redirect(url_for('user_posts', username=username))
+	current_user.unfollow(user)
+	db.session.commit()
+	flash('💔 You are not following {}.'.format(username.title()), 'info')
+	return redirect(url_for('user_posts', username=username))
 
 
 def send_reset_email(user):
@@ -350,32 +386,32 @@ def reset_request():
 
 @app.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    user = User.verify_reset_token(token)
-    if user is None:
-        flash('That is an invalid or expired token', 'danger')
-        return redirect(url_for('reset_request'))
-    form = ResetPasswordForm()
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user.password = hashed_password
-        db.session.commit()
-        flash('Your password has been updated! You are now able to log in', 'success')
-        return redirect(url_for('login'))
-    return render_template('reset_token.html', title='Reset Password', form=form)
+	if current_user.is_authenticated:
+		return redirect(url_for('home'))
+	user = User.verify_reset_token(token)
+	if user is None:
+		flash('That is an invalid or expired token', 'danger')
+		return redirect(url_for('reset_request'))
+	form = ResetPasswordForm()
+	if form.validate_on_submit():
+		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+		user.password = hashed_password
+		db.session.commit()
+		flash('Your password has been updated! You are now able to log in', 'success')
+		return redirect(url_for('login'))
+	return render_template('reset_token.html', title='Reset Password', form=form)
 
 
 #Error Handlers
 @app.errorhandler(404)
 def not_found_error(error):
-    return render_template('404.html'), 404
+	return render_template('404.html'), 404
 
 @app.errorhandler(403)
 def forbidden_route_error(error):
-    return render_template('403.html'), 403
+	return render_template('403.html'), 403
 
 @app.errorhandler(500)
 def internal_error(error):
-    db.session.rollback()
-    return render_template('500.html'), 500
+	db.session.rollback()
+	return render_template('500.html'), 500

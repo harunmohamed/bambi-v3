@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+{% block content %}
+	
+<style>
+header, footer {
+   display: flex;
+   flex-direction: row;
+ }
+ header .profile-thumbnail {
+   width: 55px;
+   height: 55px;
+   border-radius: 50%;
+ }
+ header .profile-name {
+   display: flex;
+   flex-direction:column;
+   margin-left: 10px;
+ }
+header h3, header h4 {
+   display: flex;
+   margin: 0;
+ }
+ #inner p {
+   margin-bottom: 10px;
+   font-size: 20px;
+ }
+ #inner hr {
+   margin: 20px 0;
+   border-style: solid;
+   opacity: 0.1;
+   color:#F9E9C8;
+ }
+ .post{
+   border: 2px solid #F9E9C8;
+   padding: 10px;
+ }
+</style>	
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-3 d-none d-lg-block">
+				<!-- User info , photos -->
+		      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;" data-toggle="modal" data-target="#profile">
+		        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="harun profile" class="profile-thumbnail">
+		        <div class="profile-name">
+		          <h3>{{current_user.username}}</h3>
+		          <small>@{{current_user.email.split("@")[0] | lower}}</small>
+		        </div>
+		      </header>
+		      <br>
+
+		    <div class="card about" style="color:#fff;background:#000;text-align:left;border:1px solid #F9E9C8;">
+		    <div class="card-body">
+		      <p> 🎓 Studies at <span>Near East University</span></p>
+			  <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
+			  <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
+			  <p> 🙊 Is <span>{{current_user.age}}</span> years old</p>
+			  <p> 🌍 From <span>{{current_user.country}}</span></p>
+			  <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
+			  <p> 💎 Interested in <span>{{current_user.hobby}}</span></p>
+			  <a class="btn btn-sm btn-primary" href="{{ url_for('account') }}">🍁 edit</a>
+		    </div>
+		  </div>
+
+		  <br>
+
+		  <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+		    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+		    <div class="profile-name">
+		      <h3 class="logo">BAMBI</h3>
+		      <small id="year"></small>
+		    </div>
+		  </header>
+		</div>
+
+		<div class="col-lg-6" style="text-align: center">
+			<div class="post">
+			  {% with messages = get_flashed_messages(with_categories=true) %}
+		    	{% if messages %}
+		      		{% for category , message in messages %}
+		        		<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+	      					{{message}}
+	        			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	          				<span aria-hidden="true">&times;</span>
+	        			</button>
+	      				</div>
+		      		{% endfor %}
+		    	{% endif %}
+	  		  {% endwith %}
+			  <div id="inner">
+			   <div class="content-section">
+				  <form method="POST" action="" enctype="multipart/form-data">
+				    {{ form.hidden_tag() }}
+				    <fieldset class="form-group">
+				      <legend class="border-bottom mb-2 pb-2">Message {{recipient.title()}}</legend>
+				      <div class="form-group">
+				        {{ form.message.label(placeholder="speak your mind...", class="form-control-label") }}
+				        {% if form.message.errors %}
+				        {{ form.message(placeholder="speak your mind...", class="form-control form-control-sm is-invalid") }}
+				        <div class="invalid-feedback">
+				          {% for error in form.message.errors %}
+				          <span>{{ error }}</span>
+				          {% endfor %}
+				        </div>
+				        {% else %}
+				        {{ form.message(placeholder="speak your mind...", class="form-control form-control-sm", rows="5") }}
+				        {% endif %}
+				      </div>
+				    </div>
+				    </fieldset>
+				    <div class="form-group">
+				      {{ form.submit(class="btn btn-outline-warning") }}
+				    </div>
+				  </form>
+
+			  </div>
+		</div>
+		<br>
+		</div>
+
+
+{% endblock content %}

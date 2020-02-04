@@ -312,12 +312,16 @@ section .btn {
         </h2>
 
         {% if current_user == user%}
+        <button class="btn profile-edit-btn btn-dark"><a href="{{ url_for('messages') }}" style="color:#fff;text-decoration:none;">🔐 Messages{% set new_messages = current_user.new_messages() %}
+          <span id="message_count" class="badge"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a></button>
         <button class="btn profile-edit-btn btn-primary" data-toggle="modal" data-target="#info">Edit Profile</button>
         {% else %}
           {% if not current_user.is_following(user) %}
             <button class="btn profile-edit-btn btn-primary mb-2"><a href="{{ url_for('follow', username=user.username) }}" style="color:#fff;text-decoration:none;">Follow</a></button>
           {% else %}
-            <button class="btn profile-edit-btn btn-danger mb-2"><a href="{{ url_for('unfollow', username=user.username) }}" style="color:#fff;text-decoration:none;">Unfollow</a></button>
+            <button class="btn profile-edit-btn btn-dark"><a href="{{ url_for('send_message',recipient=user.username) }}" style="color:#fff;text-decoration:none;">🔏 Message</a></button>
+                <button class="btn profile-edit-btn btn-danger"><a href="{{ url_for('unfollow', username=user.username) }}" style="color:#fff;text-decoration:none;">Unfollow</a></button>
+
           {% endif %}
         {% endif %}
 
@@ -346,7 +350,7 @@ section .btn {
 
           {%else%}
             {% if user.bio %}
-            <p>{{user.email.split("@")[0] | lower}}</small> - {{user.bio}}</p></p>
+            {{user.email.split("@")[0] | lower}}</small> - {{user.bio}}</p>
             {% else %}
             {{user.email.split("@")[0] | lower}}</small> - I study {{user.department}} at Near East University. I am {{user.age}} from {{user.country}}. I'm interested in {{user.hobby}}</p> 
             {%endif%}
@@ -390,9 +394,8 @@ section .btn {
       <p> 💎 Interested in <span>{{user.hobby}}</span></p>
       {% if user != current_user and current_user.is_following(user) %}
       <p class="f">💛 You follow {{user.username}}</p> 
-      {% else %}
-      <!--<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#info" style="color:#fff;">🍁 edit</a>-->
       {% endif %}
+      <small>Last seen on: {{ moment(user.last_seen).format('LLL') }}</small>
     </div>
   </div>
 
@@ -434,6 +437,8 @@ section .btn {
       {% if posts.total == 0 %}
         <img src="{{ url_for('static', filename='profile_pics/' + 'empty.png') }}" class="img-fluid mx-auto d-block" style="margin-bottom: 50px;">
       {% endif %}
+
+      {% if current_user.is_following(user) or current_user == user %}
       {% for post in posts.items %}
     <div class="post">
       <header>
@@ -446,7 +451,12 @@ section .btn {
           </div>
           <div class="follow-btn">
             {% if current_user != user %}
-            <i class="fas fa-heart love" style="font-size: 28px;"></i>
+            <!--<i class="fas fa-heart love" style="font-size: 28px;"></i>-->
+              {% if current_user.has_liked_post(post) %}
+                <a href="{{ url_for('like_action', post_id=post.id, action='unlike') }}" style="text-decoration:none;">❤</a>
+              {% else %}
+                <a href="{{ url_for('like_action', post_id=post.id, action='like') }}" style="text-decoration:none;">👍</a>
+              {% endif %}
             {% else %}
               <div class="dropdown dropleft">
             <button class="btn btn-dark btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background:#000;">
@@ -489,7 +499,7 @@ section .btn {
             {{post.content|urlize(40, target='_blank')}}
         </p>
           <div class="comments">
-            <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width: 40px;height: 40px;border-radius:50%;">
+            <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width:30px;height:30px;border-radius:50%;">
             <input type="text" name="comment" placeholder="Join the Conversation" style="background:#000;border:none;border-radius:5px;outline:none;width:85%;height: 35px;padding:10px;color:#F9E9C8;margin-top:5px;">
           </div>
           <br>
@@ -498,13 +508,12 @@ section .btn {
         <footer>
           <div class="stats">
             <div class="Retweets">
-               <a  class="badge badge-dark" href="{{url_for('post', post_id=post.id)}}">🍒comments</a> | <small class="date">{{ moment(post.date_posted).fromNow() }}</small>
+               <a class="badge badge-dark">❤ {{ post.likes.count() }}</a> | <a class="badge badge-dark" href="{{url_for('post', post_id=post.id)}}">🍒comments</a> | <small class="date">{{ moment(post.date_posted).fromNow() }}</small>
             </div>
         </footer>
     </div>
     <br>
   {% endfor %}
-
     {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
       {% if page_num %}
         {% if posts.page == page_num %}
@@ -517,6 +526,8 @@ section .btn {
       {% endif %}
     {% endfor %}
     <div style="margin-bottom: 40px;"></div>
+    {% endif %}
+
 </div>
 
 
@@ -664,6 +675,10 @@ section .btn {
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
               <!--<legend class="border-bottom mb-2 pb-2">Account Info</legend>-->
+              <div class="form-check">
+              {{ form.private(class="form-check-input") }}
+              {{ form.private.label(class="form-check-label") }}
+            </div>
               <div class="form-group">
                 {{ form.picture.label() }}
                 {{ form.picture(class="form-control-file") }}

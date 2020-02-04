@@ -186,7 +186,8 @@ header, footer {
 
     <div class="menu" style="border:1px solid #F9E9C8;border-radius: 5px;">
       <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
-       <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
+       <a class="dropdown-item" href="{{ url_for('messages') }}"> 💬 Messages 
+        {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
       <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
       <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
       <a class="dropdown-item" href="{{ url_for('market') }}"> 👜 Market</a>
@@ -331,6 +332,7 @@ header, footer {
 
 
    {% for post in posts.items %}
+    {% if not post.author.private or current_user == post.author or current_user.is_authenticated %} <!--if current_user.is_following(post.author)-->
     <div class="post">
       <header>
           <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" data-toggle="popover" data-content="😎 : I am {{post.author.age}} from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}">
@@ -341,36 +343,44 @@ header, footer {
             <small>@{{post.author.email.split("@")[0] | lower}}</small>
           </div>
           <div class="follow-btn">
-            {% if post.author != current_user %}
-              <i class="fas fa-heart love" style="font-size: 28px;"></i>
-            {% else %}
-            <div class="dropdown dropleft">
-            <button class="btn btn-dark btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background:#000;">
-              <i class="fas fa-ellipsis-v" style="font-size: 28px;"></i>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #000;width: 20px;">
-              <a class="btn btn-warning btn-sm m-1" href="{{url_for('update_post', post_id=post.id)}}">✏edit</a>
-              <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">🗑️delete</button>
-            </div>
-             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel" style="color:#000;">Delete Post?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
-                      <input class="btn btn-danger" type="submit" value="Delete">
-                    </form>
+            {% if current_user.is_authenticated %}
+              {% if post.author != current_user %}
+                <!--<i class="fas fa-heart love" style="font-size: 28px;"></i>-->
+                {% if current_user.has_liked_post(post) %}
+                  <a href="{{ url_for('like_action', post_id=post.id, action='unlike') }}" style="text-decoration:none;">❤</a>
+                {% else %}
+                  <a href="{{ url_for('like_action', post_id=post.id, action='like') }}" style="text-decoration:none;">👍</a>
+                {% endif %}
+
+                {% else %}
+                <div class="dropdown dropleft">
+                <button class="btn btn-dark btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background:#000;">
+                  <i class="fas fa-ellipsis-v" style="font-size: 28px;"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #000;width: 20px;">
+                  <a class="btn btn-warning btn-sm m-1" href="{{url_for('update_post', post_id=post.id)}}">✏edit</a>
+                  <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">🗑️delete</button>
+                </div>
+                 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel" style="color:#000;">Delete Post?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                          <input class="btn btn-danger" type="submit" value="Delete">
+                        </form>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+              {% endif %}
             {% endif %}
           </div>
         </header>
@@ -388,7 +398,7 @@ header, footer {
           </p>
           {% if current_user.is_authenticated %}
           <div class="comments">
-            <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" class="mb-2"style="width: 40px;height: 40px;border-radius:50%;">
+            <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" class="mb-2"style="width:30px;height:30px;border-radius:50%;">
             <input type="text" name="comment" placeholder="Join the Conversation" style="background:#000;border:none;border-radius:5px;outline:none;width:85%;height: 35px;padding:10px;color:#F9E9C8;margin-top:5px;">
           </div>
           {% endif %}
@@ -399,11 +409,12 @@ header, footer {
           <div class="stats">
             <div class="Retweets">
               {% set words = post.content.split() %}
-               <a  class="badge badge-dark" href="{{url_for('post', post_id=post.id)}}">🍒comments</a> | <small class="date">{{ moment(post.date_posted).fromNow() }}</small> <!--| <small>{{words | count}} words</small>-->
+               <a class="badge badge-dark">❤ {{ post.likes.count() }}</a> | <a class="badge badge-dark" href="{{url_for('post', post_id=post.id)}}">🍒comments</a> | <small class="date">{{ moment(post.date_posted).fromNow() }}</small> <!--| <small>{{words | count}} words</small>-->
             </div>
           </div>
         </footer>
     </div>
+    {% endif %}
     <br>
   {% endfor %}
     {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}

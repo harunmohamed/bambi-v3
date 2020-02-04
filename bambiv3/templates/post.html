@@ -100,7 +100,7 @@ header, footer {
 
     <div class="menu" style="border:1px solid #F9E9C8;border-radius: 5px;">
       <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
-       <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
+       <a class="dropdown-item" href="{{ url_for('messages') }}"> 💬 Messages {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
       <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
       <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
       <a class="dropdown-item" href="{{ url_for('market') }}"> 👜 Market</a>
@@ -155,7 +155,12 @@ header, footer {
           </div>
           <div class="follow-btn">
             {% if post.author != current_user %}
-              <i class="fas fa-heart love" style="font-size: 28px;"></i>
+              <!--<i class="fas fa-heart love" style="font-size: 28px;"></i>-->
+              {% if current_user.has_liked_post(post) %}
+                <a href="{{ url_for('like_action', post_id=post.id, action='unlike') }}" style="text-decoration:none;">❤</a>
+              {% else %}
+                <a href="{{ url_for('like_action', post_id=post.id, action='like') }}" style="text-decoration:none;">👍</a>
+              {% endif %}
             {% else %}
               <div class="dropdown dropleft">
             <button class="btn btn-dark btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background:#000;">
@@ -178,7 +183,10 @@ header, footer {
             {%if post.image%}<small>{{post.author.email.split("@")[0] | lower}}</small>{%endif%}
             {{post.content| urlize(40, target='_blank')}}
           </p>
-          <small class="date">{{ moment(post.date_posted).fromNow() }}</small>
+          <a class="badge badge-dark">❤ {{ post.likes.count() }}</a> | <small class="date">{{ moment(post.date_posted).fromNow() }}</small>
+
+
+
           <div id="disqus_thread"></div>
           <script>
           (function() { // DON'T EDIT BELOW THIS LINE
