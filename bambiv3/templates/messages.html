@@ -84,9 +84,9 @@ header h3, header h4 {
           </div>
         </header>
           <p>
-            {{post.content| urlize(40, target='_blank')}}
+            {{message.body| urlize(40, target='_blank')}}
           </p>
-          <small class="date">{{ moment(post.timestamp).fromNow() }}</small>
+          <small class="date">{{ moment(message.timestamp).fromNow() }}</small>
 			{% endfor %}
 		</div>
 		<br>

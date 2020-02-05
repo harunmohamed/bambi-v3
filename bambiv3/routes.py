@@ -70,6 +70,8 @@ def inbox():
 @login_required
 def send_message(recipient):
     user = User.query.filter_by(username=recipient).first_or_404()
+    if user == current_user:
+    	return redirect(url_for('messages'))
     form = MessageForm()
     if form.validate_on_submit():
         msg = Message(body=form.message.data, author=current_user, recipient=user)
