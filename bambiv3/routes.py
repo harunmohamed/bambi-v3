@@ -5,7 +5,7 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from bambiv3 import app, db, bcrypt, mail
 from bambiv3.forms import RegistrationForm, LoginForm, UpdateAccountForm, MessageForm, PostForm, ProductForm, RequestResetForm, ResetPasswordForm
-from bambiv3.models import User, Post, Product, Message
+from bambiv3.models import User, Post, Product, Message as m
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
@@ -69,25 +69,26 @@ def inbox():
 @app.route('/send_message/<recipient>', methods=['GET', 'POST'])
 @login_required
 def send_message(recipient):
-    user = User.query.filter_by(username=recipient).first_or_404()
-    if user == current_user:
-    	return redirect(url_for('messages'))
-    form = MessageForm()
-    if form.validate_on_submit():
-        msg = Message(body=form.message.data, author=current_user, recipient=user)
-        db.session.add(msg)
-        db.session.commit()
-        flash('Your message has been sent.', 'success')
-        return redirect(url_for('user_posts', username=recipient))
-    return render_template('send_message.html', recipient=recipient, title="Send Message", form=form)
+	user = User.query.filter_by(username=recipient).first_or_404()
+	if user == current_user:
+		return redirect(url_for('messages'))
+	form = MessageForm()
+	if form.validate_on_submit():
+		msg = m(author=current_user, recipient=user, body=form.message.data)
+		db.session.add(msg)
+		db.session.commit()
+		flash('Your message has been sent.', 'success')
+		return redirect(url_for('user_posts', username=recipient))
+	return render_template('send_message.html', recipient=recipient, title="Send Message", form=form)
 
 @app.route('/messages')
 @login_required
 def messages():
-    current_user.last_message_read_time = datetime.utcnow()
-    db.session.commit()
-    messages = current_user.messages_received.all()#order_by(Message.timestamp.desc())
-    return render_template('messages.html', messages=messages)#messages=messages.items)
+	current_user.last_message_read_time = datetime.utcnow()
+	db.session.commit()
+	messages = current_user.messages_received.order_by(m.timestamp.desc())
+	users = User.query.all()
+	return render_template('messages.html', messages=messages, users=users)
 
 @app.route('/inbox/demo')
 def chat():

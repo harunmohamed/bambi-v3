@@ -77,7 +77,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="{{ url_for('f_posts') }}" data-toggle="popover" data-content="🍌: Add Posts with a Title"> 🍧 Friend</a>
-              <a class="dropdown-item" href="{{ url_for('messages') }}" data-toggle="popover" data-content="🍌: Reply to your Messages"> 💬 Messages {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
+              <a class="dropdown-item" href="{{ url_for('messages') }}" data-toggle="popover" data-content="🍌: Reply to your Messages"> 💬 Messages {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
               <a class="dropdown-item" href="{{ url_for('discover') }}" data-toggle="popover" data-content="🍌: Discover New Friends"> 🔥 Discover Friends</a>
               <a class="dropdown-item" href="{{ url_for('explore') }}" data-toggle="popover" data-content="🍌: Explore Random Stuff!"> 🔱 Explore</a> 
               <a class="dropdown-item" href="{{ url_for('dating') }}" data-toggle="popover" data-content="🍌: Love Hard Today!"> 💋 Dating</a> 
@@ -128,7 +128,7 @@
       <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="90px" height="90px;" style="margin-left:45px;margin-bottom:20px;border-radius:50%">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
-       <a class="dropdown-item" href="{{ url_for('messages') }}"> 💬 Messages {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
+       <a class="dropdown-item" href="{{ url_for('messages') }}"> 💬 Messages {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
       <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
       <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
       <a class="dropdown-item" href="{{ url_for('market') }}"> 👜 Market</a>

@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-	
+
+
 <style>
 header, footer {
    display: flex;
@@ -16,13 +17,23 @@ header, footer {
    flex-direction:column;
    margin-left: 10px;
  }
-header h3, header h4 {
+ header .follow-btn {
+   display: flex;
+   margin: 0 0 0 auto;
+ }
+ header .follow-btn button {
+   border: 0;
+   border-radius: 3px;
+   padding: 5px;
+ }
+ header h3, header h4 {
    display: flex;
    margin: 0;
  }
  #inner p {
    margin-bottom: 10px;
-   font-size: 20px;
+   font-size: 16px;
+   color:#f8f8f2;
  }
  #inner hr {
    margin: 20px 0;
@@ -30,68 +41,220 @@ header h3, header h4 {
    opacity: 0.1;
    color:#F9E9C8;
  }
- .post{
-   border: 2px solid #F9E9C8;
-   padding: 10px;
+ footer .stats {
+   display: flex;
+   font-size: 15px;
  }
-</style>	
+ footer .stats strong {
+   font-size: 18px;
+ }
+ footer .stats .likes {
+   margin-left: 10px;
+ }
+ footer .cta {
+   margin-left: auto;
+ }
+ footer .cta button {
+   border: 0;
+   background: transparent;
+ }
+ .post{
+   border: 1px solid #a0998a;
+   padding: 10px;
+   border-radius: 7px;
+ }
+ .post_btn{
+  background-color : #000;
+  color: #F9E9C8;
+  padding: 10px 20px;
+  border:none;
+  outline:none;
+  border:2px solid #F9E9C8;
+  padding: 2px;
+  border-radius: 50%;
+  height:70px;
+  width:70px;
+}
+#new_post{
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+}
+.liked {
+  color: red;
+}
+.love{
+  cursor: pointer;
+}
+.subtle{
+  background-color: #000;
+  border: none;
+  padding-top: 5px;
+  margin-top: 2px;
+  margin-left: 10px;
+}
+.subtle:focus{
+  background-color: #000;
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
+  color: #fff;
+}
+.menu a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+.menu a:hover {
+  color: #000;
+}
+.cardi{
+  background: #000;
+  overflow-x: auto;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.cardi::-webkit-scrollbar {
+  display: none;
+}
+.scroll img{
+  width:100%;
+  height:100%;
+  border-radius:10px;
+}
+.card--content {
+  background: linear-gradient(#ffcccc,#ccffff);
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  border-radius:10px;
+  border:1px solid #fff;
+  border-radius:10px;
+  padding:1px;
+  flex: 0 0 auto;
+}
+</style>
+
+
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-lg-3 d-none d-lg-block">
-				<!-- User info , photos -->
-		      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;" data-toggle="modal" data-target="#profile">
-		        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="harun profile" class="profile-thumbnail">
-		        <div class="profile-name">
-		          <h3>{{current_user.username}}</h3>
-		          <small>@{{current_user.email.split("@")[0] | lower}}</small>
-		        </div>
-		      </header>
-		      <br>
+  <div class="row">
+    <div class="col-lg-3 d-none d-lg-block">
+      <!-- User info , photos -->
+      {% if current_user.is_authenticated %}
+      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;">
+        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3>{{current_user.username}}</h3>
+          <small>@{{current_user.email.split("@")[0] | lower}}</small>
+        </div>
+      </header>
+      <br>
 
-		    <div class="card about" style="color:#fff;background:#000;text-align:left;border:1px solid #F9E9C8;">
-		    <div class="card-body">
-		      <p> 🎓 Studies at <span>Near East University</span></p>
-			  <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
-			  <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
-			  <p> 🙊 Is <span>{{current_user.age}}</span> years old</p>
-			  <p> 🌍 From <span>{{current_user.country}}</span></p>
-			  <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
-			  <p> 💎 Interested in <span>{{current_user.hobby}}</span></p>
-			  <a class="btn btn-sm btn-primary" href="{{ url_for('account') }}">🍁 edit</a>
-		    </div>
-		  </div>
 
-		  <br>
+    <div class="menu" style="border:1px solid #F9E9C8;border-radius: 5px;">
+      <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
+       <a class="dropdown-item" href="{{ url_for('messages') }}"> 💬 Messages {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
+      <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
+      <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
+      <a class="dropdown-item" href="{{ url_for('market') }}"> 👜 Market</a>
+      <a class="dropdown-item" href="{{ url_for('account') }}"> 🍪 Settings</a>
+      <a class="dropdown-item" href="{{ url_for('blog') }}"> 🎬 Blog</a> 
+      <a class="dropdown-item" href="{{ url_for('about') }}"> 👋 About Bambi</a>
+      <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
+    </div>
 
-		  <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
-		    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
-		    <div class="profile-name">
-		      <h3 class="logo">BAMBI</h3>
-		      <small id="year"></small>
-		    </div>
-		  </header>
-		</div>
+  <br>
 
-		<div class="col-lg-6" style="text-align: center">
-			{% for message in messages %}
-		<header>
+  <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+    <div class="profile-name">
+      <h3 class="logo">BAMBI</h3>
+      <small id="year"></small>
+    </div>
+  </header>
+  {% else %}
+    <div class="card" style="color:#000;">
+      <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo">
+      <div class="card-body">
+        <h5 class="card-title"><small class="text-muted">sponsored</small></h5>
+        <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+    <br>
+    <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+    <div class="profile-name">
+      <h3 class="logo">BAMBI</h3>
+      <small>&copy 2019</small>
+    </div>
+  </header>
+  {% endif %}
+</div>
+
+
+
+
+    <div class="col-lg-6">
+          {% if current_user.is_authenticated %}
+          <section class="cardi scroll">
+            {% for user in users if user != current_user %}
+            <div class="others">
+            <div class="card--content"><a href="{{ url_for('send_message',recipient=user.username) }}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt=""></a>
+            </div>
+            <small style="font-size:15px;color:#f8f8f2;padding-left:15px">
+            {{user.username.lower()}}
+            {% if user.username in ["harun" , "bambi"] %}<img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:15px;height:15px;">{% endif %}
+          </small>
+            </div>
+            {% endfor %}
+            <div class="card--content"><img src="" alt=""></div>
+            <div class="card--content"><img src="" alt=""></div>
+            <div class="card--content"><img src="" alt=""></div>
+          </section>
+          <br>
+          {% endif %}
+
+
+
+
+
+   {% for message in messages %}
+    <div class="post">
+      <header>
           <img src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}" alt="profile pic" class="profile-thumbnail">
           <div class="profile-name">
-            <h3><a href="{{url_for('user_posts', username=message.author.username)}}" style="color: #F9E9C8;">{{message.author.username}}
-              {% if message.author.username in ["harun","bambi"]%}<img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:20px;height:20px;margin-left: -5px;">{% endif %}
-            </a></h3>
+            <h3 data-toggle="popover"><a href="{{url_for('user_posts', username=message.author.username)}}" style="color:#F9E9C8;">{{message.author.username}}
+             {% if message.author.username in ["harun" , "bambi"] %}<img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:20px;height:20px;margin-left: -5px;">{% endif %}
+           </a></h3>
             <small>@{{message.author.email.split("@")[0] | lower}}</small>
           </div>
+          <div class="follow-btn">
+            <small><a href="{{ url_for('send_message',recipient=message.author.username) }}" style="text-decoration:none;">reply</a></small>
+          </div>
         </header>
-          <p>
-            {{message.body| urlize(40, target='_blank')}}
-          </p>
-          <small class="date">{{ moment(message.timestamp).fromNow() }}</small>
-			{% endfor %}
-		</div>
-		<br>
-		</div>
-	</div>
+
+        <div id="inner">
+
+          <p>{{message.body | safe | urlize(40, target='_blank')}}</p>
+
+        </div>
+
+        <footer>
+            <div class="Retweets">
+               <small class="date">{{ moment(message.timestamp).fromNow() }}</small>
+            </div>
+        </footer>
+    </div>
+    <br>
+  {% endfor %}
+</div>
+
 
 
 {% endblock content %}

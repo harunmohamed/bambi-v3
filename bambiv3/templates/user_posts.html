@@ -313,7 +313,7 @@ section .btn {
 
         {% if current_user == user%}
         <button class="btn profile-edit-btn btn-dark"><a href="{{ url_for('messages') }}" style="color:#fff;text-decoration:none;">🔐 Messages{% set new_messages = current_user.new_messages() %}
-          <span id="message_count" class="badge"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a></button>
+          <span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a></button>
         <button class="btn profile-edit-btn btn-primary" data-toggle="modal" data-target="#info">Edit Profile</button>
         {% else %}
           {% if not current_user.is_following(user) %}

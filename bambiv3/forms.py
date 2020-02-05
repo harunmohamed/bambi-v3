@@ -73,7 +73,7 @@ class PostForm(FlaskForm):
 	submit = SubmitField('🛫 Post')
 
 class MessageForm(FlaskForm):
-    message = TextAreaField(('Message'), validators=[DataRequired(), Length(min=0, max=140)])
+    message = TextAreaField(('Message'), validators=[DataRequired()]) #Length(min=0, max=140)
     submit = SubmitField('send')
 
 class ProductForm(FlaskForm):
