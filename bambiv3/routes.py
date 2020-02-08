@@ -69,6 +69,7 @@ def inbox():
 @app.route('/send_message/<recipient>', methods=['GET', 'POST'])
 @login_required
 def send_message(recipient):
+	recipient = recipient.lower()
 	user = User.query.filter_by(username=recipient).first_or_404()
 	if user == current_user:
 		return redirect(url_for('messages'))
@@ -334,6 +335,7 @@ def user(username):
 @app.route('/follow/<username>')
 @login_required
 def follow(username):
+	username = username.lower()
 	user = User.query.filter_by(username=username).first()
 	if user is None:
 		flash('User {} not found.'.format(username))
@@ -350,6 +352,7 @@ def follow(username):
 @app.route('/unfollow/<username>')
 @login_required
 def unfollow(username):
+	username = username.lower()
 	user = User.query.filter_by(username=username).first()
 	if user is None:
 		flash('User {} not found.'.format(username))

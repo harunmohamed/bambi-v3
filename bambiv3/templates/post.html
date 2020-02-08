@@ -183,7 +183,7 @@ header, footer {
             {%if post.image%}<small>{{post.author.email.split("@")[0] | lower}}</small>{%endif%}
             {{post.content| urlize(40, target='_blank')}}
           </p>
-          <a class="badge badge-dark">❤ {{ post.likes.count() }}</a> | <small class="date">{{ moment(post.date_posted).fromNow() }}</small>
+          <a class="badge badge-dark">❤ {{ post.likes.count() }}</a> | <a class="badge badge-dark">⏳ {{ moment(post.date_posted).fromNow() }}</a>
 
 
 
