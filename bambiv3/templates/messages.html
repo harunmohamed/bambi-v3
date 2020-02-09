@@ -232,7 +232,7 @@ header, footer {
             <h3 data-toggle="popover"><a href="{{url_for('user_posts', username=message.author.username)}}" style="color:#F9E9C8;">{{message.author.username}}
              {% if message.author.username in ["harun" , "bambi"] %}<img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:20px;height:20px;margin-left: -5px;">{% endif %}
            </a></h3>
-            <small>@{{message.author.email.split("@")[0] | lower}}</small>
+            <small>active {{ moment(message.author.last_seen).fromNow() }}</small>
           </div>
           <div class="follow-btn">
             <small><a href="{{ url_for('send_message',recipient=message.author.username) }}" style="text-decoration:none;">reply</a></small>
