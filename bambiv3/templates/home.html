@@ -397,26 +397,27 @@ header, footer {
             {% if words|count > 60 %}<a class="badge badge-danger" href="{{url_for('post', post_id=post.id)}}">👀read more</a>{% endif %}
           </p>
           {% if current_user.is_authenticated %}
-          <div class="comments">
+          <div class="comments mb-2">
             <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" class="mb-2"style="width:30px;height:30px;border-radius:50%;">
             <input type="text" name="comment" placeholder="Join the Conversation" style="background:#000;border:none;border-radius:5px;outline:none;width:85%;height: 35px;padding:10px;color:#F9E9C8;margin-top:5px;">
           </div>
           {% endif %}
-          <br>
         </div>
 
         <footer>
           <div class="stats">
             <div class="Retweets">
               {% set words = post.content.split() %}
-               <a class="badge badge-dark">❤ {{ post.likes.count() }}</a> | <a class="badge badge-dark">⏳ {{ moment(post.date_posted).fromNow() }}</a> | <a class="badge badge-dark" href="{{url_for('post', post_id=post.id)}}">🍒comments</a><!--| <small>{{words | count}} words</small>-->
+               <a class="badge badge-dark p-1">❤ {{ post.likes.count() }}</a> | <a class="badge badge-dark p-1">⏳ {{ moment(post.date_posted).fromNow() }}</a> | <a class="badge badge-dark p-1" href="{{url_for('post', post_id=post.id)}}">🍒comments</a><!--| <small>{{words | count}} words</small>-->
             </div>
           </div>
         </footer>
     </div>
-    {% endif %}
     <br>
+    {% endif %}
   {% endfor %}
+
+    <!--pagination-->
     {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
       {% if page_num %}
         {% if posts.page == page_num %}

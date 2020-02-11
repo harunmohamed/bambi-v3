@@ -312,8 +312,8 @@ section .btn {
         </h2>
 
         {% if current_user == user%}
-        <button class="btn profile-edit-btn btn-dark"><a href="{{ url_for('messages') }}" style="color:#fff;text-decoration:none;">🔐 Messages{% set new_messages = current_user.new_messages() %}
-          <span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a></button>
+        {% set new_messages = current_user.new_messages() %}
+        <button class="btn profile-edit-btn btn-dark"><a href="{{ url_for('messages') }}" style="color:#fff;text-decoration:none;">🔐 Messages <span id="message_count" class="badge badge-warning" style="display:{% if new_messages %}inline{% else %}none{% endif %};">{{ new_messages }}</span></a></button>
         <button class="btn profile-edit-btn btn-primary" data-toggle="modal" data-target="#info">Edit Profile</button>
         {% else %}
           {% if not current_user.is_following(user) %}
@@ -342,10 +342,7 @@ section .btn {
       <div class="profile-bio">
 
         <p style="font-size:18px;"><small class="profile-real-name" style="font-size: 18px;">
-          {% if user.username == "bambi" %}
-          {{user.email.split("@")[0] | lower}}</small> - Bambi is a campus social network for students at Near East University. Discover People & Places and make new Friends</p>
-
-          {% elif user.username == "harun" %}
+          {% if user.username == "harun" %}
           {{user.email.split("@")[0] | lower}}☁</small> - I am a Software Engineering Student at The Near East University and the <a class="badge badge-warning" style="color:#000;">💦Founder of Bambi</a> too. I enjoy playing football and I have developed a recent liking for billiards.</p>
 
           {%else%}
@@ -498,17 +495,16 @@ section .btn {
             {%if post.image%}<small>{{post.author.email.split("@")[0] | lower}}</small>{%endif%}
             {{post.content|urlize(40, target='_blank')}}
         </p>
-          <div class="comments">
+          <div class="comments mb-2">
             <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width:30px;height:30px;border-radius:50%;">
             <input type="text" name="comment" placeholder="Join the Conversation" style="background:#000;border:none;border-radius:5px;outline:none;width:85%;height: 35px;padding:10px;color:#F9E9C8;margin-top:5px;">
           </div>
-          <br>
         </div>
 
         <footer>
           <div class="stats">
             <div class="Retweets">
-               <a class="badge badge-dark">❤ {{ post.likes.count() }}</a> | <a class="badge badge-dark">⏳ {{ moment(post.date_posted).fromNow() }}</a> | <a class="badge badge-dark" href="{{url_for('post', post_id=post.id)}}">🍒comments</a>
+               <a class="badge badge-dark p-1">❤ {{ post.likes.count() }}</a> | <a class="badge badge-dark p-1">⏳ {{ moment(post.date_posted).fromNow() }}</a> | <a class="badge badge-dark p-1" href="{{url_for('post', post_id=post.id)}}">🍒comments</a>
             </div>
         </footer>
     </div>
