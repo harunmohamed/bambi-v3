@@ -420,7 +420,7 @@ header, footer {
           <div class="stats">
             <div class="Retweets">
               {% set words = post.content.split() %}
-               <a class="badge badge-dark p-1">❤ {{ post.likes.count() }}</a> | <a class="badge badge-dark p-1">⏳ {{ moment(post.date_posted).fromNow() }}</a> | <a class="badge badge-dark p-1" href="{{url_for('post', post_id=post.id)}}">🍒comments</a><!--| <small>{{words | count}} words</small>-->
+               <a class="badge badge-dark p-1">❤ {{ post.likes.count() }}</a> | <a class="badge badge-dark p-1">⏳ {{ moment(post.date_posted).fromNow() }}</a> {% if current_user.is_authenticated %} | <a class="badge badge-dark p-1" href="{{url_for('post', post_id=post.id)}}">🍒comments</a> {% endif %}<!--| <small>{{words | count}} words</small>-->
             </div>
           </div>
         </footer>
