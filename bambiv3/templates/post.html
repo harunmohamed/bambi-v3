@@ -7,7 +7,7 @@ header, footer {
    display: flex;
    flex-direction: row;
    color:#F9E9C8;
-   background:#0c0c0b;
+   background:#0f0f0e;
    border-radius:10px;
    padding:8px;
    cursor:pointer;
@@ -64,7 +64,7 @@ header, footer {
    background: transparent;
  }
  .post{
-   background:#0c0c0b;
+   background:#0f0f0e;
    border-radius:10px;
    padding:7px;
  }
@@ -103,7 +103,7 @@ header, footer {
       <br>
 
 
-    <div class="menu" style="background:#0c0c0b;border-radius:10px;">
+    <div class="menu" style="background:#0f0f0e;border-radius:10px;">
       <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
        <a class="dropdown-item" href="{{ url_for('messages') }}"> 💬 Messages {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
       <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
