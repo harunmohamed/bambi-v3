@@ -1,9 +1,9 @@
 body{
-  background:#070707; /*#070707 bg and #0c0c0b for posts*/
+  background:#000; /*#070707 bg and #0c0c0b for posts*/
   color:#F9E9C8;
 }
 nav{
-    background:#070707;
+    background:#000;
 }
 .search{
   margin-right:5px;
