@@ -617,7 +617,7 @@ section .btn {
       </div>
       <div class="modal-body">
         {% for user in user.followers %}
-          <header>
+          <header style="background:none;color:#000;">
           <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
           <div class="profile-name">
             <p>{{user.username}}</p>
@@ -645,7 +645,7 @@ section .btn {
       </div>
       <div class="modal-body">
         {% for user in user.followed %}
-           <header>
+           <header style="background:none;color:#000;">
           <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
           <div class="profile-name">
             <p>{{user.username}}</p>
