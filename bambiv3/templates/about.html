@@ -5,148 +5,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='profile_pics/' + 'logo.png') }}">
 		<title>Bambi - About</title>
+		<!-- Font awesome kit -->
+    	<script src="https://kit.fontawesome.com/17192b7610.js"></script>
 	</head>
-	<body class="is-preload">
-
-		<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<a href="#" class="image avatar"><img src="{{ url_for('static', filename='profile_pics/' + '771effb41d44ef0b.png') }}" alt="" /></a>
-					<h1><strong>Harun Mohamed</strong><br>
-					  <span>Founder - BAMBI</span></h1>
-				</div>
-			</header>
-
-		<!-- Main -->
-			<div id="main">
-
-				<!-- One -->
-					<section id="one">
-						<header class="major">
-							<h2>Simply put,<br />
-							I am a profusely curious human.</h2>
-						</header>
-						<p>I have an incredibly short concentration span and I get bored pretty fast. My interests range depending on my momentary definition of cool. I may find reading, playing piano or skating cool periodically. Eitherway, my zeal in creating things and discovering the science behind things still remains constant</p>
-						<p>I am a Software Engineering Student at The Near East University In Cyprus. I enjoy playing football and I have developed a recent liking for billiards.</p>
-						<h4><u>What is Bambi?</u></h4>
-						  <p>
-						    Bambi is a campus social network intended for students at The Near East University. It is a place to discover people and places,
-						    make friends, post and share stuff, buy and sell items and chat.
-						  </p>
-
-						  <h4><u>Who created Bambi?</u></h4>
-						  <p>
-						    Bambi was created by <u><a href="{{url_for('user_posts', username='harun')}}" title="Harun Mohamed"> Me</a></u> in the summer of 2019 as a Software Engineering Student at The Near East University in Cyprus.
-						  </p>
-
-						  <h4><u>What more features are coming?</u></h4>
-						  <p>
-						    Bambi will be a fully fledged social network as it scales. Harun plans to add more intriguing features such as <br>
-
-						        1. Ability to check your friends in your location <br>
-						        2. See Restaraunt Menu's & Order from Restaurants <br>
-						        3. Plan events with your friends on Bambi <br>
-						        4. Inbox, Follow Friends, Like and Comment on Posts <br>
-						        5. Buy and Sell Items on Bambi
-						      
-						  </p>
-						<ul class="actions">
-							<li><a href="#" class="button">Learn More</a></li>
-						</ul>
-					</section>
-
-				<!-- Two -->
-				<!--
-					<section id="two">
-						<h2>Recent Work</h2>
-						<div class="row">
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/01.jpg" class="image fit thumb"><img src="images/thumbs/01.jpg" alt="" /></a>
-								<h3>Magna sed consequat tempus</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/02.jpg" class="image fit thumb"><img src="images/thumbs/02.jpg" alt="" /></a>
-								<h3>Ultricies lacinia interdum</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/03.jpg" class="image fit thumb"><img src="images/thumbs/03.jpg" alt="" /></a>
-								<h3>Tortor metus commodo</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/04.jpg" class="image fit thumb"><img src="images/thumbs/04.jpg" alt="" /></a>
-								<h3>Quam neque phasellus</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/05.jpg" class="image fit thumb"><img src="images/thumbs/05.jpg" alt="" /></a>
-								<h3>Nunc enim commodo aliquet</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/06.jpg" class="image fit thumb"><img src="images/thumbs/06.jpg" alt="" /></a>
-								<h3>Risus ornare lacinia</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-						</div>
-						<ul class="actions">
-							<li><a href="#" class="button">Full Portfolio</a></li>
-						</ul>
-					</section>
-				-->
-
-				<!-- Three -->
-					<section id="three">
-						<h2>Get In Touch</h2>
-						<p>Talk to me about anything!</p>
-						<div class="row">
-							<div class="col-8 col-12-small">
-								<form method="post" action="mailto:harunmohamed901@gmail.com?Subject=About%20Bambi">
-									<div class="row gtr-uniform gtr-50">
-										<div class="col-6 col-12-xsmall"><input type="text" name="name" id="name" placeholder="Name" /></div>
-										<div class="col-6 col-12-xsmall"><input type="email" name="email" id="email" placeholder="Email" /></div>
-										<div class="col-12"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
-									</div>
-								</form>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</div>
-							<div class="col-4 col-12-small">
-								<ul class="labeled-icons">
-									<li>
-										<h3 class="icon solid fa-home"><span class="label">Address</span></h3>
-										99138 Near East Boulevard<br />
-										Near East University<br />
-										Nicosia, Cyprus
-									</li>
-									<li>
-										<h3 class="icon solid fa-mobile-alt"><span class="label">Phone</span></h3>
-										+90-533-840-8610
-									</li>
-									<li>
-										<h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
-										<a href="#">harunmohamed901@gmail.com</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</section>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.poptrox.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
-</html>
 
 <style>
 	@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic");
@@ -3370,3 +3231,145 @@ input, select, textarea {
 
 	}
 </style>
+
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="#" class="image avatar"><img src="{{ url_for('static', filename='profile_pics/' + '771effb41d44ef0b.png') }}" alt="" /></a>
+					<h1><strong>Harun Mohamed</strong><br>
+					  <span style="color:#49bf9d;">Founder - Bambi <a href="https://github.com/harunmohamed/bambi-v3" target="_blank" class="text-dark is-link"><i class="fab fa-github"></i></a></span></h1>
+				</div>
+			</header>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- One -->
+					<section id="one">
+						<header class="major">
+							<h2>Simply put,<br />
+							I am a profusely curious human.</h2>
+						</header>
+						<p>I have an incredibly short concentration span and I get bored pretty fast. My interests range depending on my momentary definition of cool. I may find reading, playing piano or skating cool periodically. Eitherway, my zeal in creating things and discovering the science behind things still remains constant</p>
+						<p>I am a Software Engineering Student at The Near East University In Cyprus. I enjoy playing football and I have developed a recent liking for billiards.</p>
+						<h4><u>What is Bambi?</u></h4>
+						  <p>
+						    Bambi is a campus social network intended for students at The Near East University. It is a place to discover people and places,
+						    make friends, post and share stuff, buy and sell items and chat.
+						  </p>
+
+						  <h4><u>Who created Bambi?</u></h4>
+						  <p>
+						    Bambi was <a href="{{url_for('user_posts', username='harun')}}">made with <span class="text-danger">♥</span> by Harun</a> in the summer of 2019 as a Software Engineering Student at The Near East University in Cyprus.
+						  </p>
+
+						  <h4><u>What more features are coming?</u></h4>
+						  <p>
+						    Bambi will be a fully fledged social network as it scales. Harun plans to add more intriguing features such as <br>
+
+						        1. Ability to check your friends in your location <br>
+						        2. See Restaraunt Menu's & Order from Restaurants <br>
+						        3. Plan events with your friends on Bambi <br>
+						        4. Inbox, Follow Friends, Like and Comment on Posts <br>
+						        5. Buy and Sell Items on Bambi
+						      
+						  </p>
+						<ul class="actions">
+							<li><a href="#" class="button">Learn More</a></li>
+						</ul>
+					</section>
+
+				<!-- Two -->
+				<!--
+					<section id="two">
+						<h2>Recent Work</h2>
+						<div class="row">
+							<article class="col-6 col-12-xsmall work-item">
+								<a href="images/fulls/01.jpg" class="image fit thumb"><img src="images/thumbs/01.jpg" alt="" /></a>
+								<h3>Magna sed consequat tempus</h3>
+								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+							</article>
+							<article class="col-6 col-12-xsmall work-item">
+								<a href="images/fulls/02.jpg" class="image fit thumb"><img src="images/thumbs/02.jpg" alt="" /></a>
+								<h3>Ultricies lacinia interdum</h3>
+								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+							</article>
+							<article class="col-6 col-12-xsmall work-item">
+								<a href="images/fulls/03.jpg" class="image fit thumb"><img src="images/thumbs/03.jpg" alt="" /></a>
+								<h3>Tortor metus commodo</h3>
+								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+							</article>
+							<article class="col-6 col-12-xsmall work-item">
+								<a href="images/fulls/04.jpg" class="image fit thumb"><img src="images/thumbs/04.jpg" alt="" /></a>
+								<h3>Quam neque phasellus</h3>
+								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+							</article>
+							<article class="col-6 col-12-xsmall work-item">
+								<a href="images/fulls/05.jpg" class="image fit thumb"><img src="images/thumbs/05.jpg" alt="" /></a>
+								<h3>Nunc enim commodo aliquet</h3>
+								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+							</article>
+							<article class="col-6 col-12-xsmall work-item">
+								<a href="images/fulls/06.jpg" class="image fit thumb"><img src="images/thumbs/06.jpg" alt="" /></a>
+								<h3>Risus ornare lacinia</h3>
+								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+							</article>
+						</div>
+						<ul class="actions">
+							<li><a href="#" class="button">Full Portfolio</a></li>
+						</ul>
+					</section>
+				-->
+
+				<!-- Three -->
+					<section id="three">
+						<h2>Get In Touch</h2>
+						<p>Talk to me about anything!</p>
+						<div class="row">
+							<div class="col-8 col-12-small">
+								<form method="post" action="mailto:harunmohamed901@gmail.com?Subject=About%20Bambi">
+									<div class="row gtr-uniform gtr-50">
+										<div class="col-6 col-12-xsmall"><input type="text" name="name" id="name" placeholder="Name" /></div>
+										<div class="col-6 col-12-xsmall"><input type="email" name="email" id="email" placeholder="Email" /></div>
+										<div class="col-12"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
+									</div>
+								</form>
+								<ul class="actions">
+									<li><input type="submit" value="Send Message" /></li>
+								</ul>
+							</div>
+							<div class="col-4 col-12-small">
+								<ul class="labeled-icons">
+									<li>
+										<h3 class="icon solid">📬<span class="label">Address</span></h3>
+										99138 Near East Boulevard<br />
+										Near East University<br />
+										Nicosia, Cyprus
+									</li>
+									<li>
+										<h3 class="icon solid">📞<span class="label">Phone</span></h3>
+										+90-533-840-8610
+									</li>
+									<li>
+										<h3 class="icon solid">💌<span class="label">Email</span></h3>
+										<a href="#">harunmohamed901@gmail.com</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
