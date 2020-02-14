@@ -6,6 +6,11 @@
 header, footer {
    display: flex;
    flex-direction: row;
+   color:#F9E9C8;
+   background:#0c0c0b;
+   border-radius:10px;
+   padding:8px;
+   cursor:pointer;
  }
  header .profile-thumbnail {
    width: 55px;
@@ -59,9 +64,9 @@ header, footer {
    background: transparent;
  }
  .post{
-   border: 1px solid #a0998a;
-   padding: 10px;
-   border-radius: 7px;
+   background:#0c0c0b;
+   border-radius:10px;
+   padding:7px;
  }
  .liked {
   color: red;
@@ -88,7 +93,7 @@ header, footer {
     <div class="col-lg-3 d-none d-lg-block">
       <!-- User info , photos -->
       {% if current_user.is_authenticated %}
-      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;">
+      <header>
         <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
           <h3>{{current_user.username}}</h3>
@@ -98,7 +103,7 @@ header, footer {
       <br>
 
 
-    <div class="menu" style="border:1px solid #F9E9C8;border-radius: 5px;">
+    <div class="menu" style="background:#0c0c0b;border-radius:10px;">
       <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
        <a class="dropdown-item" href="{{ url_for('messages') }}"> 💬 Messages {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
       <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
@@ -112,7 +117,7 @@ header, footer {
 
   <br>
 
-  <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+  <header>
     <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
       <h3 class="logo">BAMBI</h3>
@@ -131,7 +136,7 @@ header, footer {
       </div>
     </div>
     <br>
-    <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+    <header>
     <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
       <h3 class="logo">BAMBI</h3>
@@ -163,7 +168,7 @@ header, footer {
               {% endif %}
             {% else %}
               <div class="dropdown dropleft">
-            <button class="btn btn-dark btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background:#000;">
+            <button class="btn btn-dark btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background:none;">
               <i class="fas fa-ellipsis-v" style="font-size: 28px;"></i>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #000;width: 20px;">

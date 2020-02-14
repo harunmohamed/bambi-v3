@@ -5,6 +5,11 @@
 header, footer {
    display: flex;
    flex-direction: row;
+   color:#F9E9C8;
+   background:#0c0c0b;
+   border-radius:10px;
+   padding:8px;
+   cursor:pointer;
  }
  header .profile-thumbnail {
    width: 55px;
@@ -31,15 +36,16 @@ header h3, header h4 {
    color:#F9E9C8;
  }
  .post{
-   border: 2px solid #F9E9C8;
-   padding: 10px;
+   background:#0c0c0b;
+   border-radius:10px;
+   padding:7px;
  }
 </style>	
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-3 d-none d-lg-block">
 				<!-- User info , photos -->
-		      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;" data-toggle="modal" data-target="#profile">
+		      <header data-toggle="modal" data-target="#profile">
 		        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="harun profile" class="profile-thumbnail">
 		        <div class="profile-name">
 		          <h3>{{current_user.username}}</h3>
@@ -48,7 +54,7 @@ header h3, header h4 {
 		      </header>
 		      <br>
 
-		    <div class="card about" style="color:#fff;background:#000;text-align:left;border:1px solid #F9E9C8;">
+		    <div class="card about" style="color:#fff;background:#0c0c0b;border-radius:10px;">
 		    <div class="card-body">
 		      <p> 🎓 Studies at <span>Near East University</span></p>
 			  <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
@@ -63,7 +69,7 @@ header h3, header h4 {
 
 		  <br>
 
-		  <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+		  <header>
 		    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
 		    <div class="profile-name">
 		      <h3 class="logo">BAMBI</h3>

@@ -6,6 +6,11 @@
 header, footer {
    display: flex;
    flex-direction: row;
+   color:#F9E9C8;
+   background:#0c0c0b;
+   border-radius:10px;
+   padding:8px;
+   cursor:pointer;
  }
  header .profile-thumbnail {
    width: 55px;
@@ -59,9 +64,9 @@ header, footer {
    background: transparent;
  }
  .post{
-   border: 1px solid #a0998a;
-   padding: 10px;
-   border-radius: 7px;
+   background:#0c0c0b;
+   border-radius:10px;
+   padding:7px;
  }
  .post_btn{
   background-color : #000;
@@ -380,7 +385,7 @@ section .btn {
         </div>
       </header>
       <br>-->
-    <div class="card about" style="color:#fff;background:#000;text-align:left;border:1px solid #F9E9C8;">
+    <div class="card about" style="color:#fff;background:#0c0c0b;border-radius:10px;">
     <div class="card-body">
       <p> 🎓 Studies at <span>Near East University</span></p>
       <p> 🏅 Majors in <span>{{user.department}}</span></p>
@@ -398,7 +403,7 @@ section .btn {
 
   <br>
 
-  <header class="d-none d-lg-flex" style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+  <header class="d-none d-lg-flex">
     <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
       <h3 class="logo">BAMBI</h3>
@@ -417,7 +422,7 @@ section .btn {
       </div>
     </div>
     <br>
-    <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
+    <header>
     <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
       <h3 class="logo">BAMBI</h3>
@@ -437,7 +442,7 @@ section .btn {
 
       {% if current_user.is_following(user) or current_user == user %}
       {% for post in posts.items %}
-    <div class="post">
+    <div class="post mb-3">
       <header>
           <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail">
           <div class="profile-name">
@@ -456,7 +461,7 @@ section .btn {
               {% endif %}
             {% else %}
               <div class="dropdown dropleft">
-            <button class="btn btn-dark btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background:#000;">
+            <button class="btn btn-dark btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background:none;">
               <i class="fas fa-ellipsis-v" style="font-size: 28px;"></i>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #000;width: 20px;">
@@ -497,7 +502,7 @@ section .btn {
         </p>
           <div class="comments mb-2">
             <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width:30px;height:30px;border-radius:50%;">
-            <input type="text" name="comment" placeholder="Join the Conversation" style="background:#000;border:none;border-radius:5px;outline:none;width:85%;height: 35px;padding:10px;color:#F9E9C8;margin-top:5px;">
+            <input type="text" name="comment" placeholder="Join the Conversation" style="background:none;border:none;border-radius:5px;outline:none;width:85%;height: 35px;padding:10px;color:#F9E9C8;margin-top:5px;">
           </div>
         </div>
 
@@ -508,7 +513,6 @@ section .btn {
             </div>
         </footer>
     </div>
-    <br>
   {% endfor %}
     {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
       {% if page_num %}

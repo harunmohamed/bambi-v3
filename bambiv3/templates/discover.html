@@ -6,6 +6,11 @@
 header, footer {
    display: flex;
    flex-direction: row;
+   color:#F9E9C8;
+   background:#0c0c0b;
+   border-radius:10px;
+   padding:8px;
+   cursor:pointer;
  }
  header .profile-thumbnail {
    width: 55px;
@@ -87,11 +92,11 @@ header, footer {
   cursor: pointer;
 }
 .subtle{
-  background-color: #000;
+  background-color: #070707;
   border: 1px solid #F9E9C8;
 }
 .subtle:focus{
-  background-color: #000;
+  background-color: #070707;
   outline: none;
   border: 1px solid #F9E9C8;
   color: #fff;
@@ -108,7 +113,7 @@ header, footer {
   color: #000;
 }
 .cardi{
-  background: #000;
+  background: #070707;
   overflow-x: auto;
   display: flex;
   flex-wrap: nowrap;
@@ -151,7 +156,7 @@ header, footer {
     <div class="col-lg-3 d-none d-lg-block">
       <!-- User info , photos -->
       {% if current_user.is_authenticated %}
-      <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;" data-toggle="modal" data-target="#profile" title="🍌: Click to Preview Your Profile Info">
+      <header data-toggle="modal" data-target="#profile" title="🍌: Click to Preview Your Profile Info">
         <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
           <h3>{{current_user.username}}</h3>
@@ -190,7 +195,7 @@ header, footer {
       </div>
     </div>
 
-    <div class="card about" style="color:#fff;background:#000;text-align:left;border:1px solid #F9E9C8;">
+    <div class="card about" style="color:#fff;background:#0c0c0b;border-radius:10px;">
     <div class="card-body">
       <p> 🎓 Studies at <span>Near East University</span></p>
       <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
@@ -205,7 +210,7 @@ header, footer {
 
   <br>
 
-  <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;" data-toggle="popover" data-content="🍌: Click to know more about Bambi">
+  <header data-toggle="popover" data-content="🍌: Click to know more about Bambi">
     <a href="{{url_for('about')}}" target="_blank" style="color: #F9E9C8;text-decoration: none;">
     <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
@@ -296,7 +301,7 @@ header, footer {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
+      <div style="color:#F9E9C8;background:#0c0c0b;padding:8px;cursor:pointer;border-radius:10px;overflow:auto;height:318px;">
         <h5 style="padding-left: 3px;">Friends - <small><a href="{{url_for('discover')}}" target="_blank">view all</a></small></h5>
         {% for user in users if user != current_user %}
         <header>
@@ -311,7 +316,7 @@ header, footer {
           {% endif %}
         </div>
         <div class="follow-btn">
-            <button style="height:40px;background:#000;color:#F9E9C8;"><a href="{{url_for('user_posts', username=user.username)}}"target="_blank">❤</a></button>
+            <button style="height:40px;background:none;color:#F9E9C8;"><a href="{{url_for('user_posts', username=user.username)}}"target="_blank">❤</a></button>
           </div>
       </header>
       <br>
