@@ -351,7 +351,7 @@ header, footer {
    {% for post in posts.items %}
     {% if not post.author.private or current_user == post.author or current_user.is_authenticated %} <!--if current_user.is_following(post.author)-->
     <div class="post mb-3">
-      <header>
+      <header class="pb-0">
           <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" data-toggle="popover" data-content="😎 : I am {{post.author.age}} from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}">
           <div class="profile-name">
             <h3 data-toggle="popover"><a href="{{url_for('user_posts', username=post.author.username)}}" style="color:#F9E9C8;">{{post.author.username}}
@@ -374,7 +374,7 @@ header, footer {
                 <button class="btn btn-dark btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background:none;">
                   <i class="fas fa-ellipsis-v" style="font-size: 28px;"></i>
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #000;width: 20px;">
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background:none;width: 20px;">
                   <a class="btn btn-warning btn-sm m-1" href="{{url_for('update_post', post_id=post.id)}}">✏edit</a>
                   <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">🗑️delete</button>
                 </div>
@@ -403,7 +403,7 @@ header, footer {
         </header>
 
         <div id="inner">
-          <p style="text-transform: uppercase;letter-spacing: 2px;text-align: center;margin-top: 4px;background:#F9E9C8;color:#000;"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#000;">{{post.title}}</a></p>
+          <p style="text-transform: uppercase;letter-spacing: 2px;text-align:center;background:#F9E9C8;color:#000;"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#000;text-decoration:none;">{{post.title}}</a></p>
           {% if post.image %}
           <img class="mb-2" src="{{ url_for('static', filename='profile_pics/' + post.image) }}" style="width:100%;height:100%;border-radius:5px;">
           {% endif %}
@@ -503,7 +503,6 @@ header, footer {
             <button style="height:40px;background:none;color:#F9E9C8;"><a href="{{url_for('user_posts', username=user.username)}}"target="_blank">❤</a></button>
           </div>
       </header>
-      <br>
       {% endfor %}
       </div>
       <br>
