@@ -3,7 +3,7 @@
 
 
 <style>
-header, footer {
+header{
    display: flex;
    flex-direction: row;
    color:#F9E9C8;
@@ -36,7 +36,7 @@ header, footer {
    margin: 0;
  }
  #inner p {
-   margin-bottom: 10px;
+   margin-bottom:1px;
    font-size: 16px;
    color:#f8f8f2;
  }
@@ -93,17 +93,16 @@ header, footer {
     <div class="col-lg-3 d-none d-lg-block">
       <!-- User info , photos -->
       {% if current_user.is_authenticated %}
-      <header>
+      <header class="mb-2">
         <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
           <h3>{{current_user.username}}</h3>
           <small>@{{current_user.email.split("@")[0] | lower}}</small>
         </div>
       </header>
-      <br>
 
 
-    <div class="menu" style="background:#191917;border-radius:10px;">
+    <div class="menu mb-2" style="background:#191917;border-radius:10px;">
       <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
        <a class="dropdown-item" href="{{ url_for('messages') }}"> 💬 Messages {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
       <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
@@ -114,8 +113,6 @@ header, footer {
       <a class="dropdown-item" href="{{ url_for('about') }}"> 👋 About Bambi</a>
       <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
     </div>
-
-  <br>
 
   <header>
     <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">

@@ -40,12 +40,6 @@ header, footer {
    font-size: 16px;
    color:#f8f8f2;
  }
- #inner hr {
-   margin: 20px 0;
-   border-style: solid;
-   opacity: 0.1;
-   color:#F9E9C8;
- }
  footer .stats {
    display: flex;
    font-size: 15px;
@@ -149,16 +143,15 @@ header, footer {
     <div class="col-lg-3 d-none d-lg-block">
       <!-- User info , photos -->
       {% if current_user.is_authenticated %}
-      <header>
+      <header class="mb-2">
         <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
           <h3>{{current_user.username}}</h3>
           <small>@{{current_user.email.split("@")[0] | lower}}</small>
         </div>
       </header>
-      <br>
 
-    <div class="card about" style="color:#fff;background:#191917;border-radius:10px;">
+    <div class="card about mb-2" style="color:#fff;background:#191917;border-radius:10px;">
     <div class="card-body">
       <p> 🎓 Studies at <span>Near East University</span></p>
       <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
@@ -170,8 +163,6 @@ header, footer {
       <a class="btn btn-sm btn-primary" href="{{ url_for('account') }}">🍁 edit</a>
     </div>
   </div>
-
-  <br>
 
   <header data-toggle="popover" data-content="🍌: Click to know more about Bambi">
     <a href="{{url_for('about')}}" target="_blank" style="color: #F9E9C8;text-decoration: none;">

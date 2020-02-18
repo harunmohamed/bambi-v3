@@ -3,7 +3,7 @@
 
 
 <style>
-header, footer {
+header{
    display: flex;
    flex-direction: row;
    color:#F9E9C8;
@@ -36,15 +36,9 @@ header, footer {
    margin: 0;
  }
  #inner p {
-   margin-bottom: 10px;
+   margin-bottom:1px;
    font-size: 16px;
    color:#f8f8f2;
- }
- #inner hr {
-   margin: 20px 0;
-   border-style: solid;
-   opacity: 0.1;
-   color:#F9E9C8;
  }
  footer .stats {
    display: flex;
@@ -149,47 +143,16 @@ header, footer {
     <div class="col-lg-3 d-none d-lg-block">
       <!-- User info , photos -->
       {% if current_user.is_authenticated %}
-      <header data-toggle="modal" data-target="#profile" title="🍌: Click to Preview Your Profile Info">
+      <header class="mb-2">
         <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
           <h3>{{current_user.username}}</h3>
           <small>@{{current_user.email.split("@")[0] | lower}}</small>
         </div>
       </header>
-      <br>
-
-      <!-- Profile Modal -->
-      <div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>-->
-          <div class="modal-body">
-            <div class="card" style="color:#000;text-align:center;">
-            <img class="card-img-top" src="{{ image_file }}" alt="Card image cap" style="height:250px;">
-            <div class="card-body">
-              <h5 class="card-title">{{current_user.username}}</h5>
-                My name is {{current_user.username}} and I study {{current_user.department}} at Near East University.
-                I am from {{current_user.country}} and I am {{current_user.age}} years old. 
-            </div>
-            <div class="card-footer">
-              My hobbies include {{current_user.hobby}}.My Student number is {{current_user.student_number}} and my email is {{current_user.email}}
-            <div>
-            </div>
-          </div>
-          </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary"><a href="{{ url_for('account') }}" style="color:#F9E9C8;">Edit</a></button>
-            <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
 
-    <div class="menu" style="background:#191917;border-radius:10px">
+    <div class="menu mb-2" style="background:#191917;border-radius:10px">
       <a class="dropdown-item" href="{{ url_for('messages') }}"> 💬 Messages {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
       <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
       <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
@@ -200,7 +163,6 @@ header, footer {
       <a class="dropdown-item" href="{{ url_for('about') }}"> 👋 About Bambi</a>
       <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
     </div>
-  <br>
 
   <header data-toggle="popover" data-content="🍌: Click to know more about Bambi">
     <a href="{{url_for('about')}}" target="_blank" style="color: #F9E9C8;text-decoration: none;">
@@ -238,7 +200,7 @@ header, footer {
 
 
           {% if current_user.is_authenticated %}
-          <section class="cardi scroll">
+          <section class="cardi scroll mb-2">
             <div class="me">
             <div class="card--content">
               <a href="{{url_for('user_posts', username=current_user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}"></a>
@@ -262,7 +224,6 @@ header, footer {
             <div class="card--content"><img src="" alt=""></div>
             <div class="card--content"><img src="" alt=""></div>
           </section>
-          <br>
           {% endif %}
 
 
@@ -331,8 +292,8 @@ header, footer {
             {% if words|count > 60 %}<a class="badge badge-danger" href="{{url_for('post', post_id=post.id)}}">👀read more</a>{% endif %}
           </p>
           {% if current_user.is_authenticated %}
-          <div class="comments mb-2">
-            <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" class="mb-2"style="width: 40px;height: 40px;border-radius:50%;">
+          <div class="comments">
+            <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" class="mb-2"style="width:30px;height:30px;border-radius:50%;">
             <input type="text" name="comment" placeholder="Join the Conversation" style="background:none;border:none;border-radius:5px;outline:none;width:85%;height: 35px;padding:5px;color:#F9E9C8;margin-top:5px;">
           </div>
           {% endif %}

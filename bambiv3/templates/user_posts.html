@@ -3,7 +3,7 @@
 
 
 <style>
-header, footer {
+header{
    display: flex;
    flex-direction: row;
    color:#F9E9C8;
@@ -36,7 +36,7 @@ header, footer {
    margin: 0;
  }
  #inner p {
-   margin-bottom: 10px;
+   margin-bottom:1px;
    font-size: 16px;
    color:#f8f8f2;
  }
@@ -338,7 +338,7 @@ section .btn {
 
 
         <ul>
-          <li style="font-size: 22px;"><span class="profile-stat-count">{{ posts.total }}</span> <small>posts</small></li>
+          <li style="font-size:22px;"><span class="profile-stat-count">{{ posts.total }}</span> <small>posts</small></li>
           <li style="font-size: 22px;" data-toggle="modal" data-target="#followers"><span class="profile-stat-count">{{ user.followers.count() }}</span> <small>followers</small></li>
           <li style="font-size: 22px;" data-toggle="modal" data-target="#following"><span class="profile-stat-count">{{ user.followed.count() }}</span> <small>following</small></li>
         </ul>
@@ -347,7 +347,7 @@ section .btn {
 
       <div class="profile-bio">
 
-        <p style="font-size:18px;"><small class="profile-real-name" style="font-size: 18px;">
+        <p class="mb-2" style="font-size:18px;"><small class="profile-real-name" style="font-size:18px;font-weight:400">
           {% if user.username == "harun" %}
           {{user.email.split("@")[0] | lower}}☁</small> - I am a Software Engineering Student at The Near East University and the <a class="badge badge-warning" style="color:#000;">💦Founder of Bambi</a> too. I enjoy playing football and I have developed a recent liking for billiards.</p>
 
@@ -386,7 +386,7 @@ section .btn {
         </div>
       </header>
       <br>-->
-    <div class="card about" style="color:#fff;background:#191917;border-radius:10px;">
+    <div class="card about mb-2" style="color:#fff;background:#191917;border-radius:10px;">
     <div class="card-body">
       <p> 🎓 Studies at <span>Near East University</span></p>
       <p> 🏅 Majors in <span>{{user.department}}</span></p>
@@ -402,7 +402,6 @@ section .btn {
     </div>
   </div>
 
-  <br>
 
   <header class="d-none d-lg-flex">
     <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
@@ -501,7 +500,7 @@ section .btn {
             {%if post.image%}<small>{{post.author.email.split("@")[0] | lower}}</small>{%endif%}
             {{post.content|urlize(40, target='_blank')}}
         </p>
-          <div class="comments mb-2">
+          <div class="comments mb-1">
             <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width:30px;height:30px;border-radius:50%;">
             <input type="text" name="comment" placeholder="Join the Conversation" style="background:none;border:none;border-radius:5px;outline:none;width:85%;height: 35px;padding:10px;color:#F9E9C8;margin-top:5px;">
           </div>
