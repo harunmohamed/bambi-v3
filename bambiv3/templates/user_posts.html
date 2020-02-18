@@ -36,7 +36,7 @@ header{
    margin: 0;
  }
  #inner p {
-   margin-bottom:1px;
+   margin-bottom:5px;
    font-size: 16px;
    color:#f8f8f2;
  }
@@ -442,7 +442,7 @@ section .btn {
 
       {% if current_user.is_following(user) or current_user == user %}
       {% for post in posts.items %}
-    <div class="post mb-3">
+    <div class="post mb-2">
       <header class="pb-0">
           <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail">
           <div class="profile-name">

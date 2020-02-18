@@ -36,7 +36,7 @@ header{
    margin: 0;
  }
  #inner p {
-   margin-bottom:2px;
+   margin-bottom:5px;
    font-size: 16px;
    color:#f8f8f2;
  }
@@ -226,8 +226,8 @@ header{
 
 
    {% for message in messages %}
-    <div class="post mb-3">
-      <header>
+    <div class="post mb-2">
+      <header style="padding:0;">
           <img src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}" alt="profile pic" class="profile-thumbnail">
           <div class="profile-name">
             <h3 data-toggle="popover"><a href="{{url_for('user_posts', username=message.author.username)}}" style="color:#F9E9C8;">{{message.author.username}}

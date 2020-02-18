@@ -198,7 +198,7 @@ header, footer {
     <div class="col-lg-6">
       
    {% for product in products %}
-    <div class="post mb-3">
+    <div class="post mb-2">
       <header>
           <img src="{{ url_for('static', filename='profile_pics/' + product.author.image_file) }}" alt="seller" class="profile-thumbnail">
           <div class="profile-name">
