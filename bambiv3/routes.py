@@ -101,11 +101,10 @@ def chat():
 	return render_template('inbox_preview.html', title="Chat")
 
 @app.route('/discover')
+@login_required
 def discover():
 	users = User.query.all()
-	if current_user.is_authenticated:
-		image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-	return render_template('discover.html', image_file=image_file, users=users)
+	return render_template('discover.html', users=users)
 
 @app.route('/swipe')
 def swipe():

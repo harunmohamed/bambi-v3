@@ -1,40 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
   
-<style>
-header, footer {
-   display: flex;
-   flex-direction: row;
- }
- header .profile-thumbnail {
-   width: 55px;
-   height: 55px;
-   border-radius: 50%;
- }
- header .profile-name {
-   display: flex;
-   flex-direction:column;
-   margin-left: 10px;
- }
-header h3, header h4 {
-   display: flex;
-   margin: 0;
- }
- #inner p {
-   margin-bottom: 10px;
-   font-size: 20px;
- }
- #inner hr {
-   margin: 20px 0;
-   border-style: solid;
-   opacity: 0.1;
-   color:#F9E9C8;
- }
- .post{
-   border: 2px solid #F9E9C8;
-   padding: 10px;
- }
-</style>  
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-3 d-none d-lg-block">
@@ -233,6 +200,8 @@ header h3, header h4 {
         </div>
       </header>
     </div>
+
+    <div style="margin-bottom: 40px;"></div>
 
 
 {% endblock content %}
