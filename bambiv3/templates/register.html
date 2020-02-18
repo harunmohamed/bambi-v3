@@ -74,14 +74,14 @@ header h3, header h4 {
       <div class="col">
         <div class="form-group">
         {% if form.username.errors %}
-        {{ form.username(placeholder="username", class="form-control form-control is-invalid") }}
+        {{ form.username(placeholder="username / first name", class="form-control form-control is-invalid") }}
         <div class="invalid-feedback">
           {% for error in form.username.errors %}
           <span>{{ error }}</span>
           {% endfor %}
         </div>
         {% else %}
-        {{ form.username(placeholder="username", class="form-control form-control") }}
+        {{ form.username(placeholder="username / first name", class="form-control form-control") }}
         {% endif %}
       </div>
       </div>
