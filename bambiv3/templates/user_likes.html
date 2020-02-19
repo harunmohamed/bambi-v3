@@ -178,7 +178,7 @@
           {% endif %}
         </div>
         <div class="follow-btn">
-            <button style="height:40px;background:none;color:#F9E9C8;"><a href="{{url_for('user_posts', username=user.username)}}"target="_blank">❤</a></button>
+            <button style="height:40px;background:none;color:#F9E9C8;"><a href="{{url_for('user_posts', username=post.author.username)}}"target="_blank">❤</a></button>
           </div>
       </header>
       {% endfor %}
