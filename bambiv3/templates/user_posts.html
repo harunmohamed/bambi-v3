@@ -206,9 +206,12 @@ section .btn {
         }
     }
 }
-.dropdown a{
+.container-fluid .dropdown a{
   border-top: 1px solid #070707;
   color:#fff;
+}
+.container-fluid .dropdown a:hover{
+  color:#000;
 }
 </style>
 
@@ -236,7 +239,7 @@ section .btn {
         <div class="dropdown" style="margin:auto 10px;">
               <button class="btn  btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-left:2px;">
               </button>
-              <div class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton" style="cursor:pointer;padding:0;background:#191917;color:#fff;">
+              <div class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton" style="cursor:pointer;padding:0;background:#191917;color:#fff;margin-left:-80px;">
                 {% if current_user == user%}
                 {% set new_messages = current_user.new_messages() %}
                 <a class="dropdown-item" href="{{ url_for('messages') }}">🔐 Messages <span id="message_count" class="badge badge-warning" style="display:{% if new_messages %}inline{% else %}none{% endif %};">{{ new_messages }}</span></a>
