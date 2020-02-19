@@ -298,7 +298,7 @@ def likes(username):
 	username = username.lower()
 	user = User.query.filter_by(username=username).first_or_404()
 	posts = Post.query.all()
-	return render_template('user_likes.html', user=user, posts=posts, title= user.username.title() + "Likes")
+	return render_template('user_likes.html', user=user, posts=posts, title= user.username.title() + " Likes")
 
 
 

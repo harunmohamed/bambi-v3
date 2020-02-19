@@ -62,7 +62,7 @@
     <div class="col-lg-6">
       <!-- content area -->
 
-      <h2>{{user.username.title()}}'s Likes</h2>
+      {% if current_user != user %}<h2>{{user.username.title()}}'s Likes</h2> {% else %} <h2>My Likes</h2> {% endif %}
    {% for post in posts if user.has_liked_post(post) %}
     <div class="post mb-2">
       <header class="pb-0" style="padding:0;">
@@ -163,6 +163,26 @@
         {% endif %}
       {% endwith %}
       {% endif %}
+      <div style="color:#F9E9C8;background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
+        {% if current_user != user %}<h5 style="padding-left: 3px;">{{user.username.title()}}'s Likes</h5>{% else %} <h5>My Likes</h5>{% endif %}
+        {% for post in posts if user.has_liked_post(post) %}
+        <header>
+        <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="default profile" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3>{{post.author.username}}</h3>
+          {% if post.author.country == current_user.country %}
+          <small>From {{post.author.country}}</small>
+          {% endif %}
+          {% if post.author.department == current_user.department %}
+          <small>Studies {{post.author.department}}</small>
+          {% endif %}
+        </div>
+        <div class="follow-btn">
+            <button style="height:40px;background:none;color:#F9E9C8;"><a href="{{url_for('user_posts', username=user.username)}}"target="_blank">❤</a></button>
+          </div>
+      </header>
+      {% endfor %}
+      </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
