@@ -89,7 +89,7 @@
                <span>😎</span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="{{ url_for('f_posts') }}" data-toggle="popover" data-content="🍌: Add Posts with a Title"> 🍧 Friend</a>
+              <a class="dropdown-item" href="{{ url_for('f_posts') }}" data-toggle="popover" data-content="🍌: Add Posts with a Title"> 🍧 Friend Posts</a>
               <a class="dropdown-item" href="{{ url_for('messages') }}" data-toggle="popover" data-content="🍌: Reply to your Messages"> 💬 Messages {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
               <a class="dropdown-item" href="{{ url_for('discover') }}" data-toggle="popover" data-content="🍌: Discover New Friends"> 🔥 Discover Friends</a>
               <a class="dropdown-item" href="{{ url_for('explore') }}" data-toggle="popover" data-content="🍌: Explore Random Stuff!"> 🔱 Explore</a> 

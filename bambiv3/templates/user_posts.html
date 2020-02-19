@@ -220,7 +220,7 @@ section .btn {
 
       </div>
 
-      <div class="profile-user-settings">
+      <div class="profile-user-settings" style="display:flex;">
 
         <h2 class="profile-user-name">{{user.username.title()}}
           {% if user.username in ["harun" , "bambi"] %}
@@ -229,19 +229,26 @@ section .btn {
 
         </h2>
 
-        {% if current_user == user%}
-        {% set new_messages = current_user.new_messages() %}
-        <button class="btn profile-edit-btn btn-dark"><a href="{{ url_for('messages') }}" style="color:#fff;text-decoration:none;">🔐 Messages <span id="message_count" class="badge badge-warning" style="display:{% if new_messages %}inline{% else %}none{% endif %};">{{ new_messages }}</span></a></button>
-        <button class="btn profile-edit-btn btn-primary" data-toggle="modal" data-target="#info">Edit Profile</button>
-        {% else %}
-          {% if not current_user.is_following(user) %}
-            <button class="btn profile-edit-btn btn-primary mb-2"><a href="{{ url_for('follow', username=user.username) }}" style="color:#fff;text-decoration:none;">Follow</a></button>
-          {% else %}
-            <button class="btn profile-edit-btn btn-dark"><a href="{{ url_for('send_message',recipient=user.username) }}" style="color:#fff;text-decoration:none;">🔏 Message</a></button>
-                <button class="btn profile-edit-btn btn-danger"><a href="{{ url_for('unfollow', username=user.username) }}" style="color:#fff;text-decoration:none;">Unfollow</a></button>
-
-          {% endif %}
-        {% endif %}
+        <div class="dropdown" style="margin:auto 10px;">
+              <button class="btn  btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-left:2px;">
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="cursor:pointer;padding:0;background:#070707;color:#fff;">
+                {% if current_user == user%}
+                {% set new_messages = current_user.new_messages() %}
+                <a class="btn btn-dark mt-1 mb-1" href="{{ url_for('messages') }}">🔐 Messages <span id="message_count" class="badge badge-warning" style="display:{% if new_messages %}inline{% else %}none{% endif %};">{{ new_messages }}</span></a>
+                <a class="btn btn-warning" href="{{ url_for('likes', username=current_user.username) }}" style="color:#000">My Likes</a>
+                <a class="btn btn-primary" data-toggle="modal" data-target="#info">Edit Profile</a>
+                {% else %}
+                  {% if not current_user.is_following(user) %}
+                    <a class="btn btn-primary" href="{{ url_for('follow', username=user.username) }}">Follow</a>
+                  {% else %}
+                    <a class="btn btn-dark mb-1" href="{{ url_for('send_message',recipient=user.username) }}">🔏 Message</a>
+                    <a class="btn btn-warning" href="{{ url_for('likes', username=user.username) }}" style="color:#000">Likes</a>
+                    <a class="btn btn-danger" href="{{ url_for('unfollow', username=user.username) }}">Unfollow</a>
+                  {% endif %}
+                {% endif %}
+              </div>
+          </div>
 
 
       </div>

@@ -292,6 +292,15 @@ def new_product():
 			return redirect(url_for('market'))
 	return render_template('create_product.html', title='New Product', form=form, legend='New Product')
 
+@app.route("/<string:username>/likes", methods=['GET', 'POST'])
+@login_required
+def likes(username):
+	username = username.lower()
+	user = User.query.filter_by(username=username).first_or_404()
+	posts = Post.query.all()
+	return render_template('user_likes.html', user=user, posts=posts, title= user.username.title() + "Likes")
+
+
 
 @app.route("/user/<string:username>", methods=['GET', 'POST'])
 @login_required
