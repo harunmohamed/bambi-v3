@@ -209,7 +209,7 @@
           <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" data-toggle="popover" data-content="😎 : I am {{post.author.age}} from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}">
           <div class="profile-name">
             <h3 data-toggle="popover"><a href="{{url_for('user_posts', username=post.author.username)}}" style="color:#F9E9C8;">{{post.author.username}}
-             {% if post.author.username in ["harun" , "bambi"] %}<img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:20px;height:20px;margin-left: -5px;">{% endif %}
+             {% if post.author.username in ["harun" , "bambi"] %}<img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:17px;height:17px;margin-left: -5px;">{% endif %}
            </a></h3>
             <small>@{{post.author.email.split("@")[0] | lower}}</small>
           </div>

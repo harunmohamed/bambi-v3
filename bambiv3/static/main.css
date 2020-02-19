@@ -143,6 +143,14 @@ header{
    border-radius:10px;
    padding:7px;
  }
+ .post .profile-thumbnail{
+  width: 45px;
+  height: 45px;
+ }
+ .post h3{
+  font-weight: 400;
+  font-size: 1.4rem;
+ }
  .post_btn{
   background-color : #000;
   color: #F9E9C8;
