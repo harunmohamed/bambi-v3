@@ -302,7 +302,7 @@ def likes(username):
 	for post in posts:
 		if user.has_liked_post(post):
 			liked_people.add(post.author)
-	return render_template('user_likes.html', user=user, posts=posts, liked_people=liked_people, title= user.username.title() + " Likes")
+	return render_template('user_likes.html', user=user, posts=posts, liked_people=liked_people, title= user.username.title() + "'s Likes")
 
 
 
