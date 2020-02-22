@@ -104,7 +104,7 @@ def chat():
 @login_required
 def discover():
 	users = User.query.all()
-	return render_template('discover.html', users=users)
+	return render_template('discover.html', users=users, title='Discover')
 
 @app.route('/swipe')
 def swipe():
