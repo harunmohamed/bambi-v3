@@ -548,7 +548,7 @@ section .btn {
             <a href="{{ url_for('user_posts', username=user.username) }}"target="_blank" style="text-decoration:none;color:#000;">{{user.username}}</a>
           </div>
           <div class="follow-btn">
-              {% if not current_user.is_following(user) %}<a href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;">Follow</a>{% endif %}
+              {% if user != current_user and not current_user.is_following(user) %}<a href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;">Follow</a>{% endif %}
             </div>
       </header>
         {% endfor %}
@@ -576,7 +576,7 @@ section .btn {
             <a href="{{ url_for('user_posts', username=user.username) }}"target="_blank" style="text-decoration:none;color:#000;">{{user.username}}</a>
           </div>
           <div class="follow-btn">
-              {% if user.is_following(current_user) %}<a href="" style="font-size:12px;text-decoration:none;">follows you</a>{% endif %}
+              {% if user != current_user and user.is_following(current_user) %}<a href="" style="font-size:12px;text-decoration:none;">follows you</a>{% endif %}
             </div>
       </header>
         {% endfor %}
