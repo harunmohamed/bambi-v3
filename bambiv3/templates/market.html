@@ -67,7 +67,7 @@
           <img src="{{ url_for('static', filename='profile_pics/' + product.author.image_file) }}" alt="seller" class="profile-thumbnail">
           <div class="profile-name">
             <h3 data-toggle="popover"><a href="{{url_for('user_posts', username=product.author.username)}}" style="color:#F9E9C8;">{{product.author.username}}
-             {% if product.author.username in ["harun" , "bambi"] %}<img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:17px;height:17px;margin-left: -5px;">{% endif %}
+             {% if product.author.username in ["harun" , "bambi"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-left: -5px;">{% endif %}
            </a></h3>
             <small>@{{product.author.email.split("@")[0] | lower}}</small>
           </div>
