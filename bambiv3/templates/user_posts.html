@@ -242,14 +242,14 @@ section .btn {
               <div class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton" style="cursor:pointer;padding:0;background:#191917;color:#fff;margin-left:-80px;">
                 {% if current_user == user%}
                 {% set new_messages = current_user.new_messages() %}
-                <a class="dropdown-item" href="{{ url_for('messages') }}">🔐 Messages <span id="message_count" class="badge badge-warning" style="display:{% if new_messages %}inline{% else %}none{% endif %};">{{ new_messages }}</span></a>
+                <a class="dropdown-item" href="{{ url_for('messages') }}" style="border-top:none;">🔐 Messages <span id="message_count" class="badge badge-warning" style="display:{% if new_messages %}inline{% else %}none{% endif %};">{{ new_messages }}</span></a>
                 <a class="dropdown-item" href="{{ url_for('likes', username=current_user.username) }}">💛 My Likes</a>
                 <a class="dropdown-item" data-toggle="modal" data-target="#info">⚜ Edit Profile</a>
                 {% else %}
                   {% if not current_user.is_following(user) %}
-                    <a class="dropdown-item" href="{{ url_for('follow', username=user.username) }}">🔅 Follow</a>
+                    <a class="dropdown-item" href="{{ url_for('follow', username=user.username) }}" style="border-top:none;">🔅 Follow</a>
                   {% else %}
-                    <a class="dropdown-item" href="{{ url_for('send_message',recipient=user.username) }}">🔏 Message</a>
+                    <a class="dropdown-item" href="{{ url_for('send_message',recipient=user.username) }}" style="border-top:none;">🔏 Message</a>
                     <a class="dropdown-item" href="{{ url_for('likes', username=user.username) }}">💛 Likes</a>
                     <a class="dropdown-item" href="{{ url_for('unfollow', username=user.username) }}">👽 Unfollow</a>
                   {% endif %}
@@ -435,7 +435,7 @@ section .btn {
         <footer>
           <div class="stats">
             <div class="Retweets">
-               <a class="badge badge-dark p-1">❤ {{ post.likes.count() }}</a> | <a class="badge badge-dark p-1">⏳ {{ moment(post.date_posted).fromNow() }}</a> | <a class="badge badge-dark p-1" href="{{url_for('post', post_id=post.id)}}">🍒comments</a>
+               <a class="badge badge-dark p-1">❤ {{ post.likes.count() }}</a> • <a class="badge badge-dark p-1">⏳ {{ moment(post.date_posted).fromNow() }}</a> • <a class="badge badge-dark p-1" href="{{url_for('post', post_id=post.id)}}">🍒comments</a>
             </div>
         </footer>
     </div>
@@ -545,10 +545,10 @@ section .btn {
           <header style="background:none;color:#000;">
           <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
           <div class="profile-name">
-            <a href="{{ url_for('follow', username=user.username) }}"target="_blank" style="text-decoration:none;color:#000;">{{user.username}}</a>
+            <a href="{{ url_for('user_posts', username=user.username) }}"target="_blank" style="text-decoration:none;color:#000;">{{user.username}}</a>
           </div>
           <div class="follow-btn">
-              <a href="{{ url_for('user_posts', username=user.username) }}"target="_blank" style="text-decoration:none;color:#fff;">❤</a>
+              {% if not current_user.is_following(user) %}<a href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;">Follow</a>{% endif %}
             </div>
       </header>
         {% endfor %}
@@ -573,10 +573,10 @@ section .btn {
            <header style="background:none;color:#000;">
           <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
           <div class="profile-name">
-            <a href="{{ url_for('follow', username=user.username) }}"target="_blank" style="text-decoration:none;color:#000;">{{user.username}}</a>
+            <a href="{{ url_for('user_posts', username=user.username) }}"target="_blank" style="text-decoration:none;color:#000;">{{user.username}}</a>
           </div>
           <div class="follow-btn">
-              <a href="{{ url_for('follow', username=user.username) }}"target="_blank" style="text-decoration:none;color:#fff;">❤</a>
+              {% if user.is_following(current_user) %}<a href="" style="font-size:12px;text-decoration:none;">follows you</a>{% endif %}
             </div>
       </header>
         {% endfor %}

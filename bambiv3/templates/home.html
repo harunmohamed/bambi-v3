@@ -83,14 +83,13 @@
     </div>
   </header>
   {% else %}
-  <header>
+  <header class="mb-2">
     <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
       <h3 class="logo">Hello Friend!</h3>
       <small>how about signing in?</small>
     </div>
   </header>
-  <br>
      <div class="menu" style="background:#191917;border-radius:10px">
       <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
        <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
@@ -279,7 +278,7 @@
           <div class="stats">
             <div class="Retweets">
               {% set words = post.content.split() %}
-               <a class="badge badge-dark p-1">❤ {{ post.likes.count() }}</a> | <a class="badge badge-dark p-1">⏳ {{ moment(post.date_posted).fromNow() }}</a> {% if current_user.is_authenticated %} | <a class="badge badge-dark p-1" href="{{url_for('post', post_id=post.id)}}">🍒comments</a> {% endif %}<!--| <small>{{words | count}} words</small>-->
+               <a class="badge badge-dark p-1">❤ {{ post.likes.count() }}</a> • <a class="badge badge-dark p-1">⏳ {{ moment(post.date_posted).fromNow() }}</a> {% if current_user.is_authenticated %} • <a class="badge badge-dark p-1" href="{{url_for('post', post_id=post.id)}}">🍒comments</a> {% endif %}<!--• <small>{{words | count}} words</small>-->
             </div>
           </div>
         </footer>
@@ -341,7 +340,7 @@
       </div>
       <div style="color:#F9E9C8;background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
         <h5 style="padding-left: 3px;">Friends - <small><a href="{{url_for('discover')}}" target="_blank">view all</a></small></h5>
-        {% for user in users if user != current_user %}
+        {% for user in users if user != current_user and not current_user.is_following(user) %}
         <header>
         <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
@@ -354,7 +353,7 @@
           {% endif %}
         </div>
         <div class="follow-btn">
-            <button style="height:40px;background:none;color:#F9E9C8;"><a href="{{url_for('user_posts', username=user.username)}}"target="_blank">❤</a></button>
+            <button style="height:40px;background:none;color:#F9E9C8;">{% if not current_user.is_following(user) %}<a href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;">Follow</a>{% endif %}</button>
           </div>
       </header>
       {% endfor %}

@@ -140,29 +140,9 @@
             {% endfor %}
         {% endif %}
       {% endwith %}
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <a href="{{ url_for('new_post') }}"  style="color:#000;text-decoration: none">
-      <strong>🍧 Post Something!</strong> Tell your friends what you're up to.</a>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <a href="{{ url_for('discover') }}"  style="color:#000;text-decoration: none">
-      <strong>🔥 Discover Friends!</strong> Swipe left and right on discover to make friends.</a>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="alert alert-dark alert-dismissible fade show" role="alert">
-      <strong>💬 Check your Inbox! </strong>You have Unread Messages
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
       <div style="color:#F9E9C8;background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
-        <h5 style="padding-left: 3px;">Friends - <small><a href="{{url_for('discover')}}" target="_blank">view all</a></small></h5>
-        {% for user in users if user != current_user %}
+        <h5 style="padding-left: 3px;">My Friends</h5>
+        {% for user in users if user.is_following(current_user) %}
         <header>
         <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
@@ -175,7 +155,7 @@
           {% endif %}
         </div>
         <div class="follow-btn">
-            <button style="height:40px;background:none;color:#F9E9C8;"><a href="{{url_for('user_posts', username=user.username)}}"target="_blank">❤</a></button>
+            {% if not current_user.is_following(user) %}<a class="pt-2 pl-2" href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;">Follow</a>{% endif %}
           </div>
       </header>
       {% endfor %}

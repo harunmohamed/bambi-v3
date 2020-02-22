@@ -359,11 +359,11 @@ def follow(username):
 		return redirect(url_for('index'))
 	if user == current_user:
 		flash('You cannot follow yourself!', 'danger')
-		return redirect(url_for('user_posts', username=username))
+		return redirect(request.referrer)
 	current_user.follow(user)
 	db.session.commit()
 	flash('💛 You are following {}!'.format(username.title()), 'success')
-	return redirect(url_for('user_posts', username=username))
+	return redirect(request.referrer)
 
 
 @app.route('/unfollow/<username>')
