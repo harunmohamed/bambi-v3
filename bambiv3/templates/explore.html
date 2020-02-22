@@ -9,7 +9,7 @@
 			<button class="btn btn-dark" onclick="lightMode()"><i class="fas fa-sun"></i></button>
 			</div>
 			<hr>-->
-			<div id="search" class="card card-body mb-3" style="color:#fff;background:#000;border: 1px solid #f9e9c8">
+			<div id="search" class="card card-body mb-3 p-2" style="color:#fff;background:#191917;">
 				<h4>Hey {% if current_user.is_authenticated%}{{current_user.username.title()}}{% endif %}, Explore Random Stuff!</h4>
 				<form id="search-form">
 					<div class="form-group">
@@ -27,7 +27,7 @@
                                 Latest
                             </label>
 					</div>
-					<h5 class="mt-2">Limit: </h5>
+					<h5 class="mt-2">Search Limit: </h5>
 					<div class="form-group">
 						<select name="limit" id="limit" class="form-control">
                                 <option value="5">5</option>
