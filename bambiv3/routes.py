@@ -297,7 +297,7 @@ def new_product():
 def likes(username):
 	username = username.lower()
 	user = User.query.filter_by(username=username).first_or_404()
-	posts = Post.query.all()
+	posts = Post.query.order_by(Post.date_posted.desc())
 	liked_people = set()
 	for post in posts:
 		if user.has_liked_post(post):
