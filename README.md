@@ -4,7 +4,7 @@ On this version of Bambi, the user can do the following:
 
 1. Sign up, Log in, reset their passwords using their emails
 2. Post stuff on their timelines and like people's posts
-3. Follow friends and view their posts only on Friends Posts
+3. Follow friends, view their posts only on Friends Posts and what they like too.
 4. Message Friends and see when they were last online.
 5. Post item listings on Market
 6. Buy stuff from market
