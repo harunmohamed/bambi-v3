@@ -366,6 +366,11 @@ section .btn {
         <img src="{{ url_for('static', filename='profile_pics/' + 'empty.png') }}" class="img-fluid mx-auto d-block" style="margin-bottom: 50px;">
       {% endif %}
 
+      {% if current_user != user and not current_user.is_following(user)%}
+      <a href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;position:absolute;top:8px;right:30px;">Follow to view {{user.username.title() + "'s "}}profile</a>
+        <img src="https://cdn.dribbble.com/users/1377569/screenshots/5900387/eye.gif" class="img-fluid mx-auto d-block" style="margin-bottom:50px;height:400px;width:100%;border-radius:10px;">
+      {% endif %}
+
       {% if current_user.is_following(user) or current_user == user %}
       {% for post in posts.items %}
     <div class="post mb-2">
