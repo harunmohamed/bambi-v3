@@ -362,7 +362,7 @@ section .btn {
 
     <div class="col-lg-6">
       <!-- content area -->
-      {% if current_user == user or current_user.is_following(user) and posts.total == 0 %}
+      {% if current_user == user and posts.total == 0 or current_user.is_following(user) and posts.total == 0 %}
         <img src="{{ url_for('static', filename='profile_pics/' + 'empty.png') }}" class="img-fluid mx-auto d-block" style="margin-bottom: 50px;">
       {% endif %}
 
