@@ -224,3 +224,8 @@ header{
   padding:1px;
   flex: 0 0 auto;
 }
+.dark-theme{
+  background: #191917;
+  color: #fff;
+  border:1px solid #191917 !important;
+}
