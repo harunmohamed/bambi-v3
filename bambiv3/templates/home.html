@@ -342,7 +342,7 @@
         <h5 style="padding-left: 3px;">Friends - <small><a href="{{url_for('discover')}}" target="_blank">view all</a></small></h5>
         {% for user in users if user != current_user and not current_user.is_following(user) %}
         <header>
-        <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail">
+        <a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail"></a>
         <div class="profile-name">
           <h3>{{user.username}}</h3>
           {% if user.country == current_user.country %}
