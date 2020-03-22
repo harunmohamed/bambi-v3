@@ -5,16 +5,15 @@
 	<div class="row">
 		<div class="col-lg-3 d-none d-lg-block position-fixed">
 				<!-- User info , photos -->
-		      <header data-toggle="modal" data-target="#profile">
+		      <header class="mb-2" data-toggle="modal" data-target="#profile">
 		        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="harun profile" class="profile-thumbnail">
 		        <div class="profile-name">
 		          <h3>{{current_user.username}}</h3>
 		          <small>@{{current_user.email.split("@")[0] | lower}}</small>
 		        </div>
 		      </header>
-		      <br>
 
-		    <div class="card about" style="color:#fff;background:#191917;border-radius:10px;">
+		    <div class="card about mb-2" style="color:#fff;background:#191917;border-radius:10px;">
 		    <div class="card-body">
 		      <p> 🎓 Studies at <span>Near East University</span></p>
 			  <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
@@ -26,8 +25,6 @@
 			  <a class="btn btn-sm btn-primary" href="{{ url_for('account') }}">🍁 edit</a>
 		    </div>
 		  </div>
-
-		  <br>
 
 		  <header>
 		    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
