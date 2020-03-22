@@ -3,7 +3,7 @@
 	
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-lg-3 d-none d-lg-block">
+		<div class="col-lg-3 d-none d-lg-block position-fixed">
 				<!-- User info , photos -->
 		      <header data-toggle="modal" data-target="#profile">
 		        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="harun profile" class="profile-thumbnail">
@@ -38,7 +38,7 @@
 		  </header>
 		</div>
 
-		<div class="col-lg-6" style="text-align: center">
+		<div class="col-lg-6 offset-lg-3" style="text-align: center">
 			<div class="post">
 			  <div id="inner">
 			   <div class="content-section">
