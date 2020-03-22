@@ -88,7 +88,7 @@ h1 {
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-3 d-none d-lg-block">
+    <div class="col-lg-3 d-none d-lg-block position-fixed">
       <!-- User info , photos -->
       {% if current_user.is_authenticated %}
       <header class="mb-2">
@@ -144,7 +144,7 @@ h1 {
 
 
 
-    <div class="col-lg-6">
+    <div class="col-lg-6 offset-lg-3">
       <!-- content area -->
           <h2>Discover New Friends</h2>
           <!--{% if current_user.is_authenticated %}
@@ -196,7 +196,7 @@ h1 {
 
 
 
-    <div class="col-lg-3 d-none d-lg-block">
+    <div class="col-lg-3 d-none d-lg-block position-fixed offset-lg-9">
       {% if current_user.is_authenticated %}
       <!-- notifications and relevant ads -->
       {% with messages = get_flashed_messages(with_categories=true) %}

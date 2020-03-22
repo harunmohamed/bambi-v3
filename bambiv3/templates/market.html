@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-3 d-none d-lg-block">
+    <div class="col-lg-3 d-none d-lg-block position-fixed">
       <!-- User info , photos -->
       {% if current_user.is_authenticated %}
       <header class="mb-2">
@@ -59,7 +59,7 @@
 
 
 
-    <div class="col-lg-6">  
+    <div class="col-lg-6 offset-lg-3">  
       
    {% for product in products %}
     <div class="post mb-2">
@@ -103,7 +103,7 @@
 
 
 
-    <div class="col-lg-3 d-none d-lg-block">
+    <div class="col-lg-3 d-none d-lg-block position-fixed offset-lg-9">
       <!-- notifications and relevant ads -->
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -117,6 +117,15 @@
             {% endfor %}
         {% endif %}
       {% endwith %}
+      <header class="mb-2">
+        <img src="https://image.flaticon.com/icons/svg/1170/1170576.svg" alt="sell" class="profile-thumbnail">
+        <div class="profile-name">
+          <a href="{{ url_for('new_product') }}" style="text-decoration:none;">
+          <h3 style="color:#F9E9C8;">Wanna Sell?</h3>
+          <small>Post a product and let us do the magic for you.</small>
+          </a>
+        </div>
+      </header>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"

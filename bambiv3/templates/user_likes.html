@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-3 d-none d-lg-block">
+    <div class="col-lg-3 d-none d-lg-block position-fixed">
       <!-- User info , photos -->
       {% if current_user.is_authenticated %}
       <header class="mb-2">
@@ -21,7 +21,7 @@
       <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
       <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
       <a class="dropdown-item" href="{{ url_for('market') }}"> 👜 Market</a>
-      <a class="dropdown-item" href="{{ url_for('new_product') }}"> 🛠 Sell</a>
+      <!--<a class="dropdown-item" href="{{ url_for('new_product') }}"> 🛠 Sell</a>-->
       <a class="dropdown-item" href="{{ url_for('account') }}"> 🍪 Settings</a>
       <a class="dropdown-item" href="{{ url_for('blog') }}"> 🎬 Blog</a> 
       <a class="dropdown-item" href="{{ url_for('about') }}"> 👋 About Bambi</a>
@@ -59,7 +59,7 @@
 
 
 
-    <div class="col-lg-6">
+    <div class="col-lg-6 offset-lg-3">
       <!-- content area -->
 
       {% if current_user != user %}<h2>{{user.username.title()}}'s Likes</h2> {% else %} <h2>My Likes</h2> {% endif %}
@@ -147,7 +147,7 @@
 
 
 
-    <div class="col-lg-3 d-none d-lg-block">
+    <div class="col-lg-3 d-none d-lg-block position-fixed offset-lg-9">
       {% if current_user.is_authenticated %}
       <!-- notifications and relevant ads -->
       {% with messages = get_flashed_messages(with_categories=true) %}
