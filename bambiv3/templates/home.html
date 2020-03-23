@@ -7,7 +7,7 @@
     <div class="col-lg-3 d-none d-lg-block position-fixed">
       <!-- User info , photos -->
       {% if current_user.is_authenticated %}
-      <header class="mb-2" data-toggle="modal" data-target="#profile" title="🍌: Click to Preview Your Profile Info">
+      <header class="mb-2" title="🍌: Click to Preview Your Profile Info"> <!-- data-toggle="modal" data-target="#profile" -->
         <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
           <h3>{{current_user.username}}</h3>
