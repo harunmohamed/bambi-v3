@@ -76,8 +76,8 @@ def inbox():
 def send_message(recipient):
 	recipient = recipient.lower()
 	user = User.query.filter_by(username=recipient).first_or_404()
-	if user == current_user:
-		return redirect(url_for('messages'))
+	#if user == current_user:
+		#return redirect(url_for('messages'))
 	form = MessageForm()
 	if form.validate_on_submit():
 		msg = m(author=current_user, recipient=user, body=form.message.data)
