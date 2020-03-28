@@ -326,8 +326,12 @@ section .btn {
       <p> 💪 Joined <span>{{ moment(user.date_joined).fromNow() }}</span></p>
       {% if current_user.is_following(user) %}
       <p class="f">💛 You follow {{user.username.title()}}</p> 
+      <p>⏰ Last seen on: <span>{{ moment(user.last_seen).format('LLL') }}</span></p>
+        {% if user.single and user.gender != current_user.gender %}
+          {% if user.instagram %}<a href="https://www.instagram.com/{{user.instagram}}"><img src="https://image.flaticon.com/icons/svg/733/733558.svg" style="width:30px;height:30px;"></a>{% endif %}
+          {% if user.snapchat %} <a href="https://www.snapchat.com/add/{{user.snapchat}}"><img src="https://image.flaticon.com/icons/svg/1383/1383266.svg" style="width:35px;height:35px;"></a>{% endif %}
+        {% endif %}
       {% endif %}
-      <small>⏰ Last seen on: {{ moment(user.last_seen).format('LLL') }}</small>
     </div>
   </div>
 
