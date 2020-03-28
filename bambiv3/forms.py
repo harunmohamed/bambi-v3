@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, RadioField, DateField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Regexp
 from bambiv3.models import User
 
@@ -11,7 +11,8 @@ class RegistrationForm(FlaskForm):
 	department = StringField('Department', validators=[DataRequired()])
 	student_number = StringField('Student Number', validators=[DataRequired()])
 	country = StringField('Country', validators=[DataRequired()])
-	age = StringField('Age', validators=[DataRequired()])
+	age = DateField('birthday', format='%d-%m-%Y', validators=[DataRequired()])
+	gender = RadioField('Gender', choices=[('male','male'),('female','female')])
 	hobby = StringField('Hobby', validators=[DataRequired()])
 	password = PasswordField('Password', validators = [DataRequired()])
 	confirm_password = PasswordField('Confirm Password', validators = [DataRequired(), EqualTo('password')])
@@ -47,10 +48,13 @@ class UpdateAccountForm(FlaskForm):
 	department = StringField('Department', validators=[DataRequired()])
 	student_number = StringField('Student Number', validators=[DataRequired()])
 	country = StringField('Country', validators=[DataRequired()])
-	age = StringField('Age', validators=[DataRequired()])
+	age = DateField('birthday', format='%d-%m-%Y', validators=[DataRequired()])
 	hobby = StringField('Hobby', validators=[DataRequired()])
+	snapchat = StringField('Snapchat')
+	instagram = StringField('Instagram')
 	bio = TextAreaField('Bio')
 	private = BooleanField('Private?')
+	single = BooleanField('Single & Searchin?')
 	submit = SubmitField('Update')
 
 	def validate_username(self, username):
@@ -70,6 +74,11 @@ class PostForm(FlaskForm):
 	title = StringField('Title') #validators=[DataRequired()]
 	content = TextAreaField('Content', validators=[DataRequired()])
 	image = FileField('Upload Image', validators=[FileAllowed(['jpg', 'jpeg' , 'png', 'gif'])])
+	anonymous = BooleanField('Post Anonymously?')
+	submit = SubmitField('🛫 Post')
+
+class CommentForm(FlaskForm):
+	body = StringField(('comment'), validators=[DataRequired()])
 	submit = SubmitField('🛫 Post')
 
 class MessageForm(FlaskForm):

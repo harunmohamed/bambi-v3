@@ -26,15 +26,21 @@ class User(db.Model, UserMixin):
 	image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
 	password = db.Column(db.String(60), nullable=False)
 	last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+	date_joined = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 	department = db.Column(db.String(20), nullable=False)
 	student_number = db.Column(db.Integer(), unique=True, nullable=False)
-	age = db.Column(db.Integer(), nullable=False)
+	age = db.Column(db.DateTime, nullable=False)
+	gender = db.Column(db.String(20), nullable=False)
 	country = db.Column(db.String(20), nullable=False)
 	hobby = db.Column(db.String(20), nullable=False)
 	bio = db.Column(db.String(120), nullable=True)
 	private = db.Column(db.Boolean, default=False, nullable=False)
+	single = db.Column(db.Boolean, default=False, nullable=False)
+	snapchat = db.Column(db.String(20),default=False, nullable=False)
+	instagram = db.Column(db.String(20),default=False, nullable=False)
 	posts = db.relationship('Post', backref='author', lazy=True)
 	products = db.relationship('Product', backref='author', lazy=True)
+	comments = db.relationship("Comment", backref="author", lazy="dynamic", cascade="all, delete-orphan")
 	followed = db.relationship(
 		'User', secondary=followers,
 		primaryjoin=(followers.c.follower_id == id),
@@ -113,8 +119,10 @@ class Post(db.Model):
 	date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 	content = db.Column(db.Text, nullable=False)
 	image = db.Column(db.String(20))
+	anonymous = db.Column(db.Boolean, default=False, nullable=False)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	likes = db.relationship('PostLike', backref='post', lazy='dynamic')
+	comments = db.relationship("Comment", backref="post", lazy="dynamic", cascade="all, delete-orphan")
 
 	def __repr__(self):
 		if self.title != None:
@@ -127,6 +135,16 @@ class PostLike(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 	post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.Text, nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey("post.id"), nullable=False)
+
+    def __repr__(self):
+        return f"<Reply (id='{self.id}', body='{self.body}', date_posted='{self.date_posted}')>"
 
 class Product(db.Model):
 	id = db.Column(db.Integer, primary_key=True)

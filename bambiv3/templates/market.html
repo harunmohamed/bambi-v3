@@ -17,14 +17,16 @@
 
     <div class="card about mb-2" style="color:#fff;background:#191917;border-radius:10px;">
     <div class="card-body">
-      <p> 🎓 Studies at <span>Near East University</span></p>
-      <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
-      <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
-      <p> 🙊 Is <span>{{current_user.age}}</span> years old</p>
-      <p> 🌍 From <span>{{current_user.country}}</span></p>
-      <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
-      <p> 💎 Interested in <span>{{current_user.hobby}}</span></p>
-      <a class="btn btn-sm btn-primary" href="{{ url_for('account') }}">🍁 edit</a>
+      <!--<p> 🎓 Studies at <span>Near East University</span></p>-->
+          <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
+          <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
+          <p> 🙊 Born <span>{{ moment(current_user.age).fromNow() }}</span></p>
+          <p> {% if current_user.gender == 'male' %} 👨 {% else %}👩 {% endif %} Gender: <span>{{current_user.gender.title()}}</span></p>
+          <p> 🌍 From <span>{{current_user.country.title()}}</span></p>
+          <!--<p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>-->
+          <p> 👣 Interested in <span>{{current_user.hobby}}</span></p>
+          <p> 💪 Joined <span>{{ moment(current_user.date_joined).fromNow() }}</span></p>
+          <small>⏰ Last seen on: {{ moment(current_user.last_seen).format('LLL') }}</small>
     </div>
   </div>
 

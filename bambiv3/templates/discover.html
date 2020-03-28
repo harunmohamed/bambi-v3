@@ -101,14 +101,16 @@ h1 {
 
     <div class="card about mb-2" style="color:#fff;background:#191917;border-radius:10px;">
     <div class="card-body">
-      <p> 🎓 Studies at <span>Near East University</span></p>
-      <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
-      <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
-      <p> 🙊 Is <span>{{current_user.age}}</span> years old</p>
-      <p> 🌍 From <span>{{current_user.country}}</span></p>
-      <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
-      <p> 💎 Interested in <span>{{current_user.hobby}}</span></p>
-      <a class="btn btn-sm btn-primary" href="{{ url_for('account') }}">🍁 edit</a>
+      <!--<p> 🎓 Studies at <span>Near East University</span></p>-->
+          <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
+          <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
+          <p> 🙊 Born <span>{{ moment(current_user.age).fromNow() }}</span></p>
+          <p> {% if current_user.gender == 'male' %} 👨 {% else %}👩 {% endif %} Gender: <span>{{current_user.gender.title()}}</span></p>
+          <p> 🌍 From <span>{{current_user.country.title()}}</span></p>
+          <!--<p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>-->
+          <p> 👣 Interested in <span>{{current_user.hobby}}</span></p>
+          <p> 💪 Joined <span>{{ moment(current_user.date_joined).fromNow() }}</span></p>
+          <small>⏰ Last seen on: {{ moment(current_user.last_seen).format('LLL') }}</small>
     </div>
   </div>
 
@@ -173,8 +175,12 @@ h1 {
                 <div class="card">
                   <div class="card_image"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" style="width:100%;"></div>
                   <div class="card_content">
-                    <h2 class="card_title">{{user.username}} {% if not current_user.is_following(user) %}<a class="badge badge-primary" href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;color:#000;">Follow</a>{% endif %}</h2>
-                    <p class="card_text">{% if user.bio %} {{user.bio}} {% else %} I'm {{user.age}} from {{user.country}} and I study {{user.department}}.{% endif %}</p>
+                    <h2 class="card_title">{{user.username}} {% if not current_user.is_following(user) %}<a class="badge badge-primary" href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;color:#000;">Follow</a>{% endif %} </h2>
+                    <p class="card_text">{% if user.bio %} {{user.bio}} {% else %} I'm from {{user.country}} and I study {{user.department}}.{% endif %}</p>
+                    {% if user.single and user.gender != current_user.gender %}
+                    {% if user.instagram %}<a href="https://www.instagram.com/{{user.instagram}}"><img src="https://image.flaticon.com/icons/svg/733/733614.svg" style="width:30px;height:30px;"></a>{% endif %}
+                    {% if user.snapchat %} <a href="https://www.snapchat.com/add/{{user.snapchat}}"><img src="https://image.flaticon.com/icons/svg/174/174870.svg" style="width:30px;height:30px;"></a>{% endif %}
+                    {% endif %}
                   </div>
                 </div>
               </li>

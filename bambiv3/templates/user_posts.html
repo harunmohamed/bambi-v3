@@ -281,7 +281,8 @@ section .btn {
             {% if user.bio %}
             {{user.email.split("@")[0] | lower}}</small> - {{user.bio}}</p>
             {% else %}
-            {{user.email.split("@")[0] | lower}}</small> - I study {{user.department}} at Near East University. I am {{user.age}} from {{user.country}}. I'm interested in {{user.hobby}}</p> 
+            <!--{{user.email.split("@")[0] | lower}}</small> - I study {{user.department}} at Near East University. I am {{user.age}} from {{user.country}}. I'm interested in {{user.hobby}}</p>-->
+          {{user.email.split("@")[0] | lower}} </small> - hey there, lets be friends 🤗
             {%endif%}
           {%endif%}
 
@@ -314,13 +315,15 @@ section .btn {
       <br>-->
     <div class="card about mb-2" style="color:#fff;background:#191917;border-radius:10px;">
     <div class="card-body">
-      <p> 🎓 Studies at <span>Near East University</span></p>
+      <!--<p> 🎓 Studies at <span>Near East University</span></p>-->
       <p> 🏅 Majors in <span>{{user.department}}</span></p>
       <p> ☂ Student Number: <span>{{user.student_number}}</span></p>
-      <p> 🙊 Is <span>{{user.age}}</span> years old</p>
-      <p> 🌍 From <span>{{user.country}}</span></p>
-      <p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>
-      <p> 💎 Interested in <span>{{user.hobby}}</span></p>
+      <p> 🙊 Born <span>{{ moment(user.age).fromNow() }}</span></p>
+      <p> {% if user.gender == 'male' %} 👨 {% else %}👩 {% endif %} Gender: <span>{{user.gender.title()}}</span></p>
+      <p> 🌍 From <span>{{user.country.title()}}</span></p>
+      <!--<p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>-->
+      <p> 👣 Interested in <span>{{user.hobby}}</span></p>
+      <p> 💪 Joined <span>{{ moment(user.date_joined).fromNow() }}</span></p>
       {% if current_user.is_following(user) %}
       <p class="f">💛 You follow {{user.username.title()}}</p> 
       {% endif %}
@@ -372,7 +375,7 @@ section .btn {
       {% endif %}
 
       {% if current_user.is_following(user) or current_user == user %}
-      {% for post in posts.items %}
+      {% for post in posts.items if not post.anonymous %}
     <div class="post mb-2">
       <header class="pb-0" style="padding:0;">
           <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail">
@@ -606,8 +609,16 @@ section .btn {
             <fieldset class="form-group">
               <!--<legend class="border-bottom mb-2 pb-2">Account Info</legend>-->
               <div class="form-check">
-              {{ form.private(class="form-check-input") }}
-              {{ form.private.label(class="form-check-label") }}
+              <div class="row">
+                <div class="col">
+                  {{ form.private(class="form-check-input") }}
+                  {{ form.private.label(class="form-check-label") }}
+                </div>
+                <div class="col">
+                  {{ form.single(class="form-check-input") }}
+                  {{ form.single.label(class="form-check-label") }}
+                </div>
+              </div>
             </div>
               <div class="form-group">
                 {{ form.picture.label() }}
@@ -643,6 +654,36 @@ section .btn {
                 {% else %}
                 {{ form.username(class="form-control form-control-lg") }}
                 {% endif %}
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col">
+                    {{ form.snapchat.label(class="form-control-label") }}
+                    {% if form.snapchat.errors %}
+                    {{ form.snapchat(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.snapchat.errors %}
+                      <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.snapchat(class="form-control form-control-lg") }}
+                    {% endif %}
+                  </div>
+                  <div class="col">
+                    {{ form.instagram.label(class="form-control-label") }}
+                    {% if form.instagram.errors %}
+                    {{ form.instagram(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.instagram.errors %}
+                      <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.instagram(class="form-control form-control-lg") }}
+                    {% endif %}
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 {{ form.email.label(class="form-control-label") }}

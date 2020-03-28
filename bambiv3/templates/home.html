@@ -155,6 +155,11 @@
                 {% endif %}
               </div>
 
+              <div class="form-check mb-1">
+                {{ form.anonymous(class="form-check-input") }}
+                {{ form.anonymous.label(class="form-check-label") }}
+              </div>
+
                 <div class="form-group">
                   {{ form.submit(class="btn btn-outline-dark",style="border:1px solid #868e96;") }}
                 </div>
@@ -205,12 +210,25 @@
     {% if not post.author.private or current_user == post.author or current_user.is_authenticated %} <!--if current_user.is_following(post.author)-->
     <div class="post mb-2">
       <header class="pb-0" style="padding:0;">
-          <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" data-toggle="popover" data-content="😎 : I am {{post.author.age}} from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}">
+          {% if not post.anonymous %}
+          <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" data-toggle="popover" data-content="😎 : I'm from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}">
+        {% else %}
+          <img src="{{ url_for('static', filename='profile_pics/' + 'ghost.jpg') }}" alt="profile pic" class="profile-thumbnail">
+        {% endif %}
           <div class="profile-name">
-            <h3 data-toggle="popover"><a href="{{url_for('user_posts', username=post.author.username)}}" style="color:#F9E9C8;">{{post.author.username}}
-             {% if post.author.username in ["harun" , "bambi"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-left: -5px;">{% endif %}
+            {% if not post.anonymous %}
+
+            <h3 data-toggle="popover"><a href="{{url_for('user_posts', username=post.author.username)}}" style="color:#F9E9C8;">  {{post.author.username}}
+             {% if post.author.username in ["harun" , "bambi"] %}<img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:20px;height:20px;margin-left: -5px;">{% endif %}
            </a></h3>
-            <small>@{{post.author.email.split("@")[0] | lower}}</small>
+           <small>@{{post.author.email.split("@")[0] | lower}}</small>
+
+           {% else %}
+
+           <h3 data-toggle="popover">anonymous</h3>
+           <small>@anonymous</small>
+
+           {% endif %}
           </div>
           <div class="follow-btn">
             {% if current_user.is_authenticated %}

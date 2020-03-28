@@ -97,6 +97,20 @@
         {% endif %}
       </div>
     </div>
+    <div class="col">
+      <div class="form-group">
+        {% if form.gender.errors %}
+        {{ form.gender(placeholder="gender", class="form-control form-control is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.gender.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+        {{ form.gender(placeholder="gender", class="form-control form-control") }}
+        {% endif %}
+      </div>
+    </div>
   </div>
       
 
@@ -104,14 +118,14 @@
     <div class="col">
       <div class="form-group">
         {% if form.age.errors %}
-        {{ form.age(placeholder="age", class="form-control form-control is-invalid") }}
+        {{ form.age(placeholder="dd-mm-yyyy", class="form-control form-control is-invalid") }}
         <div class="invalid-feedback">
           {% for error in form.age.errors %}
           <span>{{ error }}</span>
           {% endfor %}
         </div>
         {% else %}
-        {{ form.age(placeholder="age", class="form-control form-control") }}
+        {{ form.age(placeholder="dd-mm-yyyy", class="form-control form-control") }}
         {% endif %}
       </div>
     </div>

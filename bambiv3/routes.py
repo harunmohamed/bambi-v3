@@ -4,8 +4,8 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from bambiv3 import app, db, bcrypt, mail
-from bambiv3.forms import RegistrationForm, LoginForm, UpdateAccountForm, MessageForm, PostForm, ProductForm, RequestResetForm, ResetPasswordForm
-from bambiv3.models import User, Post, Product, Message as m
+from bambiv3.forms import RegistrationForm, LoginForm, UpdateAccountForm, MessageForm, PostForm, CommentForm, ProductForm, RequestResetForm, ResetPasswordForm
+from bambiv3.models import User, Post, Product, Message as m, Comment
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
@@ -29,9 +29,9 @@ def home():
 	if form.validate_on_submit():
 		if form.image.data:
 			picture = save_picture(form.image.data)
-			post = Post(title=form.title.data, content=form.content.data, image=picture, author=current_user)
+			post = Post(title=form.title.data, content=form.content.data, anonymous=form.anonymous.data, image=picture, author=current_user)
 		else:
-			post = Post(title=form.title.data, content=form.content.data, author=current_user)
+			post = Post(title=form.title.data, content=form.content.data, anonymous=form.anonymous.data, author=current_user)
 		db.session.add(post)
 		db.session.commit()
 		flash('Your Post Has been Created!', 'success')
@@ -127,7 +127,7 @@ def register():
 	if form.validate_on_submit():
 		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
 		user = User(username=form.username.data.lower(), email=form.email.data, department=form.department.data,\
-			student_number=form.student_number.data, age=form.age.data, country=form.country.data, hobby=form.hobby.data,\
+			student_number=form.student_number.data, gender=form.gender.data, age=form.age.data, country=form.country.data, hobby=form.hobby.data,\
 			password=hashed_password)
 		db.session.add(user)
 		db.session.commit()
@@ -215,13 +215,13 @@ def new_post():
 	if form.validate_on_submit():
 		if form.image.data:
 			picture = save_picture(form.image.data)
-			post = Post(title=form.title.data, content=form.content.data, image=picture, author=current_user)
+			post = Post(title=form.title.data, content=form.content.data,anonymous=form.anonymous.data, image=picture, author=current_user)
 			db.session.add(post)
 			db.session.commit()
 			flash('Your Post Has been Created!', 'success')
 			return redirect(url_for('home'))
 		else:
-			post = Post(title=form.title.data, content=form.content.data, author=current_user)
+			post = Post(title=form.title.data, content=form.content.data,anonymous=form.anonymous.data, author=current_user)
 			db.session.add(post)
 			db.session.commit()
 			flash('Your Post Has been Created!', 'success')
@@ -231,8 +231,14 @@ def new_post():
 @app.route('/post/<int:post_id>', methods=["GET", "POST"])
 @login_required
 def post(post_id):
+	form = CommentForm()
+	"""if form.validate_on_submit:
+		comment = Comment(body=form.body.data, author=current_user)
+		db.session.add(comment)
+		db.session.commit()"""
 	post = Post.query.get_or_404(post_id)
-	return render_template('post.html',title=post.title, post=post)
+	comments = Comment.query.order_by(Comment.date_posted.desc())
+	return render_template('post.html',title=post.title, post=post, form=form)
 
 @app.route('/like/<int:post_id>/<action>')
 @login_required
@@ -257,12 +263,14 @@ def update_post(post_id):
 	if form.validate_on_submit():
 		post.title = form.title.data
 		post.content = form.content.data
+		post.image = save_picture(form.image.data)
 		db.session.commit()
 		flash('Your post has been updated!', 'success')
 		return redirect(url_for('post', post_id=post.id))
 	elif request.method == 'GET':
 		form.title.data = post.title
 		form.content.data = post.content
+		form.image.data = post.image
 	return render_template('create_post.html', title='Update Post',
 						   form=form, legend='Update Post')
 
@@ -317,6 +325,8 @@ def user_posts(username):
 			current_user.image_file = picture_file
 		current_user.username = form.username.data.lower()
 		current_user.email = form.email.data
+		current_user.snapchat = form.snapchat.data
+		current_user.instagram = form.instagram.data
 		current_user.department = form.department.data
 		current_user.student_number = form.student_number.data
 		current_user.country = form.country.data
@@ -324,12 +334,15 @@ def user_posts(username):
 		current_user.hobby = form.hobby.data
 		current_user.bio = form.bio.data
 		current_user.private = form.private.data
+		current_user.single = form.single.data
 		db.session.commit()
 		flash('Your Account has been updated', 'success')
 		return redirect(url_for('user_posts', username=current_user.username))
 	elif request.method == 'GET':
 		form.username.data = current_user.username
 		form.email.data = current_user.email
+		form.snapchat.data = current_user.snapchat
+		form.instagram.data = current_user.instagram
 		form.department.data = current_user.department
 		form.student_number.data = current_user.student_number
 		form.country.data = current_user.country
@@ -337,6 +350,7 @@ def user_posts(username):
 		form.hobby.data = current_user.hobby
 		form.bio.data = current_user.bio
 		form.private.data = current_user.private
+		form.single.data = current_user.single
 	image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
 	page = request.args.get('page', 1, type=int)
 	user = User.query.filter_by(username=username).first_or_404()
