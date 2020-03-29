@@ -430,7 +430,7 @@ section .btn {
         </header>
 
         <div id="inner">
-          <p style="text-transform: uppercase;letter-spacing: 2px;text-align: center;margin-top: 4px;background:#F9E9C8;color:#000;"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#000;">{{post.title}}</a></p>
+          <p style="font-size:30px;"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#fff;">{{post.title}}</a></p>
           {% if post.image %}
           <img src="{{ url_for('static', filename='profile_pics/' + post.image) }}" style="width:100%;height:100%;border-radius:5px">
           {% endif %}
