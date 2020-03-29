@@ -1,6 +1,6 @@
 body{
   background:#070707; /*#070707 bg and #191917 for posts*/
-  color:#F9E9C8;
+  color:#fff;
 }
 nav{
     background:#070707;
@@ -22,7 +22,7 @@ nav{
   padding-right:10px;
 }
 .logo{
-  color:#F9E9C8;
+  color:#fff;
   letter-spacing:2px;
 }
 .about span, small{
