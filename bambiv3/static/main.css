@@ -119,7 +119,7 @@ header{
  #inner p {
    margin-bottom:5px;
    font-size: 16px;
-   color:#f8f8f2;
+   color:#fff; /* #f8f8f2 */
  }
  footer .stats {
    display: flex;

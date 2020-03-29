@@ -263,7 +263,8 @@ def update_post(post_id):
 	if form.validate_on_submit():
 		post.title = form.title.data
 		post.content = form.content.data
-		post.image = save_picture(form.image.data)
+		if form.image.data:
+			post.image = save_picture(form.image.data)
 		db.session.commit()
 		flash('Your post has been updated!', 'success')
 		return redirect(url_for('post', post_id=post.id))
