@@ -173,7 +173,7 @@ h1 {
               {% for user in users if user != current_user and not current_user.is_following(user) %}
               <li class="cards_item">
                 <div class="card">
-                  <div class="card_image"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" style="width:100%;"></div>
+                  <div class="card_image"><a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" style="width:100%;"></a></div>
                   <div class="card_content">
                     <h2 class="card_title">{{user.username}} {% if not current_user.is_following(user) %}<a class="badge badge-primary" href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;color:#000;">Follow</a>{% endif %} </h2>
                     <p class="card_text">{% if user.bio %} {{user.bio}} {% else %} I'm from {{user.country}} and I study {{user.department}}.{% endif %}</p>
