@@ -70,7 +70,7 @@
           <div class="profile-name">
             {% if not post.anonymous %}
               <h3 data-toggle="popover"><a href="{{url_for('user_posts', username=post.author.username)}}" style="color:#fff;">  {{post.author.username}}
-               {% if post.author.username in ["harun" , "bambi"] %}<img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:20px;height:20px;margin-left: -5px;">{% endif %}
+               {% if post.author.username in ["harun" , "bambi"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-left: -5px;">{% endif %}
              </a> {% if post.author != current_user and not current_user.is_following(post.author) %}<a class="pt-2 pl-2" href="{{ url_for('follow', username=post.author.username) }}" style="font-size:12px;text-decoration:none;">Follow</a>{% endif %}</h3>
              <small>@{{post.author.email.split("@")[0] | lower}}</small>
            {% else %}
