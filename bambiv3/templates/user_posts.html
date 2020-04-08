@@ -370,7 +370,7 @@ section .btn {
       {% endif %}
 
 
-      {% if (not current_user.is_authenticated and not user.private) or (current_user.is_authenticated and not user.private) %}
+      {% if (not current_user.is_authenticated and not user.private) or (current_user.is_authenticated and not user.private) or (current_user.is_authenticated and user.private and current_user.is_following(user))%}
       {% for post in posts.items if not post.anonymous %}
     <div class="post mb-2">
       <header class="pb-0" style="padding:0;">
