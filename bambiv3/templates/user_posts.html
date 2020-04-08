@@ -236,6 +236,7 @@ section .btn {
 
         </h2>
 
+        {% if current_user.is_authenticated %}
         <div class="dropdown" style="margin:auto 10px;">
               <button class="btn  btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-left:2px;">
               </button>
@@ -256,6 +257,7 @@ section .btn {
                 {% endif %}
               </div>
           </div>
+          {% endif %}
 
 
       </div>
@@ -296,7 +298,6 @@ section .btn {
   <div class="row">
     <div class="col-lg-3">
       <!-- User info , photos -->
-      {% if current_user.is_authenticated %}
       <!--<header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;cursor:pointer;" data-toggle="modal" data-target="#profile">
         <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
@@ -324,7 +325,7 @@ section .btn {
       <!--<p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>-->
       <p> 👣 Interested in <span>{{user.hobby}}</span></p>
       <p> 💪 Joined <span>{{ moment(user.date_joined).fromNow() }}</span></p>
-      {% if current_user.is_following(user) %}
+      {% if current_user.is_authenticated and current_user.is_following(user) %}
       <p class="f">💛 You follow {{user.username.title()}}</p> 
       <p>⏰ Last seen on: <span>{{ moment(user.last_seen).format('LLL') }}</span></p>
         {% if user.single and user.gender != current_user.gender %}
@@ -343,42 +344,33 @@ section .btn {
       <small id="year"></small>
     </div>
   </header>
-  {% else %}
-    <div class="card" style="color:#000;">
-      <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo">
-      <div class="card-body">
-        <h5 class="card-title"><i class="fas fa-ad"></i></h5>
-        <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted logo">BAMBI</small>
-      </div>
-    </div>
-    <br>
-    <header>
-    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
-    <div class="profile-name">
-      <h3 class="logo">BAMBI</h3>
-      <small>&copy 2019</small>
-    </div>
-  </header>
-  {% endif %}
+
 </div>
 
 
 
     <div class="col-lg-6">
       <!-- content area -->
-      {% if current_user == user and posts.total == 0 or current_user.is_following(user) and posts.total == 0 %}
+      {% if current_user.is_authenticated %}
+      {% if current_user.is_authenticated and current_user == user and posts.total == 0 or current_user.is_following(user) and posts.total == 0 %}
         <img src="{{ url_for('static', filename='profile_pics/' + 'empty.png') }}" class="img-fluid mx-auto d-block" style="margin-bottom: 50px;">
       {% endif %}
+      {% endif %}
 
+      {% if current_user.is_authenticated %}
       {% if current_user != user and not current_user.is_following(user)%}
       <a href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;position:absolute;top:8px;right:30px;">Follow to view {{user.username.title() + "'s "}}profile</a>
         <img src="https://cdn.dribbble.com/users/1377569/screenshots/5900387/eye.gif" class="img-fluid mx-auto d-block" style="margin-bottom:50px;height:400px;width:100%;border-radius:10px;">
       {% endif %}
+      {% endif %}
 
-      {% if current_user.is_following(user) or current_user == user %}
+      {% if not current_user.is_authenticated and user.private %}
+        <a href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;position:absolute;top:8px;right:30px;">{{user.username.title()}} is private. Sign in to view.</a>
+        <img src="https://cdn.dribbble.com/users/1377569/screenshots/5900387/eye.gif" class="img-fluid mx-auto d-block" style="margin-bottom:50px;height:400px;width:100%;border-radius:10px;">
+      {% endif %}
+
+
+      {% if not current_user.is_authenticated or current_user.is_following(user) or current_user == user %}
       {% for post in posts.items if not post.anonymous %}
     <div class="post mb-2">
       <header class="pb-0" style="padding:0;">
@@ -392,7 +384,7 @@ section .btn {
           <div class="follow-btn">
             {% if current_user != user %}
             <!--<i class="fas fa-heart love" style="font-size: 28px;"></i>-->
-              {% if current_user.has_liked_post(post) %}
+              {% if current_user.is_authenticated and current_user.has_liked_post(post) %}
                 <a href="{{ url_for('like_action', post_id=post.id, action='unlike') }}" style="text-decoration:none;">❤</a>
               {% else %}
                 <a href="{{ url_for('like_action', post_id=post.id, action='like') }}" style="text-decoration:none;">👍</a>
@@ -438,10 +430,12 @@ section .btn {
             {%if post.image%}<small>{{post.author.email.split("@")[0] | lower}}</small>{%endif%}
             {{post.content|urlize(40, target='_blank')}}
         </p>
+        {% if current_user.is_authenticated %}
           <div class="comments mb-1">
             <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width:30px;height:30px;border-radius:50%;">
             <input type="text" name="comment" placeholder="Join the Conversation" style="background:none;border:none;border-radius:5px;outline:none;width:85%;height: 35px;padding:10px;color:#F9E9C8;margin-top:5px;">
           </div>
+        {% endif %}
         </div>
 
         <footer>
@@ -509,7 +503,7 @@ section .btn {
       <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo">
       <div class="card-body">
         <h5 class="card-title"><i class="fas fa-ad"></i></h5>
-        <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
+        <p class="card-text">Looking for your classmates or wanna make new friends? Sign in and get started!</p>
       </div>
       <div class="card-footer">
         <small class="text-muted logo">BAMBI</small>
@@ -523,7 +517,7 @@ section .btn {
       <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo">
       <div class="card-body">
         <h5 class="card-title"><i class="fas fa-ad"></i></h5>
-        <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
+        <p class="card-text">Looking for your classmates or wanna make new friends? Sign in and get started!</p>
       </div>
       <div class="card-footer">
         <small class="text-muted logo">BAMBI</small>
@@ -560,7 +554,7 @@ section .btn {
             <a href="{{ url_for('user_posts', username=user.username) }}"target="_blank" style="text-decoration:none;color:#000;">{{user.username}}</a>
           </div>
           <div class="follow-btn">
-              {% if user != current_user and not current_user.is_following(user) %}<a href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;">Follow</a>{% endif %}
+              {% if current_user.is_authenticated and user != current_user and not current_user.is_following(user) %}<a href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;">Follow</a>{% endif %}
             </div>
       </header>
         {% endfor %}
@@ -588,7 +582,7 @@ section .btn {
             <a href="{{ url_for('user_posts', username=user.username) }}"target="_blank" style="text-decoration:none;color:#000;">{{user.username}}</a>
           </div>
           <div class="follow-btn">
-              {% if user != current_user and user.is_following(current_user) %}<a href="" style="font-size:12px;text-decoration:none;">follows you</a>{% endif %}
+              {% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}<a href="" style="font-size:12px;text-decoration:none;">follows you</a>{% endif %}
             </div>
       </header>
         {% endfor %}
@@ -608,6 +602,7 @@ section .btn {
             <img class="card-img-top" src="{{ image_file }}" alt="Card image cap" style="height:250px;">
             <div class="card-body">
                <div class="content-section">
+          {% if current_user.is_authenticated %}
           <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
@@ -773,7 +768,7 @@ section .btn {
             <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
           </div>
           </form>
-
+          {% endif %}
         </div>
     </div>
     <br>

@@ -316,51 +316,54 @@ def likes(username):
 
 
 @app.route("/user/<string:username>", methods=['GET', 'POST'])
-@login_required
 def user_posts(username):
 	username = username.lower()
-	form = UpdateAccountForm()
-	if form.validate_on_submit():
-		if form.picture.data:
-			picture_file = save_picture(form.picture.data)
-			current_user.image_file = picture_file
-		current_user.username = form.username.data.lower()
-		current_user.email = form.email.data
-		current_user.snapchat = form.snapchat.data
-		current_user.instagram = form.instagram.data
-		current_user.department = form.department.data
-		current_user.student_number = form.student_number.data
-		current_user.country = form.country.data
-		current_user.age = form.age.data
-		current_user.hobby = form.hobby.data
-		current_user.bio = form.bio.data
-		current_user.private = form.private.data
-		current_user.single = form.single.data
-		db.session.commit()
-		flash('Your Account has been updated', 'success')
-		return redirect(url_for('user_posts', username=current_user.username))
-	elif request.method == 'GET':
-		form.username.data = current_user.username
-		form.email.data = current_user.email
-		form.snapchat.data = current_user.snapchat
-		form.instagram.data = current_user.instagram
-		form.department.data = current_user.department
-		form.student_number.data = current_user.student_number
-		form.country.data = current_user.country
-		form.age.data = current_user.age
-		form.hobby.data = current_user.hobby
-		form.bio.data = current_user.bio
-		form.private.data = current_user.private
-		form.single.data = current_user.single
-	image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+	if current_user.is_authenticated:
+		form = UpdateAccountForm()
+		if form.validate_on_submit():
+			if form.picture.data:
+				picture_file = save_picture(form.picture.data)
+				current_user.image_file = picture_file
+			current_user.username = form.username.data.lower()
+			current_user.email = form.email.data
+			current_user.snapchat = form.snapchat.data
+			current_user.instagram = form.instagram.data
+			current_user.department = form.department.data
+			current_user.student_number = form.student_number.data
+			current_user.country = form.country.data
+			current_user.age = form.age.data
+			current_user.hobby = form.hobby.data
+			current_user.bio = form.bio.data
+			current_user.private = form.private.data
+			current_user.single = form.single.data
+			db.session.commit()
+			flash('Your Account has been updated', 'success')
+			return redirect(url_for('user_posts', username=current_user.username))
+		elif request.method == 'GET':
+			form.username.data = current_user.username
+			form.email.data = current_user.email
+			form.snapchat.data = current_user.snapchat
+			form.instagram.data = current_user.instagram
+			form.department.data = current_user.department
+			form.student_number.data = current_user.student_number
+			form.country.data = current_user.country
+			form.age.data = current_user.age
+			form.hobby.data = current_user.hobby
+			form.bio.data = current_user.bio
+			form.private.data = current_user.private
+			form.single.data = current_user.single
+		image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+		page = request.args.get('page', 1, type=int)
+		user = User.query.filter_by(username=username).first_or_404()
+		posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+		return render_template('user_posts.html', posts=posts, user=user, title=user.username.title(),image_file=image_file,form=form)
 	page = request.args.get('page', 1, type=int)
 	user = User.query.filter_by(username=username).first_or_404()
 	posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
-	return render_template('user_posts.html', posts=posts, user=user, title=user.username.title(),image_file=image_file,form=form)
+	return render_template('user_posts.html', posts=posts, user=user, title=user.username.title())
 
 
 @app.route("/<string:username>", methods=['GET', 'POST'])
-@login_required
 def user(username):
 	return redirect(url_for('user_posts', username=username))
 
