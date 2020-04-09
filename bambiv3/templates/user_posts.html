@@ -558,6 +558,7 @@ section .btn {
         </button>
       </div>
       <div class="modal-body">
+        {% if current_user.is_authenticated %}
         {% for user in user.followers %}
           <header style="background:none;color:#000;">
           <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
@@ -569,6 +570,14 @@ section .btn {
             </div>
       </header>
         {% endfor %}
+        {% else %}
+          <header style="background:none;color:#000;">
+          <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
+          <div class="profile-name">
+            <a href="{{ url_for('follow', username=user.username) }}" target="_blank" style="text-decoration:none;color:#00376b;font-weight:500;">sign in to view who follows {{user.username.title()}}</a>
+          </div>
+      </header>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -586,6 +595,7 @@ section .btn {
         </button>
       </div>
       <div class="modal-body">
+        {% if current_user.is_authenticated %}
         {% for user in user.followed %}
            <header style="background:none;color:#000;">
           <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
@@ -597,6 +607,14 @@ section .btn {
             </div>
       </header>
         {% endfor %}
+        {% else %}
+          <header style="background:none;color:#000;">
+          <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
+          <div class="profile-name">
+            <a href="{{ url_for('follow', username=user.username) }}" target="_blank" style="text-decoration:none;color:#00376b;font-weight:500;">sign in to view who {{user.username.title()}} follows</a>
+          </div>
+      </header>
+        {% endif %}
       </div>
     </div>
   </div>
