@@ -230,7 +230,7 @@ section .btn {
       <div class="profile-user-settings" style="display:flex;">
 
         <h2 class="profile-user-name">{{user.username.title()}}
-          {% if user.username in ["harun" , "bambi"] %}
+          {% if user.username in ["harun" , "bambi", "dahir"] %}
           <img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:20px;height:20px;margin-left: -5px;">
           {% endif %}
 
@@ -377,7 +377,7 @@ section .btn {
           <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail">
           <div class="profile-name">
             <h3>{{post.author.username}}
-              {% if post.author.username in ["harun" , "bambi"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-top:7px;">{% endif %}
+              {% if post.author.username in ["harun" , "bambi", "dahir"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-top:7px;">{% endif %}
             </h3>
             <small>@{{post.author.email.split("@")[0] | lower}}</small>
           </div>

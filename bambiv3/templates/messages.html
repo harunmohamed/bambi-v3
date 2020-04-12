@@ -69,7 +69,7 @@
             </div>
             <small style="font-size:15px;color:#f8f8f2;padding-left:15px">
             {{user.username.lower()}}
-            {% if user.username in ["harun" , "bambi"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:15px;height:15px;">{% endif %}
+            {% if user.username in ["harun" , "bambi", "dahir"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:15px;height:15px;">{% endif %}
           </small>
             </div>
             {% endfor %}
@@ -89,7 +89,7 @@
           <img src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}" alt="profile pic" class="profile-thumbnail">
           <div class="profile-name">
             <h3 data-toggle="popover"><a href="{{url_for('user_posts', username=message.author.username)}}" style="color:#fff;">{{message.author.username}}
-             {% if message.author.username in ["harun" , "bambi"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-left: -5px;">{% endif %}
+             {% if message.author.username in ["harun" , "bambi", "dahir"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-left: -5px;">{% endif %}
            </a></h3>
             <small>active {{ moment(message.author.last_seen).fromNow() }}</small>
           </div>
