@@ -87,9 +87,9 @@ def send_message(recipient):
 		return redirect(url_for('user_posts', username=recipient))
 
 	sent = current_user.messages_sent.filter_by(recipient_id=user.id)
-	received = current_user.messages_received.filter_by(recipient_id=user.id)
+	received = current_user.messages_received.filter_by(sender_id=user.id)
 	messages = sent.union(received).order_by(m.timestamp.desc())
-	return render_template('send_message.html', recipient=recipient, title="Send Message", form=form, messages=messages)
+	return render_template('send_message.html', recipient=recipient, title="Send Message",sent=sent, received=received, form=form, messages=messages)
 
 @app.route('/messages')
 @login_required
