@@ -85,12 +85,15 @@ def message(recipient):
 		db.session.commit()
 		flash('Your message has been sent.', 'success')
 		return redirect(url_for('message', recipient=recipient))
-
 	sent = current_user.messages_sent.filter_by(recipient_id=user.id)
 	received = current_user.messages_received.filter_by(sender_id=user.id)
 	messages = sent.union(received).order_by(m.timestamp.asc())
+	recent_chats = list()
+	for message in received:
+		recent_chats.append(message.author)
+	recent_chats = list(dict.fromkeys(recent_chats))
 
-	return render_template('send_message.html', recipient=recipient, title="Chat with " + recipient.title() , form=form, messages=messages)
+	return render_template('send_message.html', recipient=recipient, title="Chat with " + recipient.title() , form=form, messages=messages, recent_chats=recent_chats)
 
 @app.route('/messages')
 @login_required
@@ -98,8 +101,12 @@ def messages():
 	current_user.last_message_read_time = datetime.utcnow()
 	db.session.commit()
 	messages = current_user.messages_received.order_by(m.timestamp.desc())
+	recent_chats = list()
+	for message in messages:
+		recent_chats.append(message.author)
+	recent_chats = list(dict.fromkeys(recent_chats))
 	users = User.query.all()
-	return render_template('messages.html', messages=messages, users=users)
+	return render_template('messages.html', messages=messages, users=users, recent_chats=recent_chats)
 
 @app.route('/inbox/demo')
 def chat():

@@ -69,7 +69,7 @@
              {% endif %}
            </a></h3>
 
-           <div style="overflow:auto;height:480px;">
+           <div style="overflow:auto;height:460px;">
 
       {% for message in messages %}
           <p 
@@ -124,10 +124,7 @@
             </div>
         </form>
       </div>
-      <div style="margin-bottom:60px"></div>
   </div>
-
-  <div style="margin-bottom: 50px;"></div>
 </div>
 
 
@@ -146,15 +143,26 @@
             {% endfor %}
         {% endif %}
       {% endwith %}
-      <header class="mb-2">
-        <img src="https://image.flaticon.com/icons/svg/1170/1170576.svg" alt="sell" class="profile-thumbnail">
+      <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:590px;">
+        <h5 style="padding-left: 3px;">Recent Chats</h5>
+        {% for person in recent_chats if person.username != recipient %}
+        <header>
+        <a href="{{url_for('message', recipient=person.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + person.image_file) }}" alt="default profile" class="profile-thumbnail"></a>
         <div class="profile-name">
-          <a href="{{ url_for('new_product') }}" style="text-decoration:none;">
-          <h3 style="color:#F9E9C8;">Wanna Sell?</h3>
-          <small>Post a product and let us do the magic for you.</small>
-          </a>
+          <h3>{{person.username}}</h3>
+          {% if person.country == current_user.country %}
+          <small>From {{person.country}}</small>
+          {% endif %}
+          {% if person.department == current_user.department %}
+          <small>Studies {{person.department}}</small>
+          {% endif %}
         </div>
+        <div class="follow-btn">
+            {% if person != current_user and not current_user.is_following(person) %}<a href="{{ url_for('follow', username=person.username) }}" style="font-size:12px;text-decoration:none;">Follow</a>{% endif %}
+          </div>
       </header>
+      {% endfor %}
+      </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
