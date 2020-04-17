@@ -71,9 +71,9 @@ def market():
 def inbox():
 	return render_template('inbox.html', title="Inbox")
 
-@app.route('/send_message/<recipient>', methods=['GET', 'POST'])
+@app.route('/m/<recipient>', methods=['GET', 'POST'])
 @login_required
-def send_message(recipient):
+def message(recipient):
 	recipient = recipient.lower()
 	user = User.query.filter_by(username=recipient).first_or_404()
 	#if user == current_user:
@@ -84,7 +84,7 @@ def send_message(recipient):
 		db.session.add(msg)
 		db.session.commit()
 		flash('Your message has been sent.', 'success')
-		return redirect(url_for('send_message', recipient=recipient))
+		return redirect(url_for('message', recipient=recipient))
 
 	sent = current_user.messages_sent.filter_by(recipient_id=user.id)
 	received = current_user.messages_received.filter_by(sender_id=user.id)

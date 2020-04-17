@@ -250,7 +250,7 @@ section .btn {
                   {% if not current_user.is_following(user) %}
                     <a class="dropdown-item" href="{{ url_for('follow', username=user.username) }}" style="border-top:none;">🔅 Follow</a>
                   {% else %}
-                    <a class="dropdown-item" href="{{ url_for('send_message',recipient=user.username) }}" style="border-top:none;">🔏 Message</a>
+                    <a class="dropdown-item" href="{{ url_for('message',recipient=user.username) }}" style="border-top:none;">🔏 Message</a>
                     <a class="dropdown-item" href="{{ url_for('likes', username=user.username) }}">💛 Likes</a>
                     <a class="dropdown-item" href="{{ url_for('unfollow', username=user.username) }}">👽 Unfollow</a>
                   {% endif %}

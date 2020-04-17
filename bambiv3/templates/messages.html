@@ -65,7 +65,7 @@
           <section class="cardi scroll mb-2">
             {% for user in users if user != current_user %}
             <div class="others">
-            <div class="card--content"><a href="{{ url_for('send_message',recipient=user.username) }}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt=""></a>
+            <div class="card--content"><a href="{{ url_for('message',recipient=user.username) }}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt=""></a>
             </div>
             <small style="font-size:15px;color:#f8f8f2;padding-left:15px">
             {{user.username.lower()}}
@@ -94,7 +94,7 @@
             <small>active {{ moment(message.author.last_seen).fromNow() }}</small>
           </div>
           <div class="follow-btn">
-            <small><a href="{{ url_for('send_message',recipient=message.author.username) }}" style="text-decoration:none;">reply</a></small>
+            <small><a href="{{ url_for('message',recipient=message.author.username) }}" style="text-decoration:none;">reply</a></small>
           </div>
         </header>
 
