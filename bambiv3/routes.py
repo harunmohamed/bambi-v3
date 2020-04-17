@@ -89,7 +89,8 @@ def message(recipient):
 	sent = current_user.messages_sent.filter_by(recipient_id=user.id)
 	received = current_user.messages_received.filter_by(sender_id=user.id)
 	messages = sent.union(received).order_by(m.timestamp.asc())
-	return render_template('send_message.html', recipient=recipient, title="Chat with " + recipient.title() ,sent=sent, received=received, form=form, messages=messages)
+
+	return render_template('send_message.html', recipient=recipient, title="Chat with " + recipient.title() , form=form, messages=messages)
 
 @app.route('/messages')
 @login_required

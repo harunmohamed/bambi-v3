@@ -1,45 +1,69 @@
 {% extends "layout.html" %}
 {% block content %}
-	
+
+
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-lg-3 d-none d-lg-block">
-				<!-- User info , photos -->
-		      <header class="mb-2">
-		        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="harun profile" class="profile-thumbnail">
-		        <div class="profile-name">
-		          <h3>{{current_user.username}}</h3>
-		          <small>@{{current_user.email.split("@")[0] | lower}}</small>
-		        </div>
-		      </header>
+  <div class="row">
+    <div class="col-lg-3 d-none d-lg-block position-fixed">
+      <!-- User info , photos -->
+      {% if current_user.is_authenticated %}
+      <header class="mb-2">
+        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3>{{current_user.username}}</h3>
+          <small>@{{current_user.email.split("@")[0] | lower}}</small>
+        </div>
+      </header>
 
-		    <div class="card about mb-2" style="color:#fff;background:#0f0f0e;border-radius:10px;">
-		    <div class="card-body">
-		      <!--<p> 🎓 Studies at <span>Near East University</span></p>-->
-		      <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
-		      <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
-		      <p> 🙊 Born <span>{{ moment(current_user.age).fromNow() }}</span></p>
-		      <p> {% if current_user.gender == 'male' %} 👨 {% else %}👩 {% endif %} Gender: <span>{{current_user.gender.title()}}</span></p>
-		      <p> 🌍 From <span>{{current_user.country.title()}}</span></p>
-		      <!--<p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>-->
-		      <p> 👣 Interested in <span>{{current_user.hobby}}</span></p>
-		      <p> 💪 Joined <span>{{ moment(current_user.date_joined).fromNow() }}</span></p>
-		      <small>⏰ Last seen on: {{ moment(current_user.last_seen).format('LLL') }}</small>
-		    </div>
-		  </div>
+    <div class="card about mb-2" style="color:#fff;background:#191917;border-radius:10px;">
+    <div class="card-body">
+      <!--<p> 🎓 Studies at <span>Near East University</span></p>-->
+          <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
+          <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
+          <p> 🙊 Born <span>{{ moment(current_user.age).fromNow() }}</span></p>
+          <p> {% if current_user.gender == 'male' %} 👨 {% else %}👩 {% endif %} Gender: <span>{{current_user.gender.title()}}</span></p>
+          <p> 🌍 From <span>{{current_user.country.title()}}</span></p>
+          <!--<p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>-->
+          <p> 👣 Interested in <span>{{current_user.hobby}}</span></p>
+          <p> 💪 Joined <span>{{ moment(current_user.date_joined).fromNow() }}</span></p>
+          <small>⏰ Last seen on: {{ moment(current_user.last_seen).format('LLL') }}</small>
+    </div>
+  </div>
 
-		  <header>
-		    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
-		    <div class="profile-name">
-		      <h3 class="logo">BAMBI</h3>
-		      <small id="year"></small>
-		    </div>
-		  </header>
-		</div>
+  <header data-toggle="popover" data-content="🍌: Click to know more about Bambi">
+    <a href="{{url_for('about')}}" target="_blank" style="color: #F9E9C8;text-decoration: none;">
+    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+    <div class="profile-name">
+      <h3 class="logo">BAMBI</h3>
+      <small id="year"></small>
+    </a>
+    </div>
+  </header>
+  {% else %}
+  <header>
+    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+    <div class="profile-name">
+      <h3 class="logo">Hello Friend!</h3>
+      <small>how about signing in?</small>
+    </div>
+  </header>
+  <br>
+     <div class="menu" style="background:#191917;border-radius:10px;">
+      <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
+       <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
+      <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
+      <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
+      <a class="dropdown-item" href="{{ url_for('blog') }}"> 🎬 Blog</a> 
+      <a class="dropdown-item" href="{{ url_for('about') }}"> 👋 About Bambi</a>
+    </div>
+  {% endif %}
+</div>
 
-		<div class="col-lg-6">
 
-			<h3 style="text-align:center"><a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{recipient.title()}}
+
+    <div class="col-lg-6 offset-lg-3">  
+      
+      <h3 style="text-align:center"><a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{recipient.title()}}
              {% if recipient in ["harun" , "bambi"] %}
              <img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-left: -5px;">
              {% endif %}
@@ -47,61 +71,110 @@
 
            <div style="overflow:auto;height:480px;">
 
-			{% for message in messages %}
-	  		  <p 
-	  		  style="
-	  		  {% if message.author == current_user%}
-	  		  	text-align:right;padding:5px;border-radius:10px;
-	  		  {%else%}
-	  		  	text-align:left;padding:5px;border-radius:10px;
-	  		  {% endif %}">
+      {% for message in messages %}
+          <p 
+          style="
+          {% if message.author == current_user%}
+            text-align:right;padding:5px;border-radius:10px;
+          {%else%}
+            text-align:left;padding:5px;border-radius:10px;
+          {% endif %}">
 
-	  		  <img src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}" alt="profile pic" title="{{message.author.username.lower()}}" style="width:35px;height:35px;border-radius:50%"> {{message.body}} 
-	  		  <br><small style="text-align:right;">{{ moment(message.timestamp).fromNow() }}</small>
-	  		</p>
+          <img src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}" alt="profile pic" title="{{message.author.username.lower()}}" style="width:35px;height:35px;border-radius:50%"> {{message.body}} 
+          <br><small style="text-align:right;">{{ moment(message.timestamp).fromNow() }}</small>
+        </p>
 
-	  		{% endfor %}
+        {% endfor %}
 
-	  		</div>
+        </div>
 
-			<div class="post" style="background:none;padding:2px;">
-			  <!--{% with messages = get_flashed_messages(with_categories=true) %}
-		    	{% if messages %}
-		      		{% for category , message in messages %}
-		        		<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-	      					{{message}}
-	        			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-	          				<span aria-hidden="true">&times;</span>
-	        			</button>
-	      				</div>
-		      		{% endfor %}
-		    	{% endif %}
-	  		  {% endwith %}--->
-			  <div id="inner">
-			   <form method="POST" action="" enctype="multipart/form-data">
-				   	{{ form.hidden_tag() }}
-				      <!--<legend class="border-bottom mb-2 pb-2">Message {{recipient.title()}}</legend>-->
-				    <div class="input-group mt-2">
-					    {{ form.message.label(placeholder="message...", class="form-control-label") }}
-					        {% if form.message.errors %}
-					        	{{ form.message(placeholder="message...", class="form-control form-control-sm is-invalid") }}
-					        	<div class="invalid-feedback">
-					          		{% for error in form.message.errors %}
-					          			<span>{{ error }}</span>
-					          		{% endfor %}
-					        	</div>
-					        {% else %}
-					        	{{ form.message(placeholder="type message...", class="form-control form-control-sm", rows="2") }}
-					        {% endif %}
+      <div class="post" style="background:none;padding:2px;">
+        <!--{% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+              {% for category , message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                  {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+              {% endfor %}
+          {% endif %}
+          {% endwith %}--->
+        <div id="inner">
+         <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+              <!--<legend class="border-bottom mb-2 pb-2">Message {{recipient.title()}}</legend>-->
+            <div class="input-group mt-2">
+              {{ form.message.label(placeholder="message...", class="form-control-label") }}
+                  {% if form.message.errors %}
+                    {{ form.message(placeholder="message...", class="form-control form-control-sm is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.message.errors %}
+                          <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                  {% else %}
+                    {{ form.message(placeholder="type message...", class="form-control form-control-sm subtle", rows="2", style="border:1px solid #007bff;border-radius:5px 0px;") }}
+                  {% endif %}
 
-					    <div class="input-group-append">
-					    	{{ form.submit(class="btn btn-outline-primary") }}
-					    </div>
-				    </div>
-				</form>
-			</div>
-			<div style="margin-bottom:60px"></div>
-	</div>
+              <div class="input-group-append">
+                {{ form.submit(class="btn btn-outline-primary", style="margin-top:2px;") }}
+              </div>
+            </div>
+        </form>
+      </div>
+      <div style="margin-bottom:60px"></div>
+  </div>
 
+  <div style="margin-bottom: 50px;"></div>
+</div>
+
+
+
+    <div class="col-lg-3 d-none d-lg-block position-fixed offset-lg-9">
+      <!-- notifications and relevant ads -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category , message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              </div>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <header class="mb-2">
+        <img src="https://image.flaticon.com/icons/svg/1170/1170576.svg" alt="sell" class="profile-thumbnail">
+        <div class="profile-name">
+          <a href="{{ url_for('new_product') }}" style="text-decoration:none;">
+          <h3 style="color:#F9E9C8;">Wanna Sell?</h3>
+          <small>Post a product and let us do the magic for you.</small>
+          </a>
+        </div>
+      </header>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script>
+     $('.love').click(function(){
+      $(this).toggleClass('liked');
+    });
+  </script>
+
+  <script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover({
+    trigger: 'hover'
+  }); 
+});
+</script>
+
+<script id="dsq-count-scr" src="//baambi.disqus.com/count.js" async></script>
 
 {% endblock content %}
