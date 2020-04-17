@@ -38,6 +38,13 @@
 		</div>
 
 		<div class="col-lg-6" style="text-align: center">
+
+			{% for message in messages.items %}
+	  		  <p>{{message.author.username}}: {{message.body}} <small>{{message.timestamp}}</small></p>
+	  		  {% else %}
+	  		  <h1>no messages yet</h1>
+	  		  {% endfor %}
+	  		  
 			<div class="post">
 			  {% with messages = get_flashed_messages(with_categories=true) %}
 		    	{% if messages %}
@@ -52,11 +59,6 @@
 		    	{% endif %}
 	  		  {% endwith %}
 
-	  		  {% for message in messages.items %}
-	  		  <p>{{message.author.username}}: {{message.body}} <small>{{message.timestamp}}</small></p>
-	  		  {% else %}
-	  		  <h1>no messages yet</h1>
-	  		  {% endfor %}
 
 			  <div id="inner">
 			   <div class="content-section">
