@@ -52,7 +52,7 @@
 		    	{% endif %}
 	  		  {% endwith %}
 
-	  		  {% for message in messages %}
+	  		  {% for message in messages.items %}
 	  		  <p>{{message.author.username}}: {{message.body}} <small>{{message.timestamp}}</small></p>
 	  		  {% else %}
 	  		  <h1>no messages yet</h1>
