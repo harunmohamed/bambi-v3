@@ -84,7 +84,7 @@ def send_message(recipient):
 		db.session.add(msg)
 		db.session.commit()
 		flash('Your message has been sent.', 'success')
-		return redirect(url_for('user_posts', username=recipient))
+		return redirect(url_for('send_message', username=recipient))
 
 	sent = current_user.messages_sent.filter_by(recipient_id=user.id)
 	received = current_user.messages_received.filter_by(sender_id=user.id)
