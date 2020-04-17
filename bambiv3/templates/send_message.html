@@ -37,9 +37,9 @@
 		  </header>
 		</div>
 
-		<div class="col-lg-6" style="text-align: center">
+		<div class="col-lg-6">
 
-			<h3><a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{recipient.title()}}
+			<h3 style="text-align:center"><a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{recipient.title()}}
              {% if recipient in ["harun" , "bambi"] %}
              <img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-left: -5px;">
              {% endif %}
