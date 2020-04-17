@@ -82,8 +82,8 @@ class CommentForm(FlaskForm):
 	submit = SubmitField('🛫 Post')
 
 class MessageForm(FlaskForm):
-    message = TextAreaField(('Message'), validators=[DataRequired()]) #Length(min=0, max=140)
-    submit = SubmitField('send')
+    message = TextAreaField((''), validators=[DataRequired()]) #Length(min=0, max=140)
+    submit = SubmitField('🛫')
 
 class ProductForm(FlaskForm):
 	title = StringField(validators=[DataRequired()])

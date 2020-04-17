@@ -39,14 +39,33 @@
 
 		<div class="col-lg-6" style="text-align: center">
 
-			{% for message in messages %}
-	  		  <p>{{message.author.username}}: {{message.body}} <br><small>{{ moment(message.timestamp).fromNow() }}</small></p>
-	  		  {% else %}
-	  		  <h1>no messages yet</h1>
-	  		  {% endfor %}
+			<h3><a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{recipient.title()}}
+             {% if recipient in ["harun" , "bambi"] %}
+             <img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-left: -5px;">
+             {% endif %}
+           </a></h3>
 
-			<div class="post">
-			  {% with messages = get_flashed_messages(with_categories=true) %}
+           <div style="height:90%;overflow:auto">
+
+			{% for message in messages %}
+	  		  <p 
+	  		  style="
+	  		  {% if message.author == current_user%}
+	  		  	text-align:right;padding:5px;border-radius:10px;
+	  		  {%else%}
+	  		  	text-align:left;padding:5px;border-radius:10px;display:inline-block;
+	  		  {% endif %}">
+
+	  		  <img src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}" alt="profile pic" title="{{message.author.username.lower()}}" style="width:35px;height:35px;border-radius:50%"> {{message.body}} 
+	  		  <br><small style="text-align:right;">{{ moment(message.timestamp).fromNow() }}</small>
+	  		</p>
+
+	  		{% endfor %}
+
+	  		</div>
+
+			<div class="post" style="background:none;padding:2px;">
+			  <!--{% with messages = get_flashed_messages(with_categories=true) %}
 		    	{% if messages %}
 		      		{% for category , message in messages %}
 		        		<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
@@ -57,38 +76,31 @@
 	      				</div>
 		      		{% endfor %}
 		    	{% endif %}
-	  		  {% endwith %}
-
-
+	  		  {% endwith %}--->
 			  <div id="inner">
-			   <div class="content-section">
-				  <form method="POST" action="" enctype="multipart/form-data">
-				    {{ form.hidden_tag() }}
-				    <fieldset class="form-group">
-				      <legend class="border-bottom mb-2 pb-2">Message {{recipient.title()}}</legend>
-				      <div class="form-group">
-				        {{ form.message.label(placeholder="speak your mind...", class="form-control-label") }}
-				        {% if form.message.errors %}
-				        {{ form.message(placeholder="speak your mind...", class="form-control form-control-sm is-invalid") }}
-				        <div class="invalid-feedback">
-				          {% for error in form.message.errors %}
-				          <span>{{ error }}</span>
-				          {% endfor %}
-				        </div>
-				        {% else %}
-				        {{ form.message(placeholder="speak your mind...", class="form-control form-control-sm", rows="5") }}
-				        {% endif %}
-				      </div>
-				    </div>
-				    </fieldset>
-				    <div class="form-group">
-				      {{ form.submit(class="btn btn-outline-warning") }}
-				    </div>
-				  </form>
+			   <form method="POST" action="" enctype="multipart/form-data">
+				   	{{ form.hidden_tag() }}
+				      <!--<legend class="border-bottom mb-2 pb-2">Message {{recipient.title()}}</legend>-->
+				    <div class="input-group mt-2">
+					    {{ form.message.label(placeholder="message...", class="form-control-label") }}
+					        {% if form.message.errors %}
+					        	{{ form.message(placeholder="message...", class="form-control form-control-sm is-invalid") }}
+					        	<div class="invalid-feedback">
+					          		{% for error in form.message.errors %}
+					          			<span>{{ error }}</span>
+					          		{% endfor %}
+					        	</div>
+					        {% else %}
+					        	{{ form.message(placeholder="type message...", class="form-control form-control-sm", rows="2") }}
+					        {% endif %}
 
-			  </div>
-		</div>
-		</div>
+					    <div class="input-group-append">
+					    	{{ form.submit(class="btn btn-outline-primary") }}
+					    </div>
+				    </div>
+				</form>
+			</div>
+	</div>
 
 
 {% endblock content %}
