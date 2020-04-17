@@ -51,6 +51,13 @@
 		      		{% endfor %}
 		    	{% endif %}
 	  		  {% endwith %}
+
+	  		  {% for message in messages %}
+	  		  <p>{{message.author.username}}: {{message.body}} <small>{{message.timestamp}}</small></p>
+	  		  {% else %}
+	  		  <h1>no messages yet</h1>
+	  		  {% endfor %}
+
 			  <div id="inner">
 			   <div class="content-section">
 				  <form method="POST" action="" enctype="multipart/form-data">
