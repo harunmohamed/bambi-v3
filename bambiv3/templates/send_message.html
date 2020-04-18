@@ -63,7 +63,7 @@
 
     <div class="col-lg-6 offset-lg-3"> 
       
-      <h3 style="text-align:center"><a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{recipient.title()}}
+      <h3 style="text-align:center"><a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{user.username.title()}}
              {% if recipient in ["harun" , "bambi"] %}
              <img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-left: -5px;">
              {% endif %}
@@ -71,11 +71,12 @@
 
            <div style="overflow:auto;height:460px;padding:5px;">
 
+
       {% for message in messages %}
           <p class="mb-2" 
           style="
           {% if message.author == current_user%}
-            text-align:left;padding:5px;border-radius:10px;display:inline-block;float:right;clear:both;max-width:75%;background:#191917
+            text-align:left;padding:5px;border-radius:10px;display:inline-block;float:right;clear:both;max-width:75%;background:#191917;
           {%else%}
             text-align:left;padding:5px;border-radius:10px;display:inline-block;max-width:75%;border:2px solid #191917;
           {% endif %}">
@@ -90,6 +91,23 @@
           <small style="display:inline-block;float:right;">{{ moment(message.timestamp).fromNow() }}</small>
         </p>
         <br>
+
+        {% else %}
+            <!-- if chat has no messages -->
+            <p class="mb-2" style="text-align:left;padding:5px;border-radius:10px;display:inline-block;float:right;clear:both;max-width:75%;background:#191917;">
+
+            <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="profile pic"style="width:35px;height:35px;border-radius:50%">
+
+            hey {{current_user.username.title()}}, {{user.username.title()}} likes {{user.hobby.lower()}}. how is that for a start? 😉🍻
+
+            </p>
+
+            <p class="mb-2" style="text-align:left;padding:5px;border-radius:10px;display:inline-block;float:right;clear:both;max-width:75%;background:#191917;">
+              {% if current_user.single and user.single and current_user.gender != user.gender %}
+                what if I also told you {{user.username.title()}} is single & searchin? 💑😇❤
+              {% endif %}
+            </p>
+
         {% endfor %}
 
         </div>

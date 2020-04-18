@@ -93,7 +93,7 @@ def message(recipient):
 		recent_chats.append(message.author)
 	recent_chats = list(dict.fromkeys(recent_chats))
 
-	return render_template('send_message.html', recipient=recipient, title="Chat with " + recipient.title() , form=form, messages=messages, recent_chats=recent_chats)
+	return render_template('send_message.html', recipient=recipient, title="Chat with " + recipient.title() , user=user, form=form, messages=messages, recent_chats=recent_chats)
 
 @app.route('/messages')
 @login_required
