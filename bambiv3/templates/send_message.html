@@ -61,7 +61,7 @@
 
 
 
-    <div class="col-lg-6 offset-lg-3">  
+    <div class="col-lg-6 offset-lg-3"> 
       
       <h3 style="text-align:center"><a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{recipient.title()}}
              {% if recipient in ["harun" , "bambi"] %}
@@ -72,19 +72,24 @@
            <div style="overflow:auto;height:460px;padding:5px;">
 
       {% for message in messages %}
-          <p 
+          <p class="mb-2" 
           style="
           {% if message.author == current_user%}
-            text-align:left;padding:5px;border-radius:10px;display:inline-block;float:right;max-width:75%;background:#191917
+            text-align:left;padding:5px;border-radius:10px;display:inline-block;max-width:75%;background:#191917
           {%else%}
             text-align:left;padding:5px;border-radius:10px;display:inline-block;max-width:75%;border:2px solid #191917;
           {% endif %}">
 
-          <img src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}" alt="profile pic" title="{{message.author.username.lower()}}" style="width:35px;height:35px;border-radius:50%"> {{message.body}} 
+          {% if message.author != current_user %}
+          <img src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}" alt="profile pic" title="{{message.author.username.lower()}}" style="width:35px;height:35px;border-radius:50%">
+          {% endif %} 
+
+          {{message.body}} 
+
           <br>
           <small style="display:inline-block;float:right;">{{ moment(message.timestamp).fromNow() }}</small>
         </p>
-
+        <br>
         {% endfor %}
 
         </div>
