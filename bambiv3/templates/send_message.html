@@ -75,9 +75,9 @@
           <p 
           style="
           {% if message.author == current_user%}
-            text-align:right;padding:5px;border-radius:10px;
+            text-align:right;padding:5px;border-radius:10px;display:inline-block;float:right;max-width:75%;background:#191917
           {%else%}
-            text-align:left;padding:5px;border-radius:10px;
+            text-align:left;padding:5px;border-radius:10px;display:inline-block;max-width:75%;border:2px solid #191917;
           {% endif %}">
 
           <img src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}" alt="profile pic" title="{{message.author.username.lower()}}" style="width:35px;height:35px;border-radius:50%"> {{message.body}} 
@@ -89,18 +89,6 @@
         </div>
 
       <div class="post" style="background:none;padding:2px;">
-        <!--{% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-              {% for category , message in messages %}
-                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                  {{message}}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-              {% endfor %}
-          {% endif %}
-          {% endwith %}--->
         <div id="inner">
          <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
