@@ -5,63 +5,27 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-3 d-none d-lg-block position-fixed">
-      <!-- User info , photos -->
-      {% if current_user.is_authenticated %}
+      <h1>Recent Chats</h1>
+
+      <div style="overflow:auto;height:460px;padding-right:5px;">
+      {% for person in recent_chats if person.username != recipient %}
+      <a href="{{ url_for('message',recipient=person.username) }}" style="text-decoration:none;">
       <header class="mb-2">
-        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail">
+        <img src="{{ url_for('static', filename='profile_pics/' + person.image_file) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
-          <h3>{{current_user.username}}</h3>
-          <small>@{{current_user.email.split("@")[0] | lower}}</small>
+          <h3>{{person.username}}</h3>
+          <small>@{{person.email.split("@")[0] | lower}}</small>
         </div>
       </header>
+      </a>
+      {% endfor %}
+    </div>
 
-    <div class="card about mb-2" style="color:#fff;background:#191917;border-radius:10px;">
-    <div class="card-body">
-      <!--<p> 🎓 Studies at <span>Near East University</span></p>-->
-          <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
-          <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
-          <p> 🙊 Born <span>{{ moment(current_user.age).fromNow() }}</span></p>
-          <p> {% if current_user.gender == 'male' %} 👨 {% else %}👩 {% endif %} Gender: <span>{{current_user.gender.title()}}</span></p>
-          <p> 🌍 From <span>{{current_user.country.title()}}</span></p>
-          <!--<p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>-->
-          <p> 👣 Interested in <span>{{current_user.hobby}}</span></p>
-          <p> 💪 Joined <span>{{ moment(current_user.date_joined).fromNow() }}</span></p>
-          <small>⏰ Last seen on: {{ moment(current_user.last_seen).format('LLL') }}</small>
-    </div>
-  </div>
-
-  <header data-toggle="popover" data-content="🍌: Click to know more about Bambi">
-    <a href="{{url_for('about')}}" target="_blank" style="color: #F9E9C8;text-decoration: none;">
-    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
-    <div class="profile-name">
-      <h3 class="logo">BAMBI</h3>
-      <small id="year"></small>
-    </a>
-    </div>
-  </header>
-  {% else %}
-  <header>
-    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
-    <div class="profile-name">
-      <h3 class="logo">Hello Friend!</h3>
-      <small>how about signing in?</small>
-    </div>
-  </header>
-  <br>
-     <div class="menu" style="background:#191917;border-radius:10px;">
-      <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
-       <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
-      <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
-      <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
-      <a class="dropdown-item" href="{{ url_for('blog') }}"> 🎬 Blog</a> 
-      <a class="dropdown-item" href="{{ url_for('about') }}"> 👋 About Bambi</a>
-    </div>
-  {% endif %}
 </div>
 
 
 
-    <div class="col-lg-6 offset-lg-3"> 
+    <div class="col-lg-8 offset-lg-3"> 
       
       <h3 style="text-align:center"><a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{user.username.title()}}
              {% if recipient in ["harun" , "bambi"] %}
@@ -141,8 +105,8 @@
 
 
 
-    <div class="col-lg-3 d-none d-lg-block position-fixed offset-lg-9">
-      <!-- notifications and relevant ads -->
+    <!--<div class="col-lg-3 d-none d-lg-block position-fixed offset-lg-9">
+      
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category , message in messages %}
@@ -174,7 +138,7 @@
           </div>
       </header>
       {% endfor %}
-      </div>
+      </div>-->
 </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
