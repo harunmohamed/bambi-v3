@@ -8,7 +8,7 @@
       <h1>Recent Chats</h1>
 
       <div style="overflow:auto;height:460px;padding-right:5px;">
-      {% for person in recent_chats if person.username != recipient %}
+      {% for person in recent_chats %}
       <a href="{{ url_for('message',recipient=person.username) }}" style="text-decoration:none;">
       <header class="mb-2">
         <img src="{{ url_for('static', filename='profile_pics/' + person.image_file) }}" alt="default profile" class="profile-thumbnail">
