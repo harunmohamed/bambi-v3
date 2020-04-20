@@ -5,9 +5,14 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-3 d-none d-lg-block position-fixed">
-      <h1>Recent Chats</h1>
+      <h1>
 
-      <div style="overflow:auto;height:460px;padding-right:5px;">
+        Recent Chats
+         {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
+
+      </h1>
+
+      <div style="overflow:auto;height:500px;padding-right:5px;">
       {% for person in recent_chats %}
       <a href="{{ url_for('message',recipient=person.username) }}" style="text-decoration:none;">
       <header class="mb-2">
@@ -15,7 +20,7 @@
         <div class="profile-name">
           <h3>{{person.username}}</h3>
           {% for message in received_all if person == message.author %}
-          <small title="">{{message.body | truncate(45) }}</small>
+          <small title="">{{ message.body | truncate(45) }}</small>
           {% endfor %}
         </div>
       </header>

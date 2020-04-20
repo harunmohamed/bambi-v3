@@ -76,6 +76,8 @@ def inbox():
 def message(recipient):
 	recipient = recipient.lower()
 	user = User.query.filter_by(username=recipient).first_or_404()
+	current_user.last_message_read_time = datetime.utcnow()
+	db.session.commit()
 	#if user == current_user:
 		#return redirect(url_for('messages'))
 	form = MessageForm()
