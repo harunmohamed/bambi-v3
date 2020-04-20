@@ -92,14 +92,11 @@ def message(recipient):
 	#adding all names of people who texted me to recent chats
 	received_all = current_user.messages_received.order_by(m.timestamp.desc())
 	recent_chats = list()
-	recent_msg = list()
 	for message in received_all:
 		recent_chats.append(message.author)
-		recent_msg.append(message.body)
 	recent_chats = list(dict.fromkeys(recent_chats))
-	recent_msg = recent_msg[0]
 
-	return render_template('send_message.html', recipient=recipient, title="Chat with " + recipient.title() , user=user, form=form, messages=messages, recent_chats=recent_chats, recent_msg=recent_msg)
+	return render_template('send_message.html', recipient=recipient, title="Chat with " + recipient.title() , user=user, form=form, messages=messages, received_all=received_all, recent_chats=recent_chats)
 
 @app.route('/messages')
 @login_required
