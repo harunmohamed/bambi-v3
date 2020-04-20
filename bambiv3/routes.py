@@ -88,8 +88,11 @@ def message(recipient):
 	sent = current_user.messages_sent.filter_by(recipient_id=user.id)
 	received = current_user.messages_received.filter_by(sender_id=user.id)
 	messages = sent.union(received).order_by(m.timestamp.asc())
+
+	#adding all names of people who texted me to recent chats
+	received_all = current_user.messages_received.order_by(m.timestamp.desc())
 	recent_chats = list()
-	for message in messages:
+	for message in received_all:
 		recent_chats.append(message.author)
 	recent_chats = list(dict.fromkeys(recent_chats))
 
