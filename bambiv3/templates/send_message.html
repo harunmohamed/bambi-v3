@@ -19,9 +19,10 @@
         <img src="{{ url_for('static', filename='profile_pics/' + person.image_file) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
           <h3>{{person.username}}</h3>
-          {% for message in received_all if person == message.author %}
+          <!--{% for message in received_all if person == message.author %}
           <small title="">{{ message.body | truncate(45) }}</small>
-          {% endfor %}
+          {% endfor %}-->
+          <small class="text-muted">active {{ moment(person.last_seen).fromNow() }}</small>
         </div>
       </header>
       </a>
