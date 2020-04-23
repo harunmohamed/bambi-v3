@@ -105,14 +105,11 @@ h1 {
         {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
       <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
       <a class="dropdown-item" href="{{ url_for('market') }}"> 👜 Market</a>
-      <!--<a class="dropdown-item" href="{{ url_for('new_product') }}"> 🛠 Sell</a>-->
       <a class="dropdown-item" href="{{ url_for('account') }}"> 🍪 Settings</a>
       <a class="dropdown-item" href="{{ url_for('blog') }}"> 🎬 Blog</a> 
       <a class="dropdown-item" href="{{ url_for('about') }}"> 👋 About Bambi</a>
       <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
     </div>
-
-  </div>
 
 
   <header data-toggle="popover" data-content="🍌: Click to know more about Bambi">
