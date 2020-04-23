@@ -15,20 +15,19 @@
         </div>
       </header>
 
-    <div class="card about mb-2" style="color:#fff;background:#191917;border-radius:10px;">
-    <div class="card-body">
-      <!--<p> 🎓 Studies at <span>Near East University</span></p>-->
-          <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
-          <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
-          <p> 🙊 Born <span>{{ moment(current_user.age).fromNow() }}</span></p>
-          <p> {% if current_user.gender == 'male' %} 👨 {% else %}👩 {% endif %} Gender: <span>{{current_user.gender.title()}}</span></p>
-          <p> 🌍 From <span>{{current_user.country.title()}}</span></p>
-          <!--<p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>-->
-          <p> 👣 Interested in <span>{{current_user.hobby}}</span></p>
-          <p> 💪 Joined <span>{{ moment(current_user.date_joined).fromNow() }}</span></p>
-          <small>⏰ Last seen on: {{ moment(current_user.last_seen).format('LLL') }}</small>
+    <div class="menu mb-2" style="background:#191917;border-radius:10px;">
+      <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
+       <a class="dropdown-item" href="{{ url_for('messages') }}"> 💬 Messages 
+        {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
+      <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
+      <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
+      <a class="dropdown-item" href="{{ url_for('market') }}"> 👜 Market</a>
+      <!--<a class="dropdown-item" href="{{ url_for('new_product') }}"> 🛠 Sell</a>-->
+      <a class="dropdown-item" href="{{ url_for('account') }}"> 🍪 Settings</a>
+      <a class="dropdown-item" href="{{ url_for('blog') }}"> 🎬 Blog</a> 
+      <a class="dropdown-item" href="{{ url_for('about') }}"> 👋 About Bambi</a>
+      <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
     </div>
-  </div>
 
   <header data-toggle="popover" data-content="🍌: Click to know more about Bambi">
     <a href="{{url_for('about')}}" target="_blank" style="color: #F9E9C8;text-decoration: none;">
