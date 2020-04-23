@@ -5,7 +5,8 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-3 d-none d-lg-block position-fixed">
-      <h1>
+     
+       <h1>
 
         Recent Chats
          {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
@@ -113,8 +114,8 @@
 
 
 
-    <!--<div class="col-lg-3 d-none d-lg-block position-fixed offset-lg-9">
-      
+    <!--<div class="col-lg-3 d-none d-lg-block position-fixed offset-sm-9">
+       notifications and relevant ads 
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category , message in messages %}
@@ -127,27 +128,8 @@
             {% endfor %}
         {% endif %}
       {% endwith %}
-      <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:400px;">
-        <h5 style="padding-left: 3px;">Recent Chats</h5>
-        {% for person in recent_chats if person.username != recipient %}
-        <header>
-        <a href="{{url_for('message', recipient=person.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + person.image_file) }}" alt="default profile" class="profile-thumbnail"></a>
-        <div class="profile-name">
-          <h3>{{person.username}}</h3>
-          {% if person.country == current_user.country %}
-          <small>From {{person.country}}</small>
-          {% endif %}
-          {% if person.department == current_user.department %}
-          <small>Studies {{person.department}}</small>
-          {% endif %}
-        </div>
-        <div class="follow-btn">
-            {% if person != current_user and not current_user.is_following(person) %}<a href="{{ url_for('follow', username=person.username) }}" style="font-size:12px;text-decoration:none;">Follow</a>{% endif %}
-          </div>
-      </header>
-      {% endfor %}
-      </div>-->
-</div>
+      
+</div>-->
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
