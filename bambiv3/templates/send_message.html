@@ -34,7 +34,7 @@
 
 
 
-    <div class="col-lg-8 offset-lg-3"> 
+    <div class="col-lg-7 offset-lg-3"> 
       
       <h3 style="text-align:center"><a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{user.username.title()}}
              {% if recipient in ["harun" , "bambi"] %}
@@ -55,7 +55,7 @@
           {% endif %}">
 
           {% if message.author != current_user %}
-          <img src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}" alt="profile pic" title="{{message.author.username.lower()}}" style="width:35px;height:35px;border-radius:50%">
+          <img src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}" alt="profile pic" title="{{message.author.username.lower()}}" style="width:30px;height:30px;border-radius:50%">
           {% endif %} 
 
           {{message.body | safe | urlize(40, target='_blank')}} 
@@ -100,11 +100,11 @@
                         {% endfor %}
                     </div>
                   {% else %}
-                    {{ form.message(placeholder="type message...", class="form-control form-control-sm subtle", rows="2", style="border:1px solid #007bff;border-radius:5px 0px;") }}
+                    {{ form.message(placeholder="type message...", class="form-control form-control-sm subtle", rows="2", style="border:2px solid #191917;height:45px;border-radius:5px 0px;") }}
                   {% endif %}
 
               <div class="input-group-append">
-                {{ form.submit(class="btn btn-outline-primary", style="margin-top:2px;") }}
+                {{ form.submit(class="btn", style="margin-top:2px;border:2px solid #191917;") }}
               </div>
             </div>
         </form>
