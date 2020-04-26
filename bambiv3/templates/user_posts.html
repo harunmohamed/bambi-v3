@@ -339,14 +339,13 @@ section .btn {
   <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow-y:auto;overflow-x:hidden;height:318px;" class="mb-2">
         {% if current_user != user %}<h5 style="padding-left: 3px;">{{user.username.title()}}'s Photos</h5>{% else %} <h5>My Photos</h5>{% endif %}
         
-        {% for post in posts.items if not post.anonymous %}
+        {% for post in post_images if not post.anonymous and user == post.author %}
           {% if post.image %}
           <a href="{{url_for('post', post_id=post.id)}}">
             <img src="{{ url_for('static', filename='profile_pics/' + post.image) }}" style="width:50%;height:150px;border-radius:5px;float:left;display:inline-block;" class="pr-2 pb-2">
           </a>
           {% endif  %}
         {% endfor %}
-
   </div>
 
   <header class="d-none d-lg-flex">
