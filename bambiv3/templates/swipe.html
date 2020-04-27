@@ -232,7 +232,7 @@ body {
       <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" style="width: 100%" height="70%">
       <h5>{{user.username}} <i class="far fa-check-circle"></i></h5>
       <div class="info">
-      <small>I'm {{user.age}} from {{user.country}} and I study {{user.department}}</small> <br>
+      <small>I'm from {{user.country}} & I'm interested in {{user.hobby}}</small> <br>
       <small title="View {{user.username}}'s Profile and Posts"><a href="{{url_for('user_posts', username=user.username)}}" target="_blank">MORE</a></small>
       </div>
     </div>
