@@ -150,7 +150,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Your Name - [@harunnmohamed](https://twitter.com/harunnmohamed) - harunmohamed901@gmail.com
 
-Project Link: [https://github.com/harunmohamed/bambi-v3](https://github.com/harumohamed/bambi-v3)
+Project Link: [Bambi Official Webapp](https://bambi.app)
 
 
 
