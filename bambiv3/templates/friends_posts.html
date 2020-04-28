@@ -167,7 +167,7 @@
           <div class="stats">
             <div class="Retweets">
               {% set words = post.content.split() %}
-               <a class="badge badge-dark p-1">❤ {{ post.likes.count() }}</a> • <a class="badge badge-dark p-1">⏳ {{ moment(post.date_posted).fromNow() }}</a> • <a  class="badge badge-dark p-1" href="{{url_for('post', post_id=post.id)}}">🍒comments</a> <!--• <small>{{words | count}} words</small>-->
+               <a class="btn btn-sm btn-outline-dark p-1">❤ {{ post.likes.count() }}</a>  <a class="btn btn-sm btn-outline-dark p-1 ml-1">⏳ {{ moment(post.date_posted).fromNow() }}</a> <a  class="btn btn-sm btn-outline-dark p-1 ml-1" href="{{url_for('post', post_id=post.id)}}" style="color:#fff;">🍒comments</a> <!--• <small>{{words | count}} words</small>-->
             </div>
           </div>
         </footer>
