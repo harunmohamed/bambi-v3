@@ -91,7 +91,7 @@
         <footer>
           <div class="stats">
             <div class="Retweets">
-               <a class="btn btn-sm btn-outline-success p-1">💵 {{product.price}}</a> <a class="btn btn-sm btn-outline-danger p-1 ml-1">🗻{{product.location}}</a> <a class="btn btn-sm btn-outline-primary p-1 ml-1" type="tel">☎ {{product.contact}}</a> <a class="btn btn-sm btn-outline-dark p-1">⏳ {{ moment(product.date_posted).fromNow() }}</a> 
+               <a class="btn btn-sm btn-outline-success p-1">💵 {{product.price}}</a> <a class="btn btn-sm btn-outline-danger p-1 ml-1">🗻{{product.location}}</a> <a class="btn btn-sm btn-outline-primary p-1 ml-1" type="tel">☎ {{product.contact}}</a> <a class="btn btn-sm btn-outline-dark p-1" title="{{product.date_posted.strftime('%a, %b %d, %Y at %H:%M:%S')}}">⏳ {{ moment(product.date_posted).fromNow() }}</a> 
             </div>
           </div>
         </footer>
