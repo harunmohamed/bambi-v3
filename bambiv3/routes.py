@@ -62,6 +62,10 @@ def blog():
 def about():
 	return render_template('about.html', title="About")
 
+@app.route('/ecc102')
+def ecc102():
+	return render_template('ecc102.html', title="Programming and Problem Solving")
+
 @app.route('/market', methods=['GET', 'POST'])
 def market():
 	products = Product.query.order_by(Product.date_posted.desc())

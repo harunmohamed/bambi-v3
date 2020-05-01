@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+  <style>
+    .col-lg-3{
+      background: #000;
+      color:#fff;
+      padding: 10px;
+      height: 100%;
+      overflow-y: auto;
+    }
+    .col-lg-9{
+      background: #191917;
+      color: #fff;
+      padding: 10px;
+    }
+    ul{
+      list-style-type: square;
+    }
+    .cardi{
+    overflow-x: auto;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  .cardi::-webkit-scrollbar {
+    display: none;
+  }
+  .scroll img{
+    width:100%;
+    height:100%;
+    border-radius:10px;
+  }
+  .card--content {
+    /*background: linear-gradient(#ffcccc,#ccffff);*/
+    background: url(https://bit.ly/3d12BUn) no-repeat fixed center;
+    width: 150px;
+    height: 150px;
+    margin: 5px;
+    border-radius:10px;
+    border:1px solid #fff;
+    border-radius:10px;
+    padding:1px;
+    flex: 0 0 auto;
+  }
+  .links .card{
+    width:33%;
+    float:left;
+    margin: 1.66%;
+    color:#000;
+  }
+  iframe{
+    width:100%;
+    height:500px;
+    border-radius:10px;
+  }
+      /* width */
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #000; 
+    }
+     
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #555; 
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #F9E9C8; 
+    }
+    h2{
+      padding-left: 10px;
+    }
+  </style>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Language" content="en-au">
+    <meta name="description" content="ECC102 - Programming and Problem solving is the introductory course to programming and software engineering at near east University. Access all course material here" />
+    <meta property="og:description" content="ECC102 - Programming and Problem solving is the introductory course to programming and software engineering at near east University. Access all course material here" />
+    <meta property="og:image" href="{{ url_for('static', filename='profile_pics/' + 'default.jpg') }}" />
+    <link rel="canonical" href="http://bambi.app/">
+    <meta property="og:title" content="ECC102 by Assist. Prof. Dr. Hüseyin SEVAY">
+    <meta property="og:description" content="ECC102 - Programming and Problem solving is the introductory course to programming and software engineering at near east University. Access all course material here">
+    <meta property="og:url" content="http://bambi.app/">
+    <meta property="og:site_name" content="Bambi">
+    <meta property="og:image" content="{{ url_for('static', filename='profile_pics/' + 'default.jpg') }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="ECC102 - Programming and Problem solving is the introductory course to programming and software engineering at near east University. Access all course material here.">
+    <meta name="twitter:title" content="ECC102 by Assist. Prof. Dr. Hüseyin SEVAY">
+    <meta name="twitter:domain" content="Bambi">
+    <meta name="twitter:creator" content="@harunnmohamed">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Programming and Problem Solving</title>
+  </head>
+  <body>
+    
+    <div class="container-fluid">
+      <div class="row"><!--main row-->
+        <div class="col-lg-3 position-fixed">
+          <h3>ECC102: Programming and Problem Solving</h3>
+          <span class="" style="font-weight:300;">
+            <img src="https://bit.ly/3aREVjP" style="width:25px;height:25px;border-radius:50%">
+          Near East University
+        </span> <br>
+          <img src="https://imgur.com/9ABDD1i.png" class="mt-4" style="width:60px;height:60px;border-radius:50%;">
+          <p class="mb-0 pb-0">
+            Assist. Prof. Dr. Hüseyin SEVAY
+            <a href="https://www.facebook.com/hsevay" target="_blank">
+              <img src="https://www.flaticon.com/premium-icon/icons/svg/2392/2392485.svg" style="height:20px;width:20px;margin-top:-3px;">
+            </a>
+          </p> 
+          <small class="text-muted">huseyin.sevay@neu.edu.tr</small>
+
+          <div class="mt-2 mb-2" style="border-top:1px solid gray;border-bottom:1px solid gray">
+            <h4 class="mt-1">Course Work</h4>
+          <ul style="margin-left: -10px">
+            <li><a href="#conditionals">Python Conditionals</a></li>
+            <li><a href="#functions">Functions</a></li>
+            <li><a href="#sets">Sets</a></li>
+            <li><a href="#lists">Lists</a></li>
+            <li><a href="#dicts">Dictionaries</a></li>
+            <li><a href="#tuples">Tuples</a></li>
+            <!--<li>Turtles</li>
+            <li>Django</li>
+            <li>Testing, CI/CD</li>
+            <li>GitHub, Travis CI</li>
+            <li>Scalability</li>
+            <li>Security</li>-->
+          </ul>
+          </div>
+
+          <div class="mt-2 mb-2">
+            <h4>Course Book</h4>
+            <a href="http://greenteapress.com/thinkpython2/thinkpython2.pdf">Think Python: How to Think Like a Computer Scientist
+            </a>
+          </div>
+
+          <div class="mt-4">
+            <img src="https://bit.ly/2zKfEuV" style="width:30px;height:30px;border-radius:50%">
+            <small>created by <a href="https://www.bambi.app/user/harun">harun mohamed</a> on 01/05/20</small>
+          </div>
+
+          <hr>
+        </div> <!--side bar-->
+
+        <div class="col-lg-9 offset-lg-3">
+
+          <!-- Scroll Section -->
+          <h2>Lectures and Assignments</h2>
+          <!--lectures and assignments-->
+          <section class="cardi scroll mb-2">
+            <!--materials-->
+            <div class="others">
+            <div class="card--content"><a href=""><img src="" alt=""></a></div>
+            <small style="font-size:15px;color:#f8f8f2;padding-left:15px">Lecture 11</small>
+            </div>
+
+            <div class="others">
+            <div class="card--content"><a href=""><img src="" alt=""></a></div>
+            <small style="font-size:15px;color:#f8f8f2;padding-left:15px">Lecture 10</small>
+            </div>
+
+            <div class="others">
+            <div class="card--content"><a href=""><img src="" alt=""></a></div>
+            <small style="font-size:15px;color:#f8f8f2;padding-left:15px">Homework 4</small>
+            </div>
+
+            <div class="others">
+            <div class="card--content"><a href=""><img src="" alt=""></a></div>
+            <small style="font-size:15px;color:#f8f8f2;padding-left:15px">Homework 3</small>
+            </div>
+
+            <div class="others">
+            <div class="card--content"><a href=""><img src="" alt=""></a></div>
+            <small style="font-size:15px;color:#f8f8f2;padding-left:15px">Lecture 9</small>
+            </div>
+
+            <div class="others">
+            <div class="card--content"><a href=""><img src="" alt=""></a></div>
+            <small style="font-size:15px;color:#f8f8f2;padding-left:15px">Lecture 8</small>
+            </div>
+            
+            <!--empty boxes-->
+            <div class="card--content"><img src="" alt=""></div>
+            <div class="card--content"><img src="" alt=""></div>
+            <div class="card--content"><img src="" alt=""></div>
+            <div class="card--content"><img src="" alt=""></div>
+          </section>
+
+          <!--materials and links-->
+          <h2 class="mt-4">Materials and Links</h2>
+          <div class="links">
+            
+            <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://bit.ly/3d3JEAf" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Lists</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://bit.ly/3d3JEAf" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Dictionaries</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://bit.ly/3d3JEAf" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Functions</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://bit.ly/3d3JEAf" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Classes</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://bit.ly/3d3JEAf" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Monkey Patching</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://bit.ly/3d3JEAf" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Polymorphism</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+
+          </div> <!-- links -->
+
+          
+          <div class="videos">
+            <h2 class="mt-4">Videos</h2>
+
+            <div id="conditionals" class="mb-2">
+              <h4>Python Conditionals - If Else Statements</h4>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/f4KOjWS_KZs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div id="functions" class="mb-2">
+              <h4>Functions</h4>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/NE97ylAnrz4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div id="sets" class="mb-2">
+              <h4>Sets</h4>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/sBvaPopWOmQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div id="lists" class="mb-2">
+              <h4>Lists</h4>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/ohCDWZgNIU0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div id="dicts" class="mb-2">
+              <h4>Dictionaries</h4>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/XCcpzWs-CI4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div id="tuples" class="mb-2">
+              <h4>Tuples</h4>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/NI26dqhs2Rk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+
+          </div><!--videos-->
+
+        </div> <!--main column-->
+      </div> <!--main row-->
+    </div> <!--container-->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
