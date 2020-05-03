@@ -2,6 +2,9 @@ from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from bambiv3 import db, login_manager, app
 from flask_login import UserMixin
+from markdown import markdown
+import bleach
+
 
 
 @login_manager.user_loader
@@ -124,11 +127,22 @@ class Post(db.Model):
 	likes = db.relationship('PostLike', backref='post', lazy='dynamic')
 	comments = db.relationship("Comment", backref="post", lazy="dynamic", cascade="all, delete-orphan")
 
+	
 	def __repr__(self):
 		if self.title != None:
 			return f"Post('{self.title}','{self.content}', '{self.date_posted}')"
 		else:
 			return f"Post({self.content}', '{self.date_posted}')"
+
+	@staticmethod
+	def on_changed_body(target, value, oldvalue, initiator):
+		allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
+		'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
+		'h1', 'h2', 'h3', 'p', 'iframe']
+		target.content = bleach.linkify(bleach.clean(markdown(value, output_format='html'),
+			tags=allowed_tags, strip=True))
+
+
 
 class PostLike(db.Model):
 	__tablename__ = 'post_like'
@@ -137,14 +151,14 @@ class PostLike(db.Model):
 	post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
 
 class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.Text, nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    post_id = db.Column(db.Integer, db.ForeignKey("post.id"), nullable=False)
+	id = db.Column(db.Integer, primary_key=True)
+	body = db.Column(db.Text, nullable=False)
+	date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	post_id = db.Column(db.Integer, db.ForeignKey("post.id"), nullable=False)
 
-    def __repr__(self):
-        return f"<Reply (id='{self.id}', body='{self.body}', date_posted='{self.date_posted}')>"
+	def __repr__(self):
+		return f"<Reply (id='{self.id}', body='{self.body}', date_posted='{self.date_posted}')>"
 
 class Product(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -164,12 +178,12 @@ class Product(db.Model):
 
 
 class Message(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    body = db.Column(db.Text) #db.String(140)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+	id = db.Column(db.Integer, primary_key=True)
+	sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+	recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+	body = db.Column(db.Text) #db.String(140)
+	timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
-    def __repr__(self):
-        return '<Message {}>'.format(self.body)
+	def __repr__(self):
+		return '<Message {}>'.format(self.body)
 
