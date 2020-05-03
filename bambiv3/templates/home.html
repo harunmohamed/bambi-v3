@@ -182,8 +182,9 @@
               <a href="{{url_for('user_posts', username=current_user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}"></a>
             </div>
               <small style="font-size:15px;padding-left:15px">
-              {{current_user.username.lower()}}
+              <code style="color:#007bff;">{{current_user.username.lower()}}</code>
               {% if current_user.username in ["harun" , "bambi"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:15px;height:15px;">{% endif %}
+              {% if current_user.birthday() %} <img src="https://image.flaticon.com/icons/svg/2488/2488614.svg" style="width:20px;height:20px;margin-top:-5px;"> {% endif %}
             </small>
             </div>
             {% for user in users if user != current_user %}
@@ -191,8 +192,9 @@
             <div class="card--content"><a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt=""></a>
             </div>
             <small style="font-size:15px;color:#f8f8f2;padding-left:15px">
-            {{user.username.lower()}}
+            <code style="color:#fff">{{user.username.lower()}}</code>
             {% if user.username in ["harun" , "bambi"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:15px;height:15px;">{% endif %}
+            {% if user.birthday() %} <img src="https://image.flaticon.com/icons/svg/2488/2488614.svg" style="width:20px;height:20px;margin-top:-5px;"> {% endif %}
           </small>
             </div>
             {% endfor %}
@@ -347,22 +349,40 @@
             {% endfor %}
         {% endif %}
       {% endwith %}
-      <div class="alert alert-warning alert-dismissible fade show dark-theme" role="alert">
+      <!--<div class="alert alert-warning alert-dismissible fade show dark-theme" role="alert">
         <a href="{{ url_for('f_posts') }}"  style="color:#fff;text-decoration: none">
       <span style="color:#1e90ff;">🍧 Post Something!</span> Tell your friends what you're up to.</a>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="alert alert-success alert-dismissible fade show dark-theme" role="alert">
-        <a href="{{ url_for('discover') }}"  style="color:#fff;text-decoration: none">
-      <span style="color:#1e90ff;">🔥 Discover Friends!</span> Swipe left and right on discover to make friends.</a>
+      <div class="alert alert-dark alert-dismissible fade show dark-theme" role="alert">
+      <span style="color:#1e90ff;">💬 Check your Inbox! </span>You have Unread Messages
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="alert alert-dark alert-dismissible fade show dark-theme" role="alert">
-      <span style="color:#1e90ff;">💬 Check your Inbox! </span>You have Unread Messages
+      </div>-->
+      {% for user in users %}
+        {% if user.birthday() %}
+          <div class="alert alert-dark alert-dismissible fade show dark-theme" role="alert">
+            <span style="color:#1e90ff;">
+              {% if user == current_user %}
+                <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" style="width:30px;height:30px;border-radius:50%;">
+                  Happy Birthday {{user.username.title()}}! <img src="https://image.flaticon.com/icons/svg/2488/2488614.svg" style="width:20px;height:20px;margin-top:-5px;"></span>
+                {%  else %}
+                <a href="{{url_for('message', recipient=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" style="width:30px;height:30px;border-radius:50%;">
+                Today is {{user.username.title() + "'s"}} birthday! <img src="https://image.flaticon.com/icons/svg/2488/2488614.svg" style="width:20px;height:20px;margin-top:-5px;"></span></a>
+                {% endif %}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <div class="alert alert-success alert-dismissible fade show dark-theme" role="alert">
+        <a href="{{ url_for('discover') }}"  style="color:#fff;text-decoration: none">
+      <span style="color:#1e90ff;">🔥 Discover Friends!</span> Swipe left and right on discover to make friends.</a>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

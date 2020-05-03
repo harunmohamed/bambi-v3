@@ -69,7 +69,7 @@
             <div class="card--content"><a href="{{ url_for('message',recipient=user.username) }}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt=""></a>
             </div>
             <small style="font-size:15px;color:#f8f8f2;padding-left:15px">
-            {{user.username.lower()}}
+            <code style="color:#fff;">{{user.username.lower()}}</code>
             {% if user.username in ["harun" , "bambi"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:15px;height:15px;">{% endif %}
           </small>
             </div>

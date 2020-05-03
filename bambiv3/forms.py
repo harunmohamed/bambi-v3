@@ -53,7 +53,7 @@ class UpdateAccountForm(FlaskForm):
 	hobby = StringField('Hobby', validators=[DataRequired()])
 	snapchat = StringField('Snapchat')
 	instagram = StringField('Instagram')
-	bio = TextAreaField('Bio')
+	bio = PageDownField('Bio')
 	private = BooleanField('Private?')
 	single = BooleanField('Single & Searchin?')
 	submit = SubmitField('Update')
@@ -74,6 +74,14 @@ class UpdateAccountForm(FlaskForm):
 class PostForm(FlaskForm):
 	title = StringField('Title') #validators=[DataRequired()]
 	content = PageDownField('Content', validators=[DataRequired()])
+	image = FileField('Upload Image', validators=[FileAllowed(['jpg', 'jpeg' , 'png', 'gif'])])
+	anonymous = BooleanField('Post Anonymously?')
+	submit = SubmitField('🛫 Post')
+
+#no markdown support for posts from home
+class HomeForm(FlaskForm):
+	title = StringField('Title') #validators=[DataRequired()]
+	content = TextAreaField('Content', validators=[DataRequired()])
 	image = FileField('Upload Image', validators=[FileAllowed(['jpg', 'jpeg' , 'png', 'gif'])])
 	anonymous = BooleanField('Post Anonymously?')
 	submit = SubmitField('🛫 Post')

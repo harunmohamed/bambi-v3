@@ -4,7 +4,7 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from bambiv3 import app, db, bcrypt, mail
-from bambiv3.forms import RegistrationForm, LoginForm, UpdateAccountForm, MessageForm, PostForm, CommentForm, ProductForm, RequestResetForm, ResetPasswordForm
+from bambiv3.forms import RegistrationForm, LoginForm, UpdateAccountForm, MessageForm, PostForm, HomeForm, CommentForm, ProductForm, RequestResetForm, ResetPasswordForm
 from bambiv3.models import User, Post, Product, Message as m, Comment
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
@@ -25,7 +25,7 @@ def layout():
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
 def home():
-	form = PostForm()
+	form = HomeForm()
 	if form.validate_on_submit():
 		if form.image.data:
 			picture = save_picture(form.image.data)

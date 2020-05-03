@@ -76,6 +76,11 @@ class User(db.Model, UserMixin):
 	def __repr__(self):
 		return f"User('{self.username}' , '{self.email}', '{self.image_file}')"
 
+	def birthday(self):
+		if self.age.month == datetime.today().month:
+			if self.age.day == datetime.today().day:
+				return True
+
 	def follow(self, user):
 		if not self.is_following(user):
 			self.followed.append(user)
@@ -115,6 +120,13 @@ class User(db.Model, UserMixin):
 		return Message.query.filter_by(recipient=self).filter(
 			Message.timestamp > last_read_time).count()
 
+	@staticmethod
+	def on_changed_body(target, value, oldvalue, initiator):
+		allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
+		'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
+		'h3', 'p', 'iframe']
+		target.content = bleach.linkify(bleach.clean(markdown(value, output_format='html'),
+			tags=allowed_tags, strip=True))
 
 class Post(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
