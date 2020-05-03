@@ -108,7 +108,13 @@
             {%if post.image%}<small>{{post.author.email.split("@")[0] | lower}}</small>{%endif%}
             {{post.content| safe | urlize(40, target='_blank')}}
           </p>
+
+          {% set words = post.content.split() %}
           <a class="btn btn-sm btn-outline-dark p-1">❤ {{ post.likes.count() }}</a> <a class="btn btn-sm btn-outline-dark p-1 ml-1">{{post.date_posted.strftime('%a, %b %d, %Y at %H:%M:%S')}}</a>
+          
+          {% if words | count > 60 %}
+          <a class="btn btn-sm btn-outline-dark p-1">{{words | count}} words</a>
+          {% endif %}
 
 
 
