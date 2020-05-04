@@ -292,7 +292,7 @@ section .btn {
           {%endif%}
 
           <!-- mutual friends -->
-          {% if user != current_user %}
+          {% if current_user.is_authenticated and user != current_user %}
           <div class="mb-1" style="margin-top: -10px">
             <code style="font-size:13px;" class="mr-2 text-muted">follows</code>
           {% for user in user.followed %}
