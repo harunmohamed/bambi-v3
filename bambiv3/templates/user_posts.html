@@ -291,7 +291,22 @@ section .btn {
             {%endif%}
           {%endif%}
 
+          <!-- mutual friends -->
+          {% if user != current_user %}
+          <div class="mb-1" style="margin-top: -10px">
+            <code style="font-size:13px;" class="mr-2 text-muted">follows</code>
+          {% for user in user.followed %}
+            {% if user in current_user.followed %}
+            <a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" style="width:20px;height:20px;border-radius:50%;margin-left:-10px;border:1px solid #000;" title="{{user.username.title()}}"></a>
+            {% endif %}
+        {% endfor %}
+        </div>
+        {% endif %}
+
+
       </div>
+
+      
 
     </div>
     <!-- End of profile section -->
@@ -539,6 +554,7 @@ section .btn {
               </button>
           </div>
         {% endif %}
+
       <div class="alert alert-success alert-dismissible fade show dark-theme" role="alert">
         <a href="{{ url_for('discover') }}"  style="color:#fff;text-decoration: none">
       <span style="color:#1e90ff;">🔥 Discover Friends!</span> Swipe left and right on discover to make friends.</a>

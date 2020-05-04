@@ -178,6 +178,18 @@ h1 {
                     {% if user.instagram %}<a href="https://www.instagram.com/{{user.instagram}}"><img src="https://image.flaticon.com/icons/svg/733/733614.svg" style="width:30px;height:30px;"></a>{% endif %}
                     {% if user.snapchat %} <a href="https://www.snapchat.com/add/{{user.snapchat}}"><img src="https://image.flaticon.com/icons/svg/174/174870.svg" style="width:30px;height:30px;"></a>{% endif %}
                     {% endif %}
+                    <!-- mutual friends -->
+                    {% if user != current_user %}
+                    <div class="mb-1 mt-2" style="margin-top: -10px">
+                      <code style="font-size:13px;color:#000;" class="mr-2">follows</code>
+                    {% for user in user.followed %}
+                      {% if user in current_user.followed %}
+                      <a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" style="width:20px;height:20px;border-radius:50%;margin-left:-10px;border:1px solid #000;" title="{{user.username.title()}}"></a>
+                      {% endif %}
+                  {% endfor %}
+                  </div>
+                  {% endif %}
+
                   </div>
                 </div>
               </li>
