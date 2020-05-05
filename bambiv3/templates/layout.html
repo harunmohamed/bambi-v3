@@ -130,7 +130,7 @@
 
     <div class="bottom d-block d-sm-none">
 
-      <a href="{{url_for('user_posts', username=current_user.username)}}" class="active"><img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="35px" height="35px;" style="border-radius:50%;"></a>
+      <a href="{{url_for('user_posts', username=current_user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="35px" height="35px;" style="border-radius:50%;"></a>
 
       <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='profile_pics/' + 'logo.svg') }}" width="35px" height="35px;" class="d-inline-block align-top" alt=""></a>
 
@@ -216,7 +216,7 @@
     }
     .bottom {
     overflow: hidden;
-    background-color: #000;
+    background-color: #070707;
     position: fixed;
     bottom: 0;
     width: 100%;
