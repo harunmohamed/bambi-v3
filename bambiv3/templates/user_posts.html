@@ -280,7 +280,16 @@ section .btn {
 
         <p class="mb-2" style="font-size:18px;"><small class="profile-real-name" style="font-size:18px;font-weight:400">
           {% if user.username == "harun" %}
-          <code>{{user.email.split("@")[0] | lower}}</code>☁</small> - <code style="color:#fff;">I am a Software Engineering Student at The Near East University and the <a class="badge badge-warning" style="color:#000;">💦Founder of Bambi</a> too. I enjoy playing football and I have developed a recent liking for billiards.</code></p>
+          <code>{{user.email.split("@")[0] | lower}}</code>☁</small> - <code style="color:#fff;">making obnoxious life decisions since '00. she says its never that serious.</code>
+          <br>
+          <code>
+            <a class="badge badge-warning" style="color:#000;">💦Founder, Bambi</a> 
+            <a class="badge badge-primary" style="color:#000;">💻code</a> 
+            <a class="badge badge-danger" style="color:#000;">🚊travel</a> 
+            <a class="badge badge-success" style="color:#000;">🎱billiards</a> 
+            <a class="badge badge-info" style="color:#000;">⚽football</a>
+          </code>
+        </p>
 
           {%else%}
             {% if user.bio %}
