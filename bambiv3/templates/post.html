@@ -110,7 +110,7 @@
           </p>
 
           {% set words = post.content.split() %}
-          <a class="btn btn-sm btn-outline-dark p-1">❤ {{ post.likes.count() }}</a> <a class="btn btn-sm btn-outline-dark p-1 ml-1">{{post.date_posted.strftime('%a, %b %d, %Y')}}</a> <!--('%a, %b %d, %Y at %H:%M:%S')-->
+          <a class="btn btn-sm btn-outline-dark p-1">❤ {{ post.likes.count() }}</a> <a class="btn btn-sm btn-outline-dark p-1 ml-1">{{post.date_posted.strftime('%a, %b %d %Y')}}</a> <!--('%a, %b %d, %Y at %H:%M:%S')-->
           
           {% if words | count > 60 %}
           <a class="btn btn-sm btn-outline-dark p-1">{{words | count}} words</a>
