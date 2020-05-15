@@ -177,6 +177,10 @@ def logout():
 	logout_user()
 	return redirect(url_for('login'))
 
+@app.route('/todo')
+def todo():
+	return render_template('todo.html')
+
 
 
 def save_picture(form_picture):
