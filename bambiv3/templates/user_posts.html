@@ -377,14 +377,14 @@ section .btn {
           {% for post in post_images if not post.anonymous and user == post.author %}
             {% if post.image %}
             <a href="{{url_for('post', post_id=post.id)}}">
-              <img src="{{ url_for('static', filename='profile_pics/' + post.image) }}" style="width:50%;height:150px;border-radius:5px;float:left;display:inline-block;" class="pr-2 pb-2">
+              <img src="{{ url_for('static', filename='posts/' + post.image) }}" style="width:50%;height:150px;border-radius:5px;float:left;display:inline-block;" class="pr-2 pb-2">
             </a>
             {% endif  %}
           {% endfor %}
     </div>
   {% endif %}
   <header class="d-none d-lg-flex">
-    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+    <img src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
       <h3 class="logo">BAMBI</h3>
       <small id="year"></small>
@@ -399,7 +399,7 @@ section .btn {
       <!-- content area -->
       {% if current_user.is_authenticated %}
       {% if current_user == user and posts.total == 0 or current_user.is_following(user) and posts.total == 0 %}
-        <img src="{{ url_for('static', filename='profile_pics/' + 'empty.png') }}" class="img-fluid mx-auto d-block" style="margin-bottom: 50px;">
+        <img src="{{ url_for('static', filename='resources/' + 'empty.png') }}" class="img-fluid mx-auto d-block" style="margin-bottom: 50px;">
       {% endif %}
       {% endif %}
 
@@ -470,7 +470,7 @@ section .btn {
         <div id="inner">
           <p style="font-size:30px;"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#fff;">{{post.title}}</a></p>
           {% if post.image %}
-          <img src="{{ url_for('static', filename='profile_pics/' + post.image) }}" style="width:100%;height:100%;border-radius:5px">
+          <img src="{{ url_for('static', filename='posts/' + post.image) }}" style="width:100%;height:100%;border-radius:5px">
           {% endif %}
           <p>
             {%if post.image%}<small>{{post.author.email.split("@")[0] | lower}}</small>{%endif%}
@@ -572,7 +572,7 @@ section .btn {
         </button>
       </div>
       <div class="card" style="color:#000;">
-      <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo">
+      <img class="card-img-top" src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo">
       <div class="card-body">
         <h5 class="card-title"><i class="fas fa-ad"></i></h5>
         <p class="card-text">Looking for your classmates or wanna make new friends? Sign in and get started!</p>
@@ -586,7 +586,7 @@ section .btn {
     </div>
     {% else %}
     <div class="card" style="color:#000;">
-      <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo">
+      <img class="card-img-top" src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo">
       <div class="card-body">
         <h5 class="card-title"><i class="fas fa-ad"></i></h5>
         <p class="card-text">Looking for your classmates or wanna make new friends? Sign in and get started!</p>

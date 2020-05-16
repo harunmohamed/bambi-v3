@@ -114,7 +114,7 @@ h1 {
 
   <header data-toggle="popover" data-content="🍌: Click to know more about Bambi">
     <a href="{{url_for('about')}}" target="_blank" style="color: #F9E9C8;text-decoration: none;">
-    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+    <img src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
       <h3 class="logo">BAMBI</h3>
       <small id="year"></small>
@@ -123,7 +123,7 @@ h1 {
   </header>
   {% else %}
   <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
-    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+    <img src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
       <h3 class="logo">Hello Friend!</h3>
       <small>how about signing in?</small>
@@ -196,7 +196,7 @@ h1 {
               {% endfor %}
               <li class="cards_item">
                 <div class="card">
-                  <div class="card_image"><img src="{{ url_for('static', filename='profile_pics/' + 'default.jpg') }}" style="width:100%;"></div>
+                  <div class="card_image"><img src="{{ url_for('static', filename='resources/' + 'default.jpg') }}" style="width:100%;"></div>
                   <div class="card_content">
                     <h2 class="card_title">Bambi<i class="far fa-check-circle"></i></h2>
                     <p class="card_text">Wanna see more friend matches for you? <a href="{{url_for('swipe')}}" target="_blank">Start Swiping!</a></p>
@@ -248,7 +248,7 @@ h1 {
       </div>
       <br>
       <div class="card" style="color:#000;">
-      <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo">
+      <img class="card-img-top" src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo">
       <div class="card-body">
         <h5 class="card-title"><i class="fas fa-ad"></i></h5>
         <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
@@ -289,7 +289,7 @@ h1 {
         </button>
       </div>
     <div class="card" style="color:#000;">
-      <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo">
+      <img class="card-img-top" src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo">
       <div class="card-body">
         <h5 class="card-title"><i class="fas fa-ad"></i></h5>
         <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>

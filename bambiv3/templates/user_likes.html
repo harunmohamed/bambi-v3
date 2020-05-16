@@ -31,7 +31,7 @@
 
   <header data-toggle="popover" data-content="🍌: Click to know more about Bambi">
     <a href="{{url_for('about')}}" target="_blank" style="color: #F9E9C8;text-decoration: none;">
-    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+    <img src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
       <h3 class="logo">BAMBI</h3>
       <small id="year"></small>
@@ -40,7 +40,7 @@
   </header>
   {% else %}
   <header>
-    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+    <img src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
       <h3 class="logo">Hello Friend!</h3>
       <small>how about signing in?</small>
@@ -70,13 +70,13 @@
           {% if not post.anonymous %}
           <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" data-toggle="popover" data-content="😎 : I'm from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}">
         {% else %}
-          <img src="{{ url_for('static', filename='profile_pics/' + 'ghost.jpg') }}" alt="profile pic" class="profile-thumbnail">
+          <img src="{{ url_for('static', filename='resources/' + 'ghost.jpg') }}" alt="profile pic" class="profile-thumbnail">
         {% endif %}
           <div class="profile-name">
             {% if not post.anonymous %}
 
             <h3 data-toggle="popover"><a href="{{url_for('user_posts', username=post.author.username)}}" style="color:#fff;">  {{post.author.username}}
-             {% if post.author.username in ["harun" , "bambi"] %}<img src="{{ url_for('static', filename='profile_pics/' + 'correct.png') }}" style="width:20px;height:20px;margin-left: -5px;">{% endif %}
+             {% if post.author.username in ["harun" , "bambi"] %}<img src="{{ url_for('static', filename='resources/' + 'correct.png') }}" style="width:20px;height:20px;margin-left: -5px;">{% endif %}
            </a></h3>
            <small>@{{post.author.email.split("@")[0] | lower}}</small>
 
@@ -130,7 +130,7 @@
         <div id="inner">
           <p  class="mt-1" style="font-size:30px;"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#fff;text-decoration:none;">{{post.title}}</a></p>
           {% if post.image %}
-          <img class="mb-2" src="{{ url_for('static', filename='profile_pics/' + post.image) }}" style="width:100%;height:100%;border-radius:5px;">
+          <img class="mb-2" src="{{ url_for('static', filename='posts/' + post.image) }}" style="width:100%;height:100%;border-radius:5px;">
           {% endif %}
           <p>
             {%if post.image%}<small>{{post.author.email.split("@")[0] | lower}}</small>{%endif%}

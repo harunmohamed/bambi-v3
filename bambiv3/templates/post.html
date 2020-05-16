@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-3 d-none d-lg-block">
+    <div class="col-lg-3 d-none d-lg-block position-fixed">
       <!-- User info , photos -->
       {% if current_user.is_authenticated %}
       <header class="mb-2">
@@ -29,7 +29,7 @@
     </div>
 
   <header>
-    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+    <img src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
       <h3 class="logo">BAMBI</h3>
       <small id="year"></small>
@@ -37,7 +37,7 @@
   </header>
   {% else %}
     <div class="card" style="color:#000;">
-      <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo">
+      <img class="card-img-top" src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo">
       <div class="card-body">
         <h5 class="card-title"><small class="text-muted">sponsored</small></h5>
         <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
@@ -48,7 +48,7 @@
     </div>
     <br>
     <header>
-    <img src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+    <img src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
       <h3 class="logo">BAMBI</h3>
       <small>&copy 2019</small>
@@ -59,13 +59,13 @@
 
 
 
-    <div class="col-lg-6">
+    <div class="col-lg-6 offset-lg-3">
     <div class="post">
       <header class="pb-0" style="padding:0;">
           {% if not post.anonymous %}
           <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" data-toggle="popover" data-content="😎 : I'm from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}">
         {% else %}
-          <img src="{{ url_for('static', filename='profile_pics/' + 'ghost.jpg') }}" alt="profile pic" class="profile-thumbnail">
+          <img src="{{ url_for('static', filename='resources/' + 'ghost.jpg') }}" alt="profile pic" class="profile-thumbnail">
         {% endif %}
           <div class="profile-name">
             {% if not post.anonymous %}
@@ -102,7 +102,7 @@
         <div id="inner">
           <p style="font-size:30px;">{{post.title}}</p>
           {% if post.image %}
-          <img class="mb-2" src="{{ url_for('static', filename='profile_pics/' + post.image) }}" style="width:100%;height:100%;border-radius:5px;">
+          <img class="mb-2" src="{{ url_for('static', filename='posts/' + post.image) }}" style="width:100%;height:100%;border-radius:5px;">
           {% endif %}
           <p>
             {%if post.image%}<small>{{post.author.email.split("@")[0] | lower}}</small>{%endif%}
@@ -143,7 +143,7 @@
 
 
 
-    <div class="col-lg-3 d-none d-lg-block">
+    <div class="col-lg-3 d-none d-lg-block position-fixed offset-lg-9">
       {% if current_user.is_authenticated %}
       <!-- notifications and relevant ads -->
       {% with messages = get_flashed_messages(with_categories=true) %}
@@ -179,7 +179,7 @@
         </button>
       </div>
       <div class="card" style="color:#000;">
-      <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo">
+      <img class="card-img-top" src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo">
       <div class="card-body">
         <h5 class="card-title"><small class="text-muted">sponsored</small></h5>
         <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
@@ -190,7 +190,7 @@
     </div>
     {% else %}
     <div class="card" style="color:#000;">
-      <img class="card-img-top" src="{{ url_for('static', filename='profile_pics/' + 'logod.png') }}" alt="logo">
+      <img class="card-img-top" src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo">
       <div class="card-body">
         <h5 class="card-title"><small class="text-muted">sponsored</small></h5>
         <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>

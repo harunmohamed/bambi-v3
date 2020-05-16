@@ -28,7 +28,7 @@ def home():
 	form = HomeForm()
 	if form.validate_on_submit():
 		if form.image.data:
-			picture = save_picture(form.image.data)
+			picture = post_img(form.image.data)
 			post = Post(title=form.title.data, content=form.content.data, anonymous=form.anonymous.data, image=picture, author=current_user)
 		else:
 			post = Post(title=form.title.data, content=form.content.data, anonymous=form.anonymous.data, author=current_user)
@@ -183,7 +183,7 @@ def todo():
 
 
 
-def save_picture(form_picture):
+def profile_img(form_picture):
 	random_hex = secrets.token_hex(8)
 	_, f_ext = os.path.splitext(form_picture.filename)
 	picture_fn = random_hex + f_ext
@@ -196,7 +196,31 @@ def save_picture(form_picture):
 
 	return picture_fn
 
+def market_img(form_picture):
+	random_hex = secrets.token_hex(8)
+	_, f_ext = os.path.splitext(form_picture.filename)
+	picture_fn = random_hex + f_ext
+	picture_path = os.path.join(app.root_path, 'static/market', picture_fn)
 
+	output_size = (400,400)
+	i = Image.open(form_picture)
+	i.thumbnail(output_size)
+	i.save(picture_path)
+
+	return picture_fn
+
+def post_img(form_picture):
+	random_hex = secrets.token_hex(8)
+	_, f_ext = os.path.splitext(form_picture.filename)
+	picture_fn = random_hex + f_ext
+	picture_path = os.path.join(app.root_path, 'static/posts', picture_fn)
+
+	output_size = (400,400)
+	i = Image.open(form_picture)
+	i.thumbnail(output_size)
+	i.save(picture_path)
+
+	return picture_fn
 
 
 
@@ -206,7 +230,7 @@ def account():
 	form = UpdateAccountForm()
 	if form.validate_on_submit():
 		if form.picture.data:
-			picture_file = save_picture(form.picture.data)
+			picture_file = profile_img(form.picture.data)
 			current_user.image_file = picture_file
 		current_user.username = form.username.data.lower()
 		current_user.email = form.email.data
@@ -239,7 +263,7 @@ def new_post():
 	form = PostForm()
 	if form.validate_on_submit():
 		if form.image.data:
-			picture = save_picture(form.image.data)
+			picture = post_img(form.image.data)
 			post = Post(title=form.title.data, content=form.content.data,anonymous=form.anonymous.data, image=picture, author=current_user)
 			db.session.add(post)
 			db.session.commit()
@@ -289,7 +313,7 @@ def update_post(post_id):
 		post.title = form.title.data
 		post.content = form.content.data
 		if form.image.data:
-			post.image = save_picture(form.image.data)
+			post.image = post_img(form.image.data)
 		db.session.commit()
 		flash('Your post has been updated!', 'success')
 		return redirect(url_for('post', post_id=post.id))
@@ -318,7 +342,7 @@ def delete_post(post_id):
 def new_product():
 	form = ProductForm()
 	if form.validate_on_submit():
-			picture1 = save_picture(form.image1.data)
+			picture1 = market_img(form.image1.data)
 			product = Product(title=form.title.data, description=form.description.data, location=form.location.data, price=form.price.data, contact=form.contact.data, image1=picture1, author=current_user)
 			db.session.add(product)
 			db.session.commit()
@@ -347,7 +371,7 @@ def user_posts(username):
 		form = UpdateAccountForm()
 		if form.validate_on_submit():
 			if form.picture.data:
-				picture_file = save_picture(form.picture.data)
+				picture_file = profile_img(form.picture.data)
 				current_user.image_file = picture_file
 			current_user.username = form.username.data.lower()
 			current_user.email = form.email.data
