@@ -213,7 +213,8 @@
     <div class="post mb-2">
       <header class="pb-0" style="padding:0;">
           {% if not post.anonymous %}
-          <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" data-toggle="popover" data-content="😎 : I'm from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}">
+          <a href="{{url_for('user_posts', username=post.author.username)}}">
+          <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" data-toggle="popover" data-content="😎 : I'm from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}"></a>
         {% else %}
           <img src="{{ url_for('static', filename='profile_pics/' + 'ghost.jpg') }}" alt="profile pic" class="profile-thumbnail">
         {% endif %}
