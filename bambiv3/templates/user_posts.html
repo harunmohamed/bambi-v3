@@ -371,7 +371,7 @@ section .btn {
   </div>
 
   {% if (not current_user.is_authenticated and not user.private) or (current_user.is_authenticated and not user.private) or (current_user.is_authenticated and current_user.is_following(user) and user.private) or (current_user == user) %}
-    <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow-y:auto;overflow-x:hidden;height:318px;" class="mb-2">
+    <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow-y:auto;overflow-x:hidden;max-height:318px;" class="mb-2">
           {% if current_user != user %}<h5 style="padding-left: 3px;">{{user.username.title()}}'s Photos</h5>{% else %} <h5>My Photos</h5>{% endif %}
           
           {% for post in post_images if not post.anonymous and user == post.author %}
