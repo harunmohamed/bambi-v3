@@ -82,6 +82,7 @@
             </p>
 
         {% endfor %}
+        <div id="chat_bottom"></div>
 
         </div>
 
@@ -147,6 +148,13 @@
       window.location.reload(1);
     }, 30000);
   </script>-->
+
+  <script>
+    // go to bottom of chat on load.
+    window.onload = function(){
+      document.getElementById('chat_bottom').scrollIntoView();
+  };
+  </script>
 
   <script>
 $(document).ready(function(){
