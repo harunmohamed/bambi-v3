@@ -214,14 +214,13 @@ header{
   border-radius:10px;
 }
 .card--content {
-  background: linear-gradient(#ffcccc,#ccffff);
+  background: #070707; /*linear-gradient(#ffcccc,#ccffff);*/
   width: 100px;
   height: 100px;
   margin: 5px;
   border-radius:10px;
-  border:1px solid #fff;
+  border:1px solid #191917;
   border-radius:10px;
-  padding:1px;
   flex: 0 0 auto;
 }
 .dark-theme{
