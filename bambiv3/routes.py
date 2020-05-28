@@ -51,7 +51,8 @@ def home():
 def f_posts():
 	page = request.args.get('page', 1, type=int)
 	posts = current_user.followed_posts().paginate(per_page=50, page=page)
-	return render_template('friends_posts.html', title="Friend Posts", posts=posts)
+	users = User.query.all()
+	return render_template('friends_posts.html', title="Friend Posts", posts=posts, users=users)
 
 
 @app.route('/blog')
@@ -286,8 +287,9 @@ def post(post_id):
 		db.session.add(comment)
 		db.session.commit()"""
 	post = Post.query.get_or_404(post_id)
+	users = User.query.all()
 	comments = Comment.query.order_by(Comment.date_posted.desc())
-	return render_template('post.html',title=post.title, post=post, form=form)
+	return render_template('post.html',title=post.title, post=post, form=form, users=users)
 
 @app.route('/like/<int:post_id>/<action>')
 @login_required
@@ -356,11 +358,12 @@ def likes(username):
 	username = username.lower()
 	user = User.query.filter_by(username=username).first_or_404()
 	posts = Post.query.order_by(Post.date_posted.desc())
+	users = User.query.all()
 	liked_people = set()
 	for post in posts:
 		if user.has_liked_post(post):
 			liked_people.add(post.author)
-	return render_template('user_likes.html', user=user, posts=posts, liked_people=liked_people, title= user.username.title() + "'s Likes")
+	return render_template('user_likes.html', user=user, posts=posts, users=users, liked_people=liked_people, title= user.username.title() + "'s Likes")
 
 
 
@@ -404,9 +407,10 @@ def user_posts(username):
 		image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
 		page = request.args.get('page', 1, type=int)
 		user = User.query.filter_by(username=username).first_or_404()
+		users = User.query.all()
 		posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(page=page, per_page=10)
 		post_images = Post.query.order_by(Post.date_posted.desc())
-		return render_template('user_posts.html', posts=posts, post_images=post_images, user=user, title=user.username.title(),image_file=image_file,form=form)
+		return render_template('user_posts.html', posts=posts, post_images=post_images, user=user, users=users, title=user.username.title(),image_file=image_file,form=form)
 	page = request.args.get('page', 1, type=int)
 	user = User.query.filter_by(username=username).first_or_404()
 	posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(page=page, per_page=10)

@@ -150,7 +150,7 @@
           <div class="stats">
             <div class="Retweets">
               {% set words = post.content.split() %}
-               <a class="btn btn-sm btn-outline-dark p-1">❤ {{ post.likes.count() }} </a> 
+               <a class="btn btn-sm btn-outline-dark p-1" data-toggle="popover" data-content="liked by {% for user in users if user.has_liked_post(post) %} {{user.username}}, {% endfor %}">❤ {{ post.likes.count() }} </a> 
                
                <a class="btn btn-sm btn-outline-dark p-1 ml-1" title="{{post.date_posted.strftime('%a, %b %d, %Y at %H:%M:%S')}}">⏳ {{ moment(post.date_posted).fromNow() }}</a>
 
