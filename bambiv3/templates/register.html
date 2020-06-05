@@ -97,21 +97,29 @@
         {% endif %}
       </div>
     </div>
+
     <div class="col">
-      <div class="form-group">
+      <div class="dropdown">
+      <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%">
+        gender
+      </button>
+      <div class="dropdown-menu p-2 pb-3" aria-labelledby="dropdownMenuButton">
         {% if form.gender.errors %}
-        {{ form.gender(placeholder="gender", class="form-control form-control is-invalid") }}
-        <div class="invalid-feedback">
-          {% for error in form.gender.errors %}
-          <span>{{ error }}</span>
-          {% endfor %}
-        </div>
-        {% else %}
-        {{ form.gender(placeholder="gender", class="form-control form-control") }}
-        {% endif %}
+            {{ form.gender(placeholder="gender", class="form-control form-control is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in form.gender.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.gender(placeholder="gender", class="form-control form-control") }}
+            {% endif %}
       </div>
     </div>
+    </div>
   </div>
+
+  
       
 
   <div class="row">
