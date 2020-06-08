@@ -171,4 +171,4 @@ Project Link: [Bambi Official Webapp](https://bambi.app)
 [license-url]: https://github.com/harunmohamed/bambi-v3/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/harunmohamed
-[product-screenshot]: https://miro.medium.com/max/1366/1*ArqBw4L0bhT9YoM1tsHsrQ.png
+[product-screenshot]: https://i.imgur.com/W676Xya.png
