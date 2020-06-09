@@ -295,10 +295,17 @@
           {% endif %}
         </div>
 
-        <div>
-          {% for comment in post.comments if current_user.is_authenticated %}
-            <small>{{comment.author.username}}: {{comment.body}}</small> <br>
-          {% endfor %}
+        <div style="max-height: 450px;overflow:auto">
+            {% if post.comments.count() > 0 %}<code>{{post.comments.count()}} comments</code><br>{% endif %}
+            {% for comment in post.comments if current_user.is_authenticated %}
+            <a href="{{url_for('user_posts', username=comment.author.username)}}">
+              <img src="{{ url_for('static', filename='profile_pics/' + comment.author.image_file) }}" style="width:20px;height:20px;border-radius:50%;"></a>
+                <span>
+                  <code style="color:#1e90ff;">{{comment.author.username}}:</code> 
+                  <code style="color:#fff;">{{comment.body}}</code> <br>
+                  <small class="text-muted ml-4">{{ moment(comment.date_posted).fromNow() }}</small>
+                </span> <br>
+            {% endfor %}
         </div>
 
         <footer>

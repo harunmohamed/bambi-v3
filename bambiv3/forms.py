@@ -87,7 +87,7 @@ class HomeForm(FlaskForm):
 	submit = SubmitField('🛫 Post')
 
 class CommentForm(FlaskForm):
-	body = StringField(('comment'), validators=[DataRequired()])
+	body = StringField(('comment'), validators=[DataRequired(), Length(min=0, max=140)])
 	submit = SubmitField('🛫 Post')
 
 class MessageForm(FlaskForm):
