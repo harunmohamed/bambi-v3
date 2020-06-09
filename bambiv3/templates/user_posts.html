@@ -495,7 +495,7 @@ section .btn {
         {% endif %}
         </div>
 
-        <div style="max-height: 450px;overflow:auto">
+        <div style="max-height:250px;overflow:auto">
             {% if post.comments.count() > 0 %}<code>{{post.comments.count()}} comments</code><br>{% endif %}
             {% for comment in post.comments if current_user.is_authenticated %}
             <a href="{{url_for('user_posts', username=comment.author.username)}}">
