@@ -134,14 +134,14 @@
             {{ form.hidden_tag() }}
               <div class="row">
                 <div class="col-1">
-                  <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width:30px;height:30px;border-radius:50%;">
+                  <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width:30px;height:30px;border-radius:50%;margin-top:8px;">
                 </div>
-                <div class="col-9">
+                <div class="col-11">
                   {{ form.body(placeholder="Join the Conversation", class="form-control form-control-sm comment-styles") }}
                 </div>
-                <div class="col-2">
+                <!--<div class="col-2">
                   {{ form.submit(class="btn btn-sm btn-outline-warning") }}
-                </div>
+                </div>-->
               </div>
           </form>
           </div>

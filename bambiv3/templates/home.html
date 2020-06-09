@@ -296,7 +296,7 @@
         </div>
 
         <div>
-          {% for comment in post.comments %}
+          {% for comment in post.comments if current_user.is_authenticated %}
             <small>{{comment.author.username}}: {{comment.body}}</small> <br>
           {% endfor %}
         </div>

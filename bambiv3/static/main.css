@@ -229,13 +229,18 @@ header{
   border:1px solid #191917 !important;
 }
 .comment-styles{
-  background:#191917;
+  background:none;
   border:none;
   border-radius:5px;
   outline:none;
   width:90%;
   height: 35px;
-  padding:10px;
-  color:#F9E9C8;
+  color:#fff;
   margin-top:5px;
+}
+.comment-styles:focus{
+  background:none;
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
 }
