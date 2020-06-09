@@ -213,9 +213,6 @@ def account():
 	return render_template('account.html', title='Account', image_file=image_file, form=form)
 
 
-
-
-
 @app.route('/post/new', methods=['GET', 'POST'])
 @login_required
 def new_post():
@@ -239,14 +236,15 @@ def new_post():
 @app.route('/post/<int:post_id>', methods=["GET", "POST"])
 @login_required
 def post(post_id):
-	form = CommentForm()
-	"""if form.validate_on_submit:
-		comment = Comment(body=form.body.data, author=current_user)
-		db.session.add(comment)
-		db.session.commit()"""
 	post = Post.query.get_or_404(post_id)
 	users = User.query.all()
-	comments = Comment.query.order_by(Comment.date_posted.desc())
+	form = CommentForm()
+	if form.validate_on_submit():
+		comment = Comment(body=form.body.data, post=post, author=current_user)
+		db.session.add(comment)
+		db.session.commit()
+		flash('Your comment has been published.')
+		return redirect(url_for('post', post_id=post.id))
 	return render_template('post.html',title=post.title, post=post, form=form, users=users)
 
 @app.route('/like/<int:post_id>/<action>')

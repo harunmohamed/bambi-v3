@@ -228,3 +228,14 @@ header{
   color: #fff;
   border:1px solid #191917 !important;
 }
+.comment-styles{
+  background:#191917;
+  border:none;
+  border-radius:5px;
+  outline:none;
+  width:90%;
+  height: 35px;
+  padding:10px;
+  color:#F9E9C8;
+  margin-top:5px;
+}

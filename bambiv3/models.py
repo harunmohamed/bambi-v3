@@ -169,6 +169,14 @@ class Comment(db.Model):
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	post_id = db.Column(db.Integer, db.ForeignKey("post.id"), nullable=False)
 
+	@staticmethod
+	def on_changed_body(target, value, oldvalue, initiator):
+		allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
+		'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
+		'h1', 'h2', 'h3', 'p', 'iframe']
+		target.body = bleach.linkify(bleach.clean(markdown(value, output_format='html'),
+			tags=allowed_tags, strip=True))
+
 	def __repr__(self):
 		return f"<Reply (id='{self.id}', body='{self.body}', date_posted='{self.date_posted}')>"
 

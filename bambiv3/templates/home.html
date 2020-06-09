@@ -295,6 +295,12 @@
           {% endif %}
         </div>
 
+        <div>
+          {% for comment in post.comments %}
+            <small>{{comment.author.username}}: {{comment.body}}</small> <br>
+          {% endfor %}
+        </div>
+
         <footer>
           <div class="stats">
             <div class="Retweets">
