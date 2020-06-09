@@ -6,6 +6,7 @@ from flask import render_template, url_for, flash, redirect, request, abort
 from bambiv3 import app, db, bcrypt, mail
 from bambiv3.forms import RegistrationForm, LoginForm, UpdateAccountForm, MessageForm, PostForm, HomeForm, CommentForm, ProductForm, RequestResetForm, ResetPasswordForm
 from bambiv3.models import User, Post, Product, Message as m, Comment
+from bambiv3.functions import profile_img, market_img, post_img
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
@@ -182,49 +183,6 @@ def logout():
 def todo():
 	return render_template('todo.html')
 
-
-
-def profile_img(form_picture):
-	random_hex = secrets.token_hex(8)
-	_, f_ext = os.path.splitext(form_picture.filename)
-	picture_fn = random_hex + f_ext
-	picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
-
-	output_size = (400,400)
-	i = Image.open(form_picture)
-	i.thumbnail(output_size)
-	i.save(picture_path)
-
-	return picture_fn
-
-def market_img(form_picture):
-	random_hex = secrets.token_hex(8)
-	_, f_ext = os.path.splitext(form_picture.filename)
-	picture_fn = random_hex + f_ext
-	picture_path = os.path.join(app.root_path, 'static/market', picture_fn)
-
-	output_size = (400,400)
-	i = Image.open(form_picture)
-	i.thumbnail(output_size)
-	i.save(picture_path)
-
-	return picture_fn
-
-def post_img(form_picture):
-	random_hex = secrets.token_hex(8)
-	_, f_ext = os.path.splitext(form_picture.filename)
-	picture_fn = random_hex + f_ext
-	picture_path = os.path.join(app.root_path, 'static/posts', picture_fn)
-
-	output_size = (400,400)
-	i = Image.open(form_picture)
-	i.thumbnail(output_size)
-	i.save(picture_path)
-
-	return picture_fn
-
-
-
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
@@ -351,6 +309,17 @@ def new_product():
 			flash('Your Product Has been Posted!', 'success')
 			return redirect(url_for('market'))
 	return render_template('create_product.html', title='New Product', form=form, legend='New Product')
+
+@app.route("/product/<int:product_id>/delete", methods=['POST'])
+@login_required
+def delete_product(product_id):
+	product = Product.query.get_or_404(product_id)
+	if product.author != current_user:
+		abort(403)
+	db.session.delete(product)
+	db.session.commit()
+	flash('Your product has been deleted!', 'success')
+	return redirect(request.referrer)
 
 @app.route("/<string:username>/likes", methods=['GET', 'POST'])
 @login_required

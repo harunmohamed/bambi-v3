@@ -58,51 +58,20 @@
 
 
 
-    <div class="col-lg-6 offset-lg-3">  
-      
-   {% for product in products %}
-    <div class="post mb-2">
-      <header style="padding:0;">
-          <img src="{{ url_for('static', filename='profile_pics/' + product.author.image_file) }}" alt="seller" class="profile-thumbnail">
-          <div class="profile-name">
-            <h3 data-toggle="popover"><a href="{{url_for('user_posts', username=product.author.username)}}" style="color:#fff;">{{product.author.username}}
-             {% if product.author.username in ["harun" , "bambi"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-left: -5px;">{% endif %}
-           </a></h3>
-            <small>@{{product.author.email.split("@")[0] | lower}}</small>
-          </div>
-          <div class="follow-btn">
-            {% if product.author != current_user %}
-              <i class="fas fa-heart love" style="font-size: 28px;"></i>
-            {% endif %}
-          </div>
-        </header>
-
-        <div id="inner">
-          <p style="font-size:30px;">{{product.title}}</p>
-          {% if product.image1 %}
-          <img class="mb-2" src="{{ url_for('static', filename='market/' + product.image1) }}" style="width:100%;height:100%;border-radius:5px;">
-          {% endif %}
-          <p>
-            <small>{{product.author.email.split("@")[0] | lower}}</small>
-            {{product.description| safe | urlize(40, target='_blank')}}
-          </p>
+    <div class="col-lg-9 offset-lg-3"> 
+      <!-- sell alert-->
+      <header class="mb-2 alert alert-dismissible">
+        <img src="https://image.flaticon.com/icons/svg/1170/1170576.svg" alt="sell" class="profile-thumbnail">
+        <div class="profile-name">
+          <a href="{{ url_for('new_product') }}" style="text-decoration:none;">
+          <h3 style="color:#fff;">Wanna Sell?</h3>
+          <small>Post a product and let us do the magic for you.</small>
+          </a>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-
-        <footer>
-          <div class="stats">
-            <div class="Retweets">
-               <a class="btn btn-sm btn-outline-success p-1">💵 {{product.price}}</a> <a class="btn btn-sm btn-outline-danger p-1 ml-1">🗻{{product.location}}</a> <a class="btn btn-sm btn-outline-primary p-1 ml-1" type="tel">☎ {{product.contact}}</a> <a class="btn btn-sm btn-outline-dark p-1" title="{{product.date_posted.strftime('%a, %b %d, %Y at %H:%M:%S')}}">⏳ {{ moment(product.date_posted).fromNow() }}</a> 
-            </div>
-          </div>
-        </footer>
-    </div>
-  {% endfor %}
-  <div style="margin-bottom: 50px;"></div>
-</div>
-
-
-
-    <div class="col-lg-3 d-none d-lg-block position-fixed offset-lg-9">
+      </header> 
       <!-- notifications and relevant ads -->
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -116,16 +85,75 @@
             {% endfor %}
         {% endif %}
       {% endwith %}
-      <header class="mb-2">
-        <img src="https://image.flaticon.com/icons/svg/1170/1170576.svg" alt="sell" class="profile-thumbnail">
-        <div class="profile-name">
-          <a href="{{ url_for('new_product') }}" style="text-decoration:none;">
-          <h3 style="color:#fff;">Wanna Sell?</h3>
-          <small>Post a product and let us do the magic for you.</small>
-          </a>
+      
+  <div class="card-columns">
+   {% for product in products %}
+      <div class="card" style="border:1px solid #191917;border-radius:5px;">
+        <img class="card-img-top img-fluid" src="{{ url_for('static', filename='market/' + product.image1) }}" alt="Card image cap">
+        {% if product.author != current_user %}
+          <i class="fas fa-heart love" style="font-size:26px;position:absolute;top:8px;right:8px;text-shadow: 0 0 2px #191917;"></i>
+        {% else %}
+                <div class="dropleft" style="position:absolute;top:8px;right:8px;">
+                <button class="btn btn-dark btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background:none;border:none;">
+                  <i class="fas fa-ellipsis-v" style="font-size: 28px;text-shadow: 0 0 3px #191917;"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background:none;border:none;margin-top:-7px;">
+                  <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal" style="float:right;">🗑️delete</button>
+                </div>
+                 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel" style="color:#000;">Delete Product?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form action="{{ url_for('delete_product', product_id=product.id) }}" method="POST">
+                          <input class="btn btn-danger" type="submit" value="Delete">
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        {% endif %}
+
+
+
+
+        <div class="card-block p-2" style="background:#191917;">
+          <span style="text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:1.5px;">{{product.title}} • {{ moment(product.date_posted).fromNow() }}</span> <br>
+
+          <span class="card-title" style="font-size:30px;color:#1e90ff;">{{product.price}}</span> <br>
+          <code style="color:#fff;">{{product.description}}</code> <br>
+
+          <a href="#" class="" style="font-size:12px;">📌 {{product.location}}</a>
+          <a href="#" class="pl-3" style="font-size:12px;">📞 {{product.contact}}</a>
+
+          <div style="display:flex;" class="mt-3">
+            <a href="{{url_for('user_posts', username=product.author.username)}}" style="color:#fff;">
+            <img src="{{ url_for('static', filename='profile_pics/' + product.author.image_file) }}" style="height:45px;width:45px;border-radius:50%;"></a>
+            <p class="ml-2" style="font-size:14px;font-weight:600;">{{product.author.username}} <br>
+            <small>@{{product.author.email.split("@")[0] | lower}}</small>
+            </p>
+          </div><!--seller div-->
+
         </div>
-      </header>
-</div>
+      </div><!--card-->
+  {% endfor %}
+  </div><!--card-columns-->
+
+  <div style="margin-bottom: 50px;"></div>
+</div><!--col-9-->
+
+
+
+    <!--<div class="col-lg-3 d-none d-lg-block position-fixed offset-lg-9">
+      
+    </div>-->
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
