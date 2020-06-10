@@ -130,8 +130,11 @@
           <span class="card-title" style="font-size:30px;color:#1e90ff;">{{product.price}}</span> <br>
           <code style="color:#fff;">{{product.description}}</code> <br>
 
-          <a href="#" class="" style="font-size:12px;">📌 {{product.location}}</a>
-          <a href="#" class="pl-3" style="font-size:12px;">📞 {{product.contact}}</a>
+          <small>📌 {{product.location}}</small>
+          <small class="pl-3">📞 {{product.contact}}</small>
+          {% if product.author != current_user %}
+            <a href="{{ url_for('message',recipient=product.author.username) }}"><small class="pl-3">💬 DM</small></a>
+          {% endif %}
 
           <div style="display:flex;" class="mt-3">
             <a href="{{url_for('user_posts', username=product.author.username)}}" style="color:#fff;">

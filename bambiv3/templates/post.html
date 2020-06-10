@@ -59,7 +59,7 @@
 
 
 
-    <div class="col-lg-6 offset-lg-3">
+    <div class="col-lg-6 offset-lg-3 mb-4">
     <div class="post">
       <header class="pb-0" style="padding:0;">
           {% if not post.anonymous %}
@@ -136,8 +136,8 @@
                 <div class="col-1">
                   <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width:30px;height:30px;border-radius:50%;margin-top:8px;">
                 </div>
-                <div class="col-11">
-                  {{ form.body(placeholder="Join the Conversation", class="form-control form-control-sm comment-styles") }}
+                <div class="col-11" style="margin-left:-10px">
+                  {{ form.body(placeholder="Add a comment", class="form-control form-control-sm comment-styles") }}
                 </div>
                 <!--<div class="col-2">
                   {{ form.submit(class="btn btn-sm btn-outline-warning") }}
@@ -146,8 +146,8 @@
           </form>
           </div>
 
-          <div>
-            <code>{{post.comments.count()}} comments</code><br>
+          <div class="ml-1 mb-4">
+            {% if post.comments.count() > 0 %}<code>{{post.comments.count()}} comments</code><br>{% endif %}
             {% for comment in post.comments if current_user.is_authenticated %}
             <a href="{{url_for('user_posts', username=comment.author.username)}}">
               <img src="{{ url_for('static', filename='profile_pics/' + comment.author.image_file) }}" style="width:20px;height:20px;border-radius:50%;"></a>
@@ -159,15 +159,8 @@
             {% endfor %}
         </div>
 
-        <div style="margin-top:40px;"></div>
+        </div>
 
-        </div>
-        <footer>
-              <div class="stats">
-              </div>
-            </footer>
-        </div>
-        <br>
     </div>
 
 

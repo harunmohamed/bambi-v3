@@ -467,7 +467,7 @@ section .btn {
           </div>
         </header>
 
-        <div id="inner">
+        <div id="inner" class="mb-2">
           <p style="font-size:30px;"><a href=" {{ url_for('post', post_id=post.id) }} " style="color:#fff;">{{post.title}}</a></p>
           {% if post.image %}
           <img src="{{ url_for('static', filename='posts/' + post.image) }}" style="width:100%;height:100%;border-radius:5px">
@@ -487,22 +487,16 @@ section .btn {
 
             {% endif %}
         </p>
-        {% if current_user.is_authenticated %}
-          <div class="comments mb-1">
-            <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="width:30px;height:30px;border-radius:50%;">
-            <input type="text" name="comment" placeholder="Join the Conversation" style="background:none;border:none;border-radius:5px;outline:none;width:85%;height: 35px;padding:10px;color:#F9E9C8;margin-top:5px;">
-          </div>
-        {% endif %}
         </div>
 
-        <div style="max-height:250px;overflow:auto">
+        <div style="max-height:250px;overflow:auto" class="mb-2">
             {% if post.comments.count() > 0 %}<code>{{post.comments.count()}} comments</code><br>{% endif %}
             {% for comment in post.comments if current_user.is_authenticated %}
             <a href="{{url_for('user_posts', username=comment.author.username)}}">
               <img src="{{ url_for('static', filename='profile_pics/' + comment.author.image_file) }}" style="width:20px;height:20px;border-radius:50%;"></a>
                 <span>
-                  <code style="color:#1e90ff;">{{comment.author.username}}:</code> 
-                  <code style="color:#fff;">{{comment.body}}</code> <br>
+                  <span style="color:#1e90ff;">{{comment.author.username}}:</span> 
+                  <span style="color:#fff;opacity:0.8;">{{comment.body}}</span> <br>
                   <small class="text-muted ml-4">{{ moment(comment.date_posted).fromNow() }}</small>
                 </span> <br>
             {% endfor %}
@@ -521,7 +515,7 @@ section .btn {
                {% endif %}
 
                {% if current_user.is_authenticated %}
-                <a class="btn btn-sm btn-outline-dark p-1 ml-1" href="{{url_for('post', post_id=post.id)}}" style="color:#fff;">🍒comments</a> 
+                <a class="btn btn-sm btn-outline-dark p-1 ml-1" href="{{url_for('post', post_id=post.id)}}" style="color:#fff;">💭comment</a> 
                 {% endif %}
             </div>
         </footer>
@@ -637,7 +631,7 @@ section .btn {
           <header style="background:none;color:#000;">
           <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
           <div class="profile-name">
-            <a href="{{ url_for('user_posts', username=user.username) }}"target="_blank" style="text-decoration:none;color:#000;">{{user.username}}</a>
+            <a href="{{ url_for('user_posts', username=user.username) }}" style="text-decoration:none;color:#000;">{{user.username}}</a>
           </div>
           <div class="follow-btn">
               {% if current_user.is_authenticated and user != current_user and not current_user.is_following(user) %}<a href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;">Follow</a>{% endif %}
@@ -648,7 +642,7 @@ section .btn {
           <header style="background:none;color:#000;">
           <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
           <div class="profile-name">
-            <a href="{{ url_for('follow', username=user.username) }}" target="_blank" style="text-decoration:none;color:#00376b;font-weight:500;">sign in to view who follows {{user.username.title()}}</a>
+            <a href="{{ url_for('follow', username=user.username) }}" style="text-decoration:none;color:#00376b;font-weight:500;">sign in to view who follows {{user.username.title()}}</a>
           </div>
       </header>
         {% endif %}
@@ -674,10 +668,10 @@ section .btn {
            <header style="background:none;color:#000;">
           <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
           <div class="profile-name">
-            <a href="{{ url_for('user_posts', username=user.username) }}"target="_blank" style="text-decoration:none;color:#000;">{{user.username}}</a>
+            <a href="{{ url_for('user_posts', username=user.username) }}" style="text-decoration:none;color:#000;">{{user.username}}</a>
           </div>
           <div class="follow-btn">
-              {% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}<a href="" style="font-size:12px;text-decoration:none;">follows you</a>{% endif %}
+              {% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}<a style="font-size:12px;text-decoration:none;color:#1e90ff;">follows you</a>{% endif %}
             </div>
       </header>
         {% endfor %}
@@ -685,7 +679,7 @@ section .btn {
           <header style="background:none;color:#000;">
           <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
           <div class="profile-name">
-            <a href="{{ url_for('follow', username=user.username) }}" target="_blank" style="text-decoration:none;color:#00376b;font-weight:500;">sign in to view who {{user.username.title()}} follows</a>
+            <a href="{{ url_for('follow', username=user.username) }}" style="text-decoration:none;color:#00376b;font-weight:500;">sign in to view who {{user.username.title()}} follows</a>
           </div>
       </header>
         {% endif %}
