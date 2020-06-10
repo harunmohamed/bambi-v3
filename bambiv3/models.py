@@ -43,7 +43,7 @@ class User(db.Model, UserMixin):
 	instagram = db.Column(db.String(20),default=False, nullable=False)
 	posts = db.relationship('Post', backref='author', lazy=True)
 	products = db.relationship('Product', backref='author', lazy=True)
-	comments = db.relationship("Comment", backref="author", lazy="dynamic")
+	comments = db.relationship("Comment", backref="author", lazy="dynamic", cascade="all, delete-orphan")
 	followed = db.relationship(
 		'User', secondary=followers,
 		primaryjoin=(followers.c.follower_id == id),
@@ -137,7 +137,7 @@ class Post(db.Model):
 	anonymous = db.Column(db.Boolean, default=False, nullable=False)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	likes = db.relationship('PostLike', backref='post', lazy='dynamic')
-	comments = db.relationship("Comment", backref="post", lazy="dynamic")
+	comments = db.relationship("Comment", backref="post", lazy="dynamic", cascade="all, delete-orphan")
 
 	
 	def __repr__(self):
