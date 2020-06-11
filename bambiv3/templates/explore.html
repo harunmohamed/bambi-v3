@@ -10,7 +10,9 @@
 			</div>
 			<hr>-->
 			<div id="search" class="card card-body mb-3 p-2" style="color:#fff;background:#191917;">
-				<h4>Hey {% if current_user.is_authenticated%}{{current_user.username.title()}}{% endif %}, Explore Random Stuff!</h4>
+				{% if current_user.is_authenticated%}
+					<h4>Hey {{current_user.username.title()}}, Explore Random Stuff!</h4>
+				{% endif %}
 				<form id="search-form">
 					<div class="form-group">
 						<input type="text" id="search-input" class="form-control mb-2" placeholder="Search Bambi for...">
