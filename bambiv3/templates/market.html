@@ -37,14 +37,14 @@
     </div>
   </header>
   {% else %}
-  <header>
+  <header class="mb-2">
     <img src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
       <h3 class="logo">Hello Friend!</h3>
       <small>how about signing in?</small>
     </div>
   </header>
-  <br>
+
      <div class="menu" style="background:#191917;border-radius:10px;">
       <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
        <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
@@ -61,7 +61,7 @@
     <div class="col-lg-9 offset-lg-3"> 
       <!-- sell alert-->
       <header class="mb-2 alert alert-dismissible">
-        <img src="https://image.flaticon.com/icons/svg/1170/1170576.svg" alt="sell" class="profile-thumbnail">
+        <img src="https://image.flaticon.com/icons/svg/1170/1170576.svg" alt="sell" style="width:60px;height:60px;">
         <div class="profile-name">
           <a href="{{ url_for('new_product') }}" style="text-decoration:none;">
           <h3 style="color:#fff;">Wanna Sell?</h3>
