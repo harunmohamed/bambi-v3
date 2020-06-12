@@ -496,7 +496,7 @@ section .btn {
               <img src="{{ url_for('static', filename='profile_pics/' + comment.author.image_file) }}" style="width:20px;height:20px;border-radius:50%;"></a>
                 <span>
                   <span style="color:#1e90ff;">{{comment.author.username}}:</span> 
-                  <span style="color:#fff;opacity:0.8;">{{comment.body}}</span> <br>
+                  <span style="color:#fff;">{{comment.body}}</span> <br>
                   <small class="text-muted ml-4">{{ moment(comment.date_posted).fromNow() }}</small>
                 </span> <br>
             {% endfor %}
