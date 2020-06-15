@@ -64,6 +64,10 @@ def blog():
 def about():
 	return render_template('about.html', title="About")
 
+@app.route('/me')
+def portfolio():
+	return redirect("https://harunmohamed.github.io/me/", code=302)
+
 @app.route('/ecc102')
 def ecc102():
 	return render_template('ecc102.html', title="Programming and Problem Solving")
