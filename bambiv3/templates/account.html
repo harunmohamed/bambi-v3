@@ -23,7 +23,7 @@
 		      <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
 		      <p> 🙊 Born <span>{{ moment(current_user.age).fromNow() }}</span></p>
 		      <p> {% if current_user.gender == 'male' %} 👨 {% else %}👩 {% endif %} Gender: <span>{{current_user.gender.title()}}</span></p>
-		      <p> 🌍 From <span>{{current_user.country.title()}}</span></p>
+		      <p> 🌍 From <a href="https://www.google.com/maps?q={{current_user.country.title()}}" target="_blank">{{current_user.country.title()}}</a></p>
 		      <!--<p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>-->
 		      <p> 👣 Interested in <span>{{current_user.hobby}}</span></p>
 		      <p> 💪 Joined <span>{{ moment(current_user.date_joined).fromNow() }}</span></p>

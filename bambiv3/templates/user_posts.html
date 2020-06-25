@@ -355,7 +355,7 @@ section .btn {
           {% endif %}
         </span></p>
       <p> {% if user.gender == 'male' %} 👨 {% else %}👩 {% endif %} Gender: <span>{{user.gender.title()}}</span></p>
-      <p> 🌍 From <span>{{user.country.title()}}</span></p>
+      <p> 🌍 From <a href="https://www.google.com/maps?q={{user.country.title()}}" target="_blank">{{user.country.title()}}</a></p>
       <!--<p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>-->
       <p> 👣 Interested in <span>{{user.hobby}}</span></p>
       <p> 💪 Joined <span>{{ moment(user.date_joined).fromNow() }}</span></p>

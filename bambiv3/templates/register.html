@@ -140,14 +140,14 @@
     <div class="col">
       <div class="form-group">
         {% if form.country.errors %}
-        {{ form.country(placeholder="country", class="form-control form-control is-invalid") }}
+        {{ form.country(placeholder="city, country", class="form-control form-control is-invalid") }}
         <div class="invalid-feedback">
           {% for error in form.country.errors %}
           <span>{{ error }}</span>
           {% endfor %}
         </div>
         {% else %}
-        {{ form.country(placeholder="country", class="form-control form-control") }}
+        {{ form.country(placeholder="city, country", class="form-control form-control") }}
         {% endif %}
       </div>
     </div>
