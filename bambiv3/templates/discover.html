@@ -172,7 +172,7 @@ h1 {
                 <div class="card">
                   <div class="card_image"><a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" style="width:100%;"></a></div>
                   <div class="card_content">
-                    <h2 class="card_title">{{user.username}} {% if not current_user.is_following(user) %}<a class="badge badge-primary" href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;color:#000;">Follow</a>{% endif %} </h2>
+                    <h2 class="card_title">{{user.username}} {% if not current_user.is_following(user) %}<a class="btn btn-sm btn-outline-primary mb-1" href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;color:#000;">Follow</a>{% endif %} </h2>
                     <p class="card_text">{% if user.bio %} {{user.bio | safe}} {% else %} I'm from {{user.country}} and I study {{user.department}}.{% endif %}</p>
                     {% if user.single and user.gender != current_user.gender %}
                     {% if user.instagram %}<a href="https://www.instagram.com/{{user.instagram}}"><img src="https://image.flaticon.com/icons/svg/733/733614.svg" style="width:30px;height:30px;"></a>{% endif %}
@@ -228,7 +228,7 @@ h1 {
       {% endwith %}
       <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
         <h5 style="padding-left: 3px;">My Friends</h5>
-        {% for user in users if user.is_following(current_user) %}
+        {% for user in users if user.is_following(current_user) and current_user.is_following(user) %}
         <header>
         <a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail"></a>
         <div class="profile-name">
