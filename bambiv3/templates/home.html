@@ -105,7 +105,7 @@
 
     <div class="col-lg-6 offset-lg-3">
       <!-- content area -->
-      <div class="row">
+      <!--<div class="row">
         <div class="col-1">
           {% if current_user.is_authenticated %}
           <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="logo" class="profile-thumbnail" style="width:45px;height:45px;border-radius:50%;padding-right:3px;">
@@ -171,8 +171,8 @@
           </form>
           {%  endif %}
         </div>
-      </div>
-      
+      </div>-->
+
 
 
           {% if current_user.is_authenticated %}
@@ -203,6 +203,55 @@
             <div class="card--content"></div>
           </section>
           {% endif %}
+
+
+      {% if current_user.is_authenticated %}
+        <div class="card mb-2 dark-theme">
+                  <div class="card-header">
+                    <div class="media align-items-center">
+                      <div class="avatar avatar-m">
+                        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="logo" class="profile-thumbnail" style="width:35px;height:35px;border-radius:50%;padding-right:3px;">
+                      </div>
+                      <div class="media-body ml-2">
+                        <h5 class="mb-0 fs-0">{{greeting}} {{current_user.username.title()}}</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body p-0">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                      {% if form.content.errors %}
+                    {{ form.content(class="form-control border-0 rounded-0 resize-none dark-theme", placeholder="What's on your mind?") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.content.errors %}
+                      <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.content(class="form-control border-0 rounded-0 resize-none dark-theme", placeholder="What's on your mind?") }}
+                    {% endif %}
+                      <div class="row no-gutters justify-content-between mt-2 px-1 pb-2">
+                        <div class="col">
+                          <a class="d-inline-flex align-items-center" style="font-size:14px;">
+                            {% if form.image.errors %}
+                            {{ form.image(class="form-control-file is-invalid") }}
+                            <div class="invalid-feedback">
+                              {% for error in form.image.errors %}
+                              <span>{{ error }}</span>
+                              {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.image(class="form-control-file") }}
+                            {% endif %}
+                          </a>
+                          <a class="btn btn-sm rounded-capsule shadow-none d-inline-flex align-items-center fs--1 ml-1" title="post anonymously?">{{ form.anonymous() }} <i class="fas fa-eye-slash pl-1" style="color:red;font-size:20px;font-weight:300;"></i></a>
+                        </div>
+                        {{ form.submit(class="btn btn-primary btn-sm px-4 px-sm-5") }}
+                      </div>
+                    </form>
+                  </div>
+                </div>
+        {% endif %}
 
 
 

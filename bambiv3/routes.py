@@ -42,7 +42,9 @@ def home():
 	users = User.query.all()
 	if current_user.is_authenticated:
 		image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-		return render_template('home.html', title="Home", form=form, posts=posts, image_file=image_file, users=users)
+		hour = datetime.now().hour
+		greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
+		return render_template('home.html', title="Home", form=form, posts=posts, image_file=image_file, users=users, greeting=greeting)
 	else:
 		#return redirect(url_for('login'))
 		return render_template('home.html', title="Home", posts=posts)
@@ -84,6 +86,8 @@ def inbox():
 @app.route('/m/<recipient>', methods=['GET', 'POST'])
 @login_required
 def message(recipient):
+	current_user.last_message_read_time = datetime.utcnow()
+	db.session.commit()
 	recipient = recipient.lower()
 	user = User.query.filter_by(username=recipient).first_or_404()
 	current_user.last_message_read_time = datetime.utcnow()

@@ -228,6 +228,13 @@ header{
   color: #fff;
   border:1px solid #191917 !important;
 }
+.dark-theme:focus{
+  background: #191917;
+  color: #fff;
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
+}
 .comment-styles{
   background:none;
   border:none;
