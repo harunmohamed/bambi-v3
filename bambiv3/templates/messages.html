@@ -101,7 +101,7 @@
 
         <div id="inner">
 
-          <p>{{message.body | safe | urlize(40, target='_blank')}}</p>
+          <p><a href="{{ url_for('message',recipient=message.author.username) }}" style="color:#fff;text-decoration:none;">{{message.body | safe | urlize(40, target='_blank')}}</a></p>
 
         </div>
 
