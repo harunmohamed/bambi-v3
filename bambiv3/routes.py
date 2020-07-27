@@ -131,7 +131,7 @@ def messages():
 		recent_chats.append(message.recipient)
 	recent_chats = list(dict.fromkeys(recent_chats))
 	users = User.query.all()
-	return render_template('messages.html', users=users, recent_chats=recent_chats)
+	return render_template('messages.html', users=users, recent_chats=recent_chats, messages=messages_received)
 
 @app.route('/inbox/demo')
 def chat():
