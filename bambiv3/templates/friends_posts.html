@@ -231,13 +231,6 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="alert alert-success alert-dismissible fade show dark-theme" role="alert">
-        <a href="{{ url_for('discover') }}"  style="color:#fff;text-decoration: none">
-      <span style="color:#1e90ff;">🔥 Discover Friends!</span> Swipe left and right on discover to make friends.</a>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
       <div class="alert alert-dark alert-dismissible fade show dark-theme" role="alert">
       <span style="color:#1e90ff;">💬 Check your Inbox! </span>You have Unread Messages
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -245,7 +238,7 @@
         </button>
       </div>
       <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
-        <h5 style="padding-left: 3px;">Friends - <small><a href="{{url_for('discover')}}" target="_blank">view all</a></small></h5>
+        <h5 style="padding-left: 3px;">Suggested Friends - <small><a href="{{url_for('discover')}}" target="_blank">view all</a></small></h5>
         {% for user in users if user != current_user and  not current_user.is_following(user) %}
         <header>
         <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail">
@@ -259,7 +252,7 @@
           {% endif %}
         </div>
         <div class="follow-btn">
-            <button style="background:none;"><a href="{{url_for('follow', username=user.username)}}"target="_blank">❤</a></button>
+            <button style="height:40px;background:none;color:#F9E9C8;"><a href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;">Follow</a></button>
           </div>
       </header>
       {% endfor %}
