@@ -83,6 +83,16 @@ def market():
 def inbox():
 	return render_template('inbox.html', title="Inbox")
 
+@app.route('/photos')
+def photos():
+	photos = set()
+	posts = Post.query.all()
+	for post in posts:
+		if post.image:
+			photos.add(post)
+	return render_template('images.html', photos=photos, title="Photos")
+
+
 @app.route('/m/<recipient>', methods=['GET', 'POST'])
 @login_required
 def message(recipient):
