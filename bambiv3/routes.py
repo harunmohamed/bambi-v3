@@ -84,6 +84,7 @@ def inbox():
 	return render_template('inbox.html', title="Inbox")
 
 @app.route('/photos')
+@login_required
 def photos():
 	photos = set()
 	posts = Post.query.all()
