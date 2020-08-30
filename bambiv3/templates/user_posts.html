@@ -280,14 +280,14 @@ section .btn {
         <p class="mb-2" style="font-size:18px;"><small class="profile-real-name" style="font-size:18px;font-weight:400">
           {% if user.username == "harun" %}
           <code>{{user.email.split("@")[0] | lower}}</code>☁</small> - <code style="color:#fff;">making obnoxious life decisions since '00.</code>
-          <br>
+          <!--<br>
           <code>
             <a class="badge badge-warning" style="color:#000;">💦Founder, Bambi</a> 
             <a class="badge badge-primary" style="color:#000;">💻code</a> 
             <a class="badge badge-danger" style="color:#000;">🚊travel</a> 
             <a class="badge badge-success" style="color:#000;">🎱billiards</a> 
             <a class="badge badge-info" style="color:#000;">⚽football</a>
-          </code>
+          </code>-->
         </p>
 
           {%else%}
@@ -313,7 +313,7 @@ section .btn {
 
         {% if current_user.is_authenticated %}
         <div class="d-block d-lg-none">
-          <code style="color:#000;">
+          <code style="color:#000;font-size:18px;">
           <!-- if current_user is not following user -->
           {% if user != current_user and not current_user.is_following(user) %}
             <a class="badge badge-info" href="{{ url_for('follow', username=user.username) }}" style="color:#000;">🔅 Follow</a>
