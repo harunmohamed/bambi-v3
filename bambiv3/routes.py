@@ -42,7 +42,7 @@ def home():
 	users = User.query.all()
 	suggested_friends = set()
 	for user in users:
-		if user != current_user and  not current_user.is_following(user):
+		if user != current_user and current_user.is_authenticated and not current_user.is_following(user):
 			suggested_friends.add(user)
 	if current_user.is_authenticated:
 		image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
@@ -101,7 +101,6 @@ def photos():
 			photos.add(post)
 	return render_template('images.html', photos=photos, title="Photos")
 
-
 @app.route('/m/<recipient>', methods=['GET', 'POST'])
 @login_required
 def message(recipient):
@@ -136,6 +135,7 @@ def message(recipient):
 
 	return render_template('send_message.html', recipient=recipient, title="Chat with " + recipient.title() , user=user, form=form, messages=messages, recent_chats=recent_chats)
 
+
 @app.route('/messages')
 @login_required
 def messages():
@@ -143,14 +143,19 @@ def messages():
 	db.session.commit()
 	messages_received = current_user.messages_received.order_by(m.timestamp.desc())
 	messages_sent = current_user.messages_sent.order_by(m.timestamp.desc())
+
+	#recent chats
 	recent_chats = list()
 	for message in messages_received:
 		recent_chats.append(message.author)
 	for message in messages_sent:
 		recent_chats.append(message.recipient)
 	recent_chats = list(dict.fromkeys(recent_chats))
+
 	users = User.query.all()
-	return render_template('messages.html', users=users, recent_chats=recent_chats, messages=messages_received)
+	hour = datetime.now().hour
+	greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
+	return render_template('messages.html', users=users, greeting=greeting, recent_chats=recent_chats, messages_sent=messages_sent, messages_received=messages_received)
 
 @app.route('/inbox/demo')
 def chat():

@@ -36,13 +36,16 @@
 
     <div class="col-lg-7 offset-lg-3"> 
       
-      <h3 style="text-align:center"><a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{user.username.title()}}
+
+      <h3 style="text-align:center;margin-left:-50px;">
+        <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" style="width:40px;height:40px;border-radius:50%;">
+        <a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{user.username.title()}}
              {% if recipient in ["harun" , "bambi"] %}
              <img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-left: -5px;">
              {% endif %}
            </a></h3>
 
-           <div style="overflow:auto;height:460px;padding:5px;">
+           <div style="overflow-y:auto;height:460px;padding:5px;">
 
 
       {% for message in messages %}
@@ -71,7 +74,7 @@
 
             <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="profile pic"style="width:35px;height:35px;border-radius:50%">
 
-            Hey {{current_user.username.title()}}, {{user.username.title()}} likes {{user.hobby.lower()}}. How is that for a start? 😉🍻
+            Hey {{current_user.username.title()}}, {{user.username.title()}}'s birthday is {{user.age.strftime(' %b %d ')}}. How is that for a start? 😉🍻
 
             </p>
 
@@ -87,31 +90,27 @@
 
         </div>
 
-      <div class="post" style="background:none;padding:2px;">
-        <div id="inner">
-         <form method="POST" action="" enctype="multipart/form-data">
+      <div class="post" style="background:none;padding:2px;width:95%;">
+          <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
-              <!--<legend class="border-bottom mb-2 pb-2">Message {{recipient.title()}}</legend>-->
-            <div class="input-group mt-2">
-              {{ form.message.label(placeholder="message...", class="form-control-label") }}
-                  {% if form.message.errors %}
-                    {{ form.message(placeholder="message...", class="form-control form-control-sm is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.message.errors %}
-                          <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
+            <div class="input-group mt-2 mr-2" style="overflow:hidden">
+              {% if form.message.errors %}
+                {{ form.message(class="form-control border-0 rounded-0 resize-none dark-theme border border-dark", placeholder="type message...") }}
+                <div class="invalid-feedback">
+                  {% for error in form.message.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
                   {% else %}
-                    {{ form.message(placeholder="type message...", class="form-control form-control-sm subtle", rows="2", style="border:2px solid #191917;height:45px;border-radius:5px 0px;") }}
+                    {{ form.message(class="form-control border-0 rounded-0 resize-none dark-theme border border-dark", placeholder="type message...") }}
                   {% endif %}
-
-              <div class="input-group-append">
-                {{ form.submit(class="btn", style="margin-top:2px;border:2px solid #191917;") }}
+                  <div class="input-group-append">
+                    {{ form.submit(class="btn btn-outline-dark btn-sm p-3") }}
+                  </div>
               </div>
-            </div>
-        </form>
-      </div>
+          </form>
   </div>
+
 </div>
 
 

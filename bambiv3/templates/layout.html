@@ -90,16 +90,17 @@
                <span>😎</span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="{{ url_for('f_posts') }}" data-toggle="popover" data-content="🍌: Add Posts with a Title"> 🍧 Friend Posts</a>
+              <a class="dropdown-item" href="{{ url_for('f_posts') }}" data-toggle="popover" data-content="🍌: View Posts from Friends"> 🍧 Friend Posts</a>
               <a class="dropdown-item" href="{{ url_for('messages') }}" data-toggle="popover" data-content="🍌: Reply to your Messages"> 💬 Messages {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
+              <a class="dropdown-item" href="{{ url_for('photos') }}" data-toggle="popover" data-content="🍌: View Photos"> 📷 Photos</a>
               <a class="dropdown-item" href="{{ url_for('discover') }}" data-toggle="popover" data-content="🍌: Discover New Friends"> 🔥 Discover Friends</a>
               <a class="dropdown-item" href="{{ url_for('explore') }}" data-toggle="popover" data-content="🍌: Explore Random Stuff!"> 🔱 Explore</a> 
-              <a class="dropdown-item" href="{{ url_for('dating') }}" data-toggle="popover" data-content="🍌: Love Hard Today!"> 💋 Dating</a> 
               <a class="dropdown-item" href="{{ url_for('market') }}" data-toggle="popover" data-content="🍌: Buy and Sell Stuff"> 👜 Market</a>
-              <a class="dropdown-item" href="{{ url_for('new_product') }}" data-toggle="popover" data-content="🍌: Buy and Sell Stuff"> 🛠 Sell</a>
+              <a class="dropdown-item" href="{{ url_for('dating') }}" data-toggle="popover" data-content="🍌: Love Hard Today!"> 💋 Dating</a> 
+              <!--<a class="dropdown-item" href="{{ url_for('new_product') }}" data-toggle="popover" data-content="🍌: Buy and Sell Stuff"> 🛠 Sell</a>
               <a class="dropdown-item" href="{{ url_for('account') }}" data-toggle="popover" data-content="🍌: Account Settings"> 🍪 Settings</a>
               <a class="dropdown-item" href="{{ url_for('blog') }}" data-toggle="popover" data-content="🍌: Bambi Blog"> 🎬 Blog</a>
-              <a class="dropdown-item" href="{{ url_for('about') }}" data-toggle="popover" data-content="🍌: Know Bambi More"> 👋 About Bambi</a>
+              <a class="dropdown-item" href="{{ url_for('about') }}" data-toggle="popover" data-content="🍌: Know Bambi More"> 👋 About Bambi</a>-->
               <a class="dropdown-item" href="{{ url_for('logout') }}" data-toggle="popover" data-content="🍌: Logout"> 🛫 Logout</a>
             </div>
           </div>
