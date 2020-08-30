@@ -238,9 +238,8 @@ section .btn {
           {% endif %}
 
         </h2>
-
         {% if current_user.is_authenticated %}
-        <div class="dropdown" style="margin:auto 10px;">
+        <div class="dropdown d-none d-lg-block" style="margin:auto 10px;">
               <button class="btn  btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-left:2px;">
               </button>
               <div class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton" style="cursor:pointer;padding:0;background:#191917;color:#fff;margin-left:-80px;">
@@ -309,6 +308,30 @@ section .btn {
             <a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" style="width:20px;height:20px;border-radius:50%;margin-left:-10px;border:1px solid #000;" title="{{user.username.title()}}"></a>
             {% endif %}
         {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if current_user.is_authenticated %}
+        <div class="d-block d-lg-none">
+          <code style="color:#000;">
+          <!-- if current_user is not following user -->
+          {% if user != current_user and not current_user.is_following(user) %}
+            <a class="badge badge-info" href="{{ url_for('follow', username=user.username) }}" style="color:#000;">🔅 Follow</a>
+          {% endif %}
+          <!-- if current_user is user -->
+          {% if user == current_user %}
+            <a class="badge badge-info" href="{{ url_for('messages') }}" style="color:#000;">🔐 Messages <span id="message_count" class="badge badge-warning" style="display:{% if new_messages %}inline{% else %}none{% endif %};">{{ new_messages }}</span></a>
+            <a class="badge badge-danger" href="{{ url_for('likes', username=current_user.username) }}" style="color:#000;">💛 My Likes
+            </a>
+            <a class="badge badge-info" data-toggle="modal" data-target="#info">⚜ Edit Profile</a>
+          {% endif %}
+          <!-- if current_user is following user -->
+          {% if current_user != user and current_user.is_following(user) %}
+            <a class="badge badge-info" href="{{ url_for('message',recipient=user.username) }}" style="color:#000;">🔏 Message</a>
+            <a class="badge badge-warning" href="{{ url_for('likes', username=user.username) }}">💛 Likes</a>
+            <a class="badge badge-danger" href="{{ url_for('unfollow', username=user.username) }}" style="color:#000;">👽 Unfollow</a>
+          {% endif %}
+          </code>
         </div>
         {% endif %}
 
