@@ -287,9 +287,9 @@
               {% if post.author != current_user %}
                 <!--<i class="fas fa-heart love" style="font-size: 28px;"></i>-->
                 {% if current_user.has_liked_post(post) %}
-                  <a href="{{ url_for('like_action', post_id=post.id, action='unlike') }}" style="text-decoration:none;">❤</a>
+                  <a href="{{ url_for('like_action', post_id=post.id, action='unlike') }}" style="text-decoration:none;font-size:30px;margin-top:-7px;">❤</a>
                 {% else %}
-                  <a href="{{ url_for('like_action', post_id=post.id, action='like') }}" style="text-decoration:none;">👍</a>
+                  <a href="{{ url_for('like_action', post_id=post.id, action='like') }}" style="text-decoration:none;font-size:30px;margin-top:-7px;">👍</a>
                 {% endif %}
 
                 {% else %}
@@ -448,7 +448,7 @@
       </div>
       <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
         <h5 style="padding-left: 3px;">Suggested Friends - <small><a href="{{url_for('discover')}}" target="_blank">view all</a></small></h5>
-        {% for user in users if user != current_user and not current_user.is_following(user) %}
+        {% for user in suggested_friends %}
         <header>
         <a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="default profile" class="profile-thumbnail"></a>
         <div class="profile-name">

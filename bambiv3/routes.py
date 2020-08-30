@@ -40,11 +40,15 @@ def home():
 	page = request.args.get('page', 1, type=int)
 	posts = Post.query.order_by(Post.date_posted.desc()).paginate(per_page=50, page=page)
 	users = User.query.all()
+	suggested_friends = set()
+	for user in users:
+		if user != current_user and  not current_user.is_following(user):
+			suggested_friends.add(user)
 	if current_user.is_authenticated:
 		image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
 		hour = datetime.now().hour
 		greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
-		return render_template('home.html', title="Home", form=form, posts=posts, image_file=image_file, users=users, greeting=greeting)
+		return render_template('home.html', title="Home", form=form, posts=posts, image_file=image_file, users=users, greeting=greeting, suggested_friends=suggested_friends)
 	else:
 		#return redirect(url_for('login'))
 		return render_template('home.html', title="Home", posts=posts)
@@ -55,7 +59,11 @@ def f_posts():
 	page = request.args.get('page', 1, type=int)
 	posts = current_user.followed_posts().paginate(per_page=50, page=page)
 	users = User.query.all()
-	return render_template('friends_posts.html', title="Friend Posts", posts=posts, users=users)
+	suggested_friends = set()
+	for user in users:
+		if user != current_user and  not current_user.is_following(user):
+			suggested_friends.add(user)
+	return render_template('friends_posts.html', title="Friend Posts", posts=posts, users=users, suggested_friends=suggested_friends)
 
 
 @app.route('/blog')
@@ -152,7 +160,11 @@ def chat():
 @login_required
 def discover():
 	users = User.query.all()
-	return render_template('discover.html', users=users, title='Discover')
+	suggested_friends = set()
+	for user in users:
+		if user != current_user and  not current_user.is_following(user):
+			suggested_friends.add(user)
+	return render_template('discover.html', users=users, title='Discover', suggested_friends=suggested_friends)
 
 @app.route('/swipe')
 def swipe():

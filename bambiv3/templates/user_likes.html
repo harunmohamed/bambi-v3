@@ -91,9 +91,9 @@
             {% if post.author != current_user %}
               <!--<i class="fas fa-heart love" style="font-size: 28px;"></i>-->
               {% if current_user.has_liked_post(post) %}
-                <a href="{{ url_for('like_action', post_id=post.id, action='unlike') }}" style="text-decoration:none;">❤</a>
+                <a href="{{ url_for('like_action', post_id=post.id, action='unlike') }}" style="text-decoration:none;font-size:30px;margin-top:-7px;">❤</a>
               {% else %}
-                <a href="{{ url_for('like_action', post_id=post.id, action='like') }}" style="text-decoration:none;">👍</a>
+                <a href="{{ url_for('like_action', post_id=post.id, action='like') }}" style="text-decoration:none;font-size:30px;margin-top:-7px;">👍</a>
               {% endif %}
             {% else %}
             <div class="dropdown dropleft">
