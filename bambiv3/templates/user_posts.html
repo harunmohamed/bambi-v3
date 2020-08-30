@@ -268,7 +268,7 @@ section .btn {
 
 
         <ul>
-          <li style="font-size:22px;"><span class="profile-stat-count">{{ posts.total }}</span> <small>posts</small></li>
+          <li style="font-size:22px;"><a class="profile-stat-count" href="#posts" style="color:#fff;text-decoration:none;">{{ posts.total }}</a> <small>posts</small></li>
           <li style="font-size: 22px;" data-toggle="modal" data-target="#followers"><span class="profile-stat-count">{{ user.followers.count() }}</span> <small>followers</small></li>
           <li style="font-size: 22px;" data-toggle="modal" data-target="#following"><span class="profile-stat-count">{{ user.followed.count() }}</span> <small>following</small></li>
         </ul>
@@ -418,7 +418,7 @@ section .btn {
 
 
 
-    <div class="col-lg-6">
+    <div id="posts" class="col-lg-6">
       <!-- content area -->
       {% if current_user.is_authenticated %}
       {% if current_user == user and posts.total == 0 or current_user.is_following(user) and posts.total == 0 %}
