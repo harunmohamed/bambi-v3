@@ -84,7 +84,10 @@ def ecc102():
 
 @app.route('/market', methods=['GET', 'POST'])
 def market():
-	products = Product.query.order_by(Product.date_posted.desc())
+	p = Product.query.order_by(Product.date_posted.desc())
+	products = set()
+	for product in p:
+			products.add(product)
 	return render_template('market.html', title="Market", products=products)
 
 @app.route('/inbox')
