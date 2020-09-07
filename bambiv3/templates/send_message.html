@@ -95,14 +95,14 @@
             {{ form.hidden_tag() }}
             <div class="input-group mt-2" style="overflow:hidden">
               {% if form.message.errors %}
-                {{ form.message(class="form-control border-0 rounded-0 resize-none dark-theme border border-dark", placeholder="type message...") }}
+                {{ form.message(class="form-control border-0 rounded-3 resize-none dark-theme border border-dark", placeholder="type message...") }}
                 <div class="invalid-feedback">
                   {% for error in form.message.errors %}
                     <span>{{ error }}</span>
                   {% endfor %}
                 </div>
                   {% else %}
-                    {{ form.message(class="form-control border-0 rounded-0 resize-none dark-theme border border-dark", placeholder="type message...") }}
+                    {{ form.message(class="form-control border-0 rounded-3 resize-none dark-theme border border-dark", placeholder="type message...") }}
                   {% endif %}
                   <div class="input-group-append">
                     {{ form.submit(class="btn btn-outline-dark btn-sm p-3") }}
