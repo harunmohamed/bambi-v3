@@ -146,7 +146,7 @@
 
     <div id="mySidenav" class="sidenav">
       <a href="{{url_for('user_posts', username=current_user.username)}}">
-        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="90px" height="90px;" style="margin-left:25px;margin-bottom:20px;border-radius:50%" title="view profile"></a>
+        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="90px" height="90px;" style=";margin-bottom:10px;border-radius:50%" title="view profile"></a>
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
        <a class="dropdown-item" href="{{ url_for('messages') }}"> 💬 Messages {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
