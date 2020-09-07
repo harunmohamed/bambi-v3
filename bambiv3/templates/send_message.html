@@ -58,7 +58,7 @@
           {% endif %}">
 
           {% if message.author != current_user %}
-          <img src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}" alt="profile pic" title="{{message.author.username.lower()}}" style="width:30px;height:30px;border-radius:50%">
+          <img src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}" alt="profile pic" title="{{message.author.username.lower()}}" style="width:22px;height:22px;border-radius:50%">
           {% endif %} 
 
           {{message.body | safe | urlize(40, target='_blank')}} 
