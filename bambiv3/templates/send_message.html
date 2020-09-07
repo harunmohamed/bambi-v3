@@ -45,7 +45,7 @@
              {% endif %}
            </a></h3>
 
-           <div style="overflow-y:auto;height:460px;padding:5px;">
+           <div style="overflow-y:auto;height:450px;padding:5px;">
 
 
       {% for message in messages %}
@@ -93,7 +93,7 @@
       <div class="post" style="background:none;padding:2px;width:95%;">
           <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
-            <div class="input-group mt-2 mr-2" style="overflow:hidden">
+            <div class="input-group mt-2" style="overflow:hidden">
               {% if form.message.errors %}
                 {{ form.message(class="form-control border-0 rounded-0 resize-none dark-theme border border-dark", placeholder="type message...") }}
                 <div class="invalid-feedback">

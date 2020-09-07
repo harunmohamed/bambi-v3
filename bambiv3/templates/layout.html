@@ -130,7 +130,6 @@
         </div>
 
     <div class="bottom d-block d-sm-none" style="padding-bottom:10px;padding-top:2px;">
-
       <a href="{{ url_for('home') }}" {% if '/home' == request.path %}  class="active" {% endif %}><img src="{{ url_for('static', filename='resources/' + 'home.svg') }}" style="width:30px;height:30px;margin-bottom:20px;" alt="home"></a>
 
       <a href="{{ url_for('photos') }}" {% if '/photos' == request.path %}  class="active" {% endif %}><img src="{{ url_for('static', filename='resources/' + 'explore.svg') }}" style="width:30px;height:30px;margin-bottom:20px;" alt="photos"></a>
