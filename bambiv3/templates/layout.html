@@ -129,15 +129,15 @@
           <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;" data-toggle="popover" data-content="🍌: Add Longer Posts with Titles">✏</a></button>
         </div>
 
-    <div class="bottom d-block d-sm-none" style="padding-bottom:8px;padding-top:2px;">
+    <div class="bottom d-block d-sm-none" style="padding-bottom:10px;padding-top:2px;">
 
-      <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='resources/' + 'home.svg') }}" style="width:30px;height:30px;margin-bottom:20px;" alt="home"></a>
+      <a href="{{ url_for('home') }}" {% if '/home' == request.path %}  class="active" {% endif %}><img src="{{ url_for('static', filename='resources/' + 'home.svg') }}" style="width:30px;height:30px;margin-bottom:20px;" alt="home"></a>
 
-      <a href="{{ url_for('photos') }}"><img src="{{ url_for('static', filename='resources/' + 'explore.svg') }}" style="width:30px;height:30px;margin-bottom:20px;" alt="photos"></a>
+      <a href="{{ url_for('photos') }}" {% if '/photos' == request.path %}  class="active" {% endif %}><img src="{{ url_for('static', filename='resources/' + 'explore.svg') }}" style="width:30px;height:30px;margin-bottom:20px;" alt="photos"></a>
 
-      <a href="{{ url_for('new_post') }}"><img src="{{ url_for('static', filename='resources/' + 'logo.svg') }}" style="width:30px;height:30px;margin-bottom:20px;" alt="new post"></a>
+      <a href="{{ url_for('new_post') }}" {% if '/post/new' == request.path %}  class="active" {% endif %}><img src="{{ url_for('static', filename='resources/' + 'logo.svg') }}" style="width:30px;height:30px;margin-bottom:20px;" alt="new post"></a>
 
-      <a href="{{ url_for('messages') }}"><img src="{{ url_for('static', filename='resources/' + 'messages.svg') }}" style="width:30px;height:30px;margin-bottom:20px;" alt="messages"></a>
+      <a href="{{ url_for('messages') }}" {% if '/messages' == request.path %}  class="active" {% endif %}><img src="{{ url_for('static', filename='resources/' + 'messages.svg') }}" style="width:30px;height:30px;margin-bottom:20px;" alt="messages"></a>
 
       <a onclick="openNav()"><img src="{{ url_for('static', filename='resources/' + 'settings.svg') }}" style="width:30px;height:30px;margin-bottom:20px;"></a>
 
@@ -163,11 +163,11 @@
     {% else %}
     <div class="bottom d-block d-sm-none">
 
-      <a href="{{ url_for('explore') }}" style="font-size:30px;cursor:pointer;width:33.3%;" data-toggle="popover" data-content="🍌: Explore"><img src="https://image.flaticon.com/icons/png/512/944/944253.png" style="width:30px;height:30px;margin-bottom:20px;"></a>
+      <a href="{{ url_for('explore') }}" style="font-size:30px;cursor:pointer;width:33.3%;" data-toggle="popover" data-content="🍌: Explore"><img src="{{ url_for('static', filename='resources/' + 'guest.png') }}" style="width:30px;height:30px;margin-bottom:20px;"></a>
 
       <a href="{{ url_for('home') }}" style="width:33.3%;"><img src="{{ url_for('static', filename='resources/' + 'logo.svg') }}" style="width:35px;height:35px;"class="d-inline-block align-top" alt=""></a>
 
-      <a href="{{ url_for('login') }}" style="font-size:30px;cursor:pointer;width:33.3%;" data-toggle="popover" data-content="🍌: Log In"><img src="https://image.flaticon.com/icons/svg/1828/1828506.svg" style="width:30px;height:30px;margin-bottom:20px;"></a>
+      <a href="{{ url_for('login') }}" style="font-size:30px;cursor:pointer;width:33.3%;" data-toggle="popover" data-content="🍌: Log In"><img src="{{ url_for('static', filename='resources/' + 'login.svg') }}" style="width:30px;height:30px;margin-bottom:20px;"></a>
 
     </div>
     {% endif %}

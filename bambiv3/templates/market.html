@@ -29,7 +29,7 @@
 
   <header data-toggle="popover" data-content="🍌: Click to know more about Bambi">
     <a href="{{url_for('about')}}" target="_blank" style="color: #F9E9C8;text-decoration: none;">
-    <img src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+    <img src="{{ url_for('static', filename='resources/' + 'logo.svg') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
       <h3 class="logo">BAMBI</h3>
       <small id="year"></small>
@@ -38,7 +38,7 @@
   </header>
   {% else %}
   <header class="mb-2">
-    <img src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+    <img src="{{ url_for('static', filename='resources/' + 'logo.svg') }}" alt="logo" class="profile-thumbnail">
     <div class="profile-name">
       <h3 class="logo">Hello Friend!</h3>
       <small>how about signing in?</small>

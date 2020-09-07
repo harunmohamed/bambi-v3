@@ -10,7 +10,7 @@
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 
   <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
-  <link rel="shortcut icon" type="image/png" href="https://image.flaticon.com/icons/svg/408/408710.svg">
+  <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='resources/' + 'logo.svg') }}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 
 <style>
@@ -200,7 +200,7 @@ body {
     </div>
     <div class="mx-auto order-0">
       <a class="navbar-brand mx-auto" href="{{ url_for('home') }}">
-        <img src="https://image.flaticon.com/icons/svg/408/408710.svg" width="35" height="35" class="d-inline-block align-top" alt="">
+        <img src="{{ url_for('static', filename='resources/' + 'logo.svg') }}" width="35" height="35" class="d-inline-block align-top" alt="">
         <!--<span class="logo">BAMBI</span>-->
       </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">

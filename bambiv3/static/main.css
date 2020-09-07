@@ -327,8 +327,8 @@ header{
 }
 
 .bottom a.active {
-  background-color: #4CAF50;
-  color: white;
+  border-top: 3px solid #0069d9;
+  background-color: #191917; 
 }
 .sidenav {
   height: 100%;

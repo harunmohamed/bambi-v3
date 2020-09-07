@@ -31,7 +31,7 @@
 		    </div>
 
 		  <header>
-		    <img src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+		    <img src="{{ url_for('static', filename='resources/' + 'logo.svg') }}" alt="logo" class="profile-thumbnail">
 		    <div class="profile-name">
 		      <h3 class="logo">BAMBI</h3>
 		      <small id="year"></small>
@@ -40,6 +40,7 @@
 		</div>
 
 		<div class="col-lg-6 offset-lg-3">
+			<h2 class="mt-1">New Post</h2>
 			<div class="post">
 			<!--<header>
 			    <img src="{{ image_file }}" alt="{{current_user.username}} profile" class="profile-thumbnail">
@@ -65,7 +66,6 @@
 				  <form method="POST" action="" enctype="multipart/form-data">
 				    {{ form.hidden_tag() }}
 				    <fieldset class="form-group">
-				      <legend class="border-bottom mb-2 pb-2">{{ legend }}</legend>
 				      <div class="form-group">
 				        {{ form.title.label(placeholder="title is optional", class="form-control-label") }}
 				        {% if form.title.errors %}

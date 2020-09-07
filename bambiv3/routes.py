@@ -276,7 +276,7 @@ def new_post():
 			db.session.commit()
 			flash('Your Post Has been Created!', 'success')
 			return redirect(url_for('home'))
-	return render_template('create_post.html', title='New Post', form=form, legend='New Post')
+	return render_template('create_post.html', title='New Post', form=form)
 
 @app.route('/post/<int:post_id>', methods=["GET", "POST"])
 @login_required
