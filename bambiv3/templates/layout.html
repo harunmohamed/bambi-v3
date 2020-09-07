@@ -129,19 +129,24 @@
           <button class="post_btn"><a href="{{ url_for('new_post') }}" style="color:#F9E9C8;" data-toggle="popover" data-content="🍌: Add Longer Posts with Titles">✏</a></button>
         </div>
 
-    <div class="bottom d-block d-sm-none">
+    <div class="bottom d-block d-sm-none" style="padding-bottom:8px;padding-top:2px;">
 
-      <a href="{{url_for('user_posts', username=current_user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="35px" height="35px;" style="border-radius:50%;"></a>
+      <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='resources/' + 'home.svg') }}" style="width:30px;height:30px;margin-bottom:20px;" alt="home"></a>
 
-      <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='resources/' + 'logo.svg') }}" width="35px" height="35px;" class="d-inline-block align-top" alt=""></a>
+      <a href="{{ url_for('photos') }}"><img src="{{ url_for('static', filename='resources/' + 'explore.svg') }}" style="width:30px;height:30px;margin-bottom:20px;" alt="photos"></a>
 
-      <a style="font-size:30px;cursor:pointer;" onclick="openNav()"><img src="https://image.flaticon.com/icons/png/512/148/148912.png" style="width:30px;height:30px;margin-bottom:20px;"></a>
+      <a href="{{ url_for('new_post') }}"><img src="{{ url_for('static', filename='resources/' + 'logo.svg') }}" style="width:30px;height:30px;margin-bottom:20px;" alt="new post"></a>
+
+      <a href="{{ url_for('messages') }}"><img src="{{ url_for('static', filename='resources/' + 'messages.svg') }}" style="width:30px;height:30px;margin-bottom:20px;" alt="messages"></a>
+
+      <a onclick="openNav()"><img src="{{ url_for('static', filename='resources/' + 'settings.svg') }}" style="width:30px;height:30px;margin-bottom:20px;"></a>
 
 
     </div>
 
     <div id="mySidenav" class="sidenav">
-      <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="90px" height="90px;" style="margin-left:45px;margin-bottom:20px;border-radius:50%">
+      <a href="{{url_for('user_posts', username=current_user.username)}}">
+        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="default profile" class="profile-thumbnail" width="90px" height="90px;" style="margin-left:25px;margin-bottom:20px;border-radius:50%" title="view profile"></a>
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
        <a class="dropdown-item" href="{{ url_for('messages') }}"> 💬 Messages {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
@@ -158,11 +163,11 @@
     {% else %}
     <div class="bottom d-block d-sm-none">
 
-      <a href="{{ url_for('explore') }}" style="font-size:30px;cursor:pointer;" data-toggle="popover" data-content="🍌: Explore"><img src="https://image.flaticon.com/icons/png/512/944/944253.png" style="width:30px;height:30px;margin-bottom:20px;"></a>
+      <a href="{{ url_for('explore') }}" style="font-size:30px;cursor:pointer;width:33.3%;" data-toggle="popover" data-content="🍌: Explore"><img src="https://image.flaticon.com/icons/png/512/944/944253.png" style="width:30px;height:30px;margin-bottom:20px;"></a>
 
-      <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='resources/' + 'logo.svg') }}" width="35px" height="35px;" class="d-inline-block align-top" alt=""></a>
+      <a href="{{ url_for('home') }}" style="width:33.3%;"><img src="{{ url_for('static', filename='resources/' + 'logo.svg') }}" style="width:35px;height:35px;"class="d-inline-block align-top" alt=""></a>
 
-      <a href="{{ url_for('login') }}" style="font-size:30px;cursor:pointer;" data-toggle="popover" data-content="🍌: Log In"><img src="https://image.flaticon.com/icons/svg/1828/1828506.svg" style="width:30px;height:30px;margin-bottom:20px;"></a>
+      <a href="{{ url_for('login') }}" style="font-size:30px;cursor:pointer;width:33.3%;" data-toggle="popover" data-content="🍌: Log In"><img src="https://image.flaticon.com/icons/svg/1828/1828506.svg" style="width:30px;height:30px;margin-bottom:20px;"></a>
 
     </div>
     {% endif %}
