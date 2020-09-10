@@ -7,6 +7,7 @@
 
 
 		<div class="col-lg-3 d-none d-lg-block position-fixed">
+		  <a href="{{ url_for('user_posts',username=current_user.username) }}" style="text-decoration:none;">
 			<header class="mb-2">
 		        <img src="{{ image_file }}" alt="user profile" class="profile-thumbnail">
 		        <div class="profile-name">
@@ -14,6 +15,7 @@
 		          <small>@{{current_user.email.split("@")[0] | lower}}</small>
 		        </div>
 		      </header>
+		  </a>
 		      
 		    <div class="card about mb-2" style="color:#fff;background:#191917;border-radius:10px;">
 		    <div class="card-body">

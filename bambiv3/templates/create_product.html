@@ -5,6 +5,7 @@
 	<div class="row">
 		<div class="col-lg-3 d-none d-lg-block position-fixed">
 				<!-- User info , photos -->
+			<a href="{{ url_for('user_posts',username=current_user.username) }}" style="text-decoration:none;">
 		      <header class="mb-2" data-toggle="modal" data-target="#profile">
 		        <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="harun profile" class="profile-thumbnail">
 		        <div class="profile-name">
@@ -12,6 +13,7 @@
 		          <small>@{{current_user.email.split("@")[0] | lower}}</small>
 		        </div>
 		      </header>
+		    </a>
 
 		    <div class="menu mb-2" style="background:#191917;border-radius:10px;">
 		      <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
