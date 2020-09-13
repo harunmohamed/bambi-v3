@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/harunmohamed/bambi-v3">
-    <img src="https://www.bambi.app/static/resources/logo.svg" alt="Logo" width="80" height="80">
+    <img src="https://bit.ly/3bYmo7t" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Bambi</h3>
