@@ -104,6 +104,17 @@ def photos():
 			photos.add(post)
 	return render_template('images.html', photos=photos, title="Photos")
 
+@app.route('/anonymous')
+@login_required
+def anonymous():
+	users = User.query.all()
+	anonymous = set()
+	posts = Post.query.all()
+	for post in posts:
+		if post.anonymous:
+			anonymous.add(post)
+	return render_template('anonymous.html', users=users, anonymous=anonymous, title="Anonymous")
+
 @app.route('/m/<recipient>', methods=['GET', 'POST'])
 @login_required
 def message(recipient):

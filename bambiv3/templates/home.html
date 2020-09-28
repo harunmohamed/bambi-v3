@@ -268,7 +268,8 @@
           <a href="{{url_for('user_posts', username=post.author.username)}}">
           <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="profile pic" class="profile-thumbnail" data-toggle="popover" data-content="😎 : I'm from {{post.author.country}} and I study {{post.author.department}}. I am Interested in {{post.author.hobby}}"></a>
         {% else %}
-          <img src="{{ url_for('static', filename='resources/' + 'ghost.jpg') }}" alt="profile pic" class="profile-thumbnail">
+        <a href="{{url_for('anonymous')}}">
+          <img src="{{ url_for('static', filename='resources/' + 'ghost.jpg') }}" alt="profile pic" class="profile-thumbnail"></a>
         {% endif %}
           <div class="profile-name">
             {% if not post.anonymous %}
@@ -279,8 +280,8 @@
            <small>@{{post.author.email.split("@")[0] | lower}}</small>
 
            {% else %}
-
-           <h3 data-toggle="popover">anonymous</h3>
+           
+           <a href="{{url_for('anonymous')}}" style="color:#fff;"><h3 data-toggle="popover">anonymous</h3></a>
            <small>@anonymous</small>
 
            {% endif %}

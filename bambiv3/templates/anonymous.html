@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="container-fluid">
+  <div class="row">
+ 
+    <div class="col-lg-1"></div>
+
+    <div class="col-lg-10">
+     
+     <h2 class="mt-1">Anonymous Posts</h2>
+     <div class="card-columns">
+   {% for post in anonymous %}
+      <div class="card" style="border:1px solid #191917;border-radius:5px;">
+        <a href="{{ url_for('post', post_id=post.id) }}" style="text-decoration:none;">
+        <div style="display:flex;overflow-x: auto">
+          {% if post.image %}
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='posts/' + post.image) }}" alt="Card image cap" style="min-width:100%;max-height:400px;border-right:1px solid #000;">
+          {% endif %}
+        </div></a>
+
+        <div class="card-block p-2" style="background:#191917;">
+          {% if post.title %} 
+          <span style="text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:1.5px;color:#FE3C72;">{{ post.title }}</span> <br>
+          {% endif %}
+
+          <img src="{{ url_for('static', filename='resources/' + 'ghost.jpg') }}" style="width:25px;height:25px;border-radius:50%">
+          <span style="text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:1.5px;">anonymous</span> <br>
+
+          <code style="color:#fff;"> 
+            <a href=" {{ url_for('post', post_id=post.id) }} " style="color:#fff;text-decoration:none;">
+            {{post.content| truncate(420) | safe | urlize(40, target='_blank')}} 
+            </a>
+         </code> <br> 
+
+        <span class="mb-2" style="margin-left:10px;">
+            {% for user in users if user.has_liked_post(post) and user.is_following(current_user)%}
+            <a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" style="width:25px;height:25px;border-radius:50%;margin-left:-8px;border:1px solid #000;" title="{{user.username.title()}}"></a>
+            {% endfor %}
+            <small class="text-muted">{{ moment(post.date_posted).fromNow() }}</small> 
+        </span>
+
+           <div style="max-height:250px;overflow:auto" class="mb-2">
+            {% for comment in post.comments if current_user.is_authenticated %}
+            <a href="{{url_for('user_posts', username=comment.author.username)}}">
+              <img src="{{ url_for('static', filename='profile_pics/' + comment.author.image_file) }}" style="width:20px;height:20px;border-radius:50%;"></a>
+                <span>
+                  <code style="color:#1e90ff;">{{comment.author.username}}:</code> 
+                  <code style="color:#fff;">{{comment.body}}</code> <br>
+                  <small class="text-muted ml-4">{{ moment(comment.date_posted).fromNow() }}</small>
+                </span> <br>
+            {% endfor %}
+        </div>
+          
+           {% if not current_user.is_following(post.author) and current_user != post.author %}
+          <div style="display:flex;" class="mt-2">
+            <p><a class="badge badge-primary mt-1 p-2" href="{{ url_for('follow', username=post.author.username) }}">Follow {{post.author.username.title()}}</a></p>
+          </div>
+          {% endif %}
+
+        </div>
+      </div><!--card-->
+      {% endfor %}
+  </div><!--card-columns-->
+
+  <div style="margin-bottom: 60px;"></div>
+</div>
+
+
+
+    <!--<div class="col-lg-3 d-none d-lg-block position-fixed offset-sm-9">
+      
+</div>-->
+
+</div>
+
+
+
+{% endblock content %}
