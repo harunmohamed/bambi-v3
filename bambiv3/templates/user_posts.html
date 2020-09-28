@@ -368,7 +368,9 @@ section .btn {
     <div class="card-body">
       <!--<p> 🎓 Studies at <span>Near East University</span></p>-->
       <p> 🏅 Majors in <span>{{user.department}}</span></p>
+      {% if current_user.is_authenticated %}
       <p> ☂ Student Number: <span>{{user.student_number}}</span></p> 
+      {% endif %}
       <p> 🙊 Born 
         <span>
           {% if current_user.is_authenticated %}
