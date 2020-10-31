@@ -210,12 +210,12 @@
 
       {% if current_user.is_authenticated %}
         <div class="card mb-2 dark-theme">
-                  <div class="card-header">
+                  <div class="card-header dark-theme">
                     <div class="media align-items-center">
                       <div class="avatar avatar-m">
                         <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="logo" class="profile-thumbnail" style="width:35px;height:35px;border-radius:50%;padding-right:3px;">
                       </div>
-                      <div class="media-body ml-2">
+                      <div class="media-body ml-2 dark">
                         <h5 class="mb-0 fs-0">{{greeting}} {{current_user.username.title()}}</h5>
                       </div>
                     </div>

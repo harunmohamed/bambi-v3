@@ -9,7 +9,7 @@
 			<button class="btn btn-dark" onclick="lightMode()"><i class="fas fa-sun"></i></button>
 			</div>
 			<hr>-->
-			<div id="search" class="card card-body mb-3 p-2" style="color:#fff;background:#191917;">
+			<div id="search" class="mb-3 p-2" style="color:#fff;background:#191917;">
 				{% if current_user.is_authenticated%}
 					<h4>Hey {{current_user.username.title()}}, Explore Random Stuff!</h4>
 				{% endif %}
