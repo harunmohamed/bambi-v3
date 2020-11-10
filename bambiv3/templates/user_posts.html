@@ -142,8 +142,8 @@ section .btn {
         display: flex;
         text-align: center;
         padding: 1rem 0;
-        border-top: 0.1rem solid #191917;
-        border-bottom: 0.1rem solid #191917;
+        border-top: 0.1rem solid #212121;
+        border-bottom: 0.1rem solid #212121;
     }
     .profile-stats li {
         font-size: 1.4rem;
@@ -207,7 +207,7 @@ section .btn {
     }
 }
 .container-fluid .dropdown a{
-  border-top: 1px solid #070707;
+  border-top: 1px solid #121212;
   color:#fff;
 }
 .container-fluid .dropdown a:hover{
@@ -242,7 +242,7 @@ section .btn {
         <div class="dropdown d-none d-lg-block" style="margin:auto 10px;">
               <button class="btn  btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-left:2px;">
               </button>
-              <div class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton" style="cursor:pointer;padding:0;background:#191917;color:#fff;margin-left:-80px;">
+              <div class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton" style="cursor:pointer;padding:0;background:#212121;color:#fff;margin-left:-80px;">
                 {% if current_user == user%}
                 {% set new_messages = current_user.new_messages() %}
                 <a class="dropdown-item" href="{{ url_for('messages') }}" style="border-top:none;">🔐 Messages <span id="message_count" class="badge badge-warning" style="display:{% if new_messages %}inline{% else %}none{% endif %};">{{ new_messages }}</span></a>
@@ -364,7 +364,7 @@ section .btn {
         </div>
       </header>
       <br>-->
-    <div class="about mb-2" style="color:#fff;background:#191917;border-radius:10px;">
+    <div class="about mb-2" style="color:#fff;background:#212121;border-radius:10px;">
     <div class="card-body">
       <!--<p> 🎓 Studies at <span>Near East University</span></p>-->
       <p> 🏅 Majors in <span>{{user.department}}</span></p>
@@ -396,7 +396,7 @@ section .btn {
   </div>
 
   {% if (not current_user.is_authenticated and not user.private) or (current_user.is_authenticated and not user.private) or (current_user.is_authenticated and current_user.is_following(user) and user.private) or (current_user == user) %}
-    <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow-y:auto;overflow-x:hidden;max-height:318px;" class="mb-2">
+    <div style="background:#212121;padding:7px;cursor:pointer;border-radius:5px;overflow-y:auto;overflow-x:hidden;max-height:318px;" class="mb-2">
           {% if current_user != user %}<h5 style="padding-left: 3px;">{{user.username.title()}}'s Photos</h5>{% else %} <h5>My Photos</h5>{% endif %}
           
           {% for post in post_images if not post.anonymous and user == post.author %}

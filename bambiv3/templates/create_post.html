@@ -18,7 +18,7 @@
 		      </header>
 		    </a>
 
-		    <div class="menu mb-2" style="background:#191917;border-radius:10px;">
+		    <div class="menu mb-2" style="background:#212121;border-radius:10px;">
 		      <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
 		       <a class="dropdown-item" href="{{ url_for('messages') }}"> 💬 Messages 
 		        {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>

@@ -12,7 +12,7 @@
      <h2 class="mt-1">Anonymous Posts</h2>
      <div class="card-columns">
    {% for post in anonymous %}
-      <div class="card" style="border:1px solid #191917;border-radius:5px;">
+      <div class="card" style="border:1px solid #212121;border-radius:5px;">
         <a href="{{ url_for('post', post_id=post.id) }}" style="text-decoration:none;">
         <div style="display:flex;overflow-x: auto">
           {% if post.image %}
@@ -20,7 +20,7 @@
           {% endif %}
         </div></a>
 
-        <div class="card-block p-2" style="background:#191917;">
+        <div class="card-block p-2" style="background:#212121;">
           {% if post.title %} 
           <span style="text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:1.5px;color:#FE3C72;">{{ post.title }}</span> <br>
           {% endif %}

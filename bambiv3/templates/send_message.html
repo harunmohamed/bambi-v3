@@ -52,9 +52,9 @@
           <p class="mb-2" 
           style="
           {% if message.author == current_user%}
-            text-align:left;padding:5px;border-radius:10px;display:inline-block;float:right;clear:both;max-width:75%;background:#191917;
+            text-align:left;padding:5px;border-radius:10px;display:inline-block;float:right;clear:both;max-width:75%;background:#212121;
           {%else%}
-            text-align:left;padding:5px;border-radius:10px;display:inline-block;max-width:75%;border:2px solid #191917;
+            text-align:left;padding:5px;border-radius:10px;display:inline-block;max-width:75%;border:2px solid #212121;
           {% endif %}">
 
           {% if message.author != current_user %}
@@ -70,7 +70,7 @@
 
         {% else %}
             <!-- if chat has no messages -->
-            <p class="mb-2" style="text-align:left;padding:5px;border-radius:10px;display:inline-block;float:right;clear:both;max-width:75%;background:#191917;">
+            <p class="mb-2" style="text-align:left;padding:5px;border-radius:10px;display:inline-block;float:right;clear:both;max-width:75%;background:#212121;">
 
             <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="profile pic"style="width:35px;height:35px;border-radius:50%">
 
@@ -78,7 +78,7 @@
 
             </p>
 
-            <p class="mb-2" style="text-align:left;padding:5px;border-radius:10px;display:inline-block;float:right;clear:both;max-width:75%;background:#191917;">
+            <p class="mb-2" style="text-align:left;padding:5px;border-radius:10px;display:inline-block;float:right;clear:both;max-width:75%;background:#212121;">
               {% if current_user.single and user.single and current_user.gender != user.gender %}
                 what if I also told you {{user.username.title()}} is single & searchin? 💑😇❤
               {% endif %}

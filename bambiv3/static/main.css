@@ -1,9 +1,9 @@
 body{
-  background:#070707; /*#070707 bg and #191917 for posts*/
+  background:#121212; /*#121212 bg and #212121 for posts*/
   color:#fff;
 }
 nav{
-    background:#070707;
+    background:#121212;
 }
 .search{
   margin-right:5px;
@@ -88,7 +88,7 @@ header{
    display: flex;
    flex-direction: row;
    color:#fff;
-   background:#191917;
+   background:#212121;
    border-radius:10px;
    padding:8px;
    cursor:pointer;
@@ -139,7 +139,7 @@ header{
    background: transparent;
  }
  .post{
-   background:#191917;
+   background:#212121;
    border-radius:10px;
    padding:7px;
  }
@@ -175,14 +175,14 @@ header{
   cursor: pointer;
 }
 .subtle{
-  background-color: #070707;
+  background-color: #121212;
   border: none;
   padding-top: 5px;
   margin-top: 2px;
   margin-left: 10px;
 }
 .subtle:focus{
-  background-color: #070707;
+  background-color: #121212;
   outline:0px !important;
   -webkit-appearance:none;
   box-shadow: none !important;
@@ -200,7 +200,7 @@ header{
   color: #000;
 }
 .cardi{
-  background: #070707;
+  background: #121212;
   overflow-x: auto;
   display: flex;
   flex-wrap: nowrap;
@@ -214,22 +214,22 @@ header{
   border-radius:10px;
 }
 .card--content {
-  background: #070707; /*linear-gradient(#ffcccc,#ccffff);*/
+  background: #121212; /*linear-gradient(#ffcccc,#ccffff);*/
   width: 80px;
   height: 80px;
   margin: 5px;
   border-radius:10px;
-  border:1px solid #191917;
+  border:1px solid #212121;
   border-radius:10px;
   flex: 0 0 auto;
 }
 .dark-theme{
-  background: #191917;
+  background: #212121;
   color: #fff;
-  border:1px solid #191917 !important;
+  border:1px solid #212121 !important;
 }
 .dark-theme:focus{
-  background: #191917;
+  background: #212121;
   color: #fff;
   outline:0px !important;
   -webkit-appearance:none;
@@ -297,7 +297,7 @@ header{
 .progress-container {
   width: 100%;
   height: 2px;
-  background: #070707;
+  background: #121212;
 }
 
 .progress-bar {
@@ -307,7 +307,7 @@ header{
 }
 .bottom {
   overflow: hidden;
-  background-color: #070707;
+  background-color: #121212;
   position: fixed;
   bottom: 0;
   width: 100%;

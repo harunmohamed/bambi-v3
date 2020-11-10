@@ -26,7 +26,7 @@
             {% endfor %}
         {% endif %}
       {% endwith %}
-      <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:400px;">
+      <div style="background:#212121;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:400px;">
         <h5 style="padding-left: 3px;">Recent Chats</h5>
         {% for person in recent_chats %}
         <a href="{{url_for('message', recipient=person.username)}}" style="text-decoration:none;">
@@ -47,7 +47,7 @@
       </a>
       {% endfor %}
       </div>
-       <div class="mt-2" style="background:#191917;padding:8px 8px 8px 32px;font-size:20px;display:block;border-radius:5px;">
+       <div class="mt-2" style="background:#212121;padding:8px 8px 8px 32px;font-size:20px;display:block;border-radius:5px;">
         <a href="{{ url_for('logout') }}" style="text-decoration:none;color:#818181;"> 🛫 Logout</a>
         </div>
 </div>

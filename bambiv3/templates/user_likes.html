@@ -18,7 +18,7 @@
     </a>
 
 
-    <div class="menu mb-2" style="background:#191917;border-radius:10px">
+    <div class="menu mb-2" style="background:#212121;border-radius:10px">
       <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
       <a class="dropdown-item" href="{{ url_for('messages') }}"> 💬 Messages {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
       <a class="dropdown-item" href="{{ url_for('photos') }}"> 📷 Photos</a>
@@ -49,7 +49,7 @@
     </div>
   </header>
   <br>
-     <div class="menu" style="background:#191917;border-radius:10px;">
+     <div class="menu" style="background:#212121;border-radius:10px;">
       <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend</a>
        <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
       <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
@@ -199,7 +199,7 @@
         {% endif %}
       {% endwith %}
       {% endif %}
-      <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
+      <div style="background:#212121;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
         {% if current_user != user %}<h5 style="padding-left: 3px;">People {{user.username.title()}} Likes</h5>{% else %} <h5>People I Like</h5>{% endif %}
         {% for person in liked_people %}
         <header>

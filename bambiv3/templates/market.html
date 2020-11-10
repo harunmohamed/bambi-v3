@@ -17,7 +17,7 @@
       </header>
     </a>
 
-    <div class="menu mb-2" style="background:#191917;border-radius:10px;">
+    <div class="menu mb-2" style="background:#212121;border-radius:10px;">
       <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
        <a class="dropdown-item" href="{{ url_for('messages') }}"> 💬 Messages 
         {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
@@ -47,7 +47,7 @@
     </div>
   </header>
 
-     <div class="menu" style="background:#191917;border-radius:10px;">
+     <div class="menu" style="background:#212121;border-radius:10px;">
       <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
        <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
       <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
@@ -90,14 +90,14 @@
       
   <div class="card-columns">
    {% for product in products %}
-      <div class="card" style="border:1px solid #191917;border-radius:5px;">
+      <div class="card" style="border:1px solid #212121;border-radius:5px;">
         <img class="card-img-top img-fluid" src="{{ url_for('static', filename='market/' + product.image1) }}" alt="Card image cap">
         {% if product.author != current_user %}
-          <i class="fas fa-heart love" style="font-size:26px;position:absolute;top:8px;right:8px;text-shadow: 0 0 2px #191917;"></i>
+          <i class="fas fa-heart love" style="font-size:26px;position:absolute;top:8px;right:8px;text-shadow: 0 0 2px #212121;"></i>
         {% else %}
                 <div class="dropleft" style="position:absolute;top:8px;right:8px;">
                 <button class="btn btn-dark btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background:none;border:none;">
-                  <i class="fas fa-ellipsis-v" style="font-size: 28px;text-shadow: 0 0 3px #191917;"></i>
+                  <i class="fas fa-ellipsis-v" style="font-size: 28px;text-shadow: 0 0 3px #212121;"></i>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background:none;border:none;margin-top:-7px;">
                   <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal" style="float:right;">🗑️delete</button>
@@ -126,7 +126,7 @@
 
 
 
-        <div class="card-block p-2" style="background:#191917;">
+        <div class="card-block p-2" style="background:#212121;">
           <span style="text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:1.5px;">{{product.title}} • {{ moment(product.date_posted).fromNow() }}</span> <br>
 
           <span class="card-title" style="font-size:30px;color:#1e90ff;">{{product.price}}</span> <br>
