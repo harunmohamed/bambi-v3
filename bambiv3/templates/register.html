@@ -103,16 +103,16 @@
       <button class="btn btn-dark dropdown-toggle text-muted" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;background-color:#fff">
         gender
       </button>
-      <div class="dropdown-menu p-2 pb-3" aria-labelledby="dropdownMenuButton" style="margin-left:-20px;">
+      <div class="dropdown-menu p-2 pb-3" aria-labelledby="dropdownMenuButton" style="margin-left:-20px;max-height:70px;">
         {% if form.gender.errors %}
-            {{ form.gender(placeholder="gender", class="form-control form-control is-invalid") }}
+            {{ form.gender(class="is-invalid") }}
             <div class="invalid-feedback">
               {% for error in form.gender.errors %}
               <span>{{ error }}</span>
               {% endfor %}
             </div>
             {% else %}
-            {{ form.gender(placeholder="gender", class="form-control form-control") }}
+            {{ form.gender(style="list-style-type:none;") }}
             {% endif %}
       </div>
     </div>
@@ -133,7 +133,7 @@
           {% endfor %}
         </div>
         {% else %}
-        {{ form.age(placeholder="dd-mm-yyyy", class="form-control form-control") }}
+        {{ form.age(placeholder="dd-mm-yyyy", class="form-control form-control",type="date", value="2000-05-20") }}
         {% endif %}
       </div>
     </div>

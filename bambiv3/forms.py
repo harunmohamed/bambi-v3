@@ -12,7 +12,7 @@ class RegistrationForm(FlaskForm):
 	department = StringField('Department', validators=[DataRequired()])
 	student_number = StringField('Student Number', validators=[DataRequired()])
 	country = StringField('Country', validators=[DataRequired()])
-	age = DateField('birthday', format='%d-%m-%Y', validators=[DataRequired()])
+	age = DateField('birthday', format='%Y-%m-%d', validators=[DataRequired()])
 	gender = RadioField('Gender', choices=[('male','male'),('female','female')])
 	hobby = StringField('Hobby', validators=[DataRequired()])
 	password = PasswordField('Password', validators = [DataRequired()])
