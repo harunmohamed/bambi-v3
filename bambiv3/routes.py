@@ -196,7 +196,8 @@ def explore():
 
 @app.route('/dating')
 def dating():
-	return render_template('36.html', title="Dating")
+	return redirect("https://neudating.herokuapp.com/", code=302)
+	#return render_template('36.html', title="Dating")
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
