@@ -1,17 +1,27 @@
 {% extends "layout.html" %}
 {% block content %}
 
+
+<style>
+  .form-control{
+    background: #212121;
+    border: 1px solid #121212;
+    height:60px;
+    color: #f2f3f5;
+  }
+  .form-control:focus{
+    background: #212121;
+    border: 1px solid #121212;
+    height:60px;
+    outline: none;
+    color: #f2f3f5;
+  }
+</style>
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-3 d-none d-lg-block">
-        <!-- User info , photos -->
-      <!--<header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
-        <img src="https://image.flaticon.com/icons/svg/408/408710.svg" alt="logo" class="profile-thumbnail">
-        <div class="profile-name">
-          <h3 class="logo">BAMBI</h3>
-          <small>&copy 2019</small>
-        </div>
-      </header>-->
+
     </div>
 
     <div class="col-lg-6 mt-4" style="text-align: center">
@@ -35,7 +45,10 @@
       <fieldset class="form-group">
         <h1 class="display-4" style="text-align:left;padding-bottom:5px;">Sign In.</h1>
       <!--<img src="https://image.flaticon.com/icons/svg/408/408710.svg" class="mb-3" style="width:120px;height:120px;border-radius: 5px;">-->
-     <div class="form-group">
+     <div class="form-group input-group">
+      <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1" style="background:#212121;border:1px solid #121212;color:#f2f3f5;">@</span>
+        </div>
         {% if form.username.errors %}
         {{ form.username(placeholder="username", class="form-control form-control is-invalid") }}
         <div class="invalid-feedback">

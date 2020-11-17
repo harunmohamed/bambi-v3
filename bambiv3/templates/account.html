@@ -44,8 +44,8 @@
 		</div>
 
 
-		<div class="col-lg-6 offset-lg-3" style="text-align: center">
-			
+		<div class="col-lg-6 offset-lg-3">
+			<h2>Update Account Details</h2>
 			<div class="post">
 				 {% with messages = get_flashed_messages(with_categories=true) %}
 		    	{% if messages %}
@@ -62,115 +62,153 @@
 			  <div id="inner">
 			   <div class="content-section">
 				  <form method="POST" action="" enctype="multipart/form-data">
-				    {{ form.hidden_tag() }}
-				    <fieldset class="form-group">
-				      <legend class="border-bottom mb-2 pb-2">Account Info</legend>
-				      <div class="form-group">
-				        {{ form.username.label(class="form-control-label") }}
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+              <!-- Profile Images -->
+              <div class="mb-2" style="background:#212121;font-size:20px;display:block;border-radius:5px;">
+	          <a data-toggle="collapse" href="#dp" role="button" aria-expanded="false" aria-controls="dp" style="text-decoration:none;color:#818181;">📸 Update Profile Image ⤵</a>
+              <div class="collapse" id="dp">
+                <div class="mb-2">
+                  <!-- dp -->
+                  {{ form.picture(class="form-control-file") }}
+                  {% if form.picture.errors %}
+                    {% for error in form.picture.errors %}
+                      <span class="text-danger">{{ error }}</span><br>
+                    {% endfor %}
+                  {% endif %}
 
-				        {% if form.username.errors %}
-				        {{ form.username(class="form-control form-control-lg is-invalid") }}
-				        <div class="invalid-feedback">
-				          {% for error in form.username.errors %}
-				          <span>{{ error }}</span>
-				          {% endfor %}
-				        </div>
-				        {% else %}
-				        {{ form.username(class="form-control form-control-lg") }}
-				        {% endif %}
-				      </div>
-				      <div class="form-group">
-				        {{ form.email.label(class="form-control-label") }}
-				        {% if form.email.errors %}
-				        {{ form.email(class="form-control form-control-lg is-invalid") }}
-				        <div class="invalid-feedback">
-				          {% for error in form.email.errors %}
-				          <span>{{ error }}</span>
-				          {% endfor %}
-				        </div>
-				        {% else %}
-				        {{ form.email(class="form-control form-control-lg") }}
-				        {% endif %}
-				      </div>
-				      <div class="form-group">
-				        {{ form.department.label(class="form-control-label") }}
-				        {% if form.department.errors %}
-				        {{ form.department(class="form-control form-control-lg is-invalid") }}
-				        <div class="invalid-feedback">
-				          {% for error in form.department.errors %}
-				          <span>{{ error }}</span>
-				          {% endfor %}
-				        </div>
-				        {% else %}
-				        {{ form.department(class="form-control form-control-lg") }}
-				        {% endif %}
-				      </div>
-				      <div class="form-group">
-				        {{ form.student_number.label(class="form-control-label") }}
-				        {% if form.student_number.errors %}
-				        {{ form.student_number(class="form-control form-control-lg is-invalid") }}
-				        <div class="invalid-feedback">
-				          {% for error in form.student_number.errors %}
-				          <span>{{ error }}</span>
-				          {% endfor %}
-				        </div>
-				        {% else %}
-				        {{ form.student_number(class="form-control form-control-lg") }}
-				        {% endif %}
-				      </div>
-				      <div class="form-group">
-				        {{ form.country.label(class="form-control-label") }}
-				        {% if form.country.errors %}
-				        {{ form.country(class="form-control form-control-lg is-invalid") }}
-				        <div class="invalid-feedback">
-				          {% for error in form.country.errors %}
-				          <span>{{ error }}</span>
-				          {% endfor %}
-				        </div>
-				        {% else %}
-				        {{ form.country(class="form-control form-control-lg") }}
-				        {% endif %}
-				      </div>
-				       <div class="form-group">
-				        {{ form.age.label(class="form-control-label") }}
-				        {% if form.age.errors %}
-				        {{ form.age(class="form-control form-control-lg is-invalid") }}
-				        <div class="invalid-feedback">
-				          {% for error in form.age.errors %}
-				          <span>{{ error }}</span>
-				          {% endfor %}
-				        </div>
-				        {% else %}
-				        {{ form.age(class="form-control form-control-lg") }}
-				        {% endif %}
-				      </div>
-				      <div class="form-group">
-				        {{ form.hobby.label(class="form-control-label") }}
-				        {% if form.hobby.errors %}
-				        {{ form.hobby(class="form-control form-control-lg is-invalid") }}
-				        <div class="invalid-feedback">
-				          {% for error in form.hobby.errors %}
-				          <span>{{ error }}</span>
-				          {% endfor %}
-				        </div>
-				        {% else %}
-				        {{ form.hobby(class="form-control form-control-lg") }}
-				        {% endif %}
-				      </div>
-				      <div class="form-group">
-				        {{ form.picture.label() }}
-				        {{ form.picture(class="form-control-file") }}
-				        {% if form.picture.errors %}
-				          {% for error in form.picture.errors %}
-				          	<span class="text-danger">{{ error }}</span><br>
-				          {% endfor %}
-				        {% endif %}
-				    </div>
-				    </fieldset>
-				    <div class="form-group">
-				      {{ form.submit(class="btn btn-outline-warning") }}
-				    </div>
-				  </form>
+                </div>
+              </div>
+          </div>
+
+              <!-- Username and Hobbies-->
+              <div class="mb-2" style="background:#212121;padding:;font-size:20px;display:block;border-radius:5px;">
+	          <a data-toggle="collapse" href="#names" role="button" aria-expanded="false" aria-controls="names" style="text-decoration:none;color:#818181;">🤓 Update Username and Hobbies ⤵</a>
+              <div class="collapse" id="names">
+              <div class="form-group">
+              	<a style="text-decoration:none;font-size:20px;color:#818181;">{{ form.username.label(class="form-control-label") }}</a>
+                {% if form.username.errors %}
+                {{ form.username(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.username.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.username(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+              <div class="form-group">
+                    <!--hobby -->
+                    <a style="text-decoration:none;font-size:20px;color:#818181;">{{ form.hobby.label(class="form-control-label") }}</a>
+                    {% if form.hobby.errors %}
+                    {{ form.hobby(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.hobby.errors %}
+                      <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.hobby(class="form-control form-control-lg") }}
+                    {% endif %}
+            </div>
+              </div>
+          </div>
+
+              <!-- School Deets -->
+              <div class="mb-2" style="background:#212121;font-size:20px;display:block;border-radius:5px;">
+	          <a data-toggle="collapse" href="#deets" role="button" aria-expanded="false" aria-controls="deets" style="text-decoration:none;color:#818181;">📚 Update School Details ⤵</a>
+              <div class="collapse" id="deets">
+                  <div class="form-group">
+                    <a style="text-decoration:none;font-size:20px;color:#818181;">{{ form.department.label(class="form-control-label") }}</a>
+                    {% if form.department.errors %}
+                    {{ form.department(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.department.errors %}
+                      <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.department(class="form-control form-control-lg") }}
+                    {% endif %}
+                  </div>
+                  <div class="form-group">
+                    <a style="text-decoration:none;font-size:20px;color:#818181;">{{ form.student_number.label(class="form-control-label") }}</a>
+                    {% if form.student_number.errors %}
+                    {{ form.student_number(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.student_number.errors %}
+                      <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.student_number(class="form-control form-control-lg") }}
+                    {% endif %}
+                  </div>
+              </div>
+
+              <!-- Country and Birthday -->
+              <div class="mb-2 mt-2" style="background:#212121;padding:;font-size:20px;display:block;border-radius:5px;">
+	          <a data-toggle="collapse" href="#country" role="button" aria-expanded="false" aria-controls="country" style="text-decoration:none;color:#818181;">🌍 Update Country & Birthday ⤵</a>
+              <div class="collapse" id="country">
+              <div class="form-group">
+                    <a style="text-decoration:none;font-size:20px;color:#818181;">{{ form.country.label(class="form-control-label") }}</a>
+                    {% if form.country.errors %}
+                    {{ form.country(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.country.errors %}
+                      <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.country(class="form-control form-control-lg") }}
+                    {% endif %}
+                  </div>
+                   <div class="form-group">
+                    <a style="text-decoration:none;font-size:20px;color:#818181;">{{ form.age.label(class="form-control-label") }}</a>
+                    {% if form.age.errors %}
+                    {{ form.age(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.age.errors %}
+                      <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.age(class="form-control form-control-lg") }}
+                    {% endif %}
+                  </div>
+              </div>
+
+              <div class="form-group mt-2">
+                <a style="text-decoration:none;font-size:20px;color:#818181;">📭 {{ form.email.label(class="form-control-label") }}</a>
+                {% if form.email.errors %}
+                {{ form.email(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.email.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.email(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+                  
+              </div>
+
+              <div class="form-group mt-2">
+              	{{ form.submit(class="btn btn-block btn-warning") }}
+              </div>
+            </fieldset>
+          </form>
+
+          	<div class="mb-2" style="background:#212121;padding:;font-size:20px;display:block;">
+	        <a class="text-danger" data-toggle="collapse" href="#delete_account" role="button" aria-expanded="false" aria-controls="delete_account" style="text-decoration:none;color:">🤖 Danger: Delete Account</a>
+	        <div class="collapse" id="delete_account">
+	           <span class="text-muted">😔 We are sad to see you go. We look forward to having you back in future. We promise to delete all your data the second you click the delete button.</span>
+              <a class="btn btn-block btn-danger mt-2 mb-4" href="{{url_for('delete_account')}}">Delete Account Permanently</a>
+	        </div>
+	     </div>
+
 
 			  </div>
 		</div>

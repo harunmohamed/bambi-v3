@@ -352,6 +352,18 @@ def delete_post(post_id):
 	return redirect(request.referrer)
 
 
+@app.route("/admin/delete/post/<int:post_id>")
+@login_required
+def admin_delete_post(post_id):
+	post = Post.query.get_or_404(post_id)
+	if current_user.username != 'harun':
+		abort(403)
+	db.session.delete(post)
+	db.session.commit()
+	flash('Post Successfully Deleted by Admin!', 'success')
+	return redirect('home')
+
+
 @app.route('/product/new', methods=['GET', 'POST'])
 @login_required
 def new_product():
@@ -388,7 +400,6 @@ def likes(username):
 		if user.has_liked_post(post):
 			liked_people.add(post.author)
 	return render_template('user_likes.html', user=user, posts=posts, users=users, liked_people=liked_people, title= user.username.title() + "'s Likes")
-
 
 
 @app.route("/user/<string:username>", methods=['GET', 'POST'])
@@ -478,6 +489,26 @@ def unfollow(username):
 	db.session.commit()
 	flash('💔 You are not following {}.'.format(username.title()), 'info')
 	return redirect(url_for('user_posts', username=username))
+
+
+@app.route('/account/delete')
+@login_required
+def delete_account():
+	db.session.delete(current_user)
+	db.session.commit()
+	flash('Your account has been successfully deleted.', 'success')
+	return redirect(url_for('home'))
+
+@app.route('/admin/delete/<string:username>')
+@login_required
+def admin_delete_account(username):
+	username = username.lower()
+	user = User.query.filter_by(username=username).first()
+	if current_user.username == 'harun':
+		db.session.delete(user)
+		db.session.commit()
+		flash('Account Successfully deleted by Admin.', 'success')
+	return redirect(url_for('home', user=user))
 
 
 def send_reset_email(user):

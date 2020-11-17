@@ -17,6 +17,16 @@
       </header>
     </a>
 
+    <!-- Admin Delete Rights -->
+      {% if current_user.username == 'harun' and post.author.username != 'harun' %}
+        <div class="mt-3 mb-3" style="background:#212121;padding:8px 8px 8px 32px;font-size:20px;display:block;border-radius:5px;">
+          <a data-toggle="collapse" href="#admindelete" role="button" aria-expanded="false" aria-controls="admindelete" style="text-decoration:none;color:#818181;">🤖 Danger: Delete Post</a>
+          <div class="collapse" id="admindelete">
+                <small class="text-muted">This is to verify that {{post.author.username.title()}} has violated community guidlines and therefore admin has a right to delete their post</small>
+                <a class="btn btn-sm btn-block btn-danger mt-2" href="{{ url_for('admin_delete_post', post_id=post.id) }}" method="POST">Delete Post</a>
+            </div>
+        </div>
+      {% endif %}
 
     <div class="menu mb-2" style="background:#212121;border-radius:10px;">
       <a class="dropdown-item" href="{{ url_for('f_posts') }}"> 🍧 Friend Posts</a>
@@ -29,6 +39,7 @@
       <a class="dropdown-item" href="{{ url_for('blog') }}"> 🎬 Blog</a> 
       <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
     </div>
+
 
   <header>
     <img src="{{ url_for('static', filename='resources/' + 'logo.svg') }}" alt="logo" class="profile-thumbnail">
@@ -183,6 +194,7 @@
             {% endfor %}
         {% endif %}
       {% endwith %}
+
       <div class="alert alert-warning alert-dismissible fade show dark-theme" role="alert">
         <a href="{{ url_for('market') }}"  style="color:#fff;text-decoration: none">
       <span style="color:#1e90ff;">👜 What's new on Market?</span></a>

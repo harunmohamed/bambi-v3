@@ -1,6 +1,21 @@
 {% extends "layout.html" %}
 {% block content %}
   
+<style>
+  .form-control{
+    background: #212121;
+    border: 1px solid #121212;
+    height:50px;
+    color: #f2f3f5;
+  }
+  .form-control:focus{
+    background: #212121;
+    border: 1px solid #121212;
+    height:50px;
+    outline: none;
+    color: #f2f3f5;
+  }
+</style>
 
 <div class="container-fluid">
   <div class="row">
@@ -39,7 +54,10 @@
 
       <div class="row">
       <div class="col">
-        <div class="form-group">
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1" style="background:#212121;border:1px solid #121212;color:#f2f3f5;">@</span>
+          </div>
         {% if form.username.errors %}
         {{ form.username(placeholder="username / first name", class="form-control form-control is-invalid") }}
         <div class="invalid-feedback">
@@ -100,7 +118,7 @@
 
     <div class="col">
       <div class="dropdown">
-      <button class="btn btn-dark dropdown-toggle text-muted" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;background-color:#fff">
+      <button class="btn btn-dark dropdown-toggle text-muted" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;background-color:#212121;height:60px;border:1px solid #121212;">
         gender
       </button>
       <div class="dropdown-menu p-2 pb-3" aria-labelledby="dropdownMenuButton" style="margin-left:-20px;max-height:70px;">
