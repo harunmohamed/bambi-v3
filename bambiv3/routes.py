@@ -35,7 +35,7 @@ def home():
 			post = Post(title=form.title.data, content=form.content.data, anonymous=form.anonymous.data, author=current_user)
 		db.session.add(post)
 		db.session.commit()
-		flash('Your Post Has been Created!', 'success')
+		flash('Your Post Has been Created!', 'info')
 		return redirect(url_for('home'))
 	page = request.args.get('page', 1, type=int)
 	posts = Post.query.order_by(Post.date_posted.desc()).paginate(per_page=50, page=page)
@@ -131,7 +131,7 @@ def message(recipient):
 		msg = m(author=current_user, recipient=user, body=form.message.data)
 		db.session.add(msg)
 		db.session.commit()
-		flash('Your message has been sent.', 'success')
+		flash('Your message has been sent.', 'info')
 		return redirect(url_for('message', recipient=recipient))
 	sent = current_user.messages_sent.filter_by(recipient_id=user.id)
 	received = current_user.messages_received.filter_by(sender_id=user.id)
@@ -211,7 +211,7 @@ def register():
 			password=hashed_password)
 		db.session.add(user)
 		db.session.commit()
-		flash(f'Account Created for {form.username.data}! You can now log in', 'success')
+		flash(f'Account Created for {form.username.data}! You can now log in', 'info')
 		return redirect(url_for('login'))
 	return render_template('register.html', title="Register", form=form)
 
@@ -256,7 +256,7 @@ def account():
 		current_user.age = form.age.data
 		current_user.hobby = form.hobby.data
 		db.session.commit()
-		flash('Your Account has been updated', 'success')
+		flash('Your Account has been updated', 'info')
 		return redirect(url_for('account'))
 	elif request.method == 'GET':
 		form.username.data = current_user.username
@@ -280,13 +280,13 @@ def new_post():
 			post = Post(title=form.title.data, content=form.content.data,anonymous=form.anonymous.data, image=picture, author=current_user)
 			db.session.add(post)
 			db.session.commit()
-			flash('Your Post Has been Created!', 'success')
+			flash('Your Post Has been Created!', 'info')
 			return redirect(url_for('home'))
 		else:
 			post = Post(title=form.title.data, content=form.content.data,anonymous=form.anonymous.data, author=current_user)
 			db.session.add(post)
 			db.session.commit()
-			flash('Your Post Has been Created!', 'success')
+			flash('Your Post Has been Created!', 'info')
 			return redirect(url_for('home'))
 	return render_template('create_post.html', title='New Post', form=form)
 
@@ -330,7 +330,7 @@ def update_post(post_id):
 		if form.image.data:
 			post.image = post_img(form.image.data)
 		db.session.commit()
-		flash('Your post has been updated!', 'success')
+		flash('Your post has been updated!', 'info')
 		return redirect(url_for('post', post_id=post.id))
 	elif request.method == 'GET':
 		form.title.data = post.title
@@ -348,7 +348,7 @@ def delete_post(post_id):
 		abort(403)
 	db.session.delete(post)
 	db.session.commit()
-	flash('Your post has been deleted!', 'success')
+	flash('Your post has been deleted!', 'info')
 	return redirect(request.referrer)
 
 
@@ -360,7 +360,7 @@ def admin_delete_post(post_id):
 		abort(403)
 	db.session.delete(post)
 	db.session.commit()
-	flash('Post Successfully Deleted by Admin!', 'success')
+	flash('Post Successfully Deleted by Admin!', 'info')
 	return redirect('home')
 
 
@@ -373,7 +373,7 @@ def new_product():
 			product = Product(title=form.title.data, description=form.description.data, location=form.location.data, price=form.price.data, contact=form.contact.data, image1=picture1, author=current_user)
 			db.session.add(product)
 			db.session.commit()
-			flash('Your Product Has been Posted!', 'success')
+			flash('Your Product Has been Posted!', 'info')
 			return redirect(url_for('market'))
 	return render_template('create_product.html', title='New Product', form=form, legend='New Product')
 
@@ -385,7 +385,7 @@ def delete_product(product_id):
 		abort(403)
 	db.session.delete(product)
 	db.session.commit()
-	flash('Your product has been deleted!', 'success')
+	flash('Your product has been deleted!', 'info')
 	return redirect(request.referrer)
 
 @app.route("/<string:username>/likes", methods=['GET', 'POST'])
@@ -424,7 +424,7 @@ def user_posts(username):
 			current_user.private = form.private.data
 			current_user.single = form.single.data
 			db.session.commit()
-			flash('Your Account has been updated', 'success')
+			flash('Your Account has been updated', 'info')
 			return redirect(url_for('user_posts', username=current_user.username))
 		elif request.method == 'GET':
 			form.username.data = current_user.username
@@ -470,7 +470,7 @@ def follow(username):
 		return redirect(request.referrer)
 	current_user.follow(user)
 	db.session.commit()
-	flash('💛 You are following {}!'.format(username.title()), 'success')
+	flash('💛 You are following {}!'.format(username.title()), 'info')
 	return redirect(request.referrer)
 
 
@@ -496,7 +496,7 @@ def unfollow(username):
 def delete_account():
 	db.session.delete(current_user)
 	db.session.commit()
-	flash('Your account has been successfully deleted.', 'success')
+	flash('Your account has been successfully deleted.', 'info')
 	return redirect(url_for('home'))
 
 @app.route('/admin/delete/<string:username>')
@@ -507,7 +507,7 @@ def admin_delete_account(username):
 	if current_user.username == 'harun':
 		db.session.delete(user)
 		db.session.commit()
-		flash('Account Successfully deleted by Admin.', 'success')
+		flash('Account Successfully deleted by Admin.', 'info')
 	return redirect(url_for('home', user=user))
 
 
@@ -548,7 +548,7 @@ def reset_token(token):
 		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
 		user.password = hashed_password
 		db.session.commit()
-		flash('Your password has been updated! You are now able to log in', 'success')
+		flash('Your password has been updated! You are now able to log in', 'info')
 		return redirect(url_for('login'))
 	return render_template('reset_token.html', title='Reset Password', form=form)
 
