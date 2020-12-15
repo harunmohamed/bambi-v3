@@ -192,8 +192,57 @@
                 {{ form.email(class="form-control form-control-lg") }}
                 {% endif %}
               </div>
-                  
+
+               <!-- Username and Hobbies-->
+              <div class="mb-2" style="background:#212121;padding:;font-size:20px;display:block;border-radius:5px;">
+            <a data-toggle="collapse" href="#pass" role="button" aria-expanded="false" aria-controls="names" style="text-decoration:none;color:#818181;">🔐 Update Password ⤵</a>
+              <div class="collapse" id="pass">
+              <!-- old password -->
+              <div class="form-group">
+                <a style="text-decoration:none;font-size:20px;color:#818181;">{{ form.old_password.label(class="form-control-label") }}</a>
+                {% if form.old_password.errors %}
+                {{ form.old_password(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.old_password.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.old_password(class="form-control form-control-lg") }}
+                {% endif %}
               </div>
+              <!-- new password -->
+              <div class="form-group">
+                <a style="text-decoration:none;font-size:20px;color:#818181;">{{ form.password.label(class="form-control-label") }}</a>
+                {% if form.password.errors %}
+                {{ form.password(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.password.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.password(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+              <!-- confirm password -->
+              <div class="form-group">
+                    <a style="text-decoration:none;font-size:20px;color:#818181;">{{ form.confirm_password.label(class="form-control-label") }}</a>
+                    {% if form.confirm_password.errors %}
+                    {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.confirm_password.errors %}
+                      <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.confirm_password(class="form-control form-control-lg") }}
+                    {% endif %}
+            </div>
+              </div>
+          </div>
+                  
+          </div>
 
               <div class="form-group mt-2">
               	{{ form.submit(class="btn btn-block btn-warning") }}

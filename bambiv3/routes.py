@@ -255,6 +255,9 @@ def account():
 		current_user.country = form.country.data
 		current_user.age = form.age.data
 		current_user.hobby = form.hobby.data
+		if form.password.data and bcrypt.check_password_hash(current_user.password, form.old_password.data):
+			hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+			current_user.password = hashed_password
 		db.session.commit()
 		flash('Your Account has been updated', 'info')
 		return redirect(url_for('account'))
