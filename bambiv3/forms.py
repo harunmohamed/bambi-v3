@@ -56,9 +56,6 @@ class UpdateAccountForm(FlaskForm):
 	bio = PageDownField('Bio')
 	private = BooleanField('Private?')
 	single = BooleanField('Single & Searchin?')
-	old_password = PasswordField('Enter Old Password', validators = [DataRequired()])
-	password = PasswordField('New Password', validators = [DataRequired()])
-	confirm_password = PasswordField('Confirm Password', validators = [DataRequired(), EqualTo('password')])
 	submit = SubmitField('Update')
 
 	def validate_username(self, username):
