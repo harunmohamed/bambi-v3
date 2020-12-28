@@ -256,15 +256,15 @@ header{
 
 /*LAYOUTS*/
 .post_btn{
-  background-color : #000;
+  background-color: #212121;
   color: #F9E9C8;
-  padding: 10px 20px;
-  outline:none;
-  border:1px solid #F9E9C8;
+  outline: none;
+  border: 4px solid #61f7d4;;
   padding: 2px;
   border-radius: 50%;
-  height:50px;
-  width:50px;
+  height: 70px;
+  width: 70px;
+  font-size: 30px;
 }
 .post_btn:hover{
   outline: none;
