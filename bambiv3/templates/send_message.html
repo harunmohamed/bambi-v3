@@ -1,6 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<style>
+  @media only screen and (min-width: 600px) {
+  .msg-box {
+    height: 520px;
+  }
+}
+  @media only screen and (max-width: 600px) {
+  .msg-box {
+    height: 430px;
+  }
+}
+</style>
 
 <div class="container-fluid">
   <div class="row">
@@ -45,7 +57,7 @@
              {% endif %}
            </a></h3>
 
-           <div style="overflow-y:auto;height:450px;padding:5px;">
+           <div class="msg-box" style="overflow-y:auto;padding:5px;">
 
 
       {% for message in messages %}
@@ -90,7 +102,7 @@
 
         </div>
 
-      <div class="post" style="background:none;padding:2px;width:95%;">
+      <div class="post" style="background:none;padding:2px;width:100%;">
           <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <div class="input-group mt-2" style="overflow:hidden">
