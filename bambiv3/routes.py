@@ -38,7 +38,7 @@ def home():
 		flash('Your Post Has been Created!', 'info')
 		return redirect(url_for('home'))
 	page = request.args.get('page', 1, type=int)
-	posts = Post.query.order_by(Post.date_posted.desc()).paginate(per_page=50, page=page)
+	posts = Post.query.order_by(Post.date_posted.desc()).paginate(per_page=20, page=page)
 	users = User.query.all()
 	suggested_friends = set()
 	for user in users:
@@ -57,7 +57,7 @@ def home():
 @login_required
 def f_posts():
 	page = request.args.get('page', 1, type=int)
-	posts = current_user.followed_posts().paginate(per_page=50, page=page)
+	posts = current_user.followed_posts().paginate(per_page=20, page=page)
 	users = User.query.all()
 	suggested_friends = set()
 	for user in users:
