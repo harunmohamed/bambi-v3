@@ -109,7 +109,7 @@ function getArticles(){
 	<div class="card-body">
 	<h5 class="card-title">${post.data.title}</h5>
 	<p class="card-text">${truncateText(post.data.selftext, 100)}</p>
-	<a href="https://reddit.com${post.data.permalink}" target="_blank" class="btn btn-primary">Read more</a>
+	<a href="https://reddit.com${post.data.permalink}" target="_blank" class="btn btn-primary btn-block">Read more</a>
 	<hr>
 	<p><b>Subreddit: ${post.data.subreddit} <br> Score: ${post.data.score}</b></p>
 	</div>
