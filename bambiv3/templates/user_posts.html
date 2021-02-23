@@ -460,13 +460,13 @@ section .btn {
             {% endif %}
             </small> 
           </div>
-          <div class="follow-btn">
+          <div class="follow-btn mr-2 mt-1">
             {% if current_user != user %}
             <!--<i class="fas fa-heart love" style="font-size: 28px;"></i>-->
               {% if current_user.is_authenticated and current_user.has_liked_post(post) %}
-                <a href="{{ url_for('like_action', post_id=post.id, action='unlike') }}" style="text-decoration:none;font-size:30px;margin-top:-7px;">❤</a>
+                <a href="{{ url_for('like_action', post_id=post.id, action='unlike') }}" style="text-decoration:none;font-size:30px;margin-top:-7px;"><i class="fas fa-heart" style="color:red"></i></a>
               {% else %}
-                <a href="{{ url_for('like_action', post_id=post.id, action='like') }}" style="text-decoration:none;font-size:30px;margin-top:-7px;">👍</a>
+                <a href="{{ url_for('like_action', post_id=post.id, action='like') }}" style="text-decoration:none;font-size:30px;margin-top:-7px;"><i class="far fa-heart" style="color:#999"></i></a>
               {% endif %}
             {% else %}
               <div class="dropdown dropleft">
@@ -538,7 +538,14 @@ section .btn {
 
         <footer>
             <div class="text-center like-comment-share" style="border-top:1px solid #4c4a4a;font-size:25px;font-weight:700">
-               <a class="btn" data-toggle="popover" data-content="liked by {% for user in users if user.has_liked_post(post) and current_user.is_authenticated %} {{user.username}}, {% endfor %}" style="color:#999;width:30%;"><i class="far fa-heart"></i> {{ post.likes.count() }} Likes </a> 
+               <a class="btn" data-toggle="popover" data-content="liked by {% for user in users if user.has_liked_post(post) and current_user.is_authenticated %} {{user.username}}, {% endfor %}" style="color:#999;width:30%;">
+                {% if current_user.is_authenticated and current_user.has_liked_post(post) %}
+                    <i class="fas fa-heart" style="color:red"></i> 
+                  {% else %}
+                    <i class="far fa-heart"></i>
+                  {% endif %}
+                {{ post.likes.count() }} Likes 
+              </a> 
 
                {% if current_user.is_authenticated %}
                 <a class="btn" href="{{url_for('post', post_id=post.id)}}" style="color:#999;width:34%;"><i class="far fa-comments"></i> 

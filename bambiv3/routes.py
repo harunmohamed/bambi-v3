@@ -180,10 +180,11 @@ def chat():
 def discover():
 	users = User.query.all()
 	suggested_friends = set()
+	year = datetime.now().year
 	for user in users:
-		if user != current_user and  not current_user.is_following(user):
+		if user != current_user and not current_user.is_following(user):
 			suggested_friends.add(user)
-	return render_template('discover.html', users=users, title='Discover', suggested_friends=suggested_friends)
+	return render_template('discover.html', users=users, title='Discover', suggested_friends=suggested_friends, year=year)
 
 @app.route('/swipe')
 def swipe():
