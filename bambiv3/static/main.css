@@ -121,23 +121,11 @@ header{
    font-size: 17px;
    color:#fff; /* #f8f8f2 */
  }
- footer .stats {
-   display: flex;
-   font-size: 15px;
- }
- footer .stats strong {
-   font-size: 18px;
- }
- footer .stats .likes {
-   margin-left: 10px;
- }
- footer .cta {
-   margin-left: auto;
- }
- footer .cta button {
-   border: 0;
-   background: transparent;
- }
+.like-comment-share a:hover{
+  background-color: #4c4a4a;
+  border-radius: 5px;
+  color: #fff
+}
  .post{
    background:#212121;
    border-radius:10px;

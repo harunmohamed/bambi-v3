@@ -450,7 +450,15 @@ section .btn {
             <h3>{{post.author.username}}
               {% if post.author.username in ["harun" , "bambi"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-top:7px;">{% endif %}
             </h3>
-            <small>@{{post.author.email.split("@")[0] | lower}}</small>
+            <!--<small>@{{post.author.email.split("@")[0] | lower}}</small>-->
+             <!--('%a, %b %d, %Y at %H:%M:%S')-->
+             {% set words = post.content.split() %}
+            <small>
+            {{ moment(post.date_posted).fromNow() }}
+            {% if words | count > 60 %}
+             · {{words | count}} words
+            {% endif %}
+            </small> 
           </div>
           <div class="follow-btn">
             {% if current_user != user %}
@@ -517,33 +525,33 @@ section .btn {
         </div>
 
         <div style="max-height:250px;overflow:auto" class="mb-2">
-            {% if post.comments.count() > 0 %}<code>{{post.comments.count()}} comments</code><br>{% endif %}
             {% for comment in post.comments if current_user.is_authenticated %}
             <a href="{{url_for('user_posts', username=comment.author.username)}}">
               <img src="{{ url_for('static', filename='profile_pics/' + comment.author.image_file) }}" style="width:20px;height:20px;border-radius:50%;"></a>
                 <span>
-                  <span style="color:#1e90ff;">{{comment.author.username}}:</span> 
-                  <span style="color:#fff;">{{comment.body}}</span> <br>
-                  <small class="text-muted ml-4">{{ moment(comment.date_posted).fromNow() }}</small>
+                  <code>{{comment.author.username}}:</code> 
+                  <code class="text-muted">{{comment.body}}</code>
+                  <!-- <small class="text-muted ml-4">{{ moment(comment.date_posted).fromNow() }}</small> -->
                 </span> <br>
             {% endfor %}
         </div>
 
         <footer>
-          <div class="stats">
-            <div class="Retweets">
-               {% set words = post.content.split() %} 
-               <a class="btn btn-sm btn-outline-dark p-1" data-toggle="popover" data-content="liked by {% for user in users if user.has_liked_post(post) %} {{user.username}}, {% endfor %}">❤ {{ post.likes.count() }} </a> 
-               
-               <a class="btn btn-sm btn-outline-dark p-1 ml-1" title="{{post.date_posted.strftime('%a, %b %d, %Y at %H:%M:%S')}}">⏳ {{ moment(post.date_posted).fromNow() }}</a>
-
-               {% if words | count > 60 %} 
-               <a class="btn btn-sm btn-outline-dark p-1">{{words | count}} words</a> 
-               {% endif %}
+            <div class="text-center like-comment-share" style="border-top:1px solid #4c4a4a;font-size:25px;font-weight:700">
+               <a class="btn" data-toggle="popover" data-content="liked by {% for user in users if user.has_liked_post(post) and current_user.is_authenticated %} {{user.username}}, {% endfor %}" style="color:#999;width:30%;"><i class="far fa-heart"></i> {{ post.likes.count() }} Likes </a> 
 
                {% if current_user.is_authenticated %}
-                <a class="btn btn-sm btn-outline-dark p-1 ml-1" href="{{url_for('post', post_id=post.id)}}" style="color:#fff;">💭comment</a> 
+                <a class="btn" href="{{url_for('post', post_id=post.id)}}" style="color:#999;width:34%;"><i class="far fa-comments"></i> 
+                {% if post.comments.count() > 0%}
+                {{post.comments.count()}} Comments
+                {% else %}
+                Comment
                 {% endif %}
+                </a> 
+                {% endif %}
+
+                <a class="btn" style="color:#999;width:30%;"><i class="fas fa-share"></i> Share</a> 
+
             </div>
         </footer>
     </div>

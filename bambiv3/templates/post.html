@@ -86,7 +86,15 @@
               <h3 data-toggle="popover"><a href="{{url_for('user_posts', username=post.author.username)}}" style="color:#fff;">  {{post.author.username}}
                {% if post.author.username in ["harun" , "bambi"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-left: -5px;">{% endif %}
              </a> {% if post.author != current_user and not current_user.is_following(post.author) %}<a class="pt-2 pl-2" href="{{ url_for('follow', username=post.author.username) }}" style="font-size:12px;text-decoration:none;">· Follow</a>{% endif %}</h3>
-             <small>@{{post.author.email.split("@")[0] | lower}}</small>
+             <!--<small>@{{post.author.email.split("@")[0] | lower}}</small>-->
+             <!--('%a, %b %d, %Y at %H:%M:%S')-->
+             {% set words = post.content.split() %}
+            <small>
+            {{post.date_posted.strftime('%a %H:%M · %d %b %Y')}}
+            {% if words | count > 60 %}
+             · {{words | count}} words
+            {% endif %}
+            </small> 
            {% else %}
            <a href="{{url_for('anonymous')}}" style="color:#fff;"><h3 data-toggle="popover">anonymous</h3></a>
              <small>@anonymous</small>
@@ -123,12 +131,16 @@
             {{post.content| safe | urlize(40, target='_blank')}}
           </p>
 
-          {% set words = post.content.split() %}
-          <a class="btn btn-sm btn-outline-dark p-1" data-toggle="popover" data-content="liked by {% for user in users if user.has_liked_post(post) %} {{user.username}}, {% endfor %}">❤ {{ post.likes.count() }}</a> <a class="btn btn-sm btn-outline-dark p-1 ml-1">{{post.date_posted.strftime('%a, %b %d %Y')}}</a> <!--('%a, %b %d, %Y at %H:%M:%S')-->
-          
-          {% if words | count > 60 %}
-          <a class="btn btn-sm btn-outline-dark p-1">{{words | count}} words</a>
-          {% endif %}
+
+            <div class="text-center like-comment-share" style="border-top:1px solid #4c4a4a;border-bottom:1px solid #4c4a4a;font-size:25px;font-weight:700">
+               <a class="btn" data-toggle="popover" data-content="liked by {% for user in users if user.has_liked_post(post) and current_user.is_authenticated %} {{user.username}}, {% endfor %}" style="color:#999;width:30%;"><i class="far fa-heart"></i> {{ post.likes.count() }} Likes </a> 
+
+                <a class="btn" style="color:#999;width:34%;"><i class="far fa-comments"></i> {{post.comments.count()}} Comments</a> 
+
+                <a class="btn" style="color:#999;width:30%;"><i class="fas fa-share"></i> Share</a> 
+
+            </div>
+
 
 
           <!--<div id="disqus_thread"></div>
@@ -160,19 +172,18 @@
           </form>
           </div>
 
-          <div class="ml-1 mb-4">
-            {% if post.comments.count() > 0 %}<code>{{post.comments.count()}} comments</code><br>{% endif %}
+          <div class="ml-1 mt-2 mb-4">
             {% for comment in post.comments if current_user.is_authenticated %}
             <a href="{{url_for('user_posts', username=comment.author.username)}}">
               <img src="{{ url_for('static', filename='profile_pics/' + comment.author.image_file) }}" style="width:20px;height:20px;border-radius:50%;"></a>
                 <span>
-                  <code style="color:#1e90ff;">{{comment.author.username}}:</code> 
-                  <code style="color:#fff;">{{comment.body}}</code> <br>
-                  <small class="text-muted ml-4">{{ moment(comment.date_posted).fromNow() }}</small>
+                  <code>{{comment.author.username}}:</code> 
+                  <code class="text-muted">{{comment.body}}</code>
+                  <!-- <small class="text-muted ml-4">{{ moment(comment.date_posted).fromNow() }}</small> -->
                 </span> <br>
             {% endfor %}
+            <br>
         </div>
-
         </div>
 
     </div>
