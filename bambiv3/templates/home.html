@@ -107,72 +107,6 @@
 
 
     <div class="col-lg-6 offset-lg-3">
-      <!-- content area -->
-      <!--<div class="row">
-        <div class="col-1">
-          {% if current_user.is_authenticated %}
-          <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="logo" class="profile-thumbnail" style="width:45px;height:45px;border-radius:50%;padding-right:3px;">
-        </div>
-        <div class="col-11">
-          <form method="POST" action="" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
-              <div class="input-group mb-3">
-                {% if form.content.errors %}
-                {{ form.content(class="form-control is-invalid subtle", placeholder="What's on your mind") }}
-                <div class="invalid-feedback">
-                  {% for error in form.content.errors %}
-                  <span>{{ error }}</span>
-                  {% endfor %}
-                </div>
-                {% else %}
-                {{ form.content(class="form-control subtle", placeholder="What's on your mind?" , style="height:50px;") }}
-                {% endif %}
-            <div class="input-group-prepend" style="color:#F9E9C8;">
-              <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              </button>
-              <div class="dropdown-menu p-2">
-                
-                <div class="form-group">
-                {% if form.title.errors %}
-                {{ form.title(placeholder="Title (optional)", class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.title.errors %}
-                  <span>{{ error }}</span>
-                  {% endfor %}
-                </div>
-                {% else %}
-                {{ form.title(placeholder="Title (optional)", class="form-control form-control-lg") }}
-                {% endif %}
-              </div>
-              <div class="form-group">
-                {% if form.image.errors %}
-                {{ form.image(class="form-control-file is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.image.errors %}
-                  <span>{{ error }}</span>
-                  {% endfor %}
-                </div>
-                {% else %}
-                {{ form.image(class="form-control-file") }}
-                {% endif %}
-              </div>
-              <div class="form-check mb-1">
-                {{ form.anonymous(class="form-check-input") }}
-                {{ form.anonymous.label(class="form-check-label") }}
-              </div>
-                <div class="form-group">
-                  {{ form.submit(class="btn btn-outline-dark",style="border:1px solid #868e96;") }}
-                </div>
-              </div>
-  
-            </div>
-          </div>
-          </form>
-          {%  endif %}
-        </div>
-      </div>-->
-
-
 
           {% if current_user.is_authenticated %}
           <section class="cardi scroll mb-2">
@@ -204,7 +138,7 @@
           {% endif %}
 
 
-      {% if current_user.is_authenticated %}
+     <!-- {% if current_user.is_authenticated %}
         <div class="card mb-2 dark-theme">
                   <div class="card-header dark-theme">
                     <div class="media align-items-center">
@@ -250,9 +184,7 @@
                     </form>
                   </div>
                 </div>
-        {% endif %}
-
-
+        {% endif %} -->
 
 
 
@@ -363,7 +295,7 @@
 
         <footer>
             <div class="text-center like-comment-share" style="border-top:1px solid #4c4a4a;font-size:25px;font-weight:700">
-               <a class="btn" data-toggle="popover" data-content="liked by {% for user in users if user.has_liked_post(post) and current_user.is_authenticated %} {{user.username}}, {% endfor %}" style="color:#999;width:28%;">
+               <a class="btn" data-toggle="popover" data-content="liked by {% for user in users if user.has_liked_post(post) and current_user.is_authenticated %} {{user.username}}, {% endfor %}" style="color:#999;width:30%;">
                 {% if current_user.is_authenticated and current_user.has_liked_post(post) %}
                     <i class="fas fa-heart" style="color:red"></i> 
                   {% else %}
@@ -373,7 +305,7 @@
               </a> 
 
                {% if current_user.is_authenticated %}
-                <a class="btn" href="{{url_for('post', post_id=post.id)}}" style="color:#999;width:40%;"><i class="far fa-comments"></i> 
+                <a class="btn" href="{{url_for('post', post_id=post.id)}}" style="color:#999;width:34%;"><i class="far fa-comments"></i> 
                 {% if post.comments.count() > 0%}
                 {{post.comments.count()}} Comments
                 {% else %}
@@ -382,7 +314,7 @@
                 </a> 
                 {% endif %}
 
-                <a class="btn" style="color:#999;width:28%;"><i class="fas fa-share"></i> Share</a> 
+                <a class="btn" style="color:#999;width:30%;"><i class="fas fa-share"></i> Share</a> 
 
             </div>
         </footer>

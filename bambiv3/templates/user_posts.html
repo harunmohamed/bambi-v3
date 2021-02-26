@@ -510,17 +510,11 @@ section .btn {
           <p>
             {%if post.image%}<small>{{post.author.email.split("@")[0] | lower}}</small>{%endif%}
 
-            {% if not current_user.is_authenticated%}
-            <!--if user is not signed in, show post preview-->
+            <!--show post preview for longer posts-->
               {{post.content| truncate(420) | safe | urlize(40, target='_blank')}}
               {% set words = post.content.split() %}
               {% if words|count > 60 %}<a class="badge badge-danger" href="{{url_for('post', post_id=post.id)}}">👀read more</a>{% endif %}
 
-            {% else %}
-              <!--if user is signed in, show full post-->
-              <a href=" {{ url_for('post', post_id=post.id) }} " style="color:#fff;text-decoration:none;">{{post.content| safe | urlize(40, target='_blank')}}</a>
-
-            {% endif %}
         </p>
         </div>
 
@@ -538,7 +532,7 @@ section .btn {
 
         <footer>
             <div class="text-center like-comment-share" style="border-top:1px solid #4c4a4a;font-size:25px;font-weight:700">
-               <a class="btn" data-toggle="popover" data-content="liked by {% for user in users if user.has_liked_post(post) and current_user.is_authenticated %} {{user.username}}, {% endfor %}" style="color:#999;width:28%;">
+               <a class="btn" data-toggle="popover" data-content="liked by {% for user in users if user.has_liked_post(post) and current_user.is_authenticated %} {{user.username}}, {% endfor %}" style="color:#999;width:30%;">
                 {% if current_user.is_authenticated and current_user.has_liked_post(post) %}
                     <i class="fas fa-heart" style="color:red"></i> 
                   {% else %}
@@ -548,7 +542,7 @@ section .btn {
               </a> 
 
                {% if current_user.is_authenticated %}
-                <a class="btn" href="{{url_for('post', post_id=post.id)}}" style="color:#999;width:40%;"><i class="far fa-comments"></i> 
+                <a class="btn" href="{{url_for('post', post_id=post.id)}}" style="color:#999;width:34%;"><i class="far fa-comments"></i> 
                 {% if post.comments.count() > 0%}
                 {{post.comments.count()}} Comments
                 {% else %}
@@ -557,7 +551,7 @@ section .btn {
                 </a> 
                 {% endif %}
 
-                <a class="btn" style="color:#999;width:28%;"><i class="fas fa-share"></i> Share</a> 
+                <a class="btn" style="color:#999;width:30%;"><i class="fas fa-share"></i> Share</a> 
 
             </div>
         </footer>
