@@ -497,6 +497,20 @@ def unfollow(username):
 	flash('💔 You are not following {}.'.format(username.title()), 'info')
 	return redirect(url_for('user_posts', username=username))
 
+@app.route('/admin')
+@login_required
+def admin():
+	users = User.query.all()
+	if current_user.email != "harunmohamed901@gmail.com":
+		return redirect(url_for('home'))
+	male = list(user for user in users if user.gender == 'male')
+	female = list(user for user in users if user.gender == 'female')
+	country = set(user.country for user in users)
+	major = set(user.department for user in users)
+	single = list(user for user in users if user.single)
+	private = list(user for user in users if user.private)
+	return render_template('admin.html', users=users, male=male, female=female, country=country, major=major, \
+		single=single, private=private)
 
 @app.route('/account/delete')
 @login_required

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="icon" href="{{ url_for('static', filename='resources/' + 'thumbnail.jpg') }}" type="image/png">
+
+    <title>Bambi Admin Panel</title>
+    
+    <!-- Custom fonts for this template-->
+    <link href="{{ url_for('static', filename='all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='google-fonts.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{{ url_for('static', filename='sb-admin-2.min.css') }}" rel="stylesheet">
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{ url_for('static', filename='jquery.easing.min.js') }}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{ url_for('static', filename='sb-admin-2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer=""></script>
+    <script src="https://kit.fontawesome.com/17192b7610.js"></script>
+
+
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url_for('admin')}}">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-parachute-box"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Bambi Admin</div>
+    </a>
+
+    <hr class="sidebar-divider my-0">
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('admin')}}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Home</span></a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link">
+            <i class="fas fa-fw fa-venus-mars"></i>
+            <span>{{male | length}} Males &  {{female| length}} Females</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link">
+            <i class="fas fa-fw fa-globe-africa"></i>
+            <span>{{country | length}} Countries</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link">
+            <i class="fas fa-fw fa-user-graduate"></i>
+            <span>{{major | length}} Majors</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link">
+            <i class="fas fa-fw fa-calendar-week"></i>
+            <span>Date Joined</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Followers</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link">
+            <i class="fas fa-fw fa-user-ninja"></i>
+            <span>{{single | length }} Single Users</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link">
+            <i class="fas fa-fw fa-user-lock"></i>
+            <span>{{private | length }} Private Users</span>
+        </a>
+    </li>
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!--<div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>-->
+
+</ul>
+
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+
+
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img class="img-profile rounded-circle" src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{current_user.username.title()}}</span>
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Profile
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{url_for('logout')}}">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+
+<div class="container-fluid">
+    
+    <div class="row">
+            <div class="col-lg-12">
+                   <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category , message in messages %}
+                          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{message}}
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                          </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                    <h6 class="m-0 font-weight-bold text-success">Admin View</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <!--<th>Email</th>-->
+                                    <th>Student Number</th>
+                                    <th>Gender</th>
+                                    <th>Country</th>
+                                    <th>Major</th>
+                                    <th>Joined</th>
+                                    <th>Followers</th>
+                                    <th>Single</th>
+                                    <th>Private</th>
+                                    <th>Delete Account</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                    {% for user in users if user.email != "harunmohamed901@gmail.com" %}
+                                    <tr>
+                                        <td>
+                                        <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="" class="profile-thumbnail" style="width:30px;height:30px;border-radius:5px;"><br>
+                                        {{user.username.title()}}
+                                        </td>
+                                        <!--<td>{{user.email}}</td>-->
+                                        <td>{{user.student_number}}</td>
+                                        <td>{{user.gender.title()}}</td>
+                                        <td>{{user.country}}</td>
+                                        <td>{{user.department}}</td>
+                                        <td>{{user.date_joined.strftime('%d %b %Y')}}</td>
+                                        <td>{{user.followers.count()}}</td>
+                                        <td>{{user.single}}</td>
+                                        <td>{{user.private}}</td>
+                                        <td>
+                                          <a class="btn btn-sm btn-block btn-danger mt-2" href="{{url_for('admin_delete_account', username=user.username)}}">Delete {{user.username.title()}}</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+</div>
+</div>
+<!-- End of Main Content -->
+
+
+
+
+
+</body></html>
