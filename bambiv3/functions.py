@@ -14,7 +14,7 @@ def profile_img(form_picture):
 	output_size = (400,400)
 	i = Image.open(form_picture)
 	i.thumbnail(output_size)
-	i.save(picture_path)
+	i.save(picture_path, optimize=True, quality=95)
 
 	return picture_fn
 
@@ -28,7 +28,7 @@ def market_img(form_picture):
 	output_size = (400,400)
 	i = Image.open(form_picture)
 	i.thumbnail(output_size)
-	i.save(picture_path)
+	i.save(picture_path, optimize=True, quality=95)
 
 	return picture_fn
 
@@ -39,10 +39,10 @@ def post_img(form_picture):
 	picture_fn = random_hex + f_ext
 	picture_path = os.path.join(app.root_path, 'static/posts', picture_fn)
 
-	output_size = (400,400)
+	output_size = (1080,1350)
 	i = Image.open(form_picture)
 	i.thumbnail(output_size)
-	i.save(picture_path)
+	i.save(picture_path, optimize=True, quality=95)
 
 	return picture_fn
 
