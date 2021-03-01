@@ -347,6 +347,9 @@ def delete_post(post_id):
 	post = Post.query.get_or_404(post_id)
 	if post.author != current_user:
 		abort(403)
+	if post.image:
+		picture_path = os.path.join(app.root_path, 'static/posts', post.image)
+		os.remove(picture_path)
 	db.session.delete(post)
 	db.session.commit()
 	flash('Your post has been deleted!', 'info')
@@ -359,6 +362,9 @@ def admin_delete_post(post_id):
 	post = Post.query.get_or_404(post_id)
 	if current_user.username != 'harun':
 		abort(403)
+	if post.image:
+		picture_path = os.path.join(app.root_path, 'static/posts', post.image)
+		os.remove(picture_path)
 	db.session.delete(post)
 	db.session.commit()
 	flash('Post Successfully Deleted by Admin!', 'info')
@@ -495,6 +501,9 @@ def unfollow(username):
 @app.route('/account/delete')
 @login_required
 def delete_account():
+	if current_user.image_file:
+		profile_picture = os.path.join(app.root_path, 'static/profile_pics', current_user.image_file)
+		os.remove(profile_picture)
 	db.session.delete(current_user)
 	db.session.commit()
 	flash('Your account has been successfully deleted.', 'info')
@@ -506,6 +515,9 @@ def admin_delete_account(username):
 	username = username.lower()
 	user = User.query.filter_by(username=username).first()
 	if current_user.username == 'harun':
+		if user.image_file:
+			profile_picture = os.path.join(app.root_path, 'static/profile_pics', user.image_file)
+			os.remove(profile_picture)
 		db.session.delete(user)
 		db.session.commit()
 		flash('Account Successfully deleted by Admin.', 'info')
