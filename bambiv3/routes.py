@@ -503,21 +503,20 @@ def admin():
 	users = User.query.all()
 	if current_user.email != "harunmohamed901@gmail.com":
 		return redirect(url_for('home'))
+	total_users = list(user for user in users)
 	male = list(user for user in users if user.gender == 'male')
 	female = list(user for user in users if user.gender == 'female')
 	country = set(user.country for user in users)
 	major = set(user.department for user in users)
 	single = list(user for user in users if user.single)
 	private = list(user for user in users if user.private)
-	return render_template('admin.html', users=users, male=male, female=female, country=country, major=major, \
-		single=single, private=private)
+	year = datetime.now().year
+	return render_template('admin.html', users=users, total_users=total_users, male=male, female=female, country=country, major=major, \
+		single=single, private=private, year=year)
 
 @app.route('/account/delete')
 @login_required
 def delete_account():
-	if current_user.image_file:
-		profile_picture = os.path.join(app.root_path, 'static/profile_pics', current_user.image_file)
-		os.remove(profile_picture)
 	db.session.delete(current_user)
 	db.session.commit()
 	flash('Your account has been successfully deleted.', 'info')
@@ -529,9 +528,6 @@ def admin_delete_account(username):
 	username = username.lower()
 	user = User.query.filter_by(username=username).first()
 	if current_user.username == 'harun':
-		if user.image_file:
-			profile_picture = os.path.join(app.root_path, 'static/profile_pics', user.image_file)
-			os.remove(profile_picture)
 		db.session.delete(user)
 		db.session.commit()
 		flash('Account Successfully deleted by Admin.', 'info')

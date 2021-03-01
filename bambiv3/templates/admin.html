@@ -55,11 +55,19 @@
             <span>Home</span></a>
     </li>
 
+
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link">
+            <i class="far fa-fw fa-user-circle"></i>
+            <span>{{total_users | length }} users</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link">
             <i class="fas fa-fw fa-venus-mars"></i>
-            <span>{{male | length}} Males &  {{female| length}} Females</span>
+            <span>{{male | length}} Male ,  {{female| length}} Female</span>
         </a>
     </li>
 
@@ -77,7 +85,7 @@
         </a>
     </li>
 
-    <li class="nav-item">
+    <!--<li class="nav-item">
         <a class="nav-link">
             <i class="fas fa-fw fa-calendar-week"></i>
             <span>Date Joined</span>
@@ -88,7 +96,7 @@
         <a class="nav-link" href="">
             <i class="fas fa-fw fa-users"></i>
             <span>Followers</span></a>
-    </li>
+    </li>-->
 
     <li class="nav-item">
         <a class="nav-link">
@@ -177,6 +185,7 @@
                                     <!--<th>Email</th>-->
                                     <th>Student Number</th>
                                     <th>Gender</th>
+                                    <th>Age</th>
                                     <th>Country</th>
                                     <th>Major</th>
                                     <th>Joined</th>
@@ -188,7 +197,7 @@
                             </thead>
                             <tbody>
                                 
-                                    {% for user in users if user.email != "harunmohamed901@gmail.com" %}
+                                    {% for user in users %}
                                     <tr>
                                         <td>
                                         <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="" class="profile-thumbnail" style="width:30px;height:30px;border-radius:5px;"><br>
@@ -197,6 +206,7 @@
                                         <!--<td>{{user.email}}</td>-->
                                         <td>{{user.student_number}}</td>
                                         <td>{{user.gender.title()}}</td>
+                                        <td>{{ year - user.age.year }}</td>
                                         <td>{{user.country}}</td>
                                         <td>{{user.department}}</td>
                                         <td>{{user.date_joined.strftime('%d %b %Y')}}</td>
@@ -204,7 +214,9 @@
                                         <td>{{user.single}}</td>
                                         <td>{{user.private}}</td>
                                         <td>
+                                        {% if user.email != "harunmohamed901@gmail.com" %}
                                           <a class="btn btn-sm btn-block btn-danger mt-2" href="{{url_for('admin_delete_account', username=user.username)}}">Delete {{user.username.title()}}</a>
+                                        {% endif %}
                                         </td>
                                     </tr>
                                     {% endfor %}
