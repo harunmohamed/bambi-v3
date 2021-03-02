@@ -510,9 +510,9 @@ def admin():
 	major = set(user.department for user in users)
 	single = list(user for user in users if user.single)
 	private = list(user for user in users if user.private)
-	year = datetime.now().year
+	today = datetime.today()
 	return render_template('admin.html', users=users, total_users=total_users, male=male, female=female, country=country, major=major, \
-		single=single, private=private, year=year)
+		single=single, private=private, today=today)
 
 @app.route('/account/delete')
 @login_required
