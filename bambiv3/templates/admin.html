@@ -206,7 +206,7 @@
                                         <!--<td>{{user.email}}</td>-->
                                         <td>{{user.student_number}}</td>
                                         <td>{{user.gender.title()}}</td>
-                                        <td>{{ today.year - user.age.year - ((today.month, today.day) < (user.age.month, user.age.day)) }}</td>
+                                        <td>{{ year - user.age.year }}</td>
                                         <td>{{user.country}}</td>
                                         <td>{{user.department}}</td>
                                         <td>{{user.date_joined.strftime('%d %b %Y')}}</td>
