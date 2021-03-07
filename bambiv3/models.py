@@ -42,7 +42,7 @@ class User(db.Model, UserMixin):
 	snapchat = db.Column(db.String(20),default=False, nullable=False)
 	instagram = db.Column(db.String(20),default=False, nullable=False)
 	posts = db.relationship('Post', backref='author', lazy=True, cascade="all, delete-orphan")
-	products = db.relationship('Product', backref='author', lazy=True)
+	products = db.relationship('Product', backref='author', lazy=True, cascade="all, delete-orphan")
 	comments = db.relationship("Comment", backref="author", lazy="dynamic", cascade="all, delete-orphan")
 	followed = db.relationship(
 		'User', secondary=followers,
@@ -51,10 +51,10 @@ class User(db.Model, UserMixin):
 		backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
 	messages_sent = db.relationship('Message',
 									foreign_keys='Message.sender_id',
-									backref='author', lazy='dynamic')
+									backref='author', lazy='dynamic', cascade="all, delete-orphan")
 	messages_received = db.relationship('Message',
 										foreign_keys='Message.recipient_id',
-										backref='recipient', lazy='dynamic')
+										backref='recipient', lazy='dynamic', cascade="all, delete-orphan")
 	last_message_read_time = db.Column(db.DateTime)
 
 
