@@ -41,7 +41,7 @@ class User(db.Model, UserMixin):
 	single = db.Column(db.Boolean, default=False, nullable=False)
 	snapchat = db.Column(db.String(20),default=False, nullable=False)
 	instagram = db.Column(db.String(20),default=False, nullable=False)
-	posts = db.relationship('Post', backref='author', lazy=True)
+	posts = db.relationship('Post', backref='author', lazy=True, cascade="all, delete-orphan")
 	products = db.relationship('Product', backref='author', lazy=True)
 	comments = db.relationship("Comment", backref="author", lazy="dynamic", cascade="all, delete-orphan")
 	followed = db.relationship(
