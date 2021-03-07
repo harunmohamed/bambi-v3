@@ -500,7 +500,7 @@ def unfollow(username):
 @app.route('/admin')
 @login_required
 def admin():
-	users = User.query.all()
+	users = User.query.order_by(User.date_joined.desc())
 	if current_user.email != "harunmohamed901@gmail.com":
 		return redirect(url_for('home'))
 	total_users = list(user for user in users)
